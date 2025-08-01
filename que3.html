@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ボタンを使ってみよう</title>
+    <script type="module" crossorigin src="/my-app/assets/main1-BPisB6VW.js"></script>
+    <link rel="stylesheet" crossorigin href="/my-app/assets/main1-DWT8FUGm.css">
+  </head>
+
+  <body>
+    <h2>ボタンを使ってみよう</h2>
+    <p>ボタンを押すとLEDが点灯するプログラムを書いてみよう。</p>
+    <div class="app-container">
+      <div class="leds">
+        <wokwi-led color="red" pin="7" label="7"></wokwi-led>
+        <wokwi-pushbutton color="red" pin="3" label="3"></wokwi-pushbutton>
+      </div>
+      <div class="toolbar">
+        <button id="run-button">Run</button>
+        <button id="stop-button" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label"></div>
+      </div>
+      <div class="code-editor"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text"></pre>
+      </div>
+      <div id ='test-output'>
+        <h3 id="test-output-label">Test Output1</h3>
+        <pre id="test-output-text"></pre>
+        <button id="check-button">正誤チェック</button> 
+      </div>
+      <div class="nextpages">
+        <button id="nextpage-btn" style="display:none;" onclick="window.location.href='que3.html'">que3.htmlを開く</button>
+      </div>
+    </div>
+<script>
+window.INITIAL_CODE = `
+void setup() {
+    pinMode(3, INPUT_PULLUP);              
+    pinMode(7, OUTPUT);             
+}
+
+void loop() {
+    if(digitalRead(3)== LOW){      
+      digitalWrite(7,1);            
+    }
+    else {                          
+      digitalWrite(7,0);           
+    }
+}`.trim();
+</script>
+<script>
+  const testoutputlabel = document.getElementById('test-output-label');
+  const nextpageBtn = document.getElementById('nextpage-btn');
+  const led = document.querySelector('wokwi-led[pin="7"]');
+  const button = document.querySelector('wokwi-pushbutton[pin="3"]');
+
+  let isAnswered = false; // 正解フラグ
+
+  setInterval(() => {
+    if (isAnswered) return; // 一度正解になったら判定を止める
+
+    const isLedOn = led && led.value === true;
+    const isPressed = button && button.pressed;
+
+    if (isLedOn && isPressed) {
+      testoutputlabel.textContent = "正解です！（ボタンが押されたらLEDが点灯しました）";
+      nextpageBtn.style.display = "inline";
+      isAnswered = true; // 正解フラグを立てる
+    } else if (isLedOn && !isPressed) {
+      testoutputlabel.textContent = "LEDは点灯していますが、ボタンが押されていません。もう一度やってみよう";
+      nextpageBtn.style.display = "none";
+    } else {
+      testoutputlabel.textContent = "LEDが消灯しています。";
+      nextpageBtn.style.display = "none";
+    }
+  }, 10);
+</script>
+</body>
+</html>

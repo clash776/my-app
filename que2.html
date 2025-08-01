@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LEDを光らせてみよう</title>
+    <script type="module" crossorigin src="/my-app/assets/main1-BPisB6VW.js"></script>
+    <link rel="stylesheet" crossorigin href="/my-app/assets/main1-DWT8FUGm.css">
+  </head>
+
+  <body>
+    <h2>LEDを光らせてみよう</h2>
+    <div class="app-container">
+      <div class="leds">
+        <wokwi-led color="red" pin="7" label="7"></wokwi-led>
+      </div>
+      <div class="toolbar">
+        <button id="run-button">Run</button>
+        <button id="stop-button" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label"></div>
+      </div>
+      <div class="code-editor"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text"></pre>
+      </div>
+      <div id ='test-output'>
+        <h3 id="test-output-label">Test Output1</h3>
+        <pre id="test-output-text"></pre>
+        <button id="check-button">正誤チェック</button> 
+      </div>
+      <div class="nextpages">
+        <button id="nextpage-btn" style="display:none;" onclick="window.location.href='que3.html'">que3.htmlを開く</button>
+      </div>
+    </div>
+<script>
+window.INITIAL_CODE = `
+void setup() {
+    pinMode(7, OUTPUT);             
+}
+void loop() {
+    digitalWrite(7, HIGH); // LEDを光らせる
+}
+`.trim();
+</script>
+<script>
+  document.getElementById('check-button').addEventListener('click', () => {
+  console.log(lastPortDState);
+  console.log(lastPortBState);
+  const userCode = editor.getModel().getValue()
+  console.log(userCode);
+  
+  const testoutputlabel = document.getElementById('test-output-label');
+  const nextpageBtn = document.getElementById('nextpage-btn');
+  const led = document.querySelector('wokwi-led[pin="7"]');
+  console.log(led, led.value);
+  if (led && led.value === true) {
+    testoutputlabel.textContent = "正解です！（7番LEDが点灯しています）";
+    nextpageBtn.style.display = "inline";
+  } else {
+    testoutputlabel.textContent = "7番LEDが点灯していません。もう一度やってみよう";
+}
+});
+</script>
+</body>
+</html>
