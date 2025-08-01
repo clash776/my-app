@@ -3,14 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ピンの設定をしてみよう</title>
+    <title>第１章　マイコンとは何か</title>
     <script type="module" crossorigin src="/my-app/assets/main1-BPisB6VW.js"></script>
     <link rel="stylesheet" crossorigin href="/my-app/assets/main1-DWT8FUGm.css">
   </head>
 
   <body>
-    <h2>ピンの設定をしてみよう</h2>
-    <h3>3番ピンを入力、7番ピンを出力に設定してみてください</h3>
+    <h2>第１章　マイコンとは何か</h2>
+    <h3>マイコンとは電気機器を制御するための小さなコンピュータです。
+    <br>冷蔵庫や洗濯機、エアコンなど、様々な電気機器に使われています。
+    </h3>
+    <h3>マイコンにはさまざまな種類、機能があります。</h3>
+    <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
+      <div style="text-align: center;">
+        <wokwi-arduino-uno></wokwi-arduino-uno>
+        <div style="margin-top: 8px; font-weight: bold;">Arduino Uno</div>
+      </div>
+      <div style="text-align: center;">
+        <wokwi-esp32-devkit-v1></wokwi-esp32-devkit-v1>
+        <div style="margin-top: 8px; font-weight: bold;">ESP32 DevKit v1</div>
+      </div>
+    </div>
     <div class="app-container">
       <div class="leds">
         <!-- <wokwi-led color="red" pin="7" label="7"></wokwi-led>
