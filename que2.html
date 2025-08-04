@@ -1,66 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LEDを光らせてみよう</title>
-    <script type="module" crossorigin src="/my-app/assets/main1-BPisB6VW.js"></script>
-    <link rel="stylesheet" crossorigin href="/my-app/assets/main1-DWT8FUGm.css">
-  </head>
 
-  <body>
-    <h2>LEDを光らせてみよう</h2>
-    <div class="app-container">
-      <div class="leds">
-        <wokwi-led color="red" pin="7" label="7"></wokwi-led>
-      </div>
-      <div class="toolbar">
-        <button id="run-button">Run</button>
-        <button id="stop-button" disabled>Stop</button>
-        <div class="spacer"></div>
-        <div id="status-label"></div>
-      </div>
-      <div class="code-editor"></div>
-      <div class="compiler-output">
-        <pre id="compiler-output-text"></pre>
-      </div>
-      <div id ='test-output'>
-        <h3 id="test-output-label">Test Output1</h3>
-        <pre id="test-output-text"></pre>
-        <button id="check-button">正誤チェック</button> 
-      </div>
-      <div class="nextpages">
-        <button id="nextpage-btn" style="display:none;" onclick="window.location.href='que3.html'">que3.htmlを開く</button>
-      </div>
-    </div>
-<script>
-window.INITIAL_CODE = `
-void setup() {
-    pinMode(7, OUTPUT);             
-}
-void loop() {
-    digitalWrite(7, HIGH); // LEDを光らせる
-}
-`.trim();
-</script>
-<script>
-  document.getElementById('check-button').addEventListener('click', () => {
-  console.log(lastPortDState);
-  console.log(lastPortBState);
-  const userCode = editor.getModel().getValue()
-  console.log(userCode);
-  
-  const testoutputlabel = document.getElementById('test-output-label');
-  const nextpageBtn = document.getElementById('nextpage-btn');
-  const led = document.querySelector('wokwi-led[pin="7"]');
-  console.log(led, led.value);
-  if (led && led.value === true) {
-    testoutputlabel.textContent = "正解です！（7番LEDが点灯しています）";
-    nextpageBtn.style.display = "inline";
-  } else {
-    testoutputlabel.textContent = "7番LEDが点灯していません。もう一度やってみよう";
-}
-});
-</script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEDを光らせてみよう</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-BBtdLoBG.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BFWcwTNN.css">
+</head>
+
+<body>
+  <h3>２．マイコンを動かすには</h3>
+  <p>マイコンを動かすためには、プログラムを書いてマイコンに書き込む必要があります。</p>
+  <p>Arduinoでは、<b>「関数」</b>の組み合わせで構成されているArduino言語を使ってプログラムを作成します。</p>
+  <p>関数とは、<b>「何らかの値を与えると、それに応じて処理を行い、その結果を返す」</b>ものです。</p>
+  <p>例として、以下のようなものが挙げられます。</p>
+  <ul>
+    <li><b>LEDを点灯・消灯させる</b></li>
+    <wokwi-led color="red" pin="7" value="true"></wokwi-led>
+    <li><b>ボタンを押したときの動作</b></li>
+    <wokwi-pushbutton color="red" pin="3"></wokwi-pushbutton>
+    <li><b>モーターを動かす</b></li>
+    <wokwi-servo angle="90"></wokwi-servo>
+  </ul>
+  <p>関数を使うことで、同じ処理を何度も簡単に実行することが出来るため、プログラムが作りやすくなります。</p>
+  <p>先ほどのプログラムでもいくつか関数が使用されています。</p>
+  <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-BWaG7y4L.jpg" alt="que2" style="max-width: 100%; display: block; margin: 0 auto;">
+  <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の2つの関数を必ず作成する必要があります。</p>
+  <ul>
+    <li><b>setup関数</b>：初期化の処理をする関数　最初に1度だけ実行される</li>
+    <li><b>loop関数</b>：メインの処理にあたる関数　繰り返し実行される</li>
+  </ul>
+  <p>この関数の中にプログラムを書き込むことで、LEDやモーターを制御することが出来ます。</p>
+  <button id="nextpage-btn" onclick="window.location.href='que3.html'">次の章へ</button>
+
+
+
 </body>
+
 </html>

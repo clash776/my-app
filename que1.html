@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>第１章　マイコンとは何か</title>
-    <script type="module" crossorigin src="/my-app/assets/main1-BPisB6VW.js"></script>
-    <link rel="stylesheet" crossorigin href="/my-app/assets/main1-DWT8FUGm.css">
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第１章　マイコンとは何か</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-BBtdLoBG.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BFWcwTNN.css">
+</head>
+
+<body>
+  <div id="page1">
     <h2>第１章　マイコンとは何か</h2>
-    <h3>マイコンとは電気機器を制御するための小さなコンピュータです。
-    <br>冷蔵庫や洗濯機、エアコンなど、様々な電気機器に使われています。
-    </h3>
-    <h3>マイコンにはさまざまな種類、機能があります。</h3>
+    <h3>１．マイコンとは</h3>
+    <p>マイコンは、センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御することができます。</p>
+    <p>マイコンはパソコンとは違い、特定の仕事を効率よくこなすために作られているため、小型であり、価格も安いものが多いです。</p>
+    <p>マイコンにはさまざまな種類、機能があります。</p>
     <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
       <div style="text-align: center;">
         <wokwi-arduino-uno></wokwi-arduino-uno>
         <div style="margin-top: 8px; font-weight: bold;">Arduino Uno</div>
       </div>
       <div style="text-align: center;">
-        <wokwi-esp32-devkit-v1></wokwi-esp32-devkit-v1>
-        <div style="margin-top: 8px; font-weight: bold;">ESP32 DevKit v1</div>
+        <wokwi-arduino-nano></wokwi-arduino-nano>
+        <div style="margin-top: 8px; font-weight: bold;">Arduino Nano</div>
       </div>
     </div>
+    <p>本教材では、上にあるようなArduinoを使った、プログラミングの方法を実際の動作を見ながら学んでいきます。
+    <p>
+    <h3>早速マイコンを動かしてみましょう！</h3>
     <div class="app-container">
-      <div class="leds">
-        <!-- <wokwi-led color="red" pin="7" label="7"></wokwi-led>
-        <wokwi-pushbutton color="red" pin="3" label="3"></wokwi-pushbutton> -->
+      <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+        <!-- LEDを中央上に配置 -->
+        <wokwi-led id="circuit-led" color="red" pin="7" style="position: absolute; left: 115px; top: 30px;"></wokwi-led>
+        <!-- Arduino Unoを中央下に配置 -->
+        <wokwi-resistor value="1000" style="position: absolute; left: 140px; top: 65px;"></wokwi-resistor>
+        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+        <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+        <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+          <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+          <line x1="130" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
+          <line x1="200" y1="70" x2="220" y2="120" stroke="black" stroke-width="2" />
+        </svg>
       </div>
+      <p>Runボタンを押してプログラムを実行してみましょう！</p>
       <div class="toolbar">
         <button id="run-button">Run</button>
         <button id="stop-button" disabled>Stop</button>
@@ -39,51 +54,91 @@
       <div class="compiler-output">
         <pre id="compiler-output-text"></pre>
       </div>
-      <div id ='test-output'>
-        <h3 id="test-output-label">Test Output1</h3>
-        <pre id="test-output-text"></pre>
-        <button id="check-button">正誤チェック</button> 
-      </div>
-      <div class="nextpages">
-        <button id="nextpage-btn" style="display:none;" onclick="window.location.href='que2.html'">que2.htmlを開く</button>
+      <div id='test-output'>
+        <div id="nextpage-guide" style="display:none; margin-top:24px; text-align:center;">
+          <p>LEDが点灯しました！次のページへ進みましょう。</p>
+          <button id="toPage2">次のページへ</button>
+        </div>
       </div>
     </div>
-<script>
-window.INITIAL_CODE = `
+    <script>
+      window.INITIAL_CODE = `
 void setup() {
-    pinMode(3, INPUT_PULLUP);              
     pinMode(7, OUTPUT);             
 }
 void loop() {
-    // ここに処理を書く
+    digitalWrite(7, HIGH); // LEDを光らせる
 }
 `.trim();
-</script>
-  <script>
-    document.getElementById('check-button').addEventListener('click', () => {
-      console.log(lastPortDState);
-      console.log(lastPortBState);
-      const userCode = editor.getModel().getValue()
-      console.log(userCode);
-    const testoutputlabel = document.getElementById('test-output-label');
-    const nextpageBtn = document.getElementById('nextpage-btn');
-    const CORRECT_PART1 = `pinMode(3, INPUT_PULLUP);`;
-    const CORRECT_PART2 = `pinMode(7, OUTPUT);`;
+    </script>
+    <script>
+      const readOnly = false; // 初期状態では読み取り専用
+      const nextpageGuide = document.getElementById('nextpage-guide');
+      const led = document.querySelector('wokwi-led[pin="7"]');
+      let isAnswered = false; // 正解フラグ
+      setInterval(() => {
+        if (isAnswered) return;
+        const isLedOn = led && led.value === true;
+        if (isLedOn) {
+          nextpageGuide.style.display = "inline";
+          isAnswered = true;
+        }
+      }, 10);
+    </script>
+  </div>
+  <div id="page2" style="display:none;">
+    <h3>２．マイコンを動かすには</h3>
+    <p>マイコンを動かすためには、プログラムを書いてマイコンに書き込む必要があります。</p>
+    <p>Arduinoでは、<b>「関数」</b>の組み合わせで構成されているArduino言語を使ってプログラムを作成します。</p>
+    <p>関数とは、<b>「何らかの値を与えると、それに応じて処理を行い、その結果を返す」</b>ものです。</p>
+    <p>例として、以下のようなものが挙げられます。</p>
+    <ul>
+      <li><b>LEDを点灯・消灯させる</b></li>
+      <wokwi-led color="red" pin="7" value="true"></wokwi-led>
+      <li><b>ボタンを押したときの動作</b></li>
+      <wokwi-pushbutton color="red" pin="3"></wokwi-pushbutton>
+      <li><b>モーターを動かす</b></li>
+      <wokwi-servo angle="90"></wokwi-servo>
+    </ul>
+    <p>関数を使うことで、同じ処理を何度も簡単に実行することが出来るため、プログラムが作りやすくなります。</p>
+    <p>先ほどのプログラムでもいくつか関数が使用されています。</p>
+    <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-BWaG7y4L.jpg" alt="que2" style="max-width: 100%; display: block; margin: 0 auto;">
+    <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の2つの関数を必ず作成する必要があります。</p>
+    <ul>
+      <li><b>setup関数</b>：初期化の処理をする関数　最初に1度だけ実行される</li>
+      <li><b>loop関数</b>：メインの処理にあたる関数　繰り返し実行される</li>
+    </ul>
+    <p>この関数の中にプログラムを書き込むことで、LEDやモーターを制御することが出来ます。</p>
+    <button id="toPage1">前のページへ</button>
+    <button id="toPage3">次のページへ</button>
+  </div>
+  <div id="page3" style="display:none;">
+    <h3>３．この教材の使い方</h3>
+    <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
+    <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-CeC_ZTp3.jpg" alt="que2" style="max-width: 100%; display: block; margin: 0 auto;">
+    
 
-    if (userCode.includes(CORRECT_PART1) && userCode.includes(CORRECT_PART2)) {
-      testoutputlabel.textContent = "正解です！";
-      nextpageBtn.style.display = "inline";
-    } else if (userCode.includes(CORRECT_PART1)) {
-      testoutputlabel.textContent = "7番ピンの設定が正しくありません。";
-      nextpageBtn.style.display = "none";
-    } else if (userCode.includes(CORRECT_PART2)) {
-      testoutputlabel.textContent = "3番ピンの設定が正しくありません。";
-      nextpageBtn.style.display = "none";
-    } else {
-      testoutputlabel.textContent = "もう一度やってみよう";
-      nextpageBtn.style.display = "none";
-    }
-    });
+  </div>
+  <script>
+    document.getElementById('toPage1').onclick = function () {
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page1').style.display = 'block';
+      window.scrollTo(0, 0);
+    };
+    document.getElementById('toPage2').onclick = function () {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+      window.scrollTo(0, 0);
+    };
+
+    document.getElementById('toPage3').onclick = function () {
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'block';
+      window.scrollTo(0, 0);
+    };
   </script>
-  </body>
+  <div id="page3" style="display:none;"></div>
+</body>
+</div>
+
 </html>
