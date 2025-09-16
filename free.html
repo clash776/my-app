@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LEDを光らせてみよう</title>
-    <style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEDを光らせてみよう</title>
+  <style>
     #draggable-led {
       width: 60px;
       height: 60px;
@@ -19,104 +20,130 @@
       align-items: center;
       justify-content: center;
     }
-    </style>
-    <script type="module" crossorigin src="/my-app/assets/main1-Dch8OFDV.js"></script>
-    <link rel="stylesheet" crossorigin href="/my-app/assets/main1-B4A8Q1jw.css">
-  </head>
+  </style>
+  <script type="module" crossorigin src="/my-app/assets/main1-agYF6Arn.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-B4A8Q1jw.css">
+</head>
 
-  <body>
-    <h2>LEDを光らせてみよう</h2>
-    <div class="app-container">
-      <div class="items_space">
-        <div class="menu-bar" style="width:100%; height:40px; background:#eee; border-bottom:1px solid #ccc; display:flex; align-items:center; padding:0 16px; box-sizing:border-box;">
-          <div style="position:relative;">
-            <button id="add-item-button">追加 ▼</button>
-            <button id="delete-item-button" style="margin-left:8px;">削除</button>
-            <div id="parts-dropdown" style="display:none; position:absolute; top:40px; left:0; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.1); z-index:1000; min-width:120px;">
-              <button class="dropdown-item" data-type="led" style="width:100%;">LED</button>
-              <button class="dropdown-item" data-type="button" style="width:100%;">ボタン</button>
-                  <!-- 今後モーターなど追加可能 -->
-            </div>
+<body>
+  <h2>LEDを光らせてみよう</h2>
+  <div class="app-container">
+    <div class="items_space">
+      <div class="menu-bar"
+        style="width:100%; height:40px; background:#eee; border-bottom:1px solid #ccc; display:flex; align-items:center; padding:0 16px; box-sizing:border-box;">
+        <div style="position:relative;">
+          <button id="add-item-button">追加 ▼</button>
+          <button id="delete-item-button" style="margin-left:8px;">削除</button>
+          <div id="parts-dropdown"
+            style="display:none; position:absolute; top:40px; left:0; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.1); z-index:1000; min-width:120px;">
+            <button class="dropdown-item" data-type="led" style="width:100%;">LED</button>
+            <button class="dropdown-item" data-type="button" style="width:100%;">ボタン</button>
+            <!-- 今後モーターなど追加可能 -->
           </div>
-          <span style="margin-left:auto;">メニュー</span>
         </div>
-    <wokwi-led id="draggable-led" color="red" pin="7"></wokwi-led>
+        <span style="margin-left:auto;">メニュー</span>
       </div>
-      <div class="toolbar">
-        <button id="run-button">Run</button>
-        <button id="stop-button" disabled>Stop</button>
-        <div class="spacer"></div>
-        <div id="status-label"></div>
-      </div>
-      <div class="code-editor"></div>
-      <div class="compiler-output">
-        <pre id="compiler-output-text"></pre>
-      </div>
-      <div id ='test-output'>
-        <h3 id="test-output-label">Test Output1</h3>
-        <pre id="test-output-text"></pre>
-        <button id="check-button">正誤チェック</button> 
-      </div>
-      <div class="nextpages">
-        <button id="nextpage-btn" style="display:none;" onclick="window.location.href='que3.html'">que3.htmlを開く</button>
+      <wokwi-7segment color="red" values="[0,1,1,0,0,1,1,1]" pins="[0,1,2,3,4,5,6,7]"></wokwi-7segment>
+    </div>
+    <div class="toolbar">
+      <button id="run-button">Run</button>
+      <button id="stop-button" disabled>Stop</button>
+      <div class="spacer"></div>
+      <div id="status-label"></div>
+    </div>
+    <div class="code-editor" id="editor1"></div>
+    <div class="compiler-output">
+      <pre id="compiler-output-text"></pre>
+    </div>
+    <div id='test-output'>
+      <h3 id="test-output-label">Test Output1</h3>
+      <pre id="test-output-text"></pre>
+      <button id="check-button">正誤チェック</button>
+    </div>
+    <div class="error-output">
+      <pre id="error-output-text"></pre>
+    </div>
+    <div id="pin-status-view" style="margin:16px 0;">
+      <div id="pin-status-view" style="margin:16px 0;">
+        <h4>ピン状態</h4>
+        <div id="pin-status-row" style="display: flex; gap: 16px;"></div>
       </div>
     </div>
-<script>
-window.INITIAL_CODE = `
+    <script>
+      window.INITIAL_CODE = `
 void setup() {
-    pinMode(7, OUTPUT);             
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);      
+    pinMode(9, OUTPUT);    
 }
 void loop() {
-    digitalWrite(7, HIGH); // LEDを光らせる
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
 }
 `.trim();
-</script>
-<script>
-  document.getElementById('check-button').addEventListener('click', () => {
-  console.log(lastPortDState);
-  console.log(lastPortBState);
-  const userCode = editor.getModel().getValue()
-  console.log(userCode);
-  
-  const testoutputlabel = document.getElementById('test-output-label');
-  const nextpageBtn = document.getElementById('nextpage-btn');
-  const led = document.querySelector('wokwi-led[pin="7"]');
-  console.log(led, led.value);
-  if (led && led.value === true) {
-    testoutputlabel.textContent = "正解です！（7番LEDが点灯しています）";
-    nextpageBtn.style.display = "inline";
-  } else {
-    testoutputlabel.textContent = "7番LEDが点灯していません。もう一度やってみよう";
-}
-});
-</script>
+      let selected_editor = '#editor1';
+      window.addEventListener('DOMContentLoaded', function () {
+        window.setActiveButtons('run-button', 'stop-button', 'status-label', 'compiler-output-text', 'error-output-text');
+      });
+    </script>
+    <script>
+      document.getElementById('check-button').addEventListener('click', () => {
+        console.log(lastPortDState);
+        console.log(lastPortBState);
+        const userCode = editor.getModel().getValue()
+        console.log(userCode);
+
+        const testoutputlabel = document.getElementById('test-output-label');
+        const nextpageBtn = document.getElementById('nextpage-btn');
+        const led = document.querySelector('wokwi-led[pin="7"]');
+        console.log(led, led.value);
+        if (led && led.value === true) {
+          testoutputlabel.textContent = "正解です！（7番LEDが点灯しています）";
+          nextpageBtn.style.display = "inline";
+        } else {
+          testoutputlabel.textContent = "7番LEDが点灯していません。もう一度やってみよう";
+        }
+      });
+    </script>
 </body>
+
 </html>
 
 
 <script>
-    // ドラッグ＆ドロップ処理
-    const led = document.getElementById('draggable-led');
-    let offsetX, offsetY, isDragging = false;
+  // ドラッグ＆ドロップ処理
+  const led = document.getElementById('draggable-led');
+  let offsetX, offsetY, isDragging = false;
 
-    led.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      offsetX = e.clientX - led.offsetLeft;
-      offsetY = e.clientY - led.offsetTop;
-      led.style.cursor = 'grabbing';
-    });
+  led.addEventListener('mousedown', function (e) {
+    isDragging = true;
+    offsetX = e.clientX - led.offsetLeft;
+    offsetY = e.clientY - led.offsetTop;
+    led.style.cursor = 'grabbing';
+  });
 
-    document.addEventListener('mousemove', function(e) {
-      if (isDragging) {
-        led.style.left = (e.clientX - offsetX) + 'px';
-        led.style.top = (e.clientY - offsetY) + 'px';
-      }
-    });
+  document.addEventListener('mousemove', function (e) {
+    if (isDragging) {
+      led.style.left = (e.clientX - offsetX) + 'px';
+      led.style.top = (e.clientY - offsetY) + 'px';
+    }
+  });
 
-    document.addEventListener('mouseup', function() {
-      isDragging = false;
-      led.style.cursor = 'grab';
-    });
+  document.addEventListener('mouseup', function () {
+    isDragging = false;
+    led.style.cursor = 'grab';
+  });
 
 </script>
 
@@ -126,6 +153,8 @@ void loop() {
   const deleteItemBtn = document.getElementById('delete-item-button');
   const partsDropdown = document.getElementById('parts-dropdown');
   let deleteMode = false;
+  const readOnly = false;
+
 
   addItemBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -168,4 +197,41 @@ void loop() {
       deleteItemBtn.style.background = '';
     }
   });
+
+  function updatePinStatusView() {
+    const row = document.getElementById('pin-status-row');
+    row.innerHTML = ''; // クリア
+
+    // Dピン（0～7）
+    for (let i = 0; i < 8; i++) {
+      const pinDiv = document.createElement('div');
+      pinDiv.style.textAlign = 'center';
+      const state = window.lastPortDState ? window.lastPortDState[i] : 'LOW';
+      pinDiv.innerHTML = `<strong>D${i}</strong><br>${state}`;
+      if (state === 'HIGH') {
+        pinDiv.style.color = 'red'; // HIGHのとき赤色
+        pinDiv.style.fontWeight = 'bold';
+      } else {
+        pinDiv.style.color = 'black';
+        pinDiv.style.fontWeight = 'normal';
+      }
+      row.appendChild(pinDiv);
+    }
+    // Bピン（0～7）
+    for (let i = 0; i < 8; i++) {
+      const pinDiv = document.createElement('div');
+      pinDiv.style.textAlign = 'center';
+      const state = window.lastPortBState ? window.lastPortBState[i] : 'LOW';
+      pinDiv.innerHTML = `<strong>B${i}</strong><br>${state}`;
+      if (state === 'HIGH') {
+        pinDiv.style.color = 'red';
+        pinDiv.style.fontWeight = 'bold';
+      } else {
+        pinDiv.style.color = 'black';
+        pinDiv.style.fontWeight = 'normal';
+      }
+      row.appendChild(pinDiv);
+    }
+  }
+  setInterval(updatePinStatusView, 100);
 </script>

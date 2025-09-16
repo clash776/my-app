@@ -5,81 +5,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ボタンを使ってみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-Dch8OFDV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-agYF6Arn.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-B4A8Q1jw.css">
 </head>
 
 <body>
-  <h3>３．この教材の使い方</h3>
-  <p>この教材は、エディタとマイコンシュミレータを使用しながら学習を進めていきます。</p>
+  <div id="page1" style="display:block;"></div>
+  <h3>第３章　複雑なLED機器の制御</h3>
+  <p>この章では複雑なLED機器の制御について学びます。</p>
+  <p>まずは、プログラムを動作させてみましょう。</p>
 
   <div class="app-container">
     <div class="leds">
-      <wokwi-led color="red" pin="7" label="7"></wokwi-led>
-      <wokwi-pushbutton color="red" pin="3" label="3"></wokwi-pushbutton>
+      <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"></wokwi-7segment>
     </div>
     <div class="toolbar">
-      <button id="run-button">Run</button>
-      <button id="stop-button" disabled>Stop</button>
+      <button id="run-button1">Run</button>
+      <button id="stop-button1" disabled>Stop</button>
       <div class="spacer"></div>
-      <div id="status-label"></div>
+      <div id="status-label1"></div>
     </div>
-    <div class="code-editor"></div>
+    <div class="code-editor" id="editor1"></div>
     <div class="compiler-output">
-      <pre id="compiler-output-text"></pre>
+      <pre id="compiler-output-text1"></pre>
     </div>
-    <div id='test-output'>
-      <h3 id="test-output-label">Test Output1</h3>
-      <pre id="test-output-text"></pre>
-      <button id="check-button">正誤チェック</button>
-    </div>
-    <div class="nextpages">
-      <button id="nextpage-btn" style="display:none;" onclick="window.location.href='que3.html'">que3.htmlを開く</button>
+    <div class="error-output">
+      <pre id="error-output-text1"></pre>
     </div>
   </div>
+  <p>上のような部品を7セグメントLEDといいます。</p>
+  <p>7セグメントLEDは8つのLEDで構成されており、数字やアルファベットを表示することができます。</p>
+  <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+  <p>7セグメントLEDは対応するピンに電流を流すと、それに対応するLEDが光ります。</p>
+  <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+  <P>一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。</P>
+  <p>例えば、７セグメントLEDの左上のLEDに電流を流した場合、真ん中のLEDが点灯します。</p>
+  </div>
   <script>
+    let selected_editor = '#editor1';
+    const readOnly = false;
     window.INITIAL_CODE = `
 void setup() {
-    pinMode(3, INPUT_PULLUP);              
-    pinMode(7, OUTPUT);             
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);
+    pinMode(9, OUTPUT);
 }
-
 void loop() {
-    if(digitalRead(3)== LOW){      
-      digitalWrite(7,1);            
-    }
-    else {                          
-      digitalWrite(7,0);           
-    }
-}`.trim();
-const readOnly = false;
-  </script>
-  <script>
-    const testoutputlabel = document.getElementById('test-output-label');
-    const nextpageBtn = document.getElementById('nextpage-btn');
-    const led = document.querySelector('wokwi-led[pin="7"]');
-    const button = document.querySelector('wokwi-pushbutton[pin="3"]');
-
-    let isAnswered = false; // 正解フラグ
-
-    setInterval(() => {
-      if (isAnswered) return; // 一度正解になったら判定を止める
-
-      const isLedOn = led && led.value === true;
-      const isPressed = button && button.pressed;
-
-      if (isLedOn && isPressed) {
-        testoutputlabel.textContent = "正解です！（ボタンが押されたらLEDが点灯しました）";
-        nextpageBtn.style.display = "inline";
-        isAnswered = true; // 正解フラグを立てる
-      } else if (isLedOn && !isPressed) {
-        testoutputlabel.textContent = "LEDは点灯していますが、ボタンが押されていません。もう一度やってみよう";
-        nextpageBtn.style.display = "none";
-      } else {
-        testoutputlabel.textContent = "LEDが消灯しています。";
-        nextpageBtn.style.display = "none";
-      }
-    }, 10);
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
+}
+`.trim();
+    window.addEventListener('DOMContentLoaded', function () {
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    });
   </script>
 </body>
 

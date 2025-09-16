@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-Dch8OFDV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-agYF6Arn.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-B4A8Q1jw.css">
 </head>
 
@@ -45,14 +45,17 @@
       </div>
       <p>Runボタンを押してプログラムを実行してみましょう！</p>
       <div class="toolbar">
-        <button id="run-button">Run</button>
-        <button id="stop-button" disabled>Stop</button>
+        <button id="run-button1">Run</button>
+        <button id="stop-button1" disabled>Stop</button>
         <div class="spacer"></div>
-        <div id="status-label"></div>
+        <div id="status-label1"></div>
       </div>
-      <div class="code-editor"></div>
+      <div class="code-editor" id="editor1"></div>
       <div class="compiler-output">
-        <pre id="compiler-output-text"></pre>
+        <pre id="compiler-output-text1"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text1"></pre>
       </div>
       <div id='test-output'>
         <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
@@ -67,7 +70,7 @@ void setup() {
     pinMode(7, OUTPUT);             
 }
 void loop() {
-    digitalWrite(7, HIGH); // LEDを光らせる
+    digitalWrite(7, HIGH); 
 }
 `.trim();
     </script>
@@ -129,12 +132,67 @@ void loop() {
     <p>例えば、7番ピンを出力用として設定する場合は、以下のように記述します。</p>
     <p>pinMode(7, OUTPUT);</p>
     <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
-    <b>これでこの章は終わりです。「次の章へ」ボタンを押して次の章へ進みましょう！</b>
     </p>
     <button id="toPage2from3">前のページへ</button>
-    <button id="toPage4from3">次の章へ</button>
+    <button id="toPage4from3">次のページへ</button>
   </div>
   <div id="page4" style="display:none;">
+    <h3>４．基本的なプログラムの書き方</h3>
+    <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
+    <p>下のプログラムを見てみましょう。</p>
+    <div class="app-container">
+      <div class="toolbar">
+        <button id="run-button2">Run</button>
+        <button id="stop-button2" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label2"></div>
+      </div>
+      <div class="code-editor" id="editor2"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text2"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text2"></pre>
+      </div>
+    </div>
+    <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラムです。</p>
+    <p>3番ピンにLEDが接続されている場合、点灯するようになっています。</p>
+      <h3>プログラムを書く上で重要なこと</h3>
+
+      <h4>セミコロン ( ; ) は必ず必要</h4>
+      <p>命令文の最後には必ず <strong>セミコロン ( ; )</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
+
+      <pre><code>pinMode(3, OUTPUT);
+digitalWrite(3, HIGH);</code></pre>
+
+      <h4>波かっこ <code>{ }</code> の役割</h4>
+      <p><code>setup()</code> と <code>loop()</code> の中身は、必ず <code>{ }</code> で囲む必要があります。もし波かっこを消してしまうと、どこまでが
+        <code>setup</code> の中なのかを Arduino が理解できず、エラーになります。</p>
+
+      <h4>コメント ( <code>//</code> )</h4>
+      <p>プログラムの中に説明を書いておくことができます。コメントはプログラムの動作には影響しません。</p>
+
+      <pre>// 3番ピンを出力用にする
+// 3番ピンをHIGHにする
+      </pre>
+    <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
+    <button id="toPage3from4">前のページへ</button>
+    <button id="toPage5from4">次のページへ</button>
+    <script>
+      window.INITIAL_CODE = `
+void setup() {
+  pinMode(3, OUTPUT);   // 3番ピンを出力用にする
+}
+void loop() {
+  digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
+}
+`.trim();
+    </script>
+
+
+  </div>
+
+  <div id="page5" style="display:none;">
     <h2>第２章　この教材の使い方</h2>
     <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
     <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-3s3apfvb.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
@@ -153,50 +211,61 @@ void loop() {
     </ul>
 
     <p><b>これでこの章は終わりです。「次の章へ」ボタンを押して次の章へ進みましょう！</b></p>
-    <button id="toPage3from4">前のページへ</button>
+    <button id="toPage4from5">前のページへ</button>
     <button id="nextpage-btn" onclick="window.location.href='que2.html'">次の章へ</button>
   </div>
+
+
   <script>
+    let selected_editor = '#editor1';
+    window.addEventListener('DOMContentLoaded', function () {
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    });
     document.getElementById('toPage2from1').onclick = function () {
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'block';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'none';
       window.scrollTo(0, 0);
+      window.initMonacoEditor();
     };
     document.getElementById('toPage1from2').onclick = function () {
       document.getElementById('page1').style.display = 'block';
       document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'none';
+      selected_editor = '#editor1';
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
       window.scrollTo(0, 0);
+      window.initMonacoEditor();
     };
     document.getElementById('toPage3from2').onclick = function () {
-      document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'none';
       document.getElementById('page3').style.display = 'block';
-      document.getElementById('page4').style.display = 'none';
       window.scrollTo(0, 0);
     };
     document.getElementById('toPage2from3').onclick = function () {
-      document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'block';
       document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'none';
       window.scrollTo(0, 0);
     };
     document.getElementById('toPage4from3').onclick = function () {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'none';
       document.getElementById('page3').style.display = 'none';
       document.getElementById('page4').style.display = 'block';
+      selected_editor = '#editor2';
+      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
       window.scrollTo(0, 0);
+      window.initMonacoEditor();
     };
     document.getElementById('toPage3from4').onclick = function () {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'none';
       document.getElementById('page3').style.display = 'block';
       document.getElementById('page4').style.display = 'none';
+      window.scrollTo(0, 0);
+    };
+    document.getElementById('toPage5from4').onclick = function () {
+      document.getElementById('page4').style.display = 'none';
+      document.getElementById('page5').style.display = 'block';
+      window.scrollTo(0, 0);
+    };
+    document.getElementById('toPage4from5').onclick = function () {
+      document.getElementById('page4').style.display = 'block';
+      document.getElementById('page5').style.display = 'none';
       window.scrollTo(0, 0);
     };
 
