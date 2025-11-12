@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+</head>
+
+<body>
+    <div id="page1" style="display:block;">
+        <h3>確認テスト</h3>
+
+        <div class="app-container">
+            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+                <wokwi-led id="circuit-led" color="red" pin="11"
+                    style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
+                <wokwi-arduino-uno id="circuit-arduino"
+                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+            </div>
+            <div class="toolbar">
+                <button id="run-button1">Run</button>
+                <button id="stop-button1" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label1"></div>
+            </div>
+            <div class="code-editor" id="editor1"></div>
+            <div class="compiler-output">
+                <pre id="compiler-output-text1"></pre>
+            </div>
+            <div class="error-output">
+                <pre id="error-output-text1"></pre>
+            </div>
+            <div class="serial-monitor">
+                <pre id="serial-monitor-text1"></pre>
+            </div>
+        </div>
+
+        <button id="toPage2from1">次のページへ</button>
+
+    </div>
+</body>
+<script>
+    let selected_editor = '#editor1';
+    const readOnly = false;
+    window.INITIAL_CODE = `
+void setup() {
+  Serial.begin(115200);
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  Serial.println(brightness); 
+  delay(10);
+  brightness++;
+}
+`.trim();
+    window.addEventListener('DOMContentLoaded', function () {
+        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+    });
+</script>
+
+</html>

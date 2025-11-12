@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWM制御</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+</head>
+
+<body>
+  <div id="page1" style="display:block;">
+    <h3>第７章　シリアルモニタ</h3>
+    <p>この章では<b>シリアルモニタ</b>の使い方について学びます。</p>
+    <p>シリアルモニタとは、マイコンとコンピューター(マイコン同士も可能)との通信を利用したデータの送受信やデバッグ(プログラムの不具合を修正する作業)などに利用されるものです。</p>
+    <p>まずは、プログラムを動作させてみましょう。</p>
+
+    <div class="app-container">
+      <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+        <wokwi-led id="circuit-led" color="red" pin="11"
+          style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
+        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+      </div>
+      <div class="toolbar">
+        <button id="run-button1">Run</button>
+        <button id="stop-button1" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label1"></div>
+      </div>
+      <div class="code-editor" id="editor1"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text1"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text1"></pre>
+      </div>
+      <div class="serial-monitor">
+        <pre id="serial-monitor-text1"></pre>
+      </div>
+    </div>
+
+    <div class="point-box">
+    </div>
+    <ul>
+      <li>プログラムを実行すると、シリアルモニタに0から255までの数字が順番に表示されます。</li>
+      <li>変数の値やプログラムの動作状況をリアルタイムで確認できます。</li>
+    </ul>
+    <h3><span style="color:#2196f3;">シリアルモニタの使い方</span></h3>
+    <ol>
+      <li><b>シリアル通信の準備</b><br>
+        マイコンとパソコン間でデータをやりとりする「シリアル通信」を使います。
+      </li>
+      <li><b>プログラムで通信開始</b><br>
+        プログラムの中で<b>Serial.begin()</b>命令を書き、通信を開始します。
+      </li>
+      <li><b>シリアルモニタに表示する</b><br>
+        <b>Serial.println()</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
+      </li>
+    </ol>
+    <div class="point-box">
+      <strong>補足:</strong> 実際のエディタ(Arduino IDEなど)でシリアルモニタを使う場合、シリアルモニタ側でも設定が必要です。
+    </div>
+    <h3>通信開始の命令例</h3>
+    <div style="background:#f0f8ff;border-left:4px solid #2196f3;padding:8px 12px;margin:12px 0;">
+      <code>void setup() { Serial.begin(9600); // 通信速度を9600bpsに設定 }</code>
+    </div>
+    <ul>
+      <li><code>Serial.begin()</code>で通信速度（ボーレート）を指定します（例：9600bps）。</li>
+      <li>この命令は<code>setup()</code>の中に1回だけ書きます。</li>
+      <li>その後、<code>Serial.print()</code>や<code>Serial.println()</code>でデータを表示できます。</li>
+      <li>シリアルモニタの右下の通信速度設定も、プログラムの値（例：9600）に合わせましょう。</li>
+    </ul>
+    <p></p>
+
+    <button id="toPage2from1">次のページへ</button>
+
+  </div>
+  <div id="page2" style="display:none;">
+    <p>それではシリアルモニタを使ってみましょう。</p>
+    <p>下のプログラムを編集してシリアルモニタに「こんにちは」と表示させてみましょう。</p>
+
+    <div class="app-container">
+      <div class="toolbar">
+        <button id="run-button2">Run</button>
+        <button id="stop-button2" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label2"></div>
+      </div>
+      <div class="code-editor" id="editor2"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text2"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text2"></pre>
+      </div>
+      <div class="serial-monitor">
+        <pre id="serial-monitor-text2"></pre>
+      </div>
+    </div>
+
+    <button id="toPage1from2">前のページへ</button>
+    <button id="toPage3from2">次のページへ</button>
+  </div>
+  <div id="page3" style="display:none;">
+
+    <button id="toPage2from3">前のページへ</button>
+  </div>
+</body>
+<script>
+  let selected_editor = '#editor1';
+  const readOnly = false;
+  window.INITIAL_CODE = `
+void setup() {
+  Serial.begin(115200);
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  Serial.println(brightness); 
+  delay(10);
+  brightness++;
+}
+`.trim();
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+  });
+  document.getElementById('toPage2from1').onclick = function () {
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2', 'serial-monitor-text2');
+    selected_editor = '#editor2';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+  Serial.begin(115200);
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  Serial.println(brightness); 
+  delay(10);
+  brightness++;
+}
+`.trim();
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+  document.getElementById('toPage1from2').onclick = function () {
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('page2').style.display = 'none';
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+    selected_editor = '#editor1';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+  Serial.begin(115200);
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  Serial.println(brightness); 
+  delay(10);
+  brightness++;
+}
+`.trim();
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+
+  document.getElementById('toPage3from2').onclick = function () {
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page3').style.display = 'block';
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+
+  document.getElementById('toPage2from3').onclick = function () {
+    document.getElementById('page3').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+
+</script>
+</body>
+
+</html>

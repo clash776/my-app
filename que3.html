@@ -5,45 +5,315 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ボタンを使ってみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-agYF6Arn.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-B4A8Q1jw.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
 </head>
 
 <body>
-  <div id="page1" style="display:block;"></div>
-  <h3>第３章　複雑なLED機器の制御</h3>
-  <p>この章では複雑なLED機器の制御について学びます。</p>
-  <p>まずは、プログラムを動作させてみましょう。</p>
+  <div id="page1" style="display:block;">
+    <h3>第４章　複雑なLED機器の制御</h3>
+    <p>この章では複雑なLED機器の制御について学びます。</p>
+    <p>まずは、プログラムを動作させてみましょう。</p>
 
-  <div class="app-container">
-    <div class="leds">
-      <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"></wokwi-7segment>
+    <div class="app-container">
+      <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+        <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+          style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
+        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+        <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
+          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
+          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
+          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
+          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
+          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+
+
+        </svg>
+      </div>
+      <div class="toolbar">
+        <button id="run-button1">Run</button>
+        <button id="stop-button1" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label1"></div>
+      </div>
+      <div class="code-editor" id="editor1"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text1"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text1"></pre>
+      </div>
     </div>
-    <div class="toolbar">
-      <button id="run-button1">Run</button>
-      <button id="stop-button1" disabled>Stop</button>
-      <div class="spacer"></div>
-      <div id="status-label1"></div>
-    </div>
-    <div class="code-editor" id="editor1"></div>
-    <div class="compiler-output">
-      <pre id="compiler-output-text1"></pre>
-    </div>
-    <div class="error-output">
-      <pre id="error-output-text1"></pre>
-    </div>
+    <p>上のような部品を7セグメントLEDといいます。</p>
+    <h3>7セグメントLEDの概要</h3>
+    <p>7セグメントLEDは8つのLEDで構成されており、数字やアルファベットを表示することができます。</p>
+    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+    <p>7セグメントLEDは対応するピンに電流を流すと、それに対応するLEDが光ります。</p>
+    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+    <P>一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。</P>
+    <p>例えば、７セグメントLEDの左上のLEDに電流を流した場合、真ん中のLEDが点灯します。</p>
+    <h3>7セグメントLEDの内部回路</h3>
+    <p>７セグメントLEDの中心のピンは<b>共通端子</b>と呼ばれ、このピンにLEDのアノード側またはカソード側が１つにまとめられています。</p>
+    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%94-UUa2TpWZ.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+    <p>今回はカソード側が集められているものを使います。このような接続になっているものを<b>カソードコモン型</b>と呼びます。</p>
+    <p>また、アノード側が集められているものは<b>アノードコモン型</b>と呼びます。</p>
+    <p>カソードコモン型の７セグメントLEDをArduinoで制御する場合、</p>
+    <p>アノード側のピンである１～８のピンを抵抗を経由してArduinoの出力ピンに接続し、共通ピンはGNDに接続します。</p>
+    <p>（本教材では内部プルアップ抵抗を用いるため、抵抗は接続しません。）</p>
+
+
+    <button id="toPage2from1">次のページへ</button>
   </div>
-  <p>上のような部品を7セグメントLEDといいます。</p>
-  <p>7セグメントLEDは8つのLEDで構成されており、数字やアルファベットを表示することができます。</p>
-  <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-  <p>7セグメントLEDは対応するピンに電流を流すと、それに対応するLEDが光ります。</p>
-  <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-  <P>一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。</P>
-  <p>例えば、７セグメントLEDの左上のLEDに電流を流した場合、真ん中のLEDが点灯します。</p>
-  </div>
+  <div id="page2" style="display:none;">
+    <h3>練習問題</h3>
+    <p>それでは下の画像をもとにエディタ内のプログラムを編集してみましょう</p>
+    <p>回路図を見て対応するピンの出力をHIGHにし、数字の5のLEDが点灯するようにしてみましょう</p>
+    <div
+      style="display: flex; justify-content: center; gap: 16px; border: 2px solid black; padding: 12px; border-radius: 8px; width: fit-content; margin: 0 auto; margin-bottom: 32px;">
+      <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width: 48%; height: auto;">
+      <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width: 48%; height: auto;">
+    </div>
+    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%93-8gzi1-wA.jpg" style="max-width: 100%; margin: 0 auto;">
+
+
+    <div class="app-container">
+      <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+        <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+          style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
+        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+        <!-- <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
+          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
+          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
+          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
+          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
+          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+
+
+        </svg> -->
+      </div>
+      <div class="toolbar">
+        <button id="run-button2">Run</button>
+        <button id="stop-button2" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label2"></div>
+      </div>
+      <div class="code-editor" id="editor2"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text2"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text2"></pre>
+      </div>
+      <div id="result"></div>
+    </div>
+    <button id="toPage1from2">前のページへ</button>
+    <button id="toPage3from2" style="display:none">次のページへ</button>
+    <script>
+      const seg = document.querySelector('wokwi-7segment');
+      const segAns = [1, 0, 1, 1, 0, 1, 1, 0];
+
+      setInterval(() => {
+        if (JSON.stringify(seg.values) === JSON.stringify(segAns)) {
+          console.log("全問正解です！次のページへ行きましょう！", seg.values);
+          document.getElementById('result').textContent = "正解です！次のページへ行きましょう！";
+          document.getElementById('toPage3from2').style.display = 'inline';
+        } else {
+          document.getElementById('toPage3from2').style.display = 'none';
+        }
+      }, 100);
+
+    </script>
+  </div>
+  <div id="page3" style="display:none;">
+    <h2>確認問題</h2>
+    <h2>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h2>
+    <h3>１．次のうち、正しい説明すべて選んでください。</h3>
+    <form>
+      <input type="checkbox" id="q1">
+      <label for="q1">７セグメントLEDは７つのLEDで構成されている。</label><br>
+
+      <input type="checkbox" id="q2">
+      <label for="q2">７セグメントLEDは点灯のさせ方によって、数字や英語を表示することが出来る。</label><br>
+
+      <input type="checkbox" id="q3">
+      <label for="q3">７セグメントLEDの中心のピンは共通ピンと呼ばれている。</label><br>
+
+      <input type="checkbox" id="q4">
+      <label for="q4">カソード側が共通ピンに集められているものをアノードコモン型と呼ぶ。</label><br>
+    </form>
+    <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
+    <div id="result1" style="margin-top: 20px;"></div>
+
+    <h3>２．指定のプログラムを１から作成してみましょう。</h3>
+    <div class="app-container">
+      <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+        <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+          style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
+        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+        <!-- <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
+          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
+          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
+          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
+          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
+          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+
+
+        </svg> -->
+      </div>
+      <div class="toolbar">
+        <button id="run-button3">Run</button>
+        <button id="stop-button3" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label3"></div>
+      </div>
+      <div class="code-editor" id="editor3"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text3"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text3"></pre>
+      </div>
+    </div>
+    <div id="result2" style="margin-top: 20px;"></div>
+
+    <button id="toPage2from3">前のページへ</button>
+    <button id="nextpage-btn" onclick="window.location.href='que4.html'" style="display:none;">次の章へ</button>
+  </div>
   <script>
-    let selected_editor = '#editor1';
-    const readOnly = false;
+    const segAns1 = [1, 1, 1, 1, 0, 0, 1, 0];
+    function checkAnswer() {
+      // 正解の組み合わせ（true=チェックすべき）
+      const correctAnswers = {
+        q1: false,
+        q2: true,
+        q3: true,
+        q4: false,
+      };
+
+      let isCorrect = true;
+      for (let key in correctAnswers) {
+        const checked = document.getElementById(key).checked;
+        if (checked !== correctAnswers[key]) {
+          isCorrect = false;
+        }
+      }
+
+      const result = document.getElementById("result");
+      if (isCorrect) {
+        document.getElementById('result1').textContent = "正解です！";
+        document.getElementById('result1').style.color = "green";
+        que1 = true;
+      } else {
+        document.getElementById('result1').textContent = "間違いがあります。もう一度見直してみましょう。";
+        document.getElementById('result1').style.color = "red";
+      }
+    }
+    setInterval(() => {
+      if (JSON.stringify(seg.values) === JSON.stringify(segAns1)) {
+        console.log("全問正解です！次のページへ行きましょう！");
+        document.getElementById('result2').textContent = "正解です！次のページへ行きましょう！";
+        document.getElementById('nextpage-btn').style.display = 'inline';
+      } else {
+        document.getElementById('nextpage-btn').style.display = 'none';
+      }
+    }, 100);
+  </script>
+</body>
+<script>
+  let selected_editor = '#editor1';
+  const readOnly = false;
+  window.INITIAL_CODE = `
+void setup() {
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);
+    pinMode(9, OUTPUT);
+}
+void loop() {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
+}
+`.trim();
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+  });
+  document.getElementById('toPage2from1').onclick = function () {
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+    selected_editor = '#editor2';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);
+    pinMode(9, OUTPUT);
+}
+void loop() {
+    digitalWrite(2, HIGH); //1
+    digitalWrite(3, LOW); //2
+    digitalWrite(4, HIGH); //3
+    digitalWrite(5, HIGH); //4
+    digitalWrite(6, LOW); //5
+    digitalWrite(7, HIGH); //6
+    digitalWrite(8, HIGH); //7
+    digitalWrite(9, LOW); //8
+}
+`.trim();
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+  document.getElementById('toPage1from2').onclick = function () {
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('page2').style.display = 'none';
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    selected_editor = '#editor1';
+    window.errorOutputText.textContent = '';
     window.INITIAL_CODE = `
 void setup() {
     pinMode(2, OUTPUT);      
@@ -66,10 +336,75 @@ void loop() {
     digitalWrite(9, HIGH);
 }
 `.trim();
-    window.addEventListener('DOMContentLoaded', function () {
-      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-    });
-  </script>
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+
+  document.getElementById('toPage3from2').onclick = function () {
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page3').style.display = 'block';
+    window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
+    selected_editor = '#editor3';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);
+    pinMode(9, OUTPUT);
+}
+void loop() {
+    digitalWrite(2, HIGH); //1
+    digitalWrite(3, HIGH); //2
+    digitalWrite(4, HIGH); //3
+    digitalWrite(5, HIGH); //4
+    digitalWrite(6, LOW); //5
+    digitalWrite(7, LOW); //6
+    digitalWrite(8, HIGH); //7
+    digitalWrite(9, LOW); //8
+}
+`.trim();
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+
+  document.getElementById('toPage2from3').onclick = function () {
+    document.getElementById('page3').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+    selected_editor = '#editor2';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);
+    pinMode(9, OUTPUT);
+}
+void loop() {
+    digitalWrite(2, HIGH); //1
+    digitalWrite(3, LOW); //2
+    digitalWrite(4, HIGH); //3
+    digitalWrite(5, HIGH); //4
+    digitalWrite(6, LOW); //5
+    digitalWrite(7, HIGH); //6
+    digitalWrite(8, HIGH); //7
+    digitalWrite(9, LOW); //8
+}
+`.trim();
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+  };
+
+</script>
 </body>
 
 </html>

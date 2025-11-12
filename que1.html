@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-agYF6Arn.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-B4A8Q1jw.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
 </head>
 
 <body>
@@ -63,17 +63,7 @@
           <button id="toPage2from1">次のページへ</button>
         </div>
       </div>
-    </div>
-    <script>
-      window.INITIAL_CODE = `
-void setup() {
-    pinMode(7, OUTPUT);             
-}
-void loop() {
-    digitalWrite(7, HIGH); 
-}
-`.trim();
-    </script>
+    </div>
     <script>
       const readOnly = false; // 初期状態では読み取り専用
       const nextpageGuide = document.getElementById('nextpage-guide');
@@ -131,6 +121,8 @@ void loop() {
     </ul>
     <p>例えば、7番ピンを出力用として設定する場合は、以下のように記述します。</p>
     <p>pinMode(7, OUTPUT);</p>
+    <p>また、関数のかっこの中に入れる値のことを<b>「引数（ひきすう）」</b>といいます。</p>
+    <p>pinMode関数の場合、引数には<b>ピン番号</b>と<b>モード</b>を指定します。</p>
     <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
     </p>
     <button id="toPage2from3">前のページへ</button>
@@ -157,39 +149,28 @@ void loop() {
     </div>
     <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラムです。</p>
     <p>3番ピンにLEDが接続されている場合、点灯するようになっています。</p>
-      <h3>プログラムを書く上で重要なこと</h3>
+    <h3>プログラムを書く上で重要なこと</h3>
 
-      <h4>セミコロン ( ; ) は必ず必要</h4>
-      <p>命令文の最後には必ず <strong>セミコロン ( ; )</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
+    <h4>セミコロン ( ; ) は必ず必要</h4>
+    <p>命令文の最後には必ず <strong>セミコロン ( ; )</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
 
-      <pre><code>pinMode(3, OUTPUT);
+    <pre><code>pinMode(3, OUTPUT);
 digitalWrite(3, HIGH);</code></pre>
 
-      <h4>波かっこ <code>{ }</code> の役割</h4>
-      <p><code>setup()</code> と <code>loop()</code> の中身は、必ず <code>{ }</code> で囲む必要があります。もし波かっこを消してしまうと、どこまでが
-        <code>setup</code> の中なのかを Arduino が理解できず、エラーになります。</p>
+    <h4>波かっこ <code>{ }</code> の役割</h4>
+    <p><code>setup()</code> と <code>loop()</code> の中身は、必ず <code>{ }</code> で囲む必要があります。もし波かっこを消してしまうと、どこまでが
+      <code>setup</code> の中なのかを Arduino が理解できず、エラーになります。
+    </p>
 
-      <h4>コメント ( <code>//</code> )</h4>
-      <p>プログラムの中に説明を書いておくことができます。コメントはプログラムの動作には影響しません。</p>
+    <h4>コメント ( <code>//</code> )</h4>
+    <p>プログラムの中に説明を書いておくことができます。コメントはプログラムの動作には影響しません。</p>
 
-      <pre>// 3番ピンを出力用にする
+    <pre>// 3番ピンを出力用にする
 // 3番ピンをHIGHにする
       </pre>
     <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
     <button id="toPage3from4">前のページへ</button>
     <button id="toPage5from4">次のページへ</button>
-    <script>
-      window.INITIAL_CODE = `
-void setup() {
-  pinMode(3, OUTPUT);   // 3番ピンを出力用にする
-}
-void loop() {
-  digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
-}
-`.trim();
-    </script>
-
-
   </div>
 
   <div id="page5" style="display:none;">
@@ -217,6 +198,14 @@ void loop() {
 
 
   <script>
+    window.INITIAL_CODE = `
+void setup() {
+    pinMode(7, OUTPUT);             
+}
+void loop() {
+    digitalWrite(7, HIGH); 
+}
+`.trim();
     let selected_editor = '#editor1';
     window.addEventListener('DOMContentLoaded', function () {
       window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
@@ -231,7 +220,16 @@ void loop() {
       document.getElementById('page1').style.display = 'block';
       document.getElementById('page2').style.display = 'none';
       selected_editor = '#editor1';
+      window.errorOutputText.textContent = '';
       window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+      window.INITIAL_CODE = `
+void setup() {
+    pinMode(7, OUTPUT);             
+}
+void loop() {
+    digitalWrite(7, HIGH); 
+}
+`.trim();
       window.scrollTo(0, 0);
       window.initMonacoEditor();
     };
@@ -249,7 +247,16 @@ void loop() {
       document.getElementById('page3').style.display = 'none';
       document.getElementById('page4').style.display = 'block';
       selected_editor = '#editor2';
+      window.errorOutputText.textContent = '';
       window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+      window.INITIAL_CODE = `
+void setup() {
+  pinMode(3, OUTPUT);   // 3番ピンを出力用にする
+}
+void loop() {
+  digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
+}
+`.trim();
       window.scrollTo(0, 0);
       window.initMonacoEditor();
     };
@@ -266,7 +273,19 @@ void loop() {
     document.getElementById('toPage4from5').onclick = function () {
       document.getElementById('page4').style.display = 'block';
       document.getElementById('page5').style.display = 'none';
+      selected_editor = '#editor2';
+      window.errorOutputText.textContent = '';
+      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+      window.INITIAL_CODE = `
+void setup() {
+  pinMode(3, OUTPUT);   // 3番ピンを出力用にする
+}
+void loop() {
+  digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
+}
+`.trim();
       window.scrollTo(0, 0);
+      window.initMonacoEditor();
     };
 
   </script>
