@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
 </head>
 
 <body>
@@ -45,8 +45,10 @@
         <p>Arduinoでは、<b>analogWrite関数</b>を使うことで簡単にPWM出力を行うことができます。</p>
         <p>analogWrite関数は、以下のように記述します。</p>
         <pre><code>analogWrite(ピン番号, 値);</code></pre>
-        <p>引数には0～255の値を指定し、値が大きいほど明るく、小さいほど暗くなります。</p>
-        <p>下のプログラムを編集してLEDの明るさを指定通りに変化させてみましょう。</p>
+        <p>２つ目の引数には0～255の値を指定することが出来ます。LEDの場合、値が大きいほど明るく、小さいほど暗くなります。</p>
+        <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
+        <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
+        <p>(下のプログラムの場合では変数brightnessがanalogWrite関数の引数として使われているため、変数brightnessの値によってLEDの明るさが変化します。)</p>
 
         <div class="app-container">
             <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
@@ -93,8 +95,7 @@
         </form>
         <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
         <div id="result1" style="margin-top: 20px;"></div>
-        <h3>２．LEDの明るさが0から255まで徐々に明るくなり、その後255から0まで徐々に暗くなるプログラムを作成してください。</h3>
-
+        <h3>２．0.1 秒ごとに analogWrite の第2引数に与える値を50、150、250 と順番に変化させ、<br>LED の明るさが段階的に変化するプログラムを作成してください。</h3>
         <div class="app-container">
             <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
                 <wokwi-led id="circuit-led" color="red" pin="11"
@@ -103,17 +104,17 @@
                     style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
             </div>
             <div class="toolbar">
-                <button id="run-button2">Run</button>
-                <button id="stop-button2" disabled>Stop</button>
+                <button id="run-button3">Run</button>
+                <button id="stop-button3" disabled>Stop</button>
                 <div class="spacer"></div>
-                <div id="status-label2"></div>
+                <div id="status-label3"></div>
             </div>
-            <div class="code-editor" id="editor2"></div>
+            <div class="code-editor" id="editor3"></div>
             <div class="compiler-output">
-                <pre id="compiler-output-text2"></pre>
+                <pre id="compiler-output-text3"></pre>
             </div>
             <div class="error-output">
-                <pre id="error-output-text2"></pre>
+                <pre id="error-output-text3"></pre>
             </div>
         </div>
 
@@ -185,6 +186,8 @@ void loop() {
 `.trim();
         window.scrollTo(0, 0);
         window.initMonacoEditor();
+        //PWM用LEDの再取得
+        window.updatepwmLed();
     };
     document.getElementById('toPage1from2').onclick = function () {
         document.getElementById('page1').style.display = 'block';
@@ -211,15 +214,47 @@ void loop() {
     document.getElementById('toPage3from2').onclick = function () {
         document.getElementById('page2').style.display = 'none';
         document.getElementById('page3').style.display = 'block';
+        window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
+        selected_editor = '#editor3';
+        window.errorOutputText.textContent = '';
+        window.INITIAL_CODE = `
+void setup() {
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  delay(10);
+  brightness++;
+}
+`.trim();
         window.scrollTo(0, 0);
         window.initMonacoEditor();
+        //PWM用LEDの再取得
+        window.updatepwmLed();
     };
 
     document.getElementById('toPage2from3').onclick = function () {
         document.getElementById('page3').style.display = 'none';
         document.getElementById('page2').style.display = 'block';
+        window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+        selected_editor = '#editor2';
+        window.errorOutputText.textContent = '';
+        window.INITIAL_CODE = `
+void setup() {
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+}
+`.trim();
         window.scrollTo(0, 0);
         window.initMonacoEditor();
+        //PWM用LEDの再取得
+        window.updatepwmLed();
     };
 
 </script>

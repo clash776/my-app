@@ -5,17 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ボタンを使ってみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
 </head>
 
 <body>
   <div id="page1" style="display:block;">
-    <h3>第４章　複雑なLED機器の制御</h3>
-    <p>この章では複雑なLED機器の制御について学びます。</p>
-    <p>まずは、プログラムを動作させてみましょう。</p>
+    <h3 style="margin-bottom:8px;">第４章　複雑なLED機器の制御</h3>
+    <p>7セグメントLEDは複数のLEDを組み合わせて数字や文字を表示できる部品です。</p>
 
+    <p style="margin-bottom:8px;">まずは、プログラムを動作させてみましょう。</p>
     <div class="app-container">
+      <!-- wokwiオブジェクト部分はそのまま -->
       <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
         <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
           style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
@@ -24,20 +25,13 @@
           <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
           <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
           <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
-
           <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
           <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
           <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
-
           <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
-
           <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
-
           <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
-
           <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
-
-
         </svg>
       </div>
       <div class="toolbar">
@@ -54,25 +48,36 @@
         <pre id="error-output-text1"></pre>
       </div>
     </div>
-    <p>上のような部品を7セグメントLEDといいます。</p>
-    <h3>7セグメントLEDの概要</h3>
-    <p>7セグメントLEDは8つのLEDで構成されており、数字やアルファベットを表示することができます。</p>
-    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-    <p>7セグメントLEDは対応するピンに電流を流すと、それに対応するLEDが光ります。</p>
-    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-    <P>一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。</P>
-    <p>例えば、７セグメントLEDの左上のLEDに電流を流した場合、真ん中のLEDが点灯します。</p>
-    <h3>7セグメントLEDの内部回路</h3>
-    <p>７セグメントLEDの中心のピンは<b>共通端子</b>と呼ばれ、このピンにLEDのアノード側またはカソード側が１つにまとめられています。</p>
-    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%94-UUa2TpWZ.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-    <p>今回はカソード側が集められているものを使います。このような接続になっているものを<b>カソードコモン型</b>と呼びます。</p>
-    <p>また、アノード側が集められているものは<b>アノードコモン型</b>と呼びます。</p>
-    <p>カソードコモン型の７セグメントLEDをArduinoで制御する場合、</p>
-    <p>アノード側のピンである１～８のピンを抵抗を経由してArduinoの出力ピンに接続し、共通ピンはGNDに接続します。</p>
-    <p>（本教材では内部プルアップ抵抗を用いるため、抵抗は接続しません。）</p>
-
-
-    <button id="toPage2from1">次のページへ</button>
+    <hr style="margin:24px 0;">
+    <h3 style="margin-bottom:8px;">7セグメントLEDの概要</h3>
+    <ul style="margin-bottom:16px;">
+      <li>7セグメントLEDは8つのLEDで構成され、数字やアルファベットを表示できます。</li>
+      <li>各LEDは対応するピンに電流を流すことで点灯します。</li>
+      <li>ピン配置と数字の対応は下の画像の通りとなっています。</li>
+    </ul>
+    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:16px;">
+      <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width:48%;height:auto;">
+      <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width:48%;height:auto;">
+    </div>
+    <div class="point-box"
+      style="background:#fffbe7;border-left:4px solid #ff9800;padding:8px 12px;margin-bottom:16px;">
+      <strong>ヒント:</strong> 一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。
+    </div>
+    <p style="margin-bottom:8px;">例えば、左上のLEDに電流を流すと真ん中のLEDが点灯します。</p>
+    <hr style="margin:24px 0;">
+    <h3 style="margin-bottom:8px;">7セグメントLEDの内部回路</h3>
+    <ul style="margin-bottom:16px;">
+      <li>中心のピンは<b>共通端子</b>と呼ばれ、LEDのアノード側またはカソード側がまとめられています。</li>
+      <li>カソード側が集められているものを<b>カソードコモン型</b>、アノード側が集められているものを<b>アノードコモン型</b>と呼びます。</li>
+      <li>本教材ではカソードコモン型を使用します。</li>
+    </ul>
+    <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%94-UUa2TpWZ.jpg" style="max-width:100%;display:block;margin:0 auto 16px auto;">
+    <div class="point-box"
+      style="background:#e3f2fd;border-left:4px solid #2196f3;padding:8px 12px;margin-bottom:16px;">
+      <strong>補足:</strong> Arduinoで制御する場合、アノード側のピン（1～8）を出力ピンに接続し、共通ピンはGNDに接続します。<br>
+      （本教材では内部プルアップ抵抗を用いるため、抵抗は接続しません。）
+    </div>
+    <button id="toPage2from1" style="margin-top:16px;">次のページへ</button>
   </div>
   <div id="page2" style="display:none;">
     <h3>練習問題</h3>

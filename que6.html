@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
 </head>
 
 <body>
@@ -78,7 +78,7 @@
   </div>
   <div id="page2" style="display:none;">
     <p>それではシリアルモニタを使ってみましょう。</p>
-    <p>下のプログラムを編集してシリアルモニタに「こんにちは」と表示させてみましょう。</p>
+    <p>下のプログラムを編集してシリアルモニタに「Hello」と表示させてみましょう。</p>
 
     <div class="app-container">
       <div class="toolbar">
@@ -98,9 +98,19 @@
         <pre id="serial-monitor-text2"></pre>
       </div>
     </div>
-
+    <div id="result1" style="margin-top: 20px;"></div>
     <button id="toPage1from2">前のページへ</button>
     <button id="toPage3from2">次のページへ</button>
+    <script>
+      setInterval(() => {
+        const serialText2 = document.getElementById('serial-monitor-text2')?.textContent;
+        if (serialText2 && serialText2.includes('Hello')) {
+          console.log('Helloが表示されています');
+          document.getElementById('result1').textContent = "正解です！";
+          document.getElementById('result1').style.color = "green";
+        }
+      }, 100);
+    </script>
   </div>
   <div id="page3" style="display:none;">
 
@@ -136,15 +146,11 @@ void loop() {
     window.INITIAL_CODE = `
 void setup() {
   Serial.begin(115200);
-  pinMode(11, OUTPUT);
 }
 
-byte brightness = 0;
 void loop() {
-  analogWrite(11, brightness);
-  Serial.println(brightness); 
-  delay(10);
-  brightness++;
+  Serial.println("Hello"); 
+  delay(100);
 }
 `.trim();
     window.scrollTo(0, 0);
@@ -189,6 +195,5 @@ void loop() {
   };
 
 </script>
-</body>
 
 </html>

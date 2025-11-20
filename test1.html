@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>test</title>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
 </head>
 
 <body>
@@ -14,8 +15,11 @@
 
         <div class="app-container">
             <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
-                <wokwi-led id="circuit-led" color="red" pin="11"
-                    style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
+                <wokwi-led color="red" pin="13" label="13"></wokwi-led>
+                <wokwi-led color="green" pin="12" label="12"></wokwi-led>
+                <wokwi-led color="blue" pin="11" label="11"></wokwi-led>
+                <wokwi-led color="yellow" pin="10" label="10"></wokwi-led>
+                <wokwi-led color="orange" pin="9" label="9"></wokwi-led>
                 <wokwi-arduino-uno id="circuit-arduino"
                     style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
             </div>
@@ -40,22 +44,24 @@
         <button id="toPage2from1">次のページへ</button>
 
     </div>
-</body>
+</body>
 <script>
     let selected_editor = '#editor1';
     const readOnly = false;
     window.INITIAL_CODE = `
+byte leds[] = {13, 12, 11, 10, 9};
 void setup() {
-  Serial.begin(115200);
-  pinMode(11, OUTPUT);
+  for (byte i = 0; i < sizeof(leds); i++) {
+    pinMode(leds[i], OUTPUT);
+  }
 }
 
-byte brightness = 0;
+int i = 0;
 void loop() {
-  analogWrite(11, brightness);
-  Serial.println(brightness); 
-  delay(10);
-  brightness++;
+  digitalWrite(leds[i], HIGH);
+  delay(250);
+  digitalWrite(leds[i], LOW);
+  i = (i + 1) % sizeof(leds);
 }
 `.trim();
     window.addEventListener('DOMContentLoaded', function () {

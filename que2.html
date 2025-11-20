@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEDを光らせてみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-S7dvPXpI.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
 </head>
 
 <body>
@@ -205,135 +205,142 @@
       <div class="error-output">
         <pre id="error-output-text2"></pre>
       </div>
-      <div id="result3" style="margin-top: 20px;"></div>
-      <div id="result4" style="margin-top: 20px;"></div>
-
-      <button id="toPage4fromTest1">前のページへ</button>
-      <button id="nextpage-btn" onclick="window.location.href='que3.html'" style="display:none;">次の章へ</button>
-      <script>
-        const testLed = document.querySelector('#Test1 wokwi-led[pin="3"]');
-        let isTestAnswered = false;
-        let que1 = false;
-        let que2 = false;
-        let que3 = false;
-        function checkAnswer() {
-          // 正解の組み合わせ（true=チェックすべき）
-          const correctAnswers = {
-            q1: true,
-            q2: true,
-            q3: false,
-            q4: true,
-            q5: false
-          };
-
-          let isCorrect = true;
-          for (let key in correctAnswers) {
-            const checked = document.getElementById(key).checked;
-            if (checked !== correctAnswers[key]) {
-              isCorrect = false;
-            }
-          }
-
-          const result = document.getElementById("result");
-          if (isCorrect) {
-            document.getElementById('result1').textContent = "正解です！";
-            document.getElementById('result1').style.color = "green";
-            que1 = true;
-          } else {
-            document.getElementById('result1').textContent = "間違いがあります。もう一度見直してみましょう。";
-            document.getElementById('result1').style.color = "red";
-          }
-        }
-        function checkFillIn() {
-          // 正解リスト
-          const answers = {
-            ans1: "プラス",
-            ans2: "抵抗",
-            ans3: "HIGH"
-          };
-          let allCorrect = true;
-          Object.keys(answers).forEach(id => {
-            const input = document.getElementById(id);
-            if (input.value.trim() === answers[id]) {
-              input.style.backgroundColor = "green";
-              input.style.color = "white";
-            } else {
-              input.style.backgroundColor = "red";
-              input.style.color = "white";
-              allCorrect = false;
-            }
-          });
-          if (allCorrect) {
-            document.getElementById('result2').textContent = "正解です！";
-            document.getElementById('result2').style.color = "green";
-            que2 = true;
-          } else {
-            document.getElementById('result2').textContent = "";
-          }
-        }
-
-
-        setInterval(() => {
-          if (isTestAnswered) return;
-          // wokwi-ledのvalueがtrueなら正誤判定
-          if (testLed && testLed.value === true) {
-            document.getElementById('result3').textContent = "LEDが点灯しました！正解です！";
-            document.getElementById('result3').style.color = "green";
-            isTestAnswered = true;
-            que3 = true;
-          }
-        }, 100);
-
-        setInterval(() => {
-          if (que1 && que2 && que3) {
-            document.getElementById('result4').textContent = "全問正解です！次のページへ行きましょう！";
-            document.getElementById('nextpage-btn').style.display = 'inline';
-          } else {
-            document.getElementById('nextpage-btn').style.display = 'none';
-          }
-        }, 100);
-
-      </script>
-
     </div>
+    <div id="result3" style="margin-top: 20px;"></div>
+    <div id="result4" style="margin-top: 20px;"></div>
+
+    <button id="toPage4fromTest1">前のページへ</button><button id="nextpage-btn" onclick="window.location.href='que3.html'" style="display:none;">次の章へ</button>
+
+    <script>
+      const testLed = document.querySelector('#Test1 wokwi-led[pin="3"]');
+      let isTestAnswered = false;
+      let que1 = false;
+      let que2 = false;
+      let que3 = false;
+      function checkAnswer() {
+        // 正解の組み合わせ（true=チェックすべき）
+        const correctAnswers = {
+          q1: true,
+          q2: true,
+          q3: false,
+          q4: true,
+          q5: false
+        };
+
+        let isCorrect = true;
+        for (let key in correctAnswers) {
+          const checked = document.getElementById(key).checked;
+          if (checked !== correctAnswers[key]) {
+            isCorrect = false;
+          }
+        }
+
+        const result = document.getElementById("result");
+        if (isCorrect) {
+          document.getElementById('result1').textContent = "正解です！";
+          document.getElementById('result1').style.color = "green";
+          que1 = true;
+        } else {
+          document.getElementById('result1').textContent = "間違いがあります。もう一度見直してみましょう。";
+          document.getElementById('result1').style.color = "red";
+        }
+      }
+      function checkFillIn() {
+        // 正解リスト
+        const answers = {
+          ans1: "プラス",
+          ans2: "抵抗",
+          ans3: "HIGH"
+        };
+        let allCorrect = true;
+        Object.keys(answers).forEach(id => {
+          const input = document.getElementById(id);
+          if (input.value.trim() === answers[id]) {
+            input.style.backgroundColor = "green";
+            input.style.color = "white";
+          } else {
+            input.style.backgroundColor = "red";
+            input.style.color = "white";
+            allCorrect = false;
+          }
+        });
+        if (allCorrect) {
+          document.getElementById('result2').textContent = "正解です！";
+          document.getElementById('result2').style.color = "green";
+          que2 = true;
+        } else {
+          document.getElementById('result2').textContent = "";
+        }
+      }
+
+
+      setInterval(() => {
+        if (isTestAnswered) return;
+        // wokwi-ledのvalueがtrueなら正誤判定
+        if (testLed && testLed.value === true) {
+          document.getElementById('result3').textContent = "LEDが点灯しました！正解です！";
+          document.getElementById('result3').style.color = "green";
+          isTestAnswered = true;
+          que3 = true;
+        }
+      }, 100);
+
+      setInterval(() => {
+        if (que1 && que2 && que3) {
+          document.getElementById('result4').textContent = "全問正解です！次のページへ行きましょう！";
+          document.getElementById('nextpage-btn').style.display = 'inline';
+        } else {
+          document.getElementById('nextpage-btn').style.display = 'none';
+        }
+      }, 100);
+
+    </script>
+
+  </div>
+
+  <div id="omake1" style="display: none;">
+    <h3>おまけ：プルアップ抵抗</h3>
+    <p>２章では</p>
+
+  </div>
 
 
-    <script>
-      const readOnly = false;
-      let selected_editor = '#editor1';
+  <script>
+    const readOnly = false;
+    let selected_editor = '#editor1';
 
 
-      document.getElementById('toPage2from1').onclick = function () {
-        document.getElementById('page1').style.display = 'none';
-        document.getElementById('page2').style.display = 'block';
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-      };
-      document.getElementById('toPage1from2').onclick = function () {
-        document.getElementById('page1').style.display = 'block';
-        document.getElementById('page2').style.display = 'none';
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-      };
-      document.getElementById('toPage3from2').onclick = function () {
-        document.getElementById('page2').style.display = 'none';
-        document.getElementById('page3').style.display = 'block';
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-      };
-      document.getElementById('toPage2from3').onclick = function () {
-        document.getElementById('page2').style.display = 'block';
-        document.getElementById('page3').style.display = 'none';
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-      };
-      document.getElementById('toPage4from3').onclick = function () {
-        document.getElementById('page3').style.display = 'none';
-        document.getElementById('page4').style.display = 'block';
-        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-        selected_editor = '#editor1';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
+    document.getElementById('toPage2from1').onclick = function () {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+      window.scrollTo(0, 0);
+      window.initMonacoEditor();
+    };
+    document.getElementById('toPage1from2').onclick = function () {
+      document.getElementById('page1').style.display = 'block';
+      document.getElementById('page2').style.display = 'none';
+      window.scrollTo(0, 0);
+      window.initMonacoEditor();
+    };
+    document.getElementById('toPage3from2').onclick = function () {
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'block';
+      window.scrollTo(0, 0);
+      window.initMonacoEditor();
+    };
+    document.getElementById('toPage2from3').onclick = function () {
+      document.getElementById('page2').style.display = 'block';
+      document.getElementById('page3').style.display = 'none';
+      window.scrollTo(0, 0);
+      window.initMonacoEditor();
+    };
+    document.getElementById('toPage4from3').onclick = function () {
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'block';
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+      selected_editor = '#editor1';
+      window.errorOutputText.textContent = '';
+      window.INITIAL_CODE = `
 void setup() {
     pinMode(3, OUTPUT);             
 }
@@ -341,42 +348,24 @@ void loop() {
     digitalWrite(3, HIGH); 
 }
 `.trim();
-        window.initMonacoEditor();
-        window.scrollTo(0, 0);
-      };
+      window.initMonacoEditor();
+      window.scrollTo(0, 0);
+    };
 
-      document.getElementById('toPage3from4').onclick = function () {
-        document.getElementById('page3').style.display = 'block';
-        document.getElementById('page4').style.display = 'none';
-        window.initMonacoEditor();
-        window.scrollTo(0, 0);
-      };
+    document.getElementById('toPage3from4').onclick = function () {
+      document.getElementById('page3').style.display = 'block';
+      document.getElementById('page4').style.display = 'none';
+      window.initMonacoEditor();
+      window.scrollTo(0, 0);
+    };
 
-      document.getElementById('toTest1from4').onclick = function () {
-        document.getElementById('page4').style.display = 'none';
-        document.getElementById('Test1').style.display = 'block';
-        window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-        selected_editor = '#editor2';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
-void setup() {
-      
-}
-void loop() {
-
-}
-`.trim();
-        window.initMonacoEditor();
-        window.scrollTo(0, 0);
-      };
-
-      document.getElementById('toPage4fromTest1').onclick = function () {
-        document.getElementById('Test1').style.display = 'none';
-        document.getElementById('page4').style.display = 'block';
-        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-        selected_editor = '#editor1';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
+    document.getElementById('toTest1from4').onclick = function () {
+      document.getElementById('page4').style.display = 'none';
+      document.getElementById('Test1').style.display = 'block';
+      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+      selected_editor = '#editor2';
+      window.errorOutputText.textContent = '';
+      window.INITIAL_CODE = `
 void setup() {
     pinMode(3, OUTPUT);             
 }
@@ -384,14 +373,32 @@ void loop() {
     digitalWrite(3, HIGH); 
 }
 `.trim();
-        window.initMonacoEditor();
-        window.scrollTo(0, 0);
-      };
+      window.initMonacoEditor();
+      window.scrollTo(0, 0);
+    };
 
-      // ボタンのイベント設定（初回のみでOK）
+    document.getElementById('toPage4fromTest1').onclick = function () {
+      document.getElementById('Test1').style.display = 'none';
+      document.getElementById('page4').style.display = 'block';
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+      selected_editor = '#editor1';
+      window.errorOutputText.textContent = '';
+      window.INITIAL_CODE = `
+void setup() {
+    pinMode(3, OUTPUT);             
+}
+void loop() {
+    digitalWrite(3, HIGH); 
+}
+`.trim();
+      window.initMonacoEditor();
+      window.scrollTo(0, 0);
+    };
+
+    // ボタンのイベント設定（初回のみでOK）
 
 
-    </script>
+  </script>
 </body>
 
 </html>

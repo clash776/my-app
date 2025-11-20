@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第１章　マイコンとは何か</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
+</head>
+
+<body>
+    <div id="page1">
+
+        <h3>２章おまけ：変数</h3>
+        <div style="border:2px solid #4caf50; background:#f6fff6; border-radius:8px; padding:16px; margin-bottom:20px;">
+            <p style="font-size:1.1em;"><b>Arduinoのプログラム（C言語）には、<span
+                        style="color:#1976d2;">変数</span>という便利なしくみがあります。</b></p>
+            <p><span
+                    style="background:#e3f2fd; padding:2px 6px; border-radius:4px;">変数とは「データに名前をつけて保存しておくための入れ物」です。</span>
+            </p>
+            <p>例えば、LEDをつないでいるピン番号を変数に入れておけば、プログラムの中でその名前を使ってLEDを操作できるようになります。</p>
+            <ul style="margin-top:10px;">
+                <li><b>どのピンを使っているかが分かりやすくなる</b></li>
+                <li><b>後でピン番号を変更したいときに、1か所変えるだけで済む</b></li>
+                <li><b>数字だけよりも読みやすく、ミスも減る</b></li>
+            </ul>
+            <div style="background:#fffde7; border-left:4px solid #ffeb3b; padding:8px 12px; margin:12px 0;">
+                <b>変数をつくるときには「型」という種類を指定します。</b><br>
+                型は「どんな種類のデータを入れる箱か」を表すものです。<br>
+                <span style="color:#388e3c;">ピン番号などの整数には <b>int型</b> を使います。</span>（ほかにも様々な型があります）
+            </div>
+        </div>
+
+        <h3>変数の使い方</h3>
+        <div style="border:2px solid #1976d2; background:#f0f7ff; border-radius:8px; padding:16px; margin-bottom:20px;">
+            <p>変数を使うには、まず<strong>変数を宣言（せんげん）</strong>します。<br>
+                宣言とは、「この名前の変数を使いますよ」とプログラムに伝えることです。</p>
+            <p>変数の宣言は、以下のように行います。</p>
+            <pre style="background:#e3f2fd; border-radius:4px; padding:8px;"><code>int ledPin = 7;</code></pre>
+            <p>上の例では、<b>int型</b>の変数<b>ledPin</b>を宣言し、<span style="color:#1976d2;">7</span>という値を入れています。<br>
+                これで、<span
+                    style="background:#fffde7; padding:2px 6px; border-radius:4px;">ledPin</span>という名前を使って7番ピンを操作できるようになります。
+            </p>
+        </div>
+        <div style="margin-bottom:20px;"><b>変数を使ってLEDを点灯させるプログラムの例を見てみましょう。</b></div>
+
+        <div class="app-container">
+            <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+                <!-- LEDを中央上に配置 -->
+                <wokwi-led id="circuit-led" color="red" pin="7"
+                    style="position: absolute; left: 195px; top: 30px;"></wokwi-led>
+                <!-- Arduino Unoを中央下に配置 -->
+                <wokwi-resistor value="200" style="position: absolute; left: 150px; top: 65px;"></wokwi-resistor>
+                <wokwi-arduino-uno id="circuit-arduino"
+                    style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+                <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+                    <line x1="150" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
+                    <line x1="220" y1="70" x2="220" y2="120" stroke="black" stroke-width="2" />
+                </svg>
+            </div>
+            <div class="toolbar">
+                <button id="run-button1">Run</button>
+                <button id="stop-button1" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label1"></div>
+            </div>
+            <div class="code-editor" id="editor1"></div>
+            <div class="compiler-output">
+                <pre id="compiler-output-text1"></pre>
+            </div>
+            <div class="error-output">
+                <pre id="error-output-text1"></pre>
+            </div>
+        </div>
+        <p>上のプログラムでは１つのLEDしか制御していないため、変数を使ってもコードの見た目はあまり変わりません。<br>
+            しかし、複数のピンや複数のLEDを扱う場合には、変数を使うことでコードをより簡潔に書けるようになります。</p>
+        <button id="toPage2from1">次のページへ</button>
+        <script>
+            const readOnly = false; // 初期状態では読み取り専用
+        </script>
+    </div>
+    <div id="page2" style="display:none;">
+        <h3>３章おまけ：繰り返し処理</h3>
+        <div style="border:2px solid #ff9800; background:#fff8e1; border-radius:8px; padding:16px; margin-bottom:20px;">
+            <p style="font-size:1.1em;"><b>３章では、7セグメントLEDを制御するために８本のピンを使用しました。</b></p>
+            <p>これまでは、各ピンごとに１行ずつプログラムを書いて設定していましたが、<span
+                    style="background:#ffe0b2; padding:2px 6px; border-radius:4px;">繰り返し処理</span>を使うことで、同じような処理をまとめて書くことができ、コードを短くすることができます。
+            </p>
+            <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+                <b>繰り返し処理を行うときには <span style="color:#d84315;">for文</span> を使います。</b><br>
+                for文を使うと、次のように記述できます。
+                <pre style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>for (初期化; 条件式; 更新処理) {
+    繰り返し中に行う処理;
+}</code></pre>
+                <p style="margin-top:8px;">for文は「<b>初期化 → 条件判定 → 処理 → 更新</b>」を自動で繰り返してくれる構文です。</p>
+            </div>
+            <div style="background:#fffde7; border-left:4px solid #ffeb3b; padding:8px 12px; margin:12px 0;">
+                <b>実際に0～7番ピンをまとめて出力に設定する例</b>
+                <pre style="background:#fffde7; border-radius:4px; padding:8px; margin-top:8px;"><code>for (int i = 0; i &lt; 8; i++) {
+    pinMode(i, OUTPUT);
+}</code></pre>
+                <ul style="margin-top:10px;">
+                    <li><code>int i = 0;</code> …… <b>最初に i を 0 にする（スタート）</b></li>
+                    <li><code>i &lt; 8;</code> …… <b>i が 8 より小さい間（0～7の間）繰り返す</b></li>
+                    <li><code>i++;</code> …… <b>繰り返すたびに i の値を1増やす</b></li>
+                </ul>
+            </div>
+            <p style="margin-top:12px;">このようにfor文を使うことで、7セグメントLEDのように複数のピンをまとめて設定するコードを、<span
+                    style="color:#d84315; font-weight:bold;">短くわかりやすく</span>書くことができます。</p>
+        </div>
+        <p>以下のプログラムは実際に繰り返し処理を用いて7セグメントLEDを制御した例です。</p>
+        <div class="app-container">
+            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+                <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+                    style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
+                <wokwi-arduino-uno id="circuit-arduino"
+                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+                <!-- <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
+          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
+          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
+          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
+          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
+          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+
+
+        </svg> -->
+            </div>
+            <div class="toolbar">
+                <button id="run-button2">Run</button>
+                <button id="stop-button2" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label2"></div>
+            </div>
+            <div class="code-editor" id="editor2"></div>
+            <div class="compiler-output">
+                <pre id="compiler-output-text2"></pre>
+            </div>
+            <div class="error-output">
+                <pre id="error-output-text2"></pre>
+            </div>
+            <div id="result"></div>
+        </div>
+        <button id="toPage1from2">前のページへ</button>
+        <button id="toPage3from2">次のページへ</button>
+    </div>
+    <div id="page3" style="display:none;">
+        <h3>３章おまけ２：配列(Array)</h3>
+        <p>前のページでは、繰り返し処理（for文）を使うことで、同じ処理を短く書けることを学びました。</p>
+        <p>LEDの点灯の処理を行う際にも、<b>配列</b>という機能と、繰り返し処理を使うことで、コードを短くすることができます。</p>
+
+        <div style="border:2px solid #1976d2; background:#f0f7ff; border-radius:8px; padding:16px; margin-bottom:20px;">
+            <p><b>複数のピンをまとめて管理したいときは、<span style="color:#1976d2;">配列（Array）</span>が便利です。</b></p>
+            <ul style="margin-top:10px;">
+                <li>ピン番号をひとまとめにできる</li>
+                <li>for文と組み合わせて、初期設定や点灯処理を簡単に記述できる</li>
+                <li>後からピン番号を変更したい場合も、配列の中身だけ変えればOK</li>
+            </ul>
+            <div style="background:#fffde7; border-left:4px solid #ffeb3b; padding:8px 12px; margin:12px 0;">
+                <b>配列の宣言例</b>
+                <pre
+                    style="background:#e3f2fd; border-radius:4px; padding:8px; margin-top:8px;"><code>int segPins[8] = {2, 3, 4, 5, 6, 7, 8, 9};</code></pre>
+                <p style="margin-top:8px;">例：<code>segPins[0]</code>はピン2、<code>segPins[1]</code>はピン3…というようにアクセスできます。</p>
+            </div>
+            <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+                <b>for文と組み合わせた初期設定</b>
+                <pre style="background:#fffde7; border-radius:4px; padding:8px; margin-top:8px;"><code>for (int i = 0; i &lt; 8; i++) {
+    pinMode(segPins[i], OUTPUT);
+}</code></pre>
+                <p style="margin-top:8px;">配列の各ピン番号を順番に取り出して、すべてOUTPUTに設定できます。</p>
+            </div>
+            <p style="margin-top:12px;">配列を使うことで、コードが短く・管理しやすくなります。</p>
+        </div>
+        <p>以下のプログラムは実際に繰り返し処理と配列を用いて7セグメントLEDを制御した例です。</p>
+        <div class="app-container">
+            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+                <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+                    style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
+                <wokwi-arduino-uno id="circuit-arduino"
+                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+                <!-- <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
+          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
+          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
+          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
+          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
+          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
+
+          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
+
+          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+
+
+        </svg> -->
+            </div>
+            <div class="toolbar">
+                <button id="run-button3">Run</button>
+                <button id="stop-button3" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label3"></div>
+            </div>
+            <div class="code-editor" id="editor3"></div>
+            <div class="compiler-output">
+                <pre id="compiler-output-text3"></pre>
+            </div>
+            <div class="error-output">
+                <pre id="error-output-text3"></pre>
+            </div>
+            <div id="result"></div>
+        </div>
+        <p>プログラムを実行すると、７セグメントLEDがすべて点灯します。</p>
+        <p>３章の最初のプログラムと比較するとコードが大幅に短縮されたことが分かると思います。</p>
+        <button id="toPage2from3">前のページへ</button>
+        <button id="toPage4from3">次のページへ</button>
+    </div>
+    <div id="page4" style="display:none;">
+        <h3>４．基本的なプログラムの書き方</h3>
+        <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
+        <p>下のプログラムを見てみましょう。</p>
+        <div class="app-container">
+            <div class="toolbar">
+                <button id="run-button2">Run</button>
+                <button id="stop-button2" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label2"></div>
+            </div>
+            <div class="code-editor" id="editor2"></div>
+            <div class="compiler-output">
+                <pre id="compiler-output-text2"></pre>
+            </div>
+            <div class="error-output">
+                <pre id="error-output-text2"></pre>
+            </div>
+        </div>
+        <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラムです。</p>
+        <p>3番ピンにLEDが接続されている場合、点灯するようになっています。</p>
+        <h3>プログラムを書く上で重要なこと</h3>
+
+        <h4>セミコロン ( ; ) は必ず必要</h4>
+        <p>命令文の最後には必ず <strong>セミコロン ( ; )</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
+
+        <pre><code>pinMode(3, OUTPUT);
+digitalWrite(3, HIGH);</code></pre>
+
+        <h4>波かっこ <code>{ }</code> の役割</h4>
+        <p><code>setup()</code> と <code>loop()</code> の中身は、必ず <code>{ }</code> で囲む必要があります。もし波かっこを消してしまうと、どこまでが
+            <code>setup</code> の中なのかを Arduino が理解できず、エラーになります。
+        </p>
+
+        <h4>コメント ( <code>//</code> )</h4>
+        <p>プログラムの中に説明を書いておくことができます。コメントはプログラムの動作には影響しません。</p>
+
+        <pre>// 3番ピンを出力用にする
+// 3番ピンをHIGHにする
+      </pre>
+        <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
+        <button id="toPage3from4">前のページへ</button>
+        <button id="toPage5from4">次のページへ</button>
+    </div>
+
+    <div id="page5" style="display:none;">
+        <h2>第２章　この教材の使い方</h2>
+        <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
+        <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-3s3apfvb.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+        <ul>
+            <li><b>マイコンと部品</b>：プログラムを実行すると、マイコンに接続されている部品が動作します。</li>
+            <li><b>Runボタン・Stopボタン</b>：プログラムを実行するときはRunボタン、止めるときはStopボタンを押します。</li>
+            ※環境によっては実行までに時間がかかってしまう場合があります。
+            <li><b>コードエディタ</b>：プログラムを書く場所です。</li>
+        </ul>
+        <p>この教材の流れは、以下のようになります。</p>
+        <ul>
+            <li><b>第1章：マイコンとは何か</b></li>
+            <li><b>第2章：この教材の使い方</b>←現在の章</li>
+            <li><b>第3章：LED点灯</b></li>
+            <li><b>第4章：さらに応用的な内容を学ぶ</b></li>
+        </ul>
+
+        <p><b>これでこの章は終わりです。「次の章へ」ボタンを押して次の章へ進みましょう！</b></p>
+        <button id="toPage4from5">前のページへ</button>
+        <button id="nextpage-btn" onclick="window.location.href='que2.html'">次の章へ</button>
+    </div>
+
+
+    <script>
+        window.INITIAL_CODE = `
+int ledPin = 7;
+void setup() {
+    pinMode(ledPin, OUTPUT);             
+}
+void loop() {
+    digitalWrite(ledPin, HIGH); 
+}
+`.trim();
+        let selected_editor = '#editor1';
+        window.addEventListener('DOMContentLoaded', function () {
+            window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+        });
+        document.getElementById('toPage2from1').onclick = function () {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
+            selected_editor = '#editor2';
+            window.errorOutputText.textContent = '';
+            window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+            window.INITIAL_CODE = `
+void setup() {
+  for (int i = 2; i < 10; i++) {
+    pinMode(i, OUTPUT);
+  }
+}
+void loop() {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
+}
+`.trim();
+            window.scrollTo(0, 0);
+            window.initMonacoEditor();
+        };
+        document.getElementById('toPage1from2').onclick = function () {
+            document.getElementById('page1').style.display = 'block';
+            document.getElementById('page2').style.display = 'none';
+            selected_editor = '#editor1';
+            window.errorOutputText.textContent = '';
+            window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+            window.INITIAL_CODE = `
+int ledPin = 7;
+void setup() {
+    pinMode(ledPin, OUTPUT);             
+}
+void loop() {
+    digitalWrite(ledPin, HIGH); 
+}
+`.trim();
+            window.scrollTo(0, 0);
+            window.initMonacoEditor();
+        };
+        document.getElementById('toPage3from2').onclick = function () {
+            document.getElementById('page2').style.display = 'none';
+            document.getElementById('page3').style.display = 'block';
+            selected_editor = '#editor3';
+            window.errorOutputText.textContent = '';
+            window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
+            window.INITIAL_CODE = `
+void setup() {
+  for (int i = 2; i < 10; i++) {
+    pinMode(i, OUTPUT);
+  }
+}
+int segPins[8] = {2, 3, 4, 5, 6, 7, 8, 9};
+void loop() {
+    for (int i = 0; i < 8; i++) {
+        digitalWrite(segPins[i], HIGH);
+    }
+}
+`.trim();
+            window.scrollTo(0, 0);
+            window.initMonacoEditor();
+        };
+        document.getElementById('toPage2from3').onclick = function () {
+            document.getElementById('page2').style.display = 'block';
+            document.getElementById('page3').style.display = 'none';
+            selected_editor = '#editor2';
+            window.errorOutputText.textContent = '';
+            window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+            window.INITIAL_CODE = `
+void setup() {
+  for (int i = 2; i < 10; i++) {
+    pinMode(i, OUTPUT);
+  }
+}
+void loop() {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
+}
+`.trim();
+            window.scrollTo(0, 0);
+            window.initMonacoEditor();
+        };
+        document.getElementById('toPage4from3').onclick = function () {
+            document.getElementById('page3').style.display = 'none';
+            document.getElementById('page4').style.display = 'block';
+            selected_editor = '#editor2';
+            window.errorOutputText.textContent = '';
+            window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+            window.INITIAL_CODE = `
+void setup() {
+  pinMode(3, OUTPUT);   // 3番ピンを出力用にする
+}
+void loop() {
+  digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
+}
+`.trim();
+            window.scrollTo(0, 0);
+            window.initMonacoEditor();
+        };
+        document.getElementById('toPage3from4').onclick = function () {
+            document.getElementById('page3').style.display = 'block';
+            document.getElementById('page4').style.display = 'none';
+            window.scrollTo(0, 0);
+        };
+        document.getElementById('toPage5from4').onclick = function () {
+            document.getElementById('page4').style.display = 'none';
+            document.getElementById('page5').style.display = 'block';
+            window.scrollTo(0, 0);
+        };
+        document.getElementById('toPage4from5').onclick = function () {
+            document.getElementById('page4').style.display = 'block';
+            document.getElementById('page5').style.display = 'none';
+            selected_editor = '#editor2';
+            window.errorOutputText.textContent = '';
+            window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+            window.INITIAL_CODE = `
+void setup() {
+  pinMode(3, OUTPUT);   // 3番ピンを出力用にする
+}
+void loop() {
+  digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
+}
+`.trim();
+            window.scrollTo(0, 0);
+            window.initMonacoEditor();
+        };
+
+    </script>
+
+</body>
+</div>
+
+</html>
