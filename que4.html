@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>delay関数</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
 </head>
 
 <body>
@@ -47,6 +47,7 @@
     </div>
     <p>上のプログラムでは200ミリ秒（0.2秒）間隔でLEDの点灯と消灯を繰り返しています。</p>
     <p>delay関数の中の数字を変更することで、LEDの点灯・消灯の長さを変えることが出来ます。</p>
+    <p>補足：※delay() の時間はミリ秒（ms）で指定します。<br>1000 ms = 1 秒、100 ms = 0.1 秒です。</p>
     <button id="toPage2from1">確認問題へ</button>
   </div>
   <div id="page2" style="display:none;">
@@ -159,6 +160,8 @@
             if ((!que2led && (counter >= 3))) {
               que2led = true;
             }
+          }else {
+            counter = 0;
           }
         }
         // window.codeがundefined/nullでない場合のみ判定

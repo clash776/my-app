@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
 </head>
 
 <body>
@@ -48,7 +48,6 @@
         <p>２つ目の引数には0～255の値を指定することが出来ます。LEDの場合、値が大きいほど明るく、小さいほど暗くなります。</p>
         <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
         <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
-        <p>(下のプログラムの場合では変数brightnessがanalogWrite関数の引数として使われているため、変数brightnessの値によってLEDの明るさが変化します。)</p>
 
         <div class="app-container">
             <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
@@ -98,7 +97,7 @@
         <h3>２．0.1 秒ごとに analogWrite の第2引数に与える値を50、150、250 と順番に変化させ、<br>LED の明るさが段階的に変化するプログラムを作成してください。</h3>
         <div class="app-container">
             <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
-                <wokwi-led id="circuit-led" color="red" pin="11"
+                <wokwi-led id="quiz-led" color="red" pin="11"
                     style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
                 <wokwi-arduino-uno id="circuit-arduino"
                     style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
@@ -116,9 +115,10 @@
             <div class="error-output">
                 <pre id="error-output-text3"></pre>
             </div>
+            <div id="result2" style="margin-top: 20px;"></div>
         </div>
-
         <button id="toPage2from3">前のページへ</button>
+        <button id="nextpage-btn" onclick="window.location.href='que6.html'" style="display:none;">次の章へ</button>
         <script>
             function checkAnswer() {
                 // 正解の組み合わせ（true=チェックすべき）
@@ -147,6 +147,66 @@
                     document.getElementById('result1').style.color = "red";
                 }
             }
+
+            let que2code = false;
+            let que2led = false;
+            let expectedValues = [50, 150, 250];
+            const LED11 = document.querySelector('#quiz-led');
+            let prevbrightness = LED11.brightness;
+            const statusLabel = document.getElementById('status-label3');
+            let time1;
+            let time2;
+            let counter = 0;
+
+            setInterval(() => {
+                if (!prevbrightness && LED11.value) {
+                    // 消灯→点灯の瞬間だけ一度だけ表示
+                    console.log(LED11, LED11.value, LED11.brightness, counter);
+                    if (counter == 0 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+                        time1 = parseSimTime(statusLabel);
+                        if (time1 == null) return;
+                        console.log('LED点灯時の時刻:', time1);
+                        counter++;
+                    }
+                }
+                if (counter == 1 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+                    // 点灯→消灯の瞬間だけ一度だけ表示
+                    time2 = parseSimTime(statusLabel);
+                    console.log('LED消灯時の時刻:', time2, time2 - time1);
+                    if (time2 - time1 > 0.090) {
+                        time1 = parseSimTime(statusLabel);
+                        counter++;
+                    } else {
+                        counter = 0;
+                    }
+                }
+                if (counter == 2 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+                    // 点灯→消灯の瞬間だけ一度だけ表示
+                    time2 = parseSimTime(statusLabel);
+                    console.log('LED点灯時の時刻:', time2);
+                    if (time2 - time1 > 0.090) {
+                        que2led = true;
+                        counter = 3;
+                    } else {
+                        counter = 0;
+                    }
+                }
+                if (typeof window.code === 'string') {
+                    if (window.code.includes("analogWrite(11, 50);") &&
+                        window.code.includes("analogWrite(11, 150);") &&
+                        window.code.includes("analogWrite(11, 250);") &&
+                        window.code.includes("delay(100);")
+                    ) {
+                        que2code = true;
+                    }
+                }
+                if (que2code && que2led) {
+                    document.getElementById('result2').textContent = "正解です！";
+                    document.getElementById('result2').style.color = "green";
+                    document.getElementById('nextpage-btn').style.display = 'inline';
+                }
+            }, 10);
+
         </script>
     </div>
 </body>
@@ -179,9 +239,8 @@ void setup() {
   pinMode(11, OUTPUT);
 }
 
-byte brightness = 0;
 void loop() {
-  analogWrite(11, brightness);
+  analogWrite(11, 0);
 }
 `.trim();
         window.scrollTo(0, 0);
@@ -222,11 +281,13 @@ void setup() {
   pinMode(11, OUTPUT);
 }
 
-byte brightness = 0;
 void loop() {
-  analogWrite(11, brightness);
-  delay(10);
-  brightness++;
+  analogWrite(11, 50);
+  delay(100);
+  analogWrite(11, 150);
+  delay(100);
+  analogWrite(11, 250);
+  delay(100);
 }
 `.trim();
         window.scrollTo(0, 0);
@@ -246,9 +307,8 @@ void setup() {
   pinMode(11, OUTPUT);
 }
 
-byte brightness = 0;
 void loop() {
-  analogWrite(11, brightness);
+  analogWrite(11, 0);
 }
 `.trim();
         window.scrollTo(0, 0);

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第１章　マイコンとは何か</title>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
+</head>
+<style>
+    html {
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .main-layout {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        width: 80px;
+        background: #111;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-content {
+        flex: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        background: none;
+        min-height: 100vh;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="main-layout">
+        <div class="sidebar"></div>
+        <div class="main-content">
+            div id="page1">
+            <div class="blue-point-box">
+                <h2>第１章　マイコンとは何か</h2>
+                <h3>１．マイコンとは</h3>
+                <p style="font-size:1.1em; margin-bottom:12px;">
+                    <b>マイコンは、センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータです。</b>
+                </p>
+                <ul style="margin-bottom:16px;">
+                    <li>パソコンとは違い、特定の仕事を効率よくこなすために作られている</li>
+                    <li>小型・低価格で、様々な種類がある</li>
+                    <li>用途に応じて異なる機能を持つ</li>
+                </ul>
+                <div
+                    style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
+                    <div style="text-align: center;">
+                        <wokwi-arduino-uno></wokwi-arduino-uno>
+                        <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Uno</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <wokwi-arduino-nano></wokwi-arduino-nano>
+                        <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Nano</div>
+                    </div>
+                </div>
+                <p style="margin-bottom:0;">本教材では、上で紹介したような <b>Arduino</b> を使い、実際の動作を確認しながらプログラミングを学んでいきます。</p>
+            </div>
+            <h3>早速プログラムを実行してみましょう！</h3>
+            <div class="app-container">
+                <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+                    <!-- LEDを中央上に配置 -->
+                    <wokwi-led id="circuit-led" color="red" pin="7"
+                        style="position: absolute; left: 195px; top: 30px;"></wokwi-led>
+                    <!-- Arduino Unoを中央下に配置 -->
+                    <wokwi-resistor value="200" style="position: absolute; left: 150px; top: 65px;"></wokwi-resistor>
+                    <wokwi-arduino-uno id="circuit-arduino"
+                        style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+                    <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+                    <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+                        <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+                        <line x1="150" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
+                        <line x1="220" y1="70" x2="220" y2="120" stroke="black" stroke-width="2" />
+                    </svg>
+                </div>
+                <p>Runボタンを押してプログラムを実行してみましょう！</p>
+                <div class="toolbar">
+                    <button id="run-button1">Run</button>
+                    <button id="stop-button1" disabled>Stop</button>
+                    <div class="spacer"></div>
+                    <div id="status-label1"></div>
+                </div>
+                <div class="code-editor" id="editor1"></div>
+                <div class="compiler-output">
+                    <pre id="compiler-output-text1"></pre>
+                </div>
+                <div class="error-output">
+                    <pre id="error-output-text1"></pre>
+                </div>
+                <div id='test-output'>
+                    <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
+                        <p>LEDが点灯しました！次のページへ進みましょう。</p>
+                        <button id="toPage2from1">次のページへ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar"></div>
+    </div>
+</body>
+
+</html>

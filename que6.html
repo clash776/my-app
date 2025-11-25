@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 
     <div class="app-container">
       <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
-        <wokwi-led id="circuit-led" color="red" pin="11"
+        <wokwi-led id="circuit-led" color="red" pin="11" brightness="0"
           style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
         <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
       </div>
@@ -42,10 +42,10 @@
 
     <div class="point-box">
     </div>
-    <ul>
-      <li>プログラムを実行すると、シリアルモニタに0から255までの数字が順番に表示されます。</li>
-      <li>変数の値やプログラムの動作状況をリアルタイムで確認できます。</li>
-    </ul>
+    <p>上のプログラムは6章の最初のプログラムです。</p>
+    <p>プログラムを実行すると、変数brightnessの値(0~255)が順番にシリアルモニタに表示されます。</p>
+    <p>このように、シリアルモニタを使うことで、変数の値などプログラムの動作状況をリアルタイムで確認することができます。</p>
+
     <h3><span style="color:#2196f3;">シリアルモニタの使い方</span></h3>
     <ol>
       <li><b>シリアル通信の準備</b><br>
@@ -59,7 +59,7 @@
       </li>
     </ol>
     <div class="point-box">
-      <strong>補足:</strong> 実際のエディタ(Arduino IDEなど)でシリアルモニタを使う場合、シリアルモニタ側でも設定が必要です。
+
     </div>
     <h3>通信開始の命令例</h3>
     <div style="background:#f0f8ff;border-left:4px solid #2196f3;padding:8px 12px;margin:12px 0;">
@@ -69,8 +69,10 @@
       <li><code>Serial.begin()</code>で通信速度（ボーレート）を指定します（例：9600bps）。</li>
       <li>この命令は<code>setup()</code>の中に1回だけ書きます。</li>
       <li>その後、<code>Serial.print()</code>や<code>Serial.println()</code>でデータを表示できます。</li>
-      <li>シリアルモニタの右下の通信速度設定も、プログラムの値（例：9600）に合わせましょう。</li>
+      <li><code>Serial.print()</code>は改行せずに表示し、<code>Serial.println()</code>は表示後に改行します。</li>
     </ul>
+    <p><b>注意：</b>実際のエディタ(Arduino IDEなど)でシリアルモニタを使う場合、<br>
+      シリアルモニタ側の通信速度設定を、プログラムの値（例：9600）に合わせる必要があります。</p>
     <p></p>
 
     <button id="toPage2from1">次のページへ</button>
@@ -113,8 +115,54 @@
     </script>
   </div>
   <div id="page3" style="display:none;">
+    <h3>第６章　PWM制御　確認問題</h3>
+    <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
+    <h3>１．次のうち、シリアルモニタを使用する目的として正しいものををすべて選んでください。</h3>
+    <form>
+      <input type="checkbox" id="q1">
+      <label for="q1">プログラムのデバッグを行うため</label><br>
 
+      <input type="checkbox" id="q2">
+      <label for="q2">LEDの明るさを変更するため</label><br>
+
+      <input type="checkbox" id="q3">
+      <label for="q3">マイコンの初期化を行うため</label><br>
+
+      <input type="checkbox" id="q4">
+      <label for="q4">変数の値を確認するため</label><br>
+    </form>
+    <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
+    <div id="result1" style="margin-top: 20px;"></div>
     <button id="toPage2from3">前のページへ</button>
+    <script>
+      function checkAnswer() {
+        // 正解の組み合わせ（true=チェックすべき）
+        const correctAnswers = {
+          q1: true,
+          q2: true,
+          q3: true,
+          q4: false,
+        };
+
+        let isCorrect = true;
+        for (let key in correctAnswers) {
+          const checked = document.getElementById(key).checked;
+          if (checked !== correctAnswers[key]) {
+            isCorrect = false;
+          }
+        }
+
+        const result = document.getElementById("result");
+        if (isCorrect) {
+          document.getElementById('result1').textContent = "正解です！";
+          document.getElementById('result1').style.color = "green";
+          que1 = true;
+        } else {
+          document.getElementById('result1').textContent = "間違いがあります。もう一度見直してみましょう。";
+          document.getElementById('result1').style.color = "red";
+        }
+      }
+    </script>
   </div>
 </body>
 <script>
@@ -145,7 +193,7 @@ void loop() {
     window.errorOutputText.textContent = '';
     window.INITIAL_CODE = `
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -164,7 +212,7 @@ void loop() {
     window.errorOutputText.textContent = '';
     window.INITIAL_CODE = `
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(11, OUTPUT);
 }
 

@@ -5,223 +5,211 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CUpjrXiO.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-BxMVHTHQ.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
 </head>
 
 <body>
-  <div id="page1">
-    <h2>第１章　マイコンとは何か</h2>
-    <h3>１．マイコンとは</h3>
-    <p>マイコンは、センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御することができます。</p>
-    <p>マイコンはパソコンとは違い、特定の仕事を効率よくこなすために作られているため、小型であり、価格も安いものが多いです。</p>
-    <p>マイコンにはさまざまな種類、機能があります。</p>
-    <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
-      <div style="text-align: center;">
-        <wokwi-arduino-uno></wokwi-arduino-uno>
-        <div style="margin-top: 8px; font-weight: bold;">Arduino Uno</div>
-      </div>
-      <div style="text-align: center;">
-        <wokwi-arduino-nano></wokwi-arduino-nano>
-        <div style="margin-top: 8px; font-weight: bold;">Arduino Nano</div>
-      </div>
-    </div>
-    <p>本教材では、上にあるようなArduinoを使った、プログラミングの方法を実際の動作を見ながら学んでいきます。
-    <p>
-    <h3>早速プログラムを実行してみましょう！</h3>
-    <div class="app-container">
-      <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
-        <!-- LEDを中央上に配置 -->
-        <wokwi-led id="circuit-led" color="red" pin="7" style="position: absolute; left: 195px; top: 30px;"></wokwi-led>
-        <!-- Arduino Unoを中央下に配置 -->
-        <wokwi-resistor value="200" style="position: absolute; left: 150px; top: 65px;"></wokwi-resistor>
-        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
-        <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
-        <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
-          <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
-          <line x1="150" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
-          <line x1="220" y1="70" x2="220" y2="120" stroke="black" stroke-width="2" />
-        </svg>
-      </div>
-      <p>Runボタンを押してプログラムを実行してみましょう！</p>
-      <div class="toolbar">
-        <button id="run-button1">Run</button>
-        <button id="stop-button1" disabled>Stop</button>
-        <div class="spacer"></div>
-        <div id="status-label1"></div>
-      </div>
-      <div class="code-editor" id="editor1"></div>
-      <div class="compiler-output">
-        <pre id="compiler-output-text1"></pre>
-      </div>
-      <div class="error-output">
-        <pre id="error-output-text1"></pre>
-      </div>
-      <div id='test-output'>
-        <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
-          <p>LEDが点灯しました！次のページへ進みましょう。</p>
-          <button id="toPage2from1">次のページへ</button>
+  <div class="main-layout">
+    <div class="sidebar"></div>
+    <div class="main-content">
+      <div id="page1">
+        <div class="blue-point-box">
+          <h2>第１章　マイコンとは何か</h2>
+          <h3>１．マイコンとは</h3>
+          <p style="font-size:1.1em; margin-bottom:12px;"><b>マイコンは、センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータです。</b>
+          </p>
+          <ul style="margin-bottom:16px;">
+            <li>パソコンとは違い、特定の仕事を効率よくこなすために作られている</li>
+            <li>小型・低価格で、様々な種類がある</li>
+            <li>用途に応じて異なる機能を持つ</li>
+          </ul>
+          <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
+            <div style="text-align: center;">
+              <wokwi-arduino-uno></wokwi-arduino-uno>
+              <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Uno</div>
+            </div>
+            <div style="text-align: center;">
+              <wokwi-arduino-nano></wokwi-arduino-nano>
+              <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Nano</div>
+            </div>
+          </div>
+          <p style="margin-bottom:0;">本教材では、上で紹介したような <b>Arduino</b> を使い、実際の動作を確認しながらプログラミングを学んでいきます。</p>
         </div>
+        <h3>早速プログラムを実行してみましょう！</h3>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 195px; top: 30px;"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 150px; top: 65px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="150" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
+              <line x1="220" y1="70" x2="220" y2="120" stroke="black" stroke-width="2" />
+            </svg>
+          </div>
+          <p>Runボタンを押してプログラムを実行してみましょう！</p>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+          <div id='test-output'>
+            <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
+              <p>LEDが点灯しました！次のページへ進みましょう。</p>
+              <button id="toPage2from1">次のページへ</button>
+            </div>
+          </div>
+        </div>
+        <script>
+          const readOnly = false; // 初期状態では読み取り専用
+          const nextpageGuide = document.getElementById('nextpage-guide');
+          const led = document.querySelector('wokwi-led[pin="7"]');
+          let isAnswered = false; // 正解フラグ
+          setInterval(() => {
+            if (isAnswered) return;
+            const isLedOn = led && led.value === true;
+            if (isLedOn) {
+              nextpageGuide.style.display = "inline";
+              isAnswered = true;
+            }
+          }, 10);
+        </script>
       </div>
-    </div>
-    <script>
-      const readOnly = false; // 初期状態では読み取り専用
-      const nextpageGuide = document.getElementById('nextpage-guide');
-      const led = document.querySelector('wokwi-led[pin="7"]');
-      let isAnswered = false; // 正解フラグ
-      setInterval(() => {
-        if (isAnswered) return;
-        const isLedOn = led && led.value === true;
-        if (isLedOn) {
-          nextpageGuide.style.display = "inline";
-          isAnswered = true;
-        }
-      }, 10);
-    </script>
-  </div>
-  <div id="page2" style="display:none;">
-    <h3>２．マイコンを動かすには</h3>
-    <p>マイコンを動かすためには、プログラムを書いてマイコンに書き込む必要があります。</p>
-    <p>Arduinoでは、<b>「関数」</b>の組み合わせで構成されているArduino言語を使ってプログラムを作成します。</p>
-    <p>関数とは、<b>「何らかの値を与えると、それに応じて処理を行い、その結果を返す」</b>ものです。</p>
-    <p>例として、以下のようなものが挙げられます。</p>
-    <ul>
-      <li><b>LEDを点灯・消灯させる</b></li>
-      <wokwi-led color="red" pin="7" value="true"></wokwi-led>
-      <li><b>ボタンを押したときの動作</b></li>
-      <wokwi-pushbutton color="red" pin="3"></wokwi-pushbutton>
-      <li><b>モーターを動かす</b></li>
-      <wokwi-servo angle="90"></wokwi-servo>
-    </ul>
-    <p>関数を使うことで、同じ処理を何度も簡単に実行することが出来るため、プログラムが作りやすくなります。</p>
-    <p>先ほどのプログラムでもいくつか関数が使用されています。</p>
-    <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-BWaG7y4L.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-    <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の2つの関数を必ず作成する必要があります。</p>
-    <ul>
-      <li><b>setup関数</b>：初期化の処理をする関数　最初に1度だけ実行される</li>
-      <li><b>loop関数</b>：メインの処理にあたる関数　繰り返し実行される</li>
-    </ul>
-    <p>この関数の中にプログラムを書き込むことで、LEDやモーターを制御することが出来ます。</p>
-    <button id="toPage1from2">前のページへ</button>
-    <button id="toPage3from2">次のページへ</button>
-  </div>
-  <div id="page3" style="display:none;">
-    <h3>３．マイコンの機能</h3>
-    <p>Arduinoには<b>GPIO</b>と呼ばれるピンが複数あります。</p>
-    <p>GPIOは、<b>General Purpose Input/Output</b>の略で、汎用的な入出力ピンのことを指します。</p>
-    <img src="/my-app/assets/GPIO-Czi4fL8V.jpg" alt="que2" style="max-width: 100%; display: block; margin: 0 auto;">
-    <p>先ほどのプログラムでは、7番ピンを出力用として使用しました。</p>
-    <p>ピンの設定をするにはsetup関数の中にある<b>pinMode</b>という関数を用いて行います。</p>
-    <p>pinMode関数は、以下のように使用します。</p>
-    <p>pinMode(ピン番号, モード);</p>
-    <p>モードには、以下の2つを指定できます。</p>
-    <ul>
-      <li><b>INPUT</b>：入力用のピンとして設定する</li>
-      <li><b>OUTPUT</b>：出力用のピンとして設定する</li>
-    </ul>
-    <p>例えば、7番ピンを出力用として設定する場合は、以下のように記述します。</p>
-    <p>pinMode(7, OUTPUT);</p>
-    <p>また、関数のかっこの中に入れる値のことを<b>「引数（ひきすう）」</b>といいます。</p>
-    <p>pinMode関数の場合、引数には<b>ピン番号</b>と<b>モード</b>を指定します。</p>
-    <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
-    </p>
-    <button id="toPage2from3">前のページへ</button>
-    <button id="toPage4from3">次のページへ</button>
-  </div>
-  <div id="page4" style="display:none;">
-    <h3>４．基本的なプログラムの書き方</h3>
-    <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
-    <p>下のプログラムを見てみましょう。</p>
-    <div class="app-container">
-      <div class="toolbar">
-        <button id="run-button2">Run</button>
-        <button id="stop-button2" disabled>Stop</button>
-        <div class="spacer"></div>
-        <div id="status-label2"></div>
+      <div id="page2" style="display:none;">
+        <h3>２．マイコンを動かすには</h3>
+        <p>マイコンを動かすためには、プログラムを書いてマイコンに書き込む必要があります。</p>
+        <p>Arduinoのプログラムは、複数の<b>関数</b>を組み合わせて作られています。</p>
+        <p>関数とは、<b>特定の処理をまとめた命令のまとまり</b>です。</p>
+        <p>例として、以下のようなものが挙げられます。</p>
+        <ul>
+          <li><b>LEDを点灯・消灯させる</b></li>
+          <wokwi-led color="red" pin="7" value="true"></wokwi-led>
+          <li><b>ボタンを押したときの動作</b></li>
+          <wokwi-pushbutton color="red" pin="3"></wokwi-pushbutton>
+          <li><b>モーターを動かす</b></li>
+          <wokwi-servo angle="90"></wokwi-servo>
+        </ul>
+        <p>関数を使うことで、同じ処理を何度も簡単に実行することが出来るため、プログラムが作りやすくなります。</p>
+        <p>先ほどのプログラムでもいくつか関数が使用されています。</p>
+        <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-BWaG7y4L.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+        <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の2つの関数を必ず作成する必要があります。</p>
+        <ul>
+          <li><b>setup関数</b>：初期化の処理をする関数　最初に1度だけ実行される</li>
+          <li><b>loop関数</b>：メインの処理にあたる関数　繰り返し実行される</li>
+        </ul>
+        <p>これらの関数の中にプログラムを書き込むことで、LEDやモーターなどを制御できます。</p>
+        <button id="toPage1from2">前のページへ</button>
+        <button id="toPage3from2">次のページへ</button>
       </div>
-      <div class="code-editor" id="editor2"></div>
-      <div class="compiler-output">
-        <pre id="compiler-output-text2"></pre>
+      <div id="page3" style="display:none;">
+        <h3>３．マイコンの機能</h3>
+        <p>Arduinoには<b>GPIO</b>と呼ばれるピンが複数あります。</p>
+        <p>GPIOは、<b>General Purpose Input/Output</b>の略で、汎用的な入出力ピンのことを指します。</p>
+        <img src="/my-app/assets/GPIO-Czi4fL8V.jpg" alt="que2" style="max-width: 100%; display: block; margin: 0 auto;">
+        <p>先ほどのプログラムでは、7番ピンを出力用として使用しました。</p>
+        <p>ピンの設定をするにはsetup関数の中にある<b>pinMode</b>という関数を用いて行います。</p>
+        <p>pinMode関数は、以下のように使用します。</p>
+        <p>pinMode(ピン番号, モード);</p>
+        <p>モードには、以下の2つを指定できます。</p>
+        <ul>
+          <li><b>INPUT</b>：入力用のピンとして設定する</li>
+          <li><b>OUTPUT</b>：出力用のピンとして設定する</li>
+        </ul>
+        <p>例えば、7番ピンを出力用として設定する場合は、以下のように記述します。</p>
+        <p>pinMode(7, OUTPUT);</p>
+        <p>関数のかっこの中に入れる値のことを<b>引数（ひきすう）</b>といいます。</p>
+        <p>pinMode関数の場合、引数には<b>ピン番号</b>と<b>モード</b>を指定します。</p>
+        <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
+        </p>
+        <button id="toPage2from3">前のページへ</button>
+        <button id="toPage4from3">次のページへ</button>
       </div>
-      <div class="error-output">
-        <pre id="error-output-text2"></pre>
-      </div>
-    </div>
-    <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラムです。</p>
-    <p>3番ピンにLEDが接続されている場合、点灯するようになっています。</p>
-    <h3>プログラムを書く上で重要なこと</h3>
+      <div id="page4" style="display:none;">
+        <h3>４．基本的なプログラムの書き方</h3>
+        <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
+        <p>下のプログラムを見てみましょう。</p>
+        <div class="app-container">
+          <div class="toolbar">
+            <button id="run-button2">Run</button>
+            <button id="stop-button2" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label2"></div>
+          </div>
+          <div class="code-editor" id="editor2"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラムです。</p>
+        <p>3番ピンにLEDが接続されている場合、点灯するようになっています。</p>
+        <h3>プログラムを書く上で重要なこと</h3>
 
-    <h4>セミコロン ( ; ) は必ず必要</h4>
-    <p>命令文の最後には必ず <strong>セミコロン ( ; )</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
+        <h4>セミコロン ( ; ) は必ず必要</h4>
+        <p>命令文の最後には必ず <strong>セミコロン ( ; )</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
 
-    <pre><code>pinMode(3, OUTPUT);
+        <pre><code>pinMode(3, OUTPUT);
 digitalWrite(3, HIGH);</code></pre>
 
-    <h4>波かっこ <code>{ }</code> の役割</h4>
-    <p><code>setup()</code> と <code>loop()</code> の中身は、必ず <code>{ }</code> で囲む必要があります。もし波かっこを消してしまうと、どこまでが
-      <code>setup</code> の中なのかを Arduino が理解できず、エラーになります。
-    </p>
+        <h4>波かっこ <code>{ }</code> の役割</h4>
+        <p><code>setup()</code> と <code>loop()</code> の中身は、必ず <code>{ }</code> で囲む必要があります。もし波かっこを消してしまうと、どこまでが
+          <code>setup</code> の中なのかを Arduino が理解できず、エラーになります。
+        </p>
 
-    <h4>コメント ( <code>//</code> )</h4>
-    <p>プログラムの中に説明を書いておくことができます。コメントはプログラムの動作には影響しません。</p>
+        <h4>コメント ( <code>//</code> )</h4>
+        <p>プログラムの中に説明を書いておくことができます。コメントはプログラムの動作には影響しません。</p>
 
-    <pre>// 3番ピンを出力用にする
+        <pre>// 3番ピンを出力用にする
 // 3番ピンをHIGHにする
       </pre>
-    <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
-    <button id="toPage3from4">前のページへ</button>
-    <button id="toPage5from4">次のページへ</button>
+        <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
+        <button id="toPage3from4">前のページへ</button>
+        <button id="toPage5from4">次のページへ</button>
+      </div>
+
+      <div id="page5" style="display:none;">
+        <h2>第２章　この教材の使い方</h2>
+        <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
+        <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-3s3apfvb.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
+        <ul>
+          <li><b>マイコンと部品</b>：プログラムを実行すると、マイコンに接続されている部品が動作します。</li>
+          <li><b>Runボタン・Stopボタン</b>：プログラムを実行するときはRunボタン、止めるときはStopボタンを押します。</li>
+          ※環境によってはプログラムの実行までに時間がかかる場合があります。
+          <li><b>コードエディタ</b>：プログラムを書く場所です。</li>
+        </ul>
+        <p>この教材の流れは、以下のようになります。</p>
+        <ul>
+          <li><b>第1章：マイコンとは何か</b></li>
+          <li><b>第2章：この教材の使い方</b>←現在の章</li>
+          <li><b>第3章：LED点灯</b></li>
+          <li><b>第4章：さらに応用的な内容を学ぶ</b></li>
+        </ul>
+
+        <p><b>これでこの章は終わりです。「次の章へ」ボタンを押して次の章へ進みましょう！</b></p>
+        <button id="toPage4from5">前のページへ</button>
+        <button id="nextpage-btn" onclick="window.location.href='que2.html'">次の章へ</button>
+      </div>
+    </div>
+    <div class="sidebar"></div>
   </div>
 
-  <div id="page5" style="display:none;">
-    <h2>第２章　この教材の使い方</h2>
-    <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
-    <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-3s3apfvb.jpg" style="max-width: 100%; display: block; margin: 0 auto;">
-    <ul>
-      <li><b>マイコンと部品</b>：プログラムを実行すると、マイコンに接続されている部品が動作します。</li>
-      <li><b>Runボタン・Stopボタン</b>：プログラムを実行するときはRunボタン、止めるときはStopボタンを押します。</li>
-      ※環境によっては実行までに時間がかかってしまう場合があります。
-      <li><b>コードエディタ</b>：プログラムを書く場所です。</li>
-    </ul>
-    <p>この教材の流れは、以下のようになります。</p>
-    <ul>
-      <li><b>第1章：マイコンとは何か</b></li>
-      <li><b>第2章：この教材の使い方</b>←現在の章</li>
-      <li><b>第3章：LED点灯</b></li>
-      <li><b>第4章：さらに応用的な内容を学ぶ</b></li>
-    </ul>
-
-    <p><b>これでこの章は終わりです。「次の章へ」ボタンを押して次の章へ進みましょう！</b></p>
-    <button id="toPage4from5">前のページへ</button>
-    <button id="nextpage-btn" onclick="window.location.href='que2.html'">次の章へ</button>
-  </div>
-
-
-  <script>
-    window.INITIAL_CODE = `
-void setup() {
-    pinMode(7, OUTPUT);             
-}
-void loop() {
-    digitalWrite(7, HIGH); 
-}
-`.trim();
-    let selected_editor = '#editor1';
-    window.addEventListener('DOMContentLoaded', function () {
-      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-    });
-    document.getElementById('toPage2from1').onclick = function () {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'block';
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage1from2').onclick = function () {
-      document.getElementById('page1').style.display = 'block';
-      document.getElementById('page2').style.display = 'none';
-      selected_editor = '#editor1';
-      window.errorOutputText.textContent = '';
-      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    <script>
       window.INITIAL_CODE = `
 void setup() {
     pinMode(7, OUTPUT);             
@@ -230,26 +218,50 @@ void loop() {
     digitalWrite(7, HIGH); 
 }
 `.trim();
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage3from2').onclick = function () {
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'block';
-      window.scrollTo(0, 0);
-    };
-    document.getElementById('toPage2from3').onclick = function () {
-      document.getElementById('page2').style.display = 'block';
-      document.getElementById('page3').style.display = 'none';
-      window.scrollTo(0, 0);
-    };
-    document.getElementById('toPage4from3').onclick = function () {
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'block';
-      selected_editor = '#editor2';
-      window.errorOutputText.textContent = '';
-      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-      window.INITIAL_CODE = `
+      let selected_editor = '#editor1';
+      window.addEventListener('DOMContentLoaded', function () {
+        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+      });
+      document.getElementById('toPage2from1').onclick = function () {
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+        window.scrollTo(0, 0);
+        window.initMonacoEditor();
+      };
+      document.getElementById('toPage1from2').onclick = function () {
+        document.getElementById('page1').style.display = 'block';
+        document.getElementById('page2').style.display = 'none';
+        selected_editor = '#editor1';
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+        window.INITIAL_CODE = `
+void setup() {
+    pinMode(7, OUTPUT);             
+}
+void loop() {
+    digitalWrite(7, HIGH); 
+}
+`.trim();
+        window.scrollTo(0, 0);
+        window.initMonacoEditor();
+      };
+      document.getElementById('toPage3from2').onclick = function () {
+        document.getElementById('page2').style.display = 'none';
+        document.getElementById('page3').style.display = 'block';
+        window.scrollTo(0, 0);
+      };
+      document.getElementById('toPage2from3').onclick = function () {
+        document.getElementById('page2').style.display = 'block';
+        document.getElementById('page3').style.display = 'none';
+        window.scrollTo(0, 0);
+      };
+      document.getElementById('toPage4from3').onclick = function () {
+        document.getElementById('page3').style.display = 'none';
+        document.getElementById('page4').style.display = 'block';
+        selected_editor = '#editor2';
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+        window.INITIAL_CODE = `
 void setup() {
   pinMode(3, OUTPUT);   // 3番ピンを出力用にする
 }
@@ -257,26 +269,26 @@ void loop() {
   digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
 }
 `.trim();
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage3from4').onclick = function () {
-      document.getElementById('page3').style.display = 'block';
-      document.getElementById('page4').style.display = 'none';
-      window.scrollTo(0, 0);
-    };
-    document.getElementById('toPage5from4').onclick = function () {
-      document.getElementById('page4').style.display = 'none';
-      document.getElementById('page5').style.display = 'block';
-      window.scrollTo(0, 0);
-    };
-    document.getElementById('toPage4from5').onclick = function () {
-      document.getElementById('page4').style.display = 'block';
-      document.getElementById('page5').style.display = 'none';
-      selected_editor = '#editor2';
-      window.errorOutputText.textContent = '';
-      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-      window.INITIAL_CODE = `
+        window.scrollTo(0, 0);
+        window.initMonacoEditor();
+      };
+      document.getElementById('toPage3from4').onclick = function () {
+        document.getElementById('page3').style.display = 'block';
+        document.getElementById('page4').style.display = 'none';
+        window.scrollTo(0, 0);
+      };
+      document.getElementById('toPage5from4').onclick = function () {
+        document.getElementById('page4').style.display = 'none';
+        document.getElementById('page5').style.display = 'block';
+        window.scrollTo(0, 0);
+      };
+      document.getElementById('toPage4from5').onclick = function () {
+        document.getElementById('page4').style.display = 'block';
+        document.getElementById('page5').style.display = 'none';
+        selected_editor = '#editor2';
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+        window.INITIAL_CODE = `
 void setup() {
   pinMode(3, OUTPUT);   // 3番ピンを出力用にする
 }
@@ -284,11 +296,11 @@ void loop() {
   digitalWrite(3, HIGH);  // 3番ピンをHIGHにする
 }
 `.trim();
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
+        window.scrollTo(0, 0);
+        window.initMonacoEditor();
+      };
 
-  </script>
+    </script>
 
 </body>
 </div>
