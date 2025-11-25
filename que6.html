@@ -132,16 +132,16 @@
       <label for="q4">変数の値を確認するため</label><br>
     </form>
     <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
-    <div id="result1" style="margin-top: 20px;"></div>
+    <div id="result2" style="margin-top: 20px;"></div>
     <button id="toPage2from3">前のページへ</button>
     <script>
       function checkAnswer() {
         // 正解の組み合わせ（true=チェックすべき）
         const correctAnswers = {
           q1: true,
-          q2: true,
-          q3: true,
-          q4: false,
+          q2: false,
+          q3: false,
+          q4: true,
         };
 
         let isCorrect = true;
@@ -154,14 +154,17 @@
 
         const result = document.getElementById("result");
         if (isCorrect) {
-          document.getElementById('result1').textContent = "正解です！";
-          document.getElementById('result1').style.color = "green";
+          document.getElementById('result2').textContent = "正解です！";
+          document.getElementById('result2').style.color = "green";
           que1 = true;
         } else {
-          document.getElementById('result1').textContent = "間違いがあります。もう一度見直してみましょう。";
-          document.getElementById('result1').style.color = "red";
+          document.getElementById('result2').textContent = "間違いがあります。もう一度見直してみましょう。";
+          document.getElementById('result2').style.color = "red";
         }
       }
+
+    
+
     </script>
   </div>
 </body>
