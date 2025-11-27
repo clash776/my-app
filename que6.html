@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
   <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-DtTrtF4W.css">
 </head>
 
 <body>
@@ -115,7 +115,7 @@
     </script>
   </div>
   <div id="page3" style="display:none;">
-    <h3>第６章　PWM制御　確認問題</h3>
+    <h3>第７章　シリアルモニタ　確認問題</h3>
     <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
     <h3>１．次のうち、シリアルモニタを使用する目的として正しいものををすべて選んでください。</h3>
     <form>
@@ -133,8 +133,49 @@
     </form>
     <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
     <div id="result2" style="margin-top: 20px;"></div>
+    <h3>２．LEDを0.1秒間隔で点滅させ、シリアルモニタに点灯時は「LED ON」と、消灯時は「LED OFF」と表示するプログラムを作成してください。</h3>
+    <div class="app-container" id="simulator">
+      <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+        <!-- LEDを中央上に配置 -->
+        <wokwi-led id="circuit-led" color="red" pin="3" style="position: absolute; left: 232px; top: 30px;"></wokwi-led>
+        <!-- Arduino Unoを中央下に配置 -->
+        <wokwi-resistor value="200" style="position: absolute; left: 188px; top: 65px;"></wokwi-resistor>
+        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+        <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
+        <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+          <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
+          <line x1="190" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
+          <line x1="258" y1="70" x2="258" y2="120" stroke="black" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="toolbar">
+        <button id="run-button3">Run</button>
+        <button id="stop-button3" disabled>Stop</button>
+        <div class="spacer"></div>
+        <div id="status-label3"></div>
+      </div>
+      <div class="code-editor" id="editor3"></div>
+      <div class="compiler-output">
+        <pre id="compiler-output-text3"></pre>
+      </div>
+      <div class="error-output">
+        <pre id="error-output-text3"></pre>
+      </div>
+      <div class="serial-monitor">
+        <pre id="serial-monitor-text3"></pre>
+      </div>
+      <div id="result3" style="margin-top: 20px;"></div>
+    </div>
     <button id="toPage2from3">前のページへ</button>
     <script>
+      const statusLabel = document.getElementById('status-label3');
+      const LED7 = document.querySelector('wokwi-led[pin="3"]');
+      const serialmonitor = document.getElementById('serial-monitor-text3');
+
+      let time1;
+      let time2;
+      let counter = 0;
+      let prevValue = LED7.value;
       function checkAnswer() {
         // 正解の組み合わせ（true=チェックすべき）
         const correctAnswers = {
@@ -163,7 +204,55 @@
         }
       }
 
-    
+
+      let que2code = false;
+      let que2serial1 = false;
+      let que2serial2 = false;
+
+
+      setInterval(() => {
+        const value = LED7.value;
+        let lines = serialmonitor.textContent.split('\n').map(line => line.trim()).filter(line => line !== '');
+        let lastLine = lines[lines.length - 1];
+        if (!que2serial1 && !que2serial2 && value && (lastLine === "LED ON")) {
+          time1 = parseSimTime(statusLabel);
+          console.log('LED点灯時の時刻:', time1);
+          que2serial1 = true;
+        }
+        if (que2serial1 && !que2serial2 && !value && (lastLine === "LED OFF")) {
+          // 点灯→消灯の瞬間だけ一度だけ表示
+          time2 = parseSimTime(statusLabel);
+          console.log('LED消灯時の時刻:', time2);
+          if (0.110 > (time2 - time1) > 0.090) {
+            counter++;
+            console.log(counter);
+            que2serial1 = false;
+            if ((!que2serial2 && (counter >= 3))) {
+              que2serial2 = true;
+            }
+          } else {
+            counter = 0;
+          }
+        }
+        // window.codeがundefined/nullでない場合のみ判定
+        if (typeof window.code === 'string') {
+          if (window.code.includes('Serial.println("LED ON");') &&
+            window.code.includes('Serial.println("LED OFF");') &&
+            window.code.includes('Serial.begin(9600);') &&
+            window.code.includes('delay(100);')
+          ) {
+            que2code = true;
+          }
+        }
+
+        if (que2code && que2serial2) {
+          document.getElementById('result3').textContent = "正解です！";
+          document.getElementById('result3').style.color = "green";
+        }
+
+        prevValue = value;
+      }, 10);
+
 
     </script>
   </div>
@@ -234,6 +323,25 @@ void loop() {
   document.getElementById('toPage3from2').onclick = function () {
     document.getElementById('page2').style.display = 'none';
     document.getElementById('page3').style.display = 'block';
+    window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3', 'serial-monitor-text3');
+    selected_editor = '#editor3';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+  Serial.begin(9600);
+  pinMode(3, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  digitalWrite(3, HIGH);
+  Serial.println("LED ON"); 
+  delay(100);
+  digitalWrite(3, LOW);
+  Serial.println("LED OFF"); 
+  delay(100);
+}
+`.trim();
     window.scrollTo(0, 0);
     window.initMonacoEditor();
   };

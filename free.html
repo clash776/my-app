@@ -22,10 +22,175 @@
     }
   </style>
   <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-DtTrtF4W.css">
 </head>
 
 <body>
+  <div style="width: 800px; height: 400px; margin: 32px auto 0 auto;">
+    <svg width="800" height="400">
+      <!-- 5行目と6行目の間に灰色の四角（中央溝）を追加 -->
+      <rect x="70" y="175" width="480" height="10" fill="#ccc" />
+
+      <line x1="100" y1="75" x2="540" y2="75" stroke="red" stroke-width="2" />
+      <g id="bb-dots"></g>
+      <g id="bb-horizontal-dots"></g>
+    </svg>
+    <script>
+      // 上端の横一列（x=100+15*n, y=45, n=0..29）
+      const bbHorizontalDots = document.getElementById('bb-horizontal-dots');
+      if (bbHorizontalDots) {
+        let hDots = '';
+        for (let n = 0; n < 30; n++) {
+          const x = 100 + n * 15;
+          hDots += `<rect x="${x}" y="45" width="5" height="5" fill="black" />\n`;
+        }
+        bbHorizontalDots.innerHTML = hDots;
+      }
+      // 10行×30列の黒点を自動生成（5行目と6行目の間に隙間）
+      const bbDots = document.getElementById('bb-dots');
+      let dots = '';
+
+      // 1~30の列番号ラベルを追加
+      for (let col = 0; col < 30; col++) {
+        const x = 100 + col * 15 + 2.5; // 四角の中央に合わせるため+2.5
+        const y = 90; // 一番上の四角より上
+        dots += `<text x="${x}" y="${y}" font-size="10" fill="#333" text-anchor="middle">${col + 1}</text>\n`;
+      }
+      const rowLabels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+      for (let col = 0; col < 30; col++) {
+        // 上5行
+        for (let row = 0; row < 5; row++) {
+          const x = 100 + col * 15;
+          const y = 100 + row * 15;
+          dots += `<rect x="${x}" y="${y}" width="5" height="5" fill="black" />\n`;
+          if (col === 0) {
+            const tx = x - 20;
+            const ty = y + 5;
+            dots += `<text x="${tx}" y="${ty}" font-size="10" fill="#333" text-anchor="middle">${rowLabels[row]}</text>\n`;
+          }
+        }
+        // 下5行（30pxの隙間を空ける）
+        for (let row = 5; row < 10; row++) {
+          const x = 100 + col * 15;
+          const y = 100 + row * 15 + 20; // 20px下にずらす
+          dots += `<rect x="${x}" y="${y}" width="5" height="5" fill="black" />\n`;
+          if (col === 0) {
+            dots += `<text x="${x - 20}" y="${y + 5}" font-size="10" fill="#333" text-anchor="middle">${rowLabels[row]}</text>\n`;
+          }
+        }
+      }
+      bbDots.innerHTML = dots;
+    </script>
+  </div>
+
+  <div style="width: 420px; margin: 32px auto 0 auto;">
+    <svg width="400" height="800">
+      <!-- 電源ライン（上） -->
+      <rect x="30" y="30" width="10" height="700" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="5" />
+      <rect x="60" y="30" width="10" height="700" fill="#ffebee" stroke="#f44336" stroke-width="2" rx="5" />
+      <!-- 電源ライン（下） -->
+      <rect x="360" y="30" width="10" height="700" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="5" />
+      <rect x="330" y="30" width="10" height="700" fill="#ffebee" stroke="#f44336" stroke-width="2" rx="5" />
+      <!-- センター溝 -->
+      <rect x="195" y="30" width="10" height="700" fill="#bbb" rx="2" />
+      <!-- 列ラベル -->
+      <text x="85" y="25" font-size="14" fill="#333">A</text>
+      <text x="115" y="25" font-size="14" fill="#333">B</text>
+      <text x="145" y="25" font-size="14" fill="#333">C</text>
+      <text x="175" y="25" font-size="14" fill="#333">D</text>
+      <text x="205" y="25" font-size="14" fill="#333">E</text>
+      <text x="225" y="25" font-size="14" fill="#333">F</text>
+      <text x="255" y="25" font-size="14" fill="#333">G</text>
+      <text x="285" y="25" font-size="14" fill="#333">H</text>
+      <text x="315" y="25" font-size="14" fill="#333">I</text>
+      <text x="345" y="25" font-size="14" fill="#333">J</text>
+      <!-- 穴の行（例: 30行分） -->
+      <g>
+        <!-- 左側A-E -->
+        <!-- 例として10行だけ描画。必要ならfor文で増やせます -->
+        <g>
+          <circle cx="90" cy="50" r="4" fill="#000" />
+          <circle cx="120" cy="50" r="4" fill="#000" />
+          <circle cx="150" cy="50" r="4" fill="#000" />
+          <circle cx="180" cy="50" r="4" fill="#000" />
+          <circle cx="210" cy="50" r="4" fill="#000" />
+          <text x="70" y="55" font-size="10" fill="#333">1</text>
+        </g>
+        <g>
+          <circle cx="90" cy="80" r="4" fill="#000" />
+          <circle cx="120" cy="80" r="4" fill="#000" />
+          <circle cx="150" cy="80" r="4" fill="#000" />
+          <circle cx="180" cy="80" r="4" fill="#000" />
+          <circle cx="210" cy="80" r="4" fill="#000" />
+          <text x="70" y="85" font-size="10" fill="#333">2</text>
+        </g>
+        <g>
+          <circle cx="90" cy="110" r="4" fill="#000" />
+          <circle cx="120" cy="110" r="4" fill="#000" />
+          <circle cx="150" cy="110" r="4" fill="#000" />
+          <circle cx="180" cy="110" r="4" fill="#000" />
+          <circle cx="210" cy="110" r="4" fill="#000" />
+          <text x="70" y="115" font-size="10" fill="#333">3</text>
+        </g>
+        <g>
+          <circle cx="90" cy="140" r="4" fill="#000" />
+          <circle cx="120" cy="140" r="4" fill="#000" />
+          <circle cx="150" cy="140" r="4" fill="#000" />
+          <circle cx="180" cy="140" r="4" fill="#000" />
+          <circle cx="210" cy="140" r="4" fill="#000" />
+          <text x="70" y="145" font-size="10" fill="#333">4</text>
+        </g>
+        <g>
+          <circle cx="90" cy="170" r="4" fill="#000" />
+          <circle cx="120" cy="170" r="4" fill="#000" />
+          <circle cx="150" cy="170" r="4" fill="#000" />
+          <circle cx="180" cy="170" r="4" fill="#000" />
+          <circle cx="210" cy="170" r="4" fill="#000" />
+          <text x="70" y="175" font-size="10" fill="#333">5</text>
+        </g>
+        <!-- ...省略: 6～10行目も同様に追加可... -->
+        <!-- 右側F-J -->
+        <g>
+          <circle cx="230" cy="50" r="4" fill="#000" />
+          <circle cx="260" cy="50" r="4" fill="#000" />
+          <circle cx="290" cy="50" r="4" fill="#000" />
+          <circle cx="320" cy="50" r="4" fill="#000" />
+          <circle cx="350" cy="50" r="4" fill="#000" />
+        </g>
+        <g>
+          <circle cx="230" cy="80" r="4" fill="#000" />
+          <circle cx="260" cy="80" r="4" fill="#000" />
+          <circle cx="290" cy="80" r="4" fill="#000" />
+          <circle cx="320" cy="80" r="4" fill="#000" />
+          <circle cx="350" cy="80" r="4" fill="#000" />
+        </g>
+        <g>
+          <circle cx="230" cy="110" r="4" fill="#000" />
+          <circle cx="260" cy="110" r="4" fill="#000" />
+          <circle cx="290" cy="110" r="4" fill="#000" />
+          <circle cx="320" cy="110" r="4" fill="#000" />
+          <circle cx="350" cy="110" r="4" fill="#000" />
+        </g>
+        <g>
+          <circle cx="230" cy="140" r="4" fill="#000" />
+          <circle cx="260" cy="140" r="4" fill="#000" />
+          <circle cx="290" cy="140" r="4" fill="#000" />
+          <circle cx="320" cy="140" r="4" fill="#000" />
+          <circle cx="350" cy="140" r="4" fill="#000" />
+        </g>
+        <g>
+          <circle cx="230" cy="170" r="4" fill="#000" />
+          <circle cx="260" cy="170" r="4" fill="#000" />
+          <circle cx="290" cy="170" r="4" fill="#000" />
+          <circle cx="320" cy="170" r="4" fill="#000" />
+          <circle cx="350" cy="170" r="4" fill="#000" />
+        </g>
+        <!-- ...省略: 6～10行目も同様に追加可... -->
+      </g>
+      <!-- ラベル -->
+      <text x="120" y="790" font-size="16" fill="#333">ブレッドボード（例）</text>
+    </svg>
+  </div>
   <h2>LEDを光らせてみよう</h2>
   <div class="app-container">
     <div class="items_space">
@@ -44,6 +209,9 @@
         <span style="margin-left:auto;">メニュー</span>
       </div>
       <wokwi-7segment color="red" values="[0,1,1,0,0,1,1,1]" pins="[0,1,2,3,4,5,6,7]"></wokwi-7segment>
+
+      <!-- SVGブレッドボード（シンプルな例） -->
+
     </div>
     <div class="toolbar">
       <button id="run-button">Run</button>
@@ -69,6 +237,7 @@
         <div id="pin-status-row" style="display: flex; gap: 16px;"></div>
       </div>
     </div>
+
     <script>
       window.INITIAL_CODE = `
 void setup() {

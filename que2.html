@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEDを光らせてみよう</title>
   <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-PRTVLLW6.css">
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-DtTrtF4W.css">
 </head>
 
 <body>
@@ -41,7 +41,7 @@
   <div id="page2" style="display:none;">
     <h3>２．マイコンとLEDを接続する</h3>
     <p>マイコンとLEDを接続するには第１章で学んだ<b>出力ピン</b>を使います。</p>
-    <p>今回は、３番ピンを出力用として使います。</p>
+    <p>今回は、3番ピンを出力用として使います。</p>
     <img src="/my-app/assets/LED%E5%9B%9E%E8%B7%AF-D5KjtP7a.jpg" alt="LEDの接続" style="display: block; margin: 0 auto; width: 400px; height: auto;">
     <p>この回路は以下のような順番で接続されています。</p>
     <ol>
@@ -58,9 +58,9 @@
   <div id="page3" style="display:none;">
     <h3>３．LEDを点灯させるプログラム</h3>
     <p>LEDを点灯させるためには、出力ピンから電流を流す必要があります。</p>
-    <P>そのために、setup関数とloop関数を編集する必要があります。</P>
+    <p>そのために、setup関数とloop関数を編集する必要があります。</p>
     <h3>setup関数の編集</h3>
-    <P>今回は、３番ピンを出力用として使用するため、１章で学んだ<b>pinMode関数</b>を使用して以下のように記述します。</P>
+    <p>今回は、3番ピンを出力用として使用するため、１章で学んだ<b>pinMode関数</b>を使用して以下のように記述します。</p>
     <p><b>pinMode(3, OUTPUT);</b></p>
     <h3>loop関数の編集</h3>
     <p>setup関数で設定した出力ピンから電流を流すには、<b>digitalWrite関数</b>を使用します。</p>
@@ -74,9 +74,9 @@
     <p><b>digitalWrite関数</b>の2つ目の引数には、<b>HIGH</b>または<b>LOW</b>を指定します。</p>
 
     <ul>
-      <li><b>HIGH</b>：出力ピンを「電圧あり（ON）」にします。<br>
+      <li><b>HIGH</b>：出力ピンを「電圧あり（ON）」にします。例：5V<br>
         → 電流が流れるので、LEDが光ります。</li>
-      <li><b>LOW</b>：出力ピンを「電圧なし（OFF）」にします。<br>
+      <li><b>LOW</b>：出力ピンを「電圧なし（OFF）」にします。例：0V<br>
         → 電流が流れないので、LEDは消えます。</li>
     </ul>
 
