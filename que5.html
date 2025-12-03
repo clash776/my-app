@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-DtTrtF4W.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-7961ac1Z.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BZP9Paqy.css">
 </head>
 
 <body>
@@ -16,11 +16,21 @@
         <p>まずは、プログラムを動作させてみましょう。</p>
 
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+            <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+                <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+                <!-- LEDを中央上に配置 -->
                 <wokwi-led id="circuit-led" color="red" pin="11"
-                    style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
+                    style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+                <!-- Arduino Unoを中央下に配置 -->
+                <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
                 <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+                    style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+                <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+                    <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+                    <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+                </svg>
             </div>
             <div class="toolbar">
                 <button id="run-button1">Run</button>
@@ -50,11 +60,21 @@
         <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
 
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+            <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+                <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+                <!-- LEDを中央上に配置 -->
                 <wokwi-led id="circuit-led" color="red" pin="11"
-                    style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
+                    style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+                <!-- Arduino Unoを中央下に配置 -->
+                <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
                 <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+                    style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+                <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+                    <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+                    <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+                </svg>
             </div>
             <div class="toolbar">
                 <button id="run-button2">Run</button>
@@ -96,11 +116,21 @@
         <div id="result1" style="margin-top: 20px;"></div>
         <h3>２．0.1 秒ごとに analogWrite の第2引数に与える値を50、150、250 と順番に変化させ、<br>LED の明るさが段階的に変化するプログラムを作成してください。</h3>
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+            <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+                <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+                <!-- LEDを中央上に配置 -->
                 <wokwi-led id="quiz-led" color="red" pin="11"
-                    style="position: absolute; left: 150px; top: 50px;"></wokwi-led>
+                    style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+                <!-- Arduino Unoを中央下に配置 -->
+                <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
                 <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
+                    style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+                <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+                    <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+                    <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+                </svg>
             </div>
             <div class="toolbar">
                 <button id="run-button3">Run</button>

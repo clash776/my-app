@@ -5,125 +5,144 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEDを光らせてみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-DtTrtF4W.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-7961ac1Z.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BZP9Paqy.css">
 </head>
 
 <body>
   <div id="page1" style="display:block;">
     <h2>第３章　LEDの点灯・消灯</h2>
     <p>先ほどまでの章では、マイコンの概要や機能について学びました。この章では、実際にLEDを点灯・消灯させるプログラムを作成してみましょう。</p>
-    <h3>１．LEDの概要</h3>
-    <p>マイコンでLEDを光らせるためには、LEDを正しくつなぐ必要があります。</p>
-    <p>LEDには向き（極性）があり、<b>アノード（長い足）</b>と<b>カソード（短い足）</b>があります。</p>
-    <img src="/my-app/assets/LED%E6%A6%82%E8%A6%81-wjU2wXeM.jpg" alt="LEDの極性" style="display: block; margin: 0 auto; width: 200px; height: auto;">
-    <ul>
-      <li><b>アノード（長い足）</b>：プラス側（電流の入り口）</li>
-      <li><b>カソード（短い足）</b>：マイナス側（電流の出口）</li>
-    </ul>
+    <div class="blue-point-box">
+      <h3>１．LEDの概要</h3>
+      <p>マイコンでLEDを光らせるためには、LEDを正しくつなぐ必要があります。</p>
+      <p>LEDには向き（極性）があり、<b>アノード（長い足）</b>と<b>カソード（短い足）</b>があります。</p>
+      <img src="/my-app/assets/LED%E6%A6%82%E8%A6%81-wjU2wXeM.jpg" alt="LEDの極性" style="display: block; margin: 0 auto; width: 200px; height: auto;">
+      <ul style="background:#e3f2fd;">
+        <li><b>アノード（長い足）</b>：プラス側（電流の入り口）</li>
+        <li><b>カソード（短い足）</b>：マイナス側（電流の出口）</li>
+      </ul>
 
-    <p>このため、LEDを接続するときは、以下のような順番でつなぎます：</p>
-    <ol>
-      <li><b>マイコンの出力ピン（電流を出す）</b></li>
-      <li><b>LEDのアノード（長い足）</b></li>
-      <li><b>LEDのカソード（短い足）</b></li>
-      <li><b>抵抗（電流を調整）</b></li>
-      <li><b>GND（グランド）</b></li>
-    </ol>
-    <p>このように正しく接続することで、出力ピンから流れた電流がLEDを通り、抵抗で電流を抑えながら<b>GNDに戻るルート</b>ができます。</p>
-    <p><b>GND（グランド）</b>とは、電気の「出口」や「戻り道」となる場所のことです。<br>
-      電気は必ず「出発点（プラス）」から「戻る場所（マイナス）」へ流れようとするので、<b>GNDがつながっていないと、電流が流れず、LEDも光りません。</b></p>
-
-    <p>LEDは「電気の一方通行の道」のようなものなので、<b>正しい向きと順番</b>でつなぐことが大切です。</p>
-
+      <p>このため、LEDを接続するときは、以下のような順番でつなぎます：</p>
+      <ol style="background:#e3f2fd;">
+        <li><b>マイコンの出力ピン（電流を出す）</b></li>
+        <li><b>LEDのアノード（長い足）</b></li>
+        <li><b>LEDのカソード（短い足）</b></li>
+        <li><b>抵抗（電流を調整）</b></li>
+        <li><b>GND（グランド）</b></li>
+      </ol>
+      <p>補足：抵抗はアノード側、カソード側どちらに接続しても問題ありません。</p>
+    </div>
     <button id="toPage2from1">次のページへ</button>
   </div>
   <div id="page2" style="display:none;">
-    <h3>２．マイコンとLEDを接続する</h3>
-    <p>マイコンとLEDを接続するには第１章で学んだ<b>出力ピン</b>を使います。</p>
-    <p>今回は、3番ピンを出力用として使います。</p>
-    <img src="/my-app/assets/LED%E5%9B%9E%E8%B7%AF-D5KjtP7a.jpg" alt="LEDの接続" style="display: block; margin: 0 auto; width: 400px; height: auto;">
-    <p>この回路は以下のような順番で接続されています。</p>
-    <ol>
-      <li><b>マイコンの出力ピン（３番ピン）</b></li>
-      <li><b>LEDのアノード（長い足）</b></li>
-      <li><b>LEDのカソード（短い足）</b></li>
-      <li><b>抵抗（電流を調整）</b></li>
-      <li><b>GND（グランド）</b></li>
-    </ol>
-    <p>次のページでは、初期設定とLEDを点灯させるプログラムを書きます。</p>
+    <div class="blue-point-box">
+      <h3>２．マイコンとLEDを接続する</h3>
+      <p>マイコンとLEDを接続するには第１章で学んだ<b>出力ピン</b>を使います。</p>
+      <p>今回は、3番ピンを出力用として使います。</p>
+      <img src="/my-app/assets/LED%E5%9B%9E%E8%B7%AF-D5KjtP7a.jpg" alt="LEDの接続" style="display: block; margin: 0 auto; width: 400px; height: auto;">
+      <p>この回路は以下のような順番で接続されています。</p>
+      <ol style="background:#e3f2fd;">
+        <li><b>マイコンの出力ピン（３番ピン）</b></li>
+        <li><b>LEDのアノード（長い足）</b></li>
+        <li><b>LEDのカソード（短い足）</b></li>
+        <li><b>抵抗（電流を調整）</b></li>
+        <li><b>GND（グランド）</b></li>
+      </ol>
+    </div>
+    <p></p>
+    <div class="green-point-box">
+      <h3>電気の通り道</h3>
+      <p>このように正しく接続することで、出力ピンから流れた電流がLEDを通り、抵抗で電流を抑えながら<b>GNDに戻るルート</b>ができます。</p>
+      <p><b>GND（グランド）</b>とは、電気の「出口」や「戻り道」となる場所のことです。<br>
+        電気は必ず「出発点（プラス）」から「戻る場所（マイナス）」へ流れようとするので、</p>
+      <p><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
+          <b>GNDがつながっていないと、電流が流れず、LEDも光りません。 </b></span></p>
+
+
+      <p>LEDは「電気の一方通行の道」のようなものなので、<b>正しい向きと順番</b>でつなぐことが大切です。</p>
+
+      <p>次のページでは、初期設定とLEDを点灯させるプログラムを書きます。</p>
+    </div>
     <button id="toPage1from2">前のページへ</button>
     <button id="toPage3from2">次のページへ</button>
   </div>
   <div id="page3" style="display:none;">
-    <h3>３．LEDを点灯させるプログラム</h3>
-    <p>LEDを点灯させるためには、出力ピンから電流を流す必要があります。</p>
-    <p>そのために、setup関数とloop関数を編集する必要があります。</p>
-    <h3>setup関数の編集</h3>
-    <p>今回は、3番ピンを出力用として使用するため、１章で学んだ<b>pinMode関数</b>を使用して以下のように記述します。</p>
-    <p><b>pinMode(3, OUTPUT);</b></p>
-    <h3>loop関数の編集</h3>
-    <p>setup関数で設定した出力ピンから電流を流すには、<b>digitalWrite関数</b>を使用します。</p>
-    <p><b>digitalWrite(ピン番号, モード);</b></p>
-    <p>モードには、以下の2つを指定できます。</p>
-    <ul>
-      <li>HIGH</li>
-      <li>LOW</li>
-    </ul>
-    <h3>HIGHとLOWの意味</h3>
-    <p><b>digitalWrite関数</b>の2つ目の引数には、<b>HIGH</b>または<b>LOW</b>を指定します。</p>
+    <div class="blue-point-box">
+      <h3>３．LEDを点灯させるプログラム</h3>
+      <p>LEDを点灯させるためには、出力ピンから電流を流す必要があります。</p>
+      <p>そのために、setup関数とloop関数を編集する必要があります。</p>
+      <h3>setup関数の編集</h3>
+      <p>今回は、3番ピンを出力用として使用するため、１章で学んだ<b>pinMode関数</b>を使用して以下のように記述します。</p>
+      <code><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+                pinMode(3, OUTPUT);</span></code>
+      <h3>loop関数の編集</h3>
+      <p>setup関数で設定した出力ピンから電流を流すには、<b>digitalWrite関数</b>を使用します。</p>
+      <code><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+                digitalWrite(ピン番号, モード);</span></code>
+      <p>モードには、<b>HIGH</b>と<b>LOW</b>の2つを指定できます。</p>
+    </div>
+    <p></p>
+    <div class="green-point-box">
+      <h3>HIGHとLOWの意味</h3>
+      <p><b>digitalWrite関数</b>の2つ目の引数には、<b>HIGH</b>または<b>LOW</b>を指定します。</p>
+      <ul style="background: #bcecbf;">
+        <li><b>HIGH</b>：出力ピンを「電圧あり（ON）」にします。例：5V<br>
+          → 電流が流れるので、LEDが光ります。</li>
+        <li><b>LOW</b>：出力ピンを「電圧なし（OFF）」にします。例：0V<br>
+          → 電流が流れないので、LEDは消えます。</li>
+      </ul>
 
-    <ul>
-      <li><b>HIGH</b>：出力ピンを「電圧あり（ON）」にします。例：5V<br>
-        → 電流が流れるので、LEDが光ります。</li>
-      <li><b>LOW</b>：出力ピンを「電圧なし（OFF）」にします。例：0V<br>
-        → 電流が流れないので、LEDは消えます。</li>
-    </ul>
-
-    <p>つまり、<b>HIGH = スイッチを入れる、LOW = スイッチを切る</b>というイメージです。</p>
-    <p>最後に、LEDを点灯させるプログラムは以下の通りになります。</p>
-    <img src="/my-app/assets/LED%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-6n-0gl1A.jpg" alt="LEDプログラム" style="display: block; margin: 0 auto; width: 500px; height: auto;">
-    <p>これでLEDを点灯させる準備が整いました！次のページではこの章のまとめです。</p>
+      <p>つまり、<b>HIGH = スイッチを入れる、LOW = スイッチを切る</b>というイメージです。</p>
+      <p>最後に、LEDを点灯させるプログラムは以下の通りになります。</p>
+      <img src="/my-app/assets/LED%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-6n-0gl1A.jpg" alt="LEDプログラム" style="display: block; margin: 0 auto; width: 500px; height: auto;">
+      <p>これでLEDを点灯させる準備が整いました！次のページではこの章のまとめです。</p>
+    </div>
     <button id="toPage2from3">前のページへ</button>
     <button id="toPage4from3">次のページへ</button>
   </div>
 
   <div id="page4" style="display:none;">
-    <h3>４．まとめ</h3>
-    <p>LEDを点灯させるためには、正しく回路を作成する必要があります。</p>
-    <p><b>・LEDの向き(極性)</b></p>
-    <P>LEDには向き（極性）があり、<b>アノード（長い足）</b>と<b>カソード（短い足）</b>があります。</P>
-    <img src="/my-app/assets/LED%E6%A6%82%E8%A6%81-wjU2wXeM.jpg" alt="LEDの極性" style="display: block; margin: 0 auto; width: 200px; height: auto;">
-    <ul>
-      <li><b>アノード（長い足）</b>：プラス側（電流の入り口）</li>
-      <li><b>カソード（短い足）</b>：マイナス側（電流の出口）</li>
-    </ul>
-    <p>そのため、アノードからカソードに電流が流れるように回路を作成する必要がありました。</p>
-    <ol>
-      <li><b>マイコンの出力ピン（３番ピン）</b></li>
-      <li><b>LEDのアノード（長い足）</b></li>
-      <li><b>LEDのカソード（短い足）</b></li>
-      <li><b>抵抗（電流を調整）</b></li>
-      <li><b>GND（グランド）</b></li>
-    </ol>
-    <p>そして、出力ピンから電流を流すためには、setup関数とloop関数を編集する必要がありました。</p>
-    <ul>
-      <li><b>pinMode(ピン番号, モード);</b></li>
-      <li><b>digitalWrite(ピン番号, モード);</b></li>
-    </ul>
+    <div class="blue-point-box">
+      <h3>４．まとめ</h3>
+      <p>LEDを点灯させるためには、正しく回路を作成する必要があります。</p>
+      <p><b>・LEDの向き(極性)</b></p>
+      <P>LEDには向き（極性）があり、<b>アノード（長い足）</b>と<b>カソード（短い足）</b>があります。</P>
+      <img src="/my-app/assets/LED%E6%A6%82%E8%A6%81-wjU2wXeM.jpg" alt="LEDの極性" style="display: block; margin: 0 auto; width: 200px; height: auto;">
+      <ul style="background: #e3f2fd;">
+        <li><b>アノード（長い足）</b>：プラス側（電流の入り口）</li>
+        <li><b>カソード（短い足）</b>：マイナス側（電流の出口）</li>
+      </ul>
+      <p>そのため、アノードからカソードに電流が流れるように回路を作成する必要がありました。</p>
+      <ol style="background: #e3f2fd;">
+        <li><b>マイコンの出力ピン（３番ピン）</b></li>
+        <li><b>LEDのアノード（長い足）</b></li>
+        <li><b>LEDのカソード（短い足）</b></li>
+        <li><b>抵抗（電流を調整）</b></li>
+        <li><b>GND（グランド）</b></li>
+      </ol>
+      <p>そして、出力ピンから電流を流すためには、setup関数とloop関数を編集する必要がありました。</p>
+      <ul style="background: #e3f2fd;">
+        <li><b>pinMode(ピン番号, モード);</b></li>
+        <li><b>digitalWrite(ピン番号, モード);</b></li>
+      </ul>
+    </div>
     <p>これまで学んできたことをまとめると、LEDを点灯させる回路とプログラムは以下のようになります。Runボタンを押してプログラムを実行してみましょう！</p>
     <div class="app-container" id="simulator">
-      <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+      <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+        <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
         <!-- LEDを中央上に配置 -->
-        <wokwi-led id="circuit-led" color="red" pin="3" style="position: absolute; left: 232px; top: 30px;"></wokwi-led>
+        <wokwi-led id="circuit-led" color="red" pin="3"
+          style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
         <!-- Arduino Unoを中央下に配置 -->
-        <wokwi-resistor value="200" style="position: absolute; left: 188px; top: 65px;"></wokwi-resistor>
-        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+        <wokwi-arduino-uno id="circuit-arduino"
+          style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
         <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
-        <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+        <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
           <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
-          <line x1="190" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
-          <line x1="258" y1="70" x2="258" y2="120" stroke="black" stroke-width="2" />
+          <line x1="278" y1="208" x2="338" y2="310" stroke="red" stroke-width="3" />
+          <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
         </svg>
       </div>
       <div class="toolbar">
@@ -179,17 +198,20 @@
 
     <h3>３．LEDを点灯させるプログラムを完成させて下さい。</h3>
     <div class="app-container" id="simulator">
-      <div class="leds-circuit" style="position: relative; width: 260px; height: 340px; margin: 0 auto;">
+      <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+        <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
         <!-- LEDを中央上に配置 -->
-        <wokwi-led id="circuit-led" color="red" pin="3" style="position: absolute; left: 232px; top: 30px;"></wokwi-led>
+        <wokwi-led id="circuit-led" color="red" pin="3"
+          style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
         <!-- Arduino Unoを中央下に配置 -->
-        <wokwi-resistor value="200" style="position: absolute; left: 188px; top: 65px;"></wokwi-resistor>
-        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 30px; top: 110px;"></wokwi-arduino-uno>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+        <wokwi-arduino-uno id="circuit-arduino"
+          style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
         <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
-        <svg width="260" height="340" style="position: absolute; left: 0; top: 0;">
+        <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
           <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
-          <line x1="190" y1="70" x2="145" y2="120" stroke="black" stroke-width="2" />
-          <line x1="258" y1="70" x2="258" y2="120" stroke="black" stroke-width="2" />
+          <line x1="278" y1="208" x2="338" y2="310" stroke="red" stroke-width="3" />
+          <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
         </svg>
       </div>
       <div class="toolbar">
@@ -209,7 +231,8 @@
     <div id="result3" style="margin-top: 20px;"></div>
     <div id="result4" style="margin-top: 20px;"></div>
 
-    <button id="toPage4fromTest1">前のページへ</button><button id="nextpage-btn" onclick="window.location.href='que3.html'" style="display:none;">次の章へ</button>
+    <button id="toPage4fromTest1">前のページへ</button><button id="nextpage-btn" onclick="window.location.href='que3.html'"
+      style="display:none;">次の章へ</button>
 
     <script>
       const testLed = document.querySelector('#Test1 wokwi-led[pin="3"]');

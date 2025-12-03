@@ -6872,4 +6872,26 @@
 【ヒント】変数名や関数名のスペルミス、宣言漏れがないか確認してください。`),t.stderr.includes("expected ')'")&&(c0.textContent+=`
 【ヒント】閉じ括弧（ ) ）が抜けている可能性があります。関数や条件式の括弧の対応を確認してください。`),t.stderr.includes("expected '}'")&&(c0.textContent+=`
 【ヒント】閉じ波括弧（ } ）が抜けている可能性があります。関数や条件式の終わりに } を追加してください。`)),t.hex?(wt.textContent+=`
-Program running...`,P1.removeAttribute("disabled"),Si(t.hex)):E0.removeAttribute("disabled")}catch(i){E0.removeAttribute("disabled"),alert("Failed: "+i)}finally{A1.textContent="",console.log(Mt,_t)}}function bt(){P1.setAttribute("disabled","1"),E0.removeAttribute("disabled"),P&&(P.stop(),P=null);for(const i of Bt)i.value=!1;for(const i of It)i.values=[0,0,0,0,0,0,0,0]}window.parseSimTime=function(i){const e=i.textContent.match(/(\d{2}):(\d{2})\.(\d{3})/);if(!e)return null;const s=parseInt(e[1],10),r=parseInt(e[2],10),n=parseInt(e[3],10);return console.log(s*60+r+n/1e3),s*60+r+n/1e3};
+Program running...`,P1.removeAttribute("disabled"),Si(t.hex)):E0.removeAttribute("disabled")}catch(i){E0.removeAttribute("disabled"),alert("Failed: "+i)}finally{A1.textContent="",console.log(Mt,_t)}}function bt(){P1.setAttribute("disabled","1"),E0.removeAttribute("disabled"),P&&(P.stop(),P=null);for(const i of Bt)i.value=!1;for(const i of It)i.values=[0,0,0,0,0,0,0,0]}window.parseSimTime=function(i){const e=i.textContent.match(/(\d{2}):(\d{2})\.(\d{3})/);if(!e)return null;const s=parseInt(e[1],10),r=parseInt(e[2],10),n=parseInt(e[3],10);return console.log(s*60+r+n/1e3),s*60+r+n/1e3};class Ai extends HTMLElement{connectedCallback(){this.innerHTML=`
+      <div style="width: 474px; height: 289px; margin: 0 auto;">
+        <svg width="474" height="289">
+          <rect x="2" y="2" width="470" height="285" fill="none" stroke="#888" stroke-width="2" />
+          <rect x="3" y="142" width="468" height="10" fill="#ccc" />
+          <line x1="20" y1="42" x2="460" y2="42" stroke="blue" stroke-width="2" />
+          <line x1="20" y1="247" x2="460" y2="247" stroke="red" stroke-width="2" />
+          <line x1="20" y1="12" x2="460" y2="12" stroke="red" stroke-width="2" />
+          <line x1="20" y1="277" x2="460" y2="277" stroke="blue" stroke-width="2" />
+          <text x="5" y="46" font-size="12" fill="blue">－</text>
+          <text x="5" y="251" font-size="12" fill="red">＋</text>
+          <text x="5" y="16" font-size="12" fill="red">＋</text>
+          <text x="5" y="281" font-size="12" fill="blue">－</text>
+          <g id="bb-dots"></g>
+        </svg>
+      </div>
+    `;const e=this.querySelector("svg").querySelector("#bb-dots");let s="";for(let n=0;n<30;n++)for(let a=0;a<2;a++){const l=20+n*15+2.5,c=57+a*185;s+=`<text x="${l}" y="${c}" font-size="10" fill="#333" text-anchor="middle">${n+1}</text>
+`}const r=["a","b","c","d","e","f","g","h","i","j"];for(let n=0;n<30;n++){for(let a=0;a<5;a++){const l=20+n*15,c=67+a*15;if(s+=`<rect x="${l}" y="${c}" width="5" height="5" fill="#5c5c5cff" />
+`,n===0){const h=l-10,d=c+5;s+=`<text x="${h}" y="${d}" font-size="10" fill="#333" text-anchor="middle">${r[a]}</text>
+`}}for(let a=5;a<10;a++){const l=20+n*15,c=67+a*15+20;if(s+=`<rect x="${l}" y="${c}" width="5" height="5" fill="#5c5c5cff" />
+`,n===0){const h=l-10,d=c+5;s+=`<text x="${h}" y="${d}" font-size="10" fill="#333" text-anchor="middle">${r[a]}</text>
+`}}for(let a=0;a<25;a++){const c=Math.floor(a/5)*15;let h=0;for(let d=0;d<4;d++){d>1&&(h=205);const p=30+a*15+c,f=17+d*15+h;s+=`<rect x="${p}" y="${f}" width="5" height="5" fill="#5c5c5cff" />
+`}}}e.innerHTML=s}}customElements.define("my-breadboard",Ai);

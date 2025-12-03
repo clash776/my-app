@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ボタンを使ってみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-ClDUI-K2.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-DtTrtF4W.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-7961ac1Z.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BZP9Paqy.css">
 </head>
 
 <body>
@@ -17,46 +17,69 @@
     <p style="margin-bottom:8px;">まずは、プログラムを動作させてみましょう。</p>
     <div class="app-container">
       <!-- wokwiオブジェクト部分はそのまま -->
-      <div class="leds-circuit" style="position: relative; width: 400px; height: 450px; margin: 0 auto;">
+      <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+        <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+        <!-- LEDを中央上に配置 -->
         <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
-          style="position: absolute; left: 225px; top: 50px;"></wokwi-7segment>
-        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 50px; top: 200px;"></wokwi-arduino-uno>
-        <wokwi-resistor id="pin2" value="200" style="position: absolute; left: 286px; top: 30px;"></wokwi-resistor>
-        <wokwi-resistor id="pin3" value="200" style="position: absolute; left: 268px; top: 45px;"></wokwi-resistor>
-        <wokwi-resistor id="pin4" value="200"
-          style="position: absolute; left: 229px; top: 158px; transform: rotate(90deg);"></wokwi-resistor>
-        <wokwi-resistor id="pin5" value="200"
-          style="position: absolute; left: 210px; top: 158px; transform: rotate(90deg);"></wokwi-resistor>
-        <wokwi-resistor id="pin6" value="200"
-          style="position: absolute; left: 199px; top: 158px; transform: rotate(90deg);"></wokwi-resistor>
-        <wokwi-resistor id="pin7" value="200" style="position: absolute; left: 181px; top: 30px;"></wokwi-resistor>
-        <wokwi-resistor id="pin8" value="200" style="position: absolute; left: 171px; top: 45px;"></wokwi-resistor>
+          style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+        <!-- Arduino Unoを中央下に配置 -->
+        <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+        <wokwi-resistor value="200"
+          style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
 
-        <svg width="400" height="450" style="position: absolute; left: 0; top: 0;">
-          <!-- pin2へ -->
-          <line x1="258" y1="35" x2="286" y2="35" stroke="red" stroke-width="2" />
-          <line x1="258" y1="35" x2="258" y2="50" stroke="red" stroke-width="2" />
-          <line x1="345" y1="35" x2="286" y2="210" stroke="red" stroke-width="2" />
-          <!-- pin3へ -->
-          <line x1="328" y1="50" x2="276" y2="210" stroke="red" stroke-width="2" />
-          <!-- pin4へ -->
-          <line x1="258" y1="192" x2="267" y2="210" stroke="red" stroke-width="2" />
-          <!-- pin5へ -->
-          <line x1="239" y1="192" x2="257" y2="210" stroke="red" stroke-width="2" />
-          <!-- pin6へ -->
-          <line x1="228" y1="192" x2="248" y2="210" stroke="red" stroke-width="2" />
-          <!-- pin7へ -->
-          <line x1="239" y1="35" x2="239" y2="50" stroke="red" stroke-width="2" />
-          <line x1="181" y1="35" x2="181" y2="46" stroke="red" stroke-width="2" />
-          <line x1="181" y1="55" x2="181" y2="150" stroke="red" stroke-width="2" />
-          <line x1="181" y1="150" x2="240" y2="210" stroke="red" stroke-width="2" />
-          <!-- pin8へ -->
-          <line x1="171" y1="50" x2="171" y2="180" stroke="red" stroke-width="2" />
-          <line x1="171" y1="180" x2="225" y2="210" stroke="red" stroke-width="2" />
+
+        <wokwi-arduino-uno id="circuit-arduino"
+          style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+        <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+        <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+          <!-- 2番ピンへ -->
+          <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+          <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+          <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+          <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+          <!-- 3番ピンへ -->
+          <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+          <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+          <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+          <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+          <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+          <!-- 4番ピンへ -->
+          <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+          <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+          <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+          <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+          <!-- 5番ピンへ -->
+          <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+          <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+          <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+          <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+          <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+          <!-- 6番ピンへ -->
+          <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+          <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+          <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+          <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+          <!-- 7番ピンへ -->
+          <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+          <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+          <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+          <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+          <!-- 8番ピンへ -->
+          <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+          <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+          <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+          <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
           <!-- GNDへ -->
-          <line x1="249" y1="50" x2="249" y2="15" stroke="black" stroke-width="2" />
-          <line x1="249" y1="15" x2="165" y2="15" stroke="black" stroke-width="2" />
-          <line x1="165" y1="15" x2="165" y2="210" stroke="black" stroke-width="2" />
+          <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+          <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+          <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+          <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+          <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
         </svg>
       </div>
       <div class="toolbar">
@@ -73,22 +96,22 @@
         <pre id="error-output-text1"></pre>
       </div>
     </div>
-    <hr style="margin:24px 0;">
-    <h3 style="margin-bottom:8px;">7セグメントLEDの概要</h3>
-    <ul style="margin-bottom:16px;">
-      <li>7セグメントLEDは、7つの棒状LED（セグメント）と1つの小さな点（ドット）の計8個のLEDで構成されています。</li>
-      <li>各LEDは対応するピンに電流を流すことで点灯します。</li>
-      <li>ピン配置と数字の対応は下の画像の通りとなっています。</li>
-    </ul>
-    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:16px;">
-      <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width:48%;height:auto;">
-      <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width:48%;height:auto;">
+    <div class="blue-point-box">
+      <h3 style="margin-bottom:8px;">7セグメントLEDの概要</h3>
+      <ul style="margin-bottom:16px;">
+        <li>7セグメントLEDは、7つの棒状LED（セグメント）と1つの小さな点（ドット）の計8個のLEDで構成されています。</li>
+        <li>各LEDは対応するピンに電流を流すことで点灯します。</li>
+        <li>ピン配置と数字の対応は下の画像の通りとなっています。</li>
+      </ul>
+      <div style="display:flex;justify-content:center;gap:16px;margin-bottom:16px;">
+        <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%91-m-_a-LOd.jpg" style="max-width:48%;height:auto;">
+        <img src="/my-app/assets/%EF%BC%97%E3%82%BB%E3%82%B0%E8%AA%AC%E6%98%8E%EF%BC%92-DB9ZBr52.jpg" style="max-width:48%;height:auto;">
+      </div>
+      <div class="point-box"
+        style="background:#fffbe7;border-left:4px solid #ff9800;padding:8px 12px;margin-bottom:16px;">
+        <strong>ヒント:</strong> 一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。
+      </div>
     </div>
-    <div class="point-box"
-      style="background:#fffbe7;border-left:4px solid #ff9800;padding:8px 12px;margin-bottom:16px;">
-      <strong>ヒント:</strong> 一枚目の画像の数字の位置が二枚目の画像のピンに対応しています。
-    </div>
-    <hr style="margin:24px 0;">
     <h3 style="margin-bottom:8px;">7セグメントLEDの内部回路</h3>
     <ul style="margin-bottom:16px;">
       <li>中心のピンは<b>共通端子</b>と呼ばれ、LEDのアノード側またはカソード側がまとめられています。</li>
@@ -115,29 +138,70 @@
 
 
     <div class="app-container">
-      <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+      <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+        <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+        <!-- LEDを中央上に配置 -->
         <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
-          style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
-        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
-        <!-- <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
-          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
-          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
-          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
-
-          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
-          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
-          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
-
-          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
-
-          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
-
-          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
-
-          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+          style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+        <!-- Arduino Unoを中央下に配置 -->
+        <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+        <wokwi-resistor value="200"
+          style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
 
 
-        </svg> -->
+        <wokwi-arduino-uno id="circuit-arduino"
+          style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+        <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+        <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+          <!-- 2番ピンへ -->
+          <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+          <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+          <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+          <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+          <!-- 3番ピンへ -->
+          <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+          <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+          <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+          <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+          <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+          <!-- 4番ピンへ -->
+          <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+          <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+          <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+          <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+          <!-- 5番ピンへ -->
+          <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+          <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+          <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+          <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+          <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+          <!-- 6番ピンへ -->
+          <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+          <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+          <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+          <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+          <!-- 7番ピンへ -->
+          <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+          <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+          <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+          <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+          <!-- 8番ピンへ -->
+          <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+          <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+          <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+          <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
+          <!-- GNDへ -->
+          <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+          <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+          <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+          <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+          <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
+        </svg>
       </div>
       <div class="toolbar">
         <button id="run-button2">Run</button>
@@ -194,29 +258,70 @@
 
     <h3>２．指定のプログラムを１から作成してみましょう。</h3>
     <div class="app-container">
-      <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
+      <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+        <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+        <!-- LEDを中央上に配置 -->
         <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
-          style="position: absolute; left: 175px; top: 20px;"></wokwi-7segment>
-        <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
-        <!-- <svg width="260" height="400" style="position: absolute; left: 0; top: 0;">
-          <line x1="236" y1="160" x2="236" y2="0" stroke="red" stroke-width="2" />
-          <line x1="236" y1="0" x2="208" y2="0" stroke="red" stroke-width="3" />
-          <line x1="208" y1="0" x2="208" y2="20" stroke="red" stroke-width="2" />
-
-          <line x1="227" y1="160" x2="227" y2="10" stroke="red" stroke-width="2" />
-          <line x1="227" y1="10" x2="218" y2="10" stroke="red" stroke-width="2" />
-          <line x1="218" y1="10" x2="218" y2="20" stroke="red" stroke-width="2" />
-
-          <line x1="218" y1="160" x2="208" y2="105" stroke="red" stroke-width="2" />
-
-          <line x1="209" y1="160" x2="189" y2="105" stroke="red" stroke-width="2" />
-
-          <line x1="200" y1="160" x2="179" y2="105" stroke="red" stroke-width="2" />
-
-          <line x1="191" y1="160" x2="150" y2="20" stroke="red" stroke-width="2" />
+          style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+        <!-- Arduino Unoを中央下に配置 -->
+        <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+        <wokwi-resistor value="200"
+          style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+        <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
 
 
-        </svg> -->
+        <wokwi-arduino-uno id="circuit-arduino"
+          style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+        <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+        <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+          <!-- 2番ピンへ -->
+          <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+          <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+          <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+          <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+          <!-- 3番ピンへ -->
+          <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+          <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+          <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+          <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+          <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+          <!-- 4番ピンへ -->
+          <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+          <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+          <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+          <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+          <!-- 5番ピンへ -->
+          <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+          <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+          <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+          <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+          <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+          <!-- 6番ピンへ -->
+          <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+          <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+          <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+          <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+          <!-- 7番ピンへ -->
+          <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+          <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+          <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+          <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+          <!-- 8番ピンへ -->
+          <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+          <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+          <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+          <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
+          <!-- GNDへ -->
+          <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+          <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+          <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+          <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+          <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
+        </svg>
       </div>
       <div class="toolbar">
         <button id="run-button3">Run</button>
