@@ -2,247 +2,393 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-7961ac1Z.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BZP9Paqy.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWM制御</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-CERnXKpw.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-EwBuZKIb.css">
 </head>
 
 <body>
-    <div id="page1" style="display:block;">
-        <h3>第６章　PWM制御</h3>
-        <p>この章ではLEDの明るさを変える制御について学びます。</p>
+  <div class="main-layout">
+    <div class="sidebar"></div>
+    <div class="main-content">
+      <div id="page1" style="display:block;">
+        <h2>第5章　PWM制御</h2>
+        <p>この章では<b>PWM制御</b>について学びます。</p>
         <p>まずは、プログラムを動作させてみましょう。</p>
 
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
-                <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
-                <!-- LEDを中央上に配置 -->
-                <wokwi-led id="circuit-led" color="red" pin="11"
-                    style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
-                <!-- Arduino Unoを中央下に配置 -->
-                <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
-                <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
-                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
-                <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
-                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
-                    <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
-                    <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
-                </svg>
-            </div>
-            <div class="toolbar">
-                <button id="run-button1">Run</button>
-                <button id="stop-button1" disabled>Stop</button>
-                <div class="spacer"></div>
-                <div id="status-label1"></div>
-            </div>
-            <div class="code-editor" id="editor1"></div>
-            <div class="compiler-output">
-                <pre id="compiler-output-text1"></pre>
-            </div>
-            <div class="error-output">
-                <pre id="error-output-text1"></pre>
-            </div>
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
         </div>
         <p>今回のプログラムでは、11番ピンをPWM出力用として設定し、LEDの明るさを段階的に変化させています。</p>
-        <p>PWMとは、出力信号を高速で「オン」と「オフ」に切り替えることで、平均的な出力電圧を調整する仕組みです。</p>
-
         <button id="toPage2from1">次のページへ</button>
-    </div>
-    <div id="page2" style="display:none;">
-        <p>Arduinoでは、<b>analogWrite関数</b>を使うことで簡単にPWM出力を行うことができます。</p>
-        <p>analogWrite関数は、以下のように記述します。</p>
-        <pre><code>analogWrite(ピン番号, 値);</code></pre>
-        <p>２つ目の引数には0～255の値を指定することが出来ます。LEDの場合、値が大きいほど明るく、小さいほど暗くなります。</p>
-        <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
+      </div>
+      <div id="page2" style="display:none;">
+        <div class="blue-point-box">
+          <h3>PWM制御とは</h3>
+          <p><b>PWM（Pulse Width Modulation:
+              パルス幅変調）制御</b>は、デジタル信号のONとOFFを高速で切り替えることで、<br>アナログ的な出力を実現する技術です。PWMを使うことで、LEDの明るさやモーターの速度などを細かく制御することができます。
+          </p>
+        </div>
+        <div class="green-point-box">
+          <h3>analogWrite関数</h3>
+          <p>Arduinoでは、<b>analogWrite関数</b>を使うことで簡単にPWM出力を行うことができます。</p>
+          <p>analogWrite関数は、以下のように記述します。</p>
+          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
+                analogWrite(ピン番号, 値);</span></code>
+          <p>２つ目の引数には0～255の値を指定することが出来ます。LEDの場合、値が大きいほど明るく、小さいほど暗くなります。</p>
+          <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
+        </div>
         <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
 
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
-                <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
-                <!-- LEDを中央上に配置 -->
-                <wokwi-led id="circuit-led" color="red" pin="11"
-                    style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
-                <!-- Arduino Unoを中央下に配置 -->
-                <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
-                <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
-                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
-                <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
-                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
-                    <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
-                    <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
-                </svg>
-            </div>
-            <div class="toolbar">
-                <button id="run-button2">Run</button>
-                <button id="stop-button2" disabled>Stop</button>
-                <div class="spacer"></div>
-                <div id="status-label2"></div>
-            </div>
-            <div class="code-editor" id="editor2"></div>
-            <div class="compiler-output">
-                <pre id="compiler-output-text2"></pre>
-            </div>
-            <div class="error-output">
-                <pre id="error-output-text2"></pre>
-            </div>
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="toolbar">
+            <button id="run-button2">Run</button>
+            <button id="stop-button2" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label2"></div>
+          </div>
+          <div class="code-editor" id="editor2"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <div class="blue-point-box">
+          <h3>digitalWrite関数との違い</h3>
+          <p>LEDを点灯させる制御として、digitalWrite関数がありました。</p>
+          <code><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+                digitalWrite(ピン番号, モード);</span></code>
+          <p>digitalWrite関数では、HIGH（5V）かLOW（0V）のどちらかしか指定できませんが、<br>analogWrite関数では0～255の範囲で細かく出力を調整できる点が異なります。</p>
+          </p>
+          <ul style="background: #e3f2fd;">
+            <li><b>digitalWrite関数</b>：HIGHかLOWしか出力の設定ができない<br>
+              イメージ：0か100かしか設定できない　デジタル：飛び飛びの値</li>
+            <p></p>
+            <li><b>analogWrite関数</b>：0～255の範囲で細かく出力を調整できる<br>
+              イメージ：0から100までの間で細かく設定できる　アナログ：連続的</li>
+          </ul>
         </div>
         <button id="toPage1from2">前のページへ</button>
         <button id="toPage3from2">次のページへ</button>
-    </div>
-    <div id="page3" style="display:none;">
-        <h3>第６章　PWM制御　確認問題</h3>
+      </div>
+      <div id="page3" style="display:none;">
+        <h3>第5章　PWM制御　確認問題</h3>
         <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
-        <h3>１．次のうち、正しい説明をすべて選んでください。</h3>
-
-        <form>
-            <input type="checkbox" id="q1">
-            <label for="q1">analogWrite関数を用いることで、PWM出力を行うことができる。</label><br>
-
-            <input type="checkbox" id="q2">
-            <label for="q2">PWM制御では、デジタル信号（HIGHとLOW）を高速で切り替えることで、出力の平均電圧を調整することができる。</label><br>
-
-            <input type="checkbox" id="q3">
-            <label for="q3">analogWrite(9, 255); は、９番ピンを常にHIGHにしたのとほぼ同じ状態になる。</label><br>
-
-            <input type="checkbox" id="q4">
-            <label for="q4">PWM制御では、delay()関数と同じようにプログラムの実行を一時的に止めている。</label><br>
-
+        <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
+        <p><b>Q1. PWM制御とは何ですか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label></label>電圧を常に一定に保つ制御方式</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>デジタル信号を高速でON/OFFしてアナログ的な出力を実現する方式</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>電流を直接アナログ出力する方式</label>
+          </div>
         </form>
-        <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
+        <p><b>Q2. ArduinoでPWMを行いたいときに使う関数はどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label></label>digitalWrite</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>pinMode</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>analogWrite</label>
+          </div>
+        </form>
+        <p><b>Q3. analogWrite(ピン番号, 値) の「値」に指定できる範囲はどれですか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>0〜1</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>0〜100</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>0〜255</label>
+          </div>
+        </form>
+        <p><b>Q4. analogWriteでLEDを制御するとき、255を指定するとどうなりますか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1" id="q4a">
+            <label>最も明るく点灯する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2" id="q4b">
+            <label>完全に消灯する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3" id="q4c">
+            <label>中くらいの明るさになる</label>
+          </div>
+        </form>
+        <p><b>Q5. digitalWrite と analogWrite の違いとして正しいものはどれですか？</b></p>
+        <form name="q5">
+          <div class="form-row">
+            <input type="radio" name="q5" value="1" id="q5a">
+            <label>digitalWriteは0〜255まで細かく出力できる</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="2" id="q5b">
+            <label>analogWriteはHIGHかLOWしか出力できない</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="3" id="q5c">
+            <label>digitalWriteは2つの値しか指定できないが、analogWriteは256段階で出力を調整できる</label>
+          </div>
+        </form>
+        <button id="check-answer-btn" onclick="checkAnswers()">回答チェック</button>
         <div id="result1" style="margin-top: 20px;"></div>
         <h3>２．0.1 秒ごとに analogWrite の第2引数に与える値を50、150、250 と順番に変化させ、<br>LED の明るさが段階的に変化するプログラムを作成してください。</h3>
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
-                <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
-                <!-- LEDを中央上に配置 -->
-                <wokwi-led id="quiz-led" color="red" pin="11"
-                    style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
-                <!-- Arduino Unoを中央下に配置 -->
-                <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
-                <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
-                <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
-                <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
-                    <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
-                    <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
-                    <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
-                </svg>
-            </div>
-            <div class="toolbar">
-                <button id="run-button3">Run</button>
-                <button id="stop-button3" disabled>Stop</button>
-                <div class="spacer"></div>
-                <div id="status-label3"></div>
-            </div>
-            <div class="code-editor" id="editor3"></div>
-            <div class="compiler-output">
-                <pre id="compiler-output-text3"></pre>
-            </div>
-            <div class="error-output">
-                <pre id="error-output-text3"></pre>
-            </div>
-            <div id="result2" style="margin-top: 20px;"></div>
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="quiz-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="toolbar">
+            <button id="run-button3">Run</button>
+            <button id="stop-button3" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label3"></div>
+          </div>
+          <div class="code-editor" id="editor3"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
         </div>
+        <div id="result2"></div>
+        <div id="result3"></div>
+        
         <button id="toPage2from3">前のページへ</button>
         <button id="nextpage-btn" onclick="window.location.href='que6.html'" style="display:none;">次の章へ</button>
         <script>
-            function checkAnswer() {
-                // 正解の組み合わせ（true=チェックすべき）
-                const correctAnswers = {
-                    q1: true,
-                    q2: true,
-                    q3: true,
-                    q4: false,
-                };
+          let que1 = false;
+          let que2 = false;
+          function checkAnswers() {
+            // 各問題の正解インデックス（0始まり）
+            const correct = {
+              q1: [1], // Q1は2番目（index:1）が正解
+              q2: [2], // Q2は3番目（index:2）が正解
+              q3: [2], // Q3は3番目（index:2）が正解
+              q4: [0], // Q4は1番目（index:0）が正解
+              q5: [2], // Q5は2番目（index:2）が正解
+            };
 
-                let isCorrect = true;
-                for (let key in correctAnswers) {
-                    const checked = document.getElementById(key).checked;
-                    if (checked !== correctAnswers[key]) {
-                        isCorrect = false;
-                    }
-                }
+            let results = [];
+            Object.keys(correct).forEach(q => {
+              const form = document.forms[q];
+              const checks = Array.from(form.querySelectorAll('input[type="radio"]'));
+              const checkedIdx = checks.findIndex(c => c.checked); // 選択されたインデックス（1つだけ）
+              const isCorrect = JSON.stringify([checkedIdx]) === JSON.stringify(correct[q]);
+              results.push(isCorrect ? "○" : "×");
+            });
 
-                const result = document.getElementById("result");
-                if (isCorrect) {
-                    document.getElementById('result1').textContent = "正解です！";
-                    document.getElementById('result1').style.color = "green";
-                    que1 = true;
-                } else {
-                    document.getElementById('result1').textContent = "間違いがあります。もう一度見直してみましょう。";
-                    document.getElementById('result1').style.color = "red";
-                }
+            // 全問分の結果をresult1に表示
+            // 横並びで表示
+            let html = '';
+            Object.keys(correct).forEach((q, i) => {
+              html += `Q${i + 1}:${results[i]} `;
+            });
+            html = html.trim();
+            if (results.every(r => r === "○")) {
+              html += '<br><span style="color:green;font-weight:bold;">全問正解です！</span>';
+              que1 = true;
+            } else {
+              html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
             }
+            document.getElementById('result1').innerHTML = html;
+          }
 
-            let que2code = false;
-            let que2led = false;
-            let expectedValues = [50, 150, 250];
-            const LED11 = document.querySelector('#quiz-led');
-            let prevbrightness = LED11.brightness;
-            const statusLabel = document.getElementById('status-label3');
-            let time1;
-            let time2;
-            let counter = 0;
+          let que2code = false;
+          let que2led = false;
+          let expectedValues = [50, 150, 250];
+          const LED11 = document.querySelector('#quiz-led');
+          let prevbrightness = LED11.brightness;
+          const statusLabel = document.getElementById('status-label3');
+          let time1;
+          let time2;
+          let counter = 0;
 
-            setInterval(() => {
-                if (!prevbrightness && LED11.value) {
-                    // 消灯→点灯の瞬間だけ一度だけ表示
-                    console.log(LED11, LED11.value, LED11.brightness, counter);
-                    if (counter == 0 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
-                        time1 = parseSimTime(statusLabel);
-                        if (time1 == null) return;
-                        console.log('LED点灯時の時刻:', time1);
-                        counter++;
-                    }
-                }
-                if (counter == 1 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
-                    // 点灯→消灯の瞬間だけ一度だけ表示
-                    time2 = parseSimTime(statusLabel);
-                    console.log('LED消灯時の時刻:', time2, time2 - time1);
-                    if (time2 - time1 > 0.090) {
-                        time1 = parseSimTime(statusLabel);
-                        counter++;
-                    } else {
-                        counter = 0;
-                    }
-                }
-                if (counter == 2 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
-                    // 点灯→消灯の瞬間だけ一度だけ表示
-                    time2 = parseSimTime(statusLabel);
-                    console.log('LED点灯時の時刻:', time2);
-                    if (time2 - time1 > 0.090) {
-                        que2led = true;
-                        counter = 3;
-                    } else {
-                        counter = 0;
-                    }
-                }
-                if (typeof window.code === 'string') {
-                    if (window.code.includes("analogWrite(11, 50);") &&
-                        window.code.includes("analogWrite(11, 150);") &&
-                        window.code.includes("analogWrite(11, 250);") &&
-                        window.code.includes("delay(100);")
-                    ) {
-                        que2code = true;
-                    }
-                }
-                if (que2code && que2led) {
-                    document.getElementById('result2').textContent = "正解です！";
-                    document.getElementById('result2').style.color = "green";
-                    document.getElementById('nextpage-btn').style.display = 'inline';
-                }
-            }, 10);
+          setInterval(() => {
+            if (!prevbrightness && LED11.value) {
+              // 消灯→点灯の瞬間だけ一度だけ表示
+              console.log(LED11, LED11.value, LED11.brightness, counter);
+              if (counter == 0 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+                time1 = parseSimTime(statusLabel);
+                if (time1 == null) return;
+                console.log('LED点灯時の時刻:', time1);
+                counter++;
+              }
+            }
+            if (counter == 1 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED消灯時の時刻:', time2, time2 - time1);
+              if (time2 - time1 > 0.090) {
+                time1 = parseSimTime(statusLabel);
+                counter++;
+              } else {
+                counter = 0;
+              }
+            }
+            if (counter == 2 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED点灯時の時刻:', time2);
+              if (time2 - time1 > 0.090) {
+                que2led = true;
+                counter = 3;
+              } else {
+                counter = 0;
+              }
+            }
+            if (typeof window.code === 'string') {
+              if (window.code.includes("analogWrite(11, 50);") &&
+                window.code.includes("analogWrite(11, 150);") &&
+                window.code.includes("analogWrite(11, 250);") &&
+                window.code.includes("delay(100);")
+              ) {
+                que2code = true;
+              }
+            }
+            if (que2code && que2led) {
+              document.getElementById('result2').textContent = "正解です！";
+              document.getElementById('result2').style.color = "green";
+              document.getElementById('nextpage-btn').style.display = 'inline';
+              que2 = true;
+            }
+            if (que1 && que2) {
+              document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
+              document.getElementById('toPage3from2').style.display = 'inline';
+            }
+          }, 10);
 
         </script>
+      </div>
     </div>
+    <div class="sidebar"></div>
+  </div>
 </body>
 <script>
-    let selected_editor = '#editor1';
-    const readOnly = false;
+  let selected_editor = '#editor1';
+  const readOnly = false;
+  window.INITIAL_CODE = `
+void setup() {
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  delay(10);
+  brightness++;
+}
+`.trim();
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+  });
+  document.getElementById('toPage2from1').onclick = function () {
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+    selected_editor = '#editor2';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
+void setup() {
+  pinMode(11, OUTPUT);
+}
+
+void loop() {
+  analogWrite(11, 0);
+}
+`.trim();
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+    //PWM用LEDの再取得
+    window.updatepwmLed();
+  };
+  document.getElementById('toPage1from2').onclick = function () {
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('page2').style.display = 'none';
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    selected_editor = '#editor1';
+    window.errorOutputText.textContent = '';
     window.INITIAL_CODE = `
 void setup() {
   pinMode(11, OUTPUT);
@@ -255,58 +401,19 @@ void loop() {
   brightness++;
 }
 `.trim();
-    window.addEventListener('DOMContentLoaded', function () {
-        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-    });
-    document.getElementById('toPage2from1').onclick = function () {
-        document.getElementById('page1').style.display = 'none';
-        document.getElementById('page2').style.display = 'block';
-        window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-        selected_editor = '#editor2';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
-void setup() {
-  pinMode(11, OUTPUT);
-}
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+    //PWM用LEDの再取得
+    window.updatepwmLed();
+  };
 
-void loop() {
-  analogWrite(11, 0);
-}
-`.trim();
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-        //PWM用LEDの再取得
-        window.updatepwmLed();
-    };
-    document.getElementById('toPage1from2').onclick = function () {
-        document.getElementById('page1').style.display = 'block';
-        document.getElementById('page2').style.display = 'none';
-        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-        selected_editor = '#editor1';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
-void setup() {
-  pinMode(11, OUTPUT);
-}
-
-byte brightness = 0;
-void loop() {
-  analogWrite(11, brightness);
-  delay(10);
-  brightness++;
-}
-`.trim();
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-    };
-
-    document.getElementById('toPage3from2').onclick = function () {
-        document.getElementById('page2').style.display = 'none';
-        document.getElementById('page3').style.display = 'block';
-        window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
-        selected_editor = '#editor3';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
+  document.getElementById('toPage3from2').onclick = function () {
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page3').style.display = 'block';
+    window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
+    selected_editor = '#editor3';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
 void setup() {
   pinMode(11, OUTPUT);
 }
@@ -320,19 +427,19 @@ void loop() {
   delay(100);
 }
 `.trim();
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-        //PWM用LEDの再取得
-        window.updatepwmLed();
-    };
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+    //PWM用LEDの再取得
+    window.updatepwmLed();
+  };
 
-    document.getElementById('toPage2from3').onclick = function () {
-        document.getElementById('page3').style.display = 'none';
-        document.getElementById('page2').style.display = 'block';
-        window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-        selected_editor = '#editor2';
-        window.errorOutputText.textContent = '';
-        window.INITIAL_CODE = `
+  document.getElementById('toPage2from3').onclick = function () {
+    document.getElementById('page3').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
+    selected_editor = '#editor2';
+    window.errorOutputText.textContent = '';
+    window.INITIAL_CODE = `
 void setup() {
   pinMode(11, OUTPUT);
 }
@@ -341,11 +448,11 @@ void loop() {
   analogWrite(11, 0);
 }
 `.trim();
-        window.scrollTo(0, 0);
-        window.initMonacoEditor();
-        //PWM用LEDの再取得
-        window.updatepwmLed();
-    };
+    window.scrollTo(0, 0);
+    window.initMonacoEditor();
+    //PWM用LEDの再取得
+    window.updatepwmLed();
+  };
 
 </script>
 </body>

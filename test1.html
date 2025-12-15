@@ -2,71 +2,147 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>test</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-7961ac1Z.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-BZP9Paqy.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-CERnXKpw.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-EwBuZKIb.css">
 </head>
 
 <body>
-    <div id="page1" style="display:block;">
-        <h3>確認テスト</h3>
-
+  <div class="main-layout">
+    <div class="sidebar"></div>
+    <div class="main-content">
+      <div id="page1" style="display:block;">
+        <h2>まとめテスト</h2>
+        <p><b>Q1. マイコンの説明として正しいものはどれですか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label>大型のゲーム専用コンピュータである</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>センサーの情報を受け取り、LEDやモーターなどを制御できる小型コンピュータ</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>インターネット接続だけを行う装置</label>
+          </div>
+        </form>
+        <p><b>Q2. 7セグメントLEDの構成として正しいものはどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label>7つのLEDだけで構成される</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>7つの棒状LEDと1つの点の計8個で構成される</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>8つの棒状LEDと1つの点の計9個で構成される</label>
+          </div>
+        </form>
+        <p><b>Q3. delay(1000); と書いたとき、プログラムはどうなりますか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>1ミリ秒だけ停止する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>0.1秒だけ停止する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>1000ミリ秒だけ停止する</label>
+          </div>
+        </form>
+        <p><b>Q4. ArduinoでPWMを行いたいときに使う関数はどれですか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1">
+            <label>digitalWrite</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2">
+            <label>pinMode</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3">
+            <label>analogWrite</label>
+          </div>
+        </form>
+        <p><b>Q5. シリアル通信を開始するために、最初に書く必要がある関数はどれですか？</b></p>
+        <form name="q5">
+          <div class="form-row">
+            <input type="radio" name="q5" value="1">
+            <label>Serial.print</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="2">
+            <label>Serial.begin</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="3">
+            <label>Serial.start</label>
+          </div>
+        </form>
+        <p><b>Q6. LEDを点灯させるプログラムを完成させて下さい。</b></p>
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 260px; height: 400px; margin: 0 auto;">
-                <wokwi-led color="red" pin="13" label="13"></wokwi-led>
-                <wokwi-led color="green" pin="12" label="12"></wokwi-led>
-                <wokwi-led color="blue" pin="11" label="11"></wokwi-led>
-                <wokwi-led color="yellow" pin="10" label="10"></wokwi-led>
-                <wokwi-led color="orange" pin="9" label="9"></wokwi-led>
-                <wokwi-arduino-uno id="circuit-arduino"
-                    style="position: absolute; left: 0px; top: 150px;"></wokwi-arduino-uno>
-            </div>
-            <div class="toolbar">
-                <button id="run-button1">Run</button>
-                <button id="stop-button1" disabled>Stop</button>
-                <div class="spacer"></div>
-                <div id="status-label1"></div>
-            </div>
-            <div class="code-editor" id="editor1"></div>
-            <div class="compiler-output">
-                <pre id="compiler-output-text1"></pre>
-            </div>
-            <div class="error-output">
-                <pre id="error-output-text1"></pre>
-            </div>
-            <div class="serial-monitor">
-                <pre id="serial-monitor-text1"></pre>
-            </div>
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
         </div>
-
+        <button type="button" onclick="checkAnswersAll()">まとめテストの回答チェック</button>
+        <div id="result-all" style="margin-bottom:24px;"></div>
         <button id="toPage2from1">次のページへ</button>
-
+      </div>
     </div>
+    <div class="sidebar"></div>
+  </div>
 </body>
 <script>
-    let selected_editor = '#editor1';
-    const readOnly = false;
-    window.INITIAL_CODE = `
-byte leds[] = {13, 12, 11, 10, 9};
+  let selected_editor = '#editor1';
+  const readOnly = false;
+  window.INITIAL_CODE = `
 void setup() {
-  for (byte i = 0; i < sizeof(leds); i++) {
-    pinMode(leds[i], OUTPUT);
-  }
+
 }
 
 int i = 0;
 void loop() {
-  digitalWrite(leds[i], HIGH);
-  delay(250);
-  digitalWrite(leds[i], LOW);
-  i = (i + 1) % sizeof(leds);
+
 }
 `.trim();
-    window.addEventListener('DOMContentLoaded', function () {
-        window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
-    });
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+  });
 </script>
 
 </html>
