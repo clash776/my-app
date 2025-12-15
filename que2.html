@@ -11,7 +11,36 @@
 
 <body>
   <div class="main-layout">
-    <div class="sidebar"></div>
+    <div class="sidebar">
+      <div class="sidebar">
+        <nav
+          style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-1:
+            LEDの概要</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-2:
+            マイコンとLEDを接続する</a>
+          <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-3:
+            LEDを点灯させるプログラム</a>
+          <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-4:
+            まとめ</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2" style="color: #fff; text-decoration: none; font-weight: bold;">2-5:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3" style="color: #fff; text-decoration: none; font-weight: bold;">2-6:
+            おまけ</a>
+      </div>
+    </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
         <h2>第２章　LEDの点灯・消灯</h2>
@@ -36,7 +65,9 @@
           </ol>
           <p>補足：抵抗はアノード側、カソード側どちらに接続しても問題ありません。</p>
         </div>
-        <button id="toPage2from1">次のページへ</button>
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -76,8 +107,12 @@
 
           <p>次のページでは、初期設定とLEDを点灯させるプログラムを書きます。</p>
         </div>
-        <button id="toPage1from2">前のページへ</button>
-        <button id="toPage3from2">次のページへ</button>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">次のページへ</button>
       </div>
       <div id="page3" style="display:none;">
         <div class="blue-point-box">
@@ -111,8 +146,12 @@
             style="display: block; margin: 0 auto; width: 500px; height: auto;">
           <p>これでLEDを点灯させる準備が整いました！次のページではこの章のまとめです。</p>
         </div>
-        <button id="toPage2from3">前のページへ</button>
-        <button id="toPage4from3">次のページへ</button>
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">次のページへ</button>
       </div>
 
       <div id="page4" style="display:none;">
@@ -174,10 +213,14 @@
           </div>
         </div>
 
-        <button id="toPage3from4">前のページへ</button>
-        <button id="toTestfrom4">確認問題へ</button>
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2">次のページへ</button>
       </div>
-      <div id="Test" style="display:none;">
+      <div id="pageTest" style="display:none;">
         <h2>確認問題</h2>
         <h2>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h2>
 
@@ -340,11 +383,15 @@
         <div id="result2" style="margin-top: 20px;"></div>
         <div id="result3" style="margin-top: 20px;"></div>
 
-        <button id="toPage4fromTest">前のページへ</button>
-        <button id="toOmakefromTest" style="display:none;">おまけへ</button>
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" style="display:none;" id="pageOmake">次のページへ</button>
 
         <script>
-          const testLed = document.querySelector('#Test wokwi-led[pin="3"]');
+          const testLed = document.querySelector('#pageTest wokwi-led[pin="3"]');
           let isTestAnswered = false;
           let que1 = false;
           let que2 = false;
@@ -401,15 +448,15 @@
           setInterval(() => {
             if (que1 && que2) {
               document.getElementById('result3').innerHTML = "<b>全問正解です！次のページへ進みましょう！</b>";
-              document.getElementById('toOmakefromTest').style.display = 'inline';
+              document.getElementById('pageOmake').style.display = 'inline';
             } else {
-              document.getElementById('toOmakefromTest').style.display = 'none';
+              document.getElementById('pageOmake').style.display = 'none';
             }
           }, 100);
 
         </script>
       </div>
-      <div id="Omake" style="display:none;">
+      <div id="pageOmake" style="display:none;">
         <h3>２章おまけ：変数</h3>
         <div style="border:2px solid #4caf50; background:#f6fff6; border-radius:8px; padding:16px; margin-bottom:20px;">
           <p style="font-size:1.1em;"><b>Arduinoのプログラム（C言語）には、<span style="color:#1976d2;">変数</span>という便利なしくみがあります。</b>
@@ -444,7 +491,7 @@
         <div style="margin-bottom:20px;"><b>変数を使ってLEDを点灯させるプログラムの例を見てみましょう。</b></div>
 
         <div class="app-container">
-            <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
             <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
             <!-- LEDを中央上に配置 -->
             <wokwi-led id="circuit-led" color="red" pin="7"
@@ -493,99 +540,61 @@
   <script>
     const readOnly = false;
     let selected_editor = '#editor1';
+    // 共通ページ切り替え関数
+    function showPage(toPage, btn) {
+      // すべてのページを非表示
+      document.querySelectorAll('[id^="page"]').forEach(div => {
+        div.style.display = (div.id === toPage) ? 'block' : 'none';
+      });
+      window.scrollTo(0, 0);
+      // エディタやボタンの切り替え
+      if (btn) {
+        const editor = btn.dataset.editor;
+        const run = btn.dataset.run;
+        const stop = btn.dataset.stop;
+        const status = btn.dataset.status;
+        const compiler = btn.dataset.compiler;
+        const error = btn.dataset.error;
+        if (editor && run && stop && status && compiler && error) {
+          selected_editor = editor;
+          window.errorOutputText.textContent = '';
+          window.setActiveButtons(run, stop, status, compiler, error);
+          window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+          window.initMonacoEditor();
+        }
+      }
+    }
 
-
-    document.getElementById('toPage2from1').onclick = function () {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'block';
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage1from2').onclick = function () {
-      document.getElementById('page1').style.display = 'block';
-      document.getElementById('page2').style.display = 'none';
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage3from2').onclick = function () {
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'block';
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage2from3').onclick = function () {
-      document.getElementById('page2').style.display = 'block';
-      document.getElementById('page3').style.display = 'none';
-      window.scrollTo(0, 0);
-      window.initMonacoEditor();
-    };
-    document.getElementById('toPage4from3').onclick = function () {
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'block';
+    document.addEventListener('DOMContentLoaded', function () {
       window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-      selected_editor = '#editor1';
-      window.errorOutputText.textContent = '';
-      window.INITIAL_CODE = `
+      window.INITIAL_CODE = PAGE_CODES['page1'];
+      document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const toPage = this.dataset.to || this.dataset.page;
+          showPage(toPage, this);
+        });
+      });
+    });
+    const PAGE_CODES = {
+      page4: `
 void setup() {
     pinMode(3, OUTPUT);             
 }
 void loop() {
     digitalWrite(3, HIGH); 
 }
-`.trim();
-      window.initMonacoEditor();
-      window.scrollTo(0, 0);
-    };
+`.trim(),
 
-    document.getElementById('toPage3from4').onclick = function () {
-      document.getElementById('page3').style.display = 'block';
-      document.getElementById('page4').style.display = 'none';
-      window.initMonacoEditor();
-      window.scrollTo(0, 0);
-    };
-
-    document.getElementById('toTestfrom4').onclick = function () {
-      document.getElementById('page4').style.display = 'none';
-      document.getElementById('Test').style.display = 'block';
-      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-      selected_editor = '#editor2';
-      window.errorOutputText.textContent = '';
-      window.INITIAL_CODE = `
+      pageTest: `
 void setup() {
     pinMode(3, OUTPUT);             
 }
 void loop() {
     digitalWrite(3, HIGH); 
 }
-`.trim();
-      window.initMonacoEditor();
-      window.scrollTo(0, 0);
-    };
-
-    document.getElementById('toPage4fromTest').onclick = function () {
-      document.getElementById('Test').style.display = 'none';
-      document.getElementById('page4').style.display = 'block';
-      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-      selected_editor = '#editor1';
-      window.errorOutputText.textContent = '';
-      window.INITIAL_CODE = `
-void setup() {
-    pinMode(3, OUTPUT);             
-}
-void loop() {
-    digitalWrite(3, HIGH); 
-}
-`.trim();
-      window.initMonacoEditor();
-      window.scrollTo(0, 0);
-    };
-    document.getElementById('toOmakefromTest').onclick = function () {
-      document.getElementById('Omake').style.display = 'block';
-      document.getElementById('Test').style.display = 'none';
-      window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
-      selected_editor = '#editor3';
-      window.errorOutputText.textContent = '';
-      window.INITIAL_CODE = `
+`.trim(),
+      pageOmake: `
 int ledPin = 7;
 void setup() {
     pinMode(ledPin, OUTPUT);             
@@ -593,26 +602,7 @@ void setup() {
 void loop() {
     digitalWrite(ledPin, HIGH); 
 }
-`.trim();
-      window.initMonacoEditor();
-      window.scrollTo(0, 0);
-    };
-    document.getElementById('toTestfromOmake').onclick = function () {
-      document.getElementById('Omake').style.display = 'none';
-      document.getElementById('Test').style.display = 'block';
-      window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-      selected_editor = '#editor2';
-      window.errorOutputText.textContent = '';
-      window.INITIAL_CODE = `
-void setup() {
-    pinMode(3, OUTPUT);             
-}
-void loop() {
-    digitalWrite(3, HIGH); 
-}
-`.trim();
-      window.initMonacoEditor();
-      window.scrollTo(0, 0);
+`.trim(),
     };
 
 
