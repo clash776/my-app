@@ -11,10 +11,38 @@
 
 <body>
   <div class="main-layout">
-    <div class="sidebar"></div>
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" data-serial="serial-monitor-text1" style="color: #fff; text-decoration: none; font-weight: bold;">3-1:
+          シリアルモニタ</a>
+        <a href="#" class="page-link" data-to="page2" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" data-serial="serial-monitor-text2" style="color: #fff; text-decoration: none; font-weight: bold;">3-2:
+          シリアルモニタの概要</a>
+        <a href="#" class="page-link" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" data-serial="serial-monitor-text3" style="color: #fff; text-decoration: none; font-weight: bold;">3-3:
+          確認問題</a>
+        <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+          data-error="error-output-text4" data-serial="serial-monitor-text4" style="color: #fff; text-decoration: none; font-weight: bold;">3-4:
+          おまけ</a>
+        <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" style="color: #fff; text-decoration: none; font-weight: bold;">3 -5:
+          おまけ</a>
+        <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" style="color: #fff; text-decoration: none; font-weight: bold;">3-6:
+          おまけ</a>
+      </nav>
+    </div>
     <div class="main-content">
-      <div id="page1" style="display:none;">
-        <h3>第6章　シリアルモニタ</h3>
+      <div id="page1" style="display:block;">
+        <h2>第6章　シリアルモニタ</h2>
         <p>この章では<b>シリアルモニタ</b>の使い方について学びます。</p>
         <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
             <b>シリアルモニタ</b>とは、マイコンとパソコン(マイコン同士も可能)との通信を利用したデータの送受信や<br>デバッグ(プログラムの不具合を修正する作業)などに利用されるものです。</span></p>
@@ -69,7 +97,9 @@
         <p>上のプログラムは5章の最初のプログラムです。</p>
         <p>プログラムを実行すると、変数brightnessの値(0~255)が順番にシリアルモニタに表示されます。</p>
         <p>このように、シリアルモニタを使うことで、変数の値などプログラムの動作状況をリアルタイムで確認することができます。</p>
-        <button id="toPage2from1">次のページへ</button>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" data-serial="serial-monitor-text2">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -145,8 +175,12 @@
           </div>
         </div>
         <div id="result1" style="margin-top: 20px;"></div>
-        <button id="toPage1from2">前のページへ</button>
-        <button id="toTestfrom2">次のページへ</button>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" data-serial="serial-monitor-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" data-serial="serial-monitor-text3">次のページへ</button>
         <script>
           setInterval(() => {
             const serialText2 = document.getElementById('serial-monitor-text2')?.textContent;
@@ -158,7 +192,7 @@
           }, 100);
         </script>
       </div>
-      <div id="Test" style="display:block;">
+      <div id="pageTest" style="display:none;">
         <h3>第6章　シリアルモニタ　確認問題</h3>
         <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
         <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
@@ -291,8 +325,12 @@
           <div id="result3"></div>
           <div id="result4"></div>
         </div>
-        <button id="toPage2fromTest">前のページへ</button>
-        <button id="nextpage-btn" onclick="window.location.href='test1.html'" style="display:none;">まとめテストへ</button>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" data-serial="serial-monitor-text2">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+          data-error="error-output-text4" data-serial="serial-monitor-text4" style="display:none;" id="toPageOmake">次のページへ</button>
         <script>
           const statusLabel = document.getElementById('status-label3');
           const LED7 = document.querySelector('wokwi-led[pin="3"]');
@@ -387,7 +425,7 @@
             }
             if (que1 && que2) {
               document.getElementById('result4').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-              document.getElementById('nextpage-btn').style.display = "inline-block";
+              document.getElementById('toPageOmake').style.display = "inline-block";
             }
             prevValue = value;
           }, 10);
@@ -402,9 +440,47 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
-  window.INITIAL_CODE = `
+  function showPage(toPage, btn) {
+    // すべてのページを非表示
+    document.querySelectorAll('[id^="page"]').forEach(div => {
+      div.style.display = (div.id === toPage) ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+    // エディタやボタンの切り替え
+    if (btn) {
+      const editor = btn.dataset.editor;
+      const run = btn.dataset.run;
+      const stop = btn.dataset.stop;
+      const status = btn.dataset.status;
+      const compiler = btn.dataset.compiler;
+      const error = btn.dataset.error;
+      const serial = btn.dataset.serial;
+      if (editor && run && stop && status && compiler && error && serial) {
+        selected_editor = editor;
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons(run, stop, status, compiler, error, serial);
+        window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+        window.initMonacoEditor();
+        window.updatepwmLed();
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+    window.INITIAL_CODE = PAGE_CODES['page1'];
+    document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const toPage = this.dataset.to || this.dataset.page;
+        showPage(toPage, this);
+      });
+    });
+  });
+  const PAGE_CODES = {
+    page1: `
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(11, OUTPUT);
 }
 
@@ -415,17 +491,8 @@ void loop() {
   delay(10);
   brightness++;
 }
-`.trim();
-  window.addEventListener('DOMContentLoaded', function () {
-    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
-  });
-  document.getElementById('toPage2from1').onclick = function () {
-    document.getElementById('page1').style.display = 'none';
-    document.getElementById('page2').style.display = 'block';
-    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2', 'serial-monitor-text2');
-    selected_editor = '#editor2';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
+`.trim(),
+    page2: `
 void setup() {
   Serial.begin(9600);
 }
@@ -434,43 +501,8 @@ void loop() {
   Serial.println("Hello"); 
   delay(100);
 }
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-  };
-  document.getElementById('toPage1from2').onclick = function () {
-    document.getElementById('page1').style.display = 'block';
-    document.getElementById('page2').style.display = 'none';
-    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
-    selected_editor = '#editor1';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
-void setup() {
-  Serial.begin(9600);
-  pinMode(11, OUTPUT);
-}
-
-byte brightness = 0;
-void loop() {
-  analogWrite(11, brightness);
-  Serial.println(brightness); 
-  delay(10);
-  brightness++;
-}
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-    //PWM用LEDの再取得
-    window.updatepwmLed();
-  };
-
-  document.getElementById('toTestfrom2').onclick = function () {
-    document.getElementById('page2').style.display = 'none';
-    document.getElementById('Test').style.display = 'block';
-    window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3', 'serial-monitor-text3');
-    selected_editor = '#editor3';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
+`.trim(),
+    pageTest: `
 void setup() {
   Serial.begin(9600);
   pinMode(3, OUTPUT);
@@ -485,31 +517,11 @@ void loop() {
   Serial.println("LED OFF"); 
   delay(100);
 }
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
+`.trim(),
+    pageOmake: `
+
+`.trim(),
   };
-
-  document.getElementById('toPage2fromTest').onclick = function () {
-    document.getElementById('Test').style.display = 'none';
-    document.getElementById('page2').style.display = 'block';
-    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2', 'serial-monitor-text2');
-    selected_editor = '#editor2';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
-void setup() {
-  Serial.begin(9600);
-}
-
-void loop() {
-  Serial.println("Hello"); 
-  delay(100);
-}
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-  };
-
 </script>
 
 </html>

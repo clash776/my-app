@@ -11,7 +11,35 @@
 
 <body>
   <div class="main-layout">
-    <div class="sidebar"></div>
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">3-1:
+          PWM制御</a>
+        <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">3-2:
+          PWM制御の概要</a>
+        <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" style="color: #fff; text-decoration: none; font-weight: bold;">3-3:
+          確認問題</a>
+        <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" style="color: #fff; text-decoration: none; font-weight: bold;">3-4:
+          おまけ</a>
+        <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" style="color: #fff; text-decoration: none; font-weight: bold;">3 -5:
+          おまけ</a>
+        <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" style="color: #fff; text-decoration: none; font-weight: bold;">3-6:
+          おまけ</a>
+      </nav>
+    </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
         <h2>第5章　PWM制御</h2>
@@ -50,7 +78,9 @@
           </div>
         </div>
         <p>今回のプログラムでは、11番ピンをPWM出力用として設定し、LEDの明るさを段階的に変化させています。</p>
-        <button id="toPage2from1">次のページへ</button>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -116,10 +146,14 @@
               イメージ：0から100までの間で細かく設定できる　アナログ：連続的</li>
           </ul>
         </div>
-        <button id="toPage1from2">前のページへ</button>
-        <button id="toPage3from2">次のページへ</button>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3">次のページへ</button>
       </div>
-      <div id="page3" style="display:none;">
+      <div id="pageTest" style="display:none;">
         <h3>第5章　PWM制御　確認問題</h3>
         <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
         <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
@@ -234,9 +268,13 @@
         </div>
         <div id="result2"></div>
         <div id="result3"></div>
-        
-        <button id="toPage2from3">前のページへ</button>
-        <button id="nextpage-btn" onclick="window.location.href='que6.html'" style="display:none;">次の章へ</button>
+
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+          data-error="error-output-text4" style="display:none;" id="topageOmake">次のページへ</button>
         <script>
           let que1 = false;
           let que2 = false;
@@ -330,12 +368,11 @@
             if (que2code && que2led) {
               document.getElementById('result2').textContent = "正解です！";
               document.getElementById('result2').style.color = "green";
-              document.getElementById('nextpage-btn').style.display = 'inline';
               que2 = true;
             }
             if (que1 && que2) {
               document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-              document.getElementById('toPage3from2').style.display = 'inline';
+              document.getElementById('topageOmake').style.display = 'inline';
             }
           }, 10);
 
@@ -348,7 +385,44 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
-  window.INITIAL_CODE = `
+  function showPage(toPage, btn) {
+    // すべてのページを非表示
+    document.querySelectorAll('[id^="page"]').forEach(div => {
+      div.style.display = (div.id === toPage) ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+    // エディタやボタンの切り替え
+    if (btn) {
+      const editor = btn.dataset.editor;
+      const run = btn.dataset.run;
+      const stop = btn.dataset.stop;
+      const status = btn.dataset.status;
+      const compiler = btn.dataset.compiler;
+      const error = btn.dataset.error;
+      if (editor && run && stop && status && compiler && error) {
+        selected_editor = editor;
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons(run, stop, status, compiler, error);
+        window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+        window.initMonacoEditor();
+        window.updatepwmLed();
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    window.INITIAL_CODE = PAGE_CODES['page1'];
+    document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const toPage = this.dataset.to || this.dataset.page;
+        showPage(toPage, this);
+      });
+    });
+  });
+  const PAGE_CODES = {
+    page1: `
 void setup() {
   pinMode(11, OUTPUT);
 }
@@ -359,17 +433,8 @@ void loop() {
   delay(10);
   brightness++;
 }
-`.trim();
-  window.addEventListener('DOMContentLoaded', function () {
-    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-  });
-  document.getElementById('toPage2from1').onclick = function () {
-    document.getElementById('page1').style.display = 'none';
-    document.getElementById('page2').style.display = 'block';
-    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-    selected_editor = '#editor2';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
+`.trim(),
+    page2: `
 void setup() {
   pinMode(11, OUTPUT);
 }
@@ -377,43 +442,8 @@ void setup() {
 void loop() {
   analogWrite(11, 0);
 }
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-    //PWM用LEDの再取得
-    window.updatepwmLed();
-  };
-  document.getElementById('toPage1from2').onclick = function () {
-    document.getElementById('page1').style.display = 'block';
-    document.getElementById('page2').style.display = 'none';
-    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
-    selected_editor = '#editor1';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
-void setup() {
-  pinMode(11, OUTPUT);
-}
-
-byte brightness = 0;
-void loop() {
-  analogWrite(11, brightness);
-  delay(10);
-  brightness++;
-}
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-    //PWM用LEDの再取得
-    window.updatepwmLed();
-  };
-
-  document.getElementById('toPage3from2').onclick = function () {
-    document.getElementById('page2').style.display = 'none';
-    document.getElementById('page3').style.display = 'block';
-    window.setActiveButtons('run-button3', 'stop-button3', 'status-label3', 'compiler-output-text3', 'error-output-text3');
-    selected_editor = '#editor3';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
+`.trim(),
+    pageTest: `
 void setup() {
   pinMode(11, OUTPUT);
 }
@@ -426,32 +456,10 @@ void loop() {
   analogWrite(11, 250);
   delay(100);
 }
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-    //PWM用LEDの再取得
-    window.updatepwmLed();
-  };
+`.trim(),
+    pageOmake: `
 
-  document.getElementById('toPage2from3').onclick = function () {
-    document.getElementById('page3').style.display = 'none';
-    document.getElementById('page2').style.display = 'block';
-    window.setActiveButtons('run-button2', 'stop-button2', 'status-label2', 'compiler-output-text2', 'error-output-text2');
-    selected_editor = '#editor2';
-    window.errorOutputText.textContent = '';
-    window.INITIAL_CODE = `
-void setup() {
-  pinMode(11, OUTPUT);
-}
-
-void loop() {
-  analogWrite(11, 0);
-}
-`.trim();
-    window.scrollTo(0, 0);
-    window.initMonacoEditor();
-    //PWM用LEDの再取得
-    window.updatepwmLed();
+`.trim(),
   };
 
 </script>
