@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEDを光らせてみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CERnXKpw.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-EwBuZKIb.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-D3IAKssS.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-Cty1drqg.css">
 </head>
 
 <body>
@@ -14,30 +14,53 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-1:
-          LEDの概要</a>
-        <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-2:
-          マイコンとLEDを接続する</a>
-        <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-3:
-          LEDを点灯させるプログラム</a>
-        <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">2-4:
-          まとめ</a>
-        <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
-          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
-          data-error="error-output-text2" style="color: #fff; text-decoration: none; font-weight: bold;">2-5:
-          確認問題</a>
-        <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
-          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3" style="color: #fff; text-decoration: none; font-weight: bold;">2-6:
-          おまけ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='howtouse.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">1章へ</a>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">2章</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-1:
+            LEDの概要</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-2:
+            マイコンとLEDを接続する</a>
+          <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-3:
+            LEDを点灯させるプログラム</a>
+          <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-4:
+            まとめ</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-5:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-6:
+            おまけ</a>
+        </div>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
       </nav>
     </div>
     <div class="main-content">
@@ -345,7 +368,7 @@
           </div>
         </form>
         <div id="result1" style="margin-top: 20px;"></div>
-        <button onclick="checkAnswers()">回答チェック</button>
+        <button onclick="window.checkAnswer()">回答チェック</button>
 
         <h3>2.LEDを点灯させるプログラムを完成させて下さい。</h3>
         <div class="app-container" id="simulator">
@@ -395,7 +418,7 @@
           let que1 = false;
           let que2 = false;
 
-          function checkAnswers() {
+          function checkAnswer() {
             // 各問題の正解インデックス（0始まり）
             const correct = {
               q1: [1], // Q1は2番目（index:1）が正解

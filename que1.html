@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CERnXKpw.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-EwBuZKIb.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-D3IAKssS.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-Cty1drqg.css">
 </head>
 
 <body>
@@ -14,68 +14,62 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">1-1:
-          マイコンとは何か</a>
-        <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">1-2:
-          マイコンを動かすには</a>
-        <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">1-3:
-          マイコンの機能</a>
-        <a href="#" class="page-link" data-to="page5" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">1-4:
-          プログラムの書き方</a>
-        <a href="#" class="page-link" data-to="page6" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">1-5:
-          まとめ</a>
-        <a href="#" class="page-link" data-to="page7" data-editor="#editor1" data-run="run-button1"
-          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" style="color: #fff; text-decoration: none; font-weight: bold;">1-6:
-          確認問題</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='howtouse.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold; font-size: 25px;">1章</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-1:
+            マイコンとは何か</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-2:
+            マイコンを動かすには</a>
+          <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-3:
+            マイコンの機能</a>
+          <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-4:
+            プログラムの書き方</a>
+          <a href="#" class="page-link" data-to="page5" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-5:
+            まとめ</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-6:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-7:
+            おまけ</a>
+        </div>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ</a>
+        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
+          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
       </nav>
     </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
-        <h2>この教材の使い方</h2>
-        <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
-        <div
-          style="position: relative; width: 800px; height: 820px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-          <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-DVSez33b.jpg" alt="GPIO" style="display: block;">
-          <svg style="position: absolute; left: 0; top: 0; width: 120%; height: 120%; pointer-events: none;">
-            <rect x="149" y="30" width="476" height="400" fill="none" stroke="red" stroke-width="3" />
-            <rect x="149" y="455" width="85" height="25" fill="none" stroke="blue" stroke-width="3" />
-            <rect x="149" y="483" width="500" height="300" fill="none" stroke="green" stroke-width="3" />
-            <text x="320" y="25" fill="red" font-size="24" font-weight="bold">マイコンと部品</text>
-            <text x="250" y="475" fill="blue" font-size="24" font-weight="bold">Runボタン・Stopボタン</text>
-            <text x="320" y="810" fill="green" font-size="24" font-weight="bold">コードエディタ</text>
-          </svg>
-        </div>
-        <ul>
-          <li><b>マイコンと部品</b>：プログラムを実行すると、マイコンに接続されている部品が動作します。</li>
-          <li><b>Runボタン・Stopボタン</b>：プログラムを実行するときはRunボタン、止めるときはStopボタンを押します。</li>
-          ※環境によってはプログラムの実行までに時間がかかる場合があります。
-          <li><b>コードエディタ</b>：プログラムを書く場所です。</li>
-        </ul>
-        <p>この教材の流れは、以下のようになります。</p>
-        <ul>
-          <li><b>第1章：マイコンとは何か</b></li>
-          <li><b>第2章：この教材の使い方</b>←現在の章</li>
-          <li><b>第3章：LED点灯</b></li>
-          <li><b>第4章：さらに応用的な内容を学ぶ</b></li>
-        </ul>
-
-        <p><b>「次の章へ」ボタンを押して次の章へ進みましょう！</b></p>
-        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
-      </div>
-      <div id="page2" style="display:none;">
         <h2>第１章　マイコンとは何か</h2>
         <div class="blue-point-box">
           <h3>1. マイコンとは</h3>
@@ -135,17 +129,13 @@
           <div id='test-output'>
             <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
               <p>LEDが点灯しました！次のページへ進みましょう。</p>
-              <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1"
+              <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1"
                 data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-                data-error="error-output-text1">前のページへ</button>
-              <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1"
-                data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-                data-error="error-output-text1">次のページへ</button>
+                data-error="error-output-text1" onclick="markPageReached(1);">次のページへ</button>
             </div>
           </div>
-        </div>
+        </div>
         <script>
-          const readOnly = false; // 初期状態では読み取り専用
           const nextpageGuide = document.getElementById('nextpage-guide');
           const led = document.querySelector('wokwi-led[pin="7"]');
           let isAnswered = false; // 正解フラグ
@@ -159,7 +149,7 @@
           }, 10);
         </script>
       </div>
-      <div id="page3" style="display:none;">
+      <div id="page2" style="display:none;">
         <div class="blue-point-box">
           <h3>2. マイコンを動かすには</h3>
           <p>Arduinoを動かすためには、プログラムを書いてArduinoに書き込む必要があります。</p>
@@ -198,14 +188,15 @@
           </ul>
           <p>これらの関数の中にプログラムを書き込むことで、LEDやモーターなどを制御できます。</p>
         </div>
-        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(2);">次のページへ</button>
       </div>
-      <div id="page4" style="display:none;">
+
+      <div id="page3" style="display:none;">
         <div class="blue-point-box">
           <h3>3. マイコンの機能</h3>
           <p>Arduinoには<b>GPIO</b>と呼ばれるピンが複数あります。</p>
@@ -251,14 +242,14 @@
           <p>pinMode関数の場合、引数には<b>ピン番号</b>と<b>モード</b>を指定します。</p>
           <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
         </div>
-        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button class="page-nav" data-to="page5" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+          data-error="error-output-text1" onclick="markPageReached(3);">次のページへ</button>
       </div>
-      <div id="page5" style="display:none;">
+      <div id="page4" style="display:none;">
         <div class="blue-point-box">
           <h3>4. 基本的なプログラムの書き方</h3>
           <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
@@ -296,14 +287,14 @@ digitalWrite(3, HIGH);</code></pre>
       </pre>
           <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
         </div>
-        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button class="page-nav" data-to="page6" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+        <button class="page-nav" data-to="page5" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+          data-error="error-output-text1" onclick="markPageReached(4);">次のページへ</button>
       </div>
-      <div id="page6" style="display:none;">
+      <div id="page5" style="display:none;">
         <div class="blue-point-box">
           <h3>5. まとめ</h3>
           <h3>マイコンとは何か</h3>
@@ -381,14 +372,14 @@ digitalWrite(3, HIGH);</code></pre>
           </ul>
         </div>
         <p>この章の内容をしっかり復習し、確認問題へ進みましょう！</p>
-        <button class="page-nav" data-to="page5" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button class="page-nav" data-to="page7" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" onclick="markPageReached(5);">次のページへ</button>
       </div>
-      <div id="page7" style="display:none;">
+      <div id="pageTest" style="display:none;">
         <h2>確認問題</h2>
         <h2>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。</h2>
 
@@ -460,15 +451,15 @@ digitalWrite(3, HIGH);</code></pre>
         <form name="q5">
           <div class="form-row">
             <input type="radio" name="q5" value="1">
-            <label>digitalWrite</label>
+            <label>digitalWrite関数</label>
           </div>
           <div class="form-row">
             <input type="radio" name="q5" value="2">
-            <label>pinMode</label>
+            <label>pinMode関数</label>
           </div>
           <div class="form-row">
             <input type="radio" name="q5" value="3">
-            <label>analogRead</label>
+            <label>analogRead関数</label>
           </div>
         </form>
         <p><b>Q6. pinMode(7, OUTPUT); の説明として正しいものはどれですか？</b></p>
@@ -517,15 +508,16 @@ digitalWrite(3, HIGH);</code></pre>
           </div>
         </form>
         <div id="result1" style="margin-top: 20px;"></div>
-        <button onclick="checkAnswers()">回答チェック</button>
+        <button onclick="checkAnswer()">回答チェック</button>
         <p></p>
-        <button class="page-nav" data-from="page7" data-to="page6" data-editor="#editor1" data-run="run-button1"
+        <button class="page-nav" data-to="page5" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor1" data-run="run-button1"
           data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" data-code="page1">前のページへ</button>
-
-        <button id="nextpage-btn" onclick="window.location.href='que2.html'" style="display:none;">次の章へ</button>
+          data-error="error-output-text1" style="display:none;" id="topageOmake" onclick="markPageReached(6);">次のページへ</button>
         <script>
-          function checkAnswers() {
+          function checkAnswer() {
             // 各問題の正解インデックス（0始まり）
             const correct = {
               q1: [1], // Q1は2番目（index:1）が正解
@@ -556,7 +548,7 @@ digitalWrite(3, HIGH);</code></pre>
             html = html.trim();
             if (results.every(r => r === "○")) {
               html += '<br><span style="color:green;font-weight:bold;">全問正解です！次の章に進みましょう！</span>';
-              document.getElementById('nextpage-btn').style.display = "inline";
+              document.getElementById('topageOmake').style.display = 'inline';
             } else {
               html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
             }
@@ -564,12 +556,74 @@ digitalWrite(3, HIGH);</code></pre>
           }
         </script>
       </div>
+      <div id="pageOmake" style="display:none;">
+        <h2>1章おまけ：ブレッドボード</h2>
+        <div class="blue-point-box">
+          <p>1章の最初のページで、Arduinoの近くに下のようなものがあったと思います。</p>
+          <div class="app-container">
+            <div class="leds-circuit" style="position: relative; width: 100%; height: 300px; margin: 0 auto;">
+              <my-breadboard style="display:block; margin: 0 auto;"></my-breadboard>
+            </div>
+          </div>
+          <p>これは <b>ブレッドボード</b> と呼ばれる、多数の穴が開いた基板です。</p>
+          <p><span
+              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">ブレッドボードには規則的に配置された穴があり、<br>部品やワイヤーを差し込むことで簡単に電子回路を作成することができます。</span>
+          </p>
+
+        </div>
+        <div class="green-point-box">
+          <h3>ブレッドボードの内部構造</h3>
+          <p>ブレッドボードの穴はすべてが独立しているわけではなく、内部では次のようにつながっています。</p>
+          <div class="app-container">
+            <!-- wokwiオブジェクト部分はそのまま -->
+            <div class="leds-circuit" style="position: relative; width: 500px; height: 300px; margin: 0 auto;">
+              <my-breadboard2 style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard2>
+            </div>
+          </div>
+          <h3>電源ライン</h3>
+          <p>ブレッドボードの両端にある赤と青でつながっている部分は<b>電源ライン</b>と呼ばれ、横方向に内部でつながっています。</p>
+          <p>電源ラインには、電源およびGND（グランド）を接続します。</p>
+          <p>多くのブレッドボードでは、＋が電源、−が GND を表していますが、<br>
+            <span
+              style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">実際の電圧が自動的に供給されるわけではありません。
+              必ずマイコンや電源装置から配線する必要があります。
+          </p>
+          <h3>部品エリア</h3>
+          <p>ブレッドボードの中央にある水色でつながっている部分は部品エリアと呼ばれ、縦方向に内部でつながっています。</p>
+          <p>電源ラインとは違い、中央に溝があります。この溝を越えた穴どうしはつながっていません。</p>
+          <P>部品エリアには、LED、抵抗、センサなどの部品を接続します。</P>
+        </div>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+
+        <button id="nextpage-btn" onclick="window.location.href='que2.html'">次の章へ</button>
+      </div>
     </div>
     <div class="sidebar"></div>
-  </div>
-
+  </div>
   <script>
+    const readOnly = false;
     let selected_editor = '#editor1';
+
+    // ページ到達状況を管理（例：最初のページだけ到達済み）
+    let reachedPages = [true, false, false, false, false, false, false];
+
+    // ページリンクを取得
+    const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+    function updateSidebarLinks() {
+      pageLinks.forEach((link, idx) => {
+        link.style.display = reachedPages[idx] ? 'block' : 'none';
+      });
+    }
+    // ページ到達時に呼び出す
+    function markPageReached(pageIdx) {
+      reachedPages[pageIdx] = true;
+      updateSidebarLinks();
+    }
+    // 初期化
+    updateSidebarLinks();
+
     // 共通ページ切り替え関数
     function showPage(toPage, btn) {
       // すべてのページを非表示
@@ -607,13 +661,12 @@ digitalWrite(3, HIGH);</code></pre>
       });
     });
     const PAGE_CODES = {
-      page2: `
-int ledPin = 7;
+      page1: `
 void setup() {
-    pinMode(ledPin, OUTPUT);             
+    pinMode(7, OUTPUT);             
 }
 void loop() {
-    digitalWrite(ledPin, HIGH); 
+    digitalWrite(7, HIGH); 
 }
 `.trim(),
     };
