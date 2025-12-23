@@ -655,9 +655,13 @@
         </script>
 
       </div>
-      <button id="tofinal" onclick="window.location.href='final.html'" style="display: none; display: block; margin: 0 auto;">次の章へ</button>
+      <div id="clear" style="display:none;">
+        <h2>全問正解です！おめでとうございます！</h2>
+        <button id="tofinal" onclick="window.location.href='final.html'">次の章へ</button>
+      </div>
     </div>
-    <div class="sidebar"></div>
+    <div class=" sidebar">
+    </div>
   </div>
 
 </body>
@@ -777,12 +781,12 @@ void loop() {
     });
   });
 
-  const nextpagebtn = document.getElementById('tofinal');
   setInterval(() => {
-    console.log('チェック中:', que1, que2, que3, que4);
-    if (nextpagebtn.style.display!='none') return;
+    // console.log('チェック中:', que1, que2, que3, que4);
     if (que1 && que2 && que3 && que4) {
-      nextpagebtn.style.display = 'block';
+      // すべて正解したらid=clearのページを表示
+      const clearDiv = document.getElementById('clear');
+      if (clearDiv) clearDiv.style.display = 'block';
     }
   }, 100);
 </script>
