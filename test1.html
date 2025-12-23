@@ -166,12 +166,10 @@
           };
 
           const led = document.querySelector('wokwi-led[pin="7"]');
-          let isAnswered = false; // 正解フラグ
           setInterval(() => {
-            if (isAnswered) return;
+            if (que1) return;
             const isLedOn = led && led.value === true;
             if (isLedOn) {
-              isAnswered = true;
               document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
             if (result1_1 && result1_2 && result1_1.textContent != "" && result1_2.textContent != "") {
@@ -308,6 +306,7 @@
           let que2led = false;
 
           setInterval(() => {
+            if (que2) return;
             const value = LED7.value;
             if (!prevValue && value) {
               // 消灯→点灯の瞬間だけ一度だけ表示
@@ -517,7 +516,7 @@
           seg = document.querySelector('wokwi-7segment[id="segment"]');
           const segAns1 = [1, 1, 0, 1, 1, 0, 1, 0];
           setInterval(() => {
-            if(que3) return;
+            if (que3) return;
             if (JSON.stringify(seg.values) === JSON.stringify(segAns1)) {
               document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
@@ -568,10 +567,6 @@
         <button class="page-nav" data-to="page3" data-editor="#editor3" data-run="run-button3" data-stop="stop-button3"
           data-status="status-label3" data-compiler="compiler-output-text3" data-error="error-output-text3"
           data-serial="serial-monitor-text3">前のページへ</button>
-
-        <button class="page-nav" data-to="page4" data-editor="#editor4" data-run="run-button4" data-stop="stop-button4"
-          data-status="status-label4" data-compiler="compiler-output-text4" data-error="error-output-text4"
-          data-serial="serial-monitor-text4">次のページへ</button>
         <script>
           const result4_1 = document.getElementById('result4-1');
           const result4_2 = document.getElementById('result4-2');
@@ -646,10 +641,9 @@
           const correctSerial2 = ("1\r\n2\r\n3\r\n1\r\n2\r\n3\r\n");
 
           setInterval(() => {
-            if(que4) return;
+            if (que4) return;
             const serialText = document.getElementById('serial-monitor-text4')?.textContent;
             if (serialText && (serialText.includes(correctSerial1) || serialText.includes(correctSerial2))) {
-              console.log('Helloが表示されています');
               document.getElementById('result4-2').textContent = "正解です！";
               document.getElementById('result4-2').style.color = "green";
             }
@@ -661,7 +655,7 @@
         </script>
 
       </div>
-
+      <button id="tofinal" onclick="window.location.href='final.html'" style="display: none; display: block; margin: 0 auto;">次の章へ</button>
     </div>
     <div class="sidebar"></div>
   </div>
@@ -782,6 +776,15 @@ void loop() {
       }
     });
   });
+
+  const nextpagebtn = document.getElementById('tofinal');
+  setInterval(() => {
+    console.log('チェック中:', que1, que2, que3, que4);
+    if (nextpagebtn.style.display!='none') return;
+    if (que1 && que2 && que3 && que4) {
+      nextpagebtn.style.display = 'block';
+    }
+  }, 100);
 </script>
 
 </html>
