@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>test</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-D3IAKssS.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-Cty1drqg.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
 </head>
 
 <body>
@@ -33,22 +33,22 @@
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
             data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
             data-error="error-output-text1" data-serial="serial-monitor-text1"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ1:
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ1
           </a>
           <a href="#" class="page-link" data-to="page2" data-editor="#editor2" data-run="run-button2"
             data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
             data-error="error-output-text2" data-serial="serial-monitor-text2"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ2:
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ2
           </a>
           <a href="#" class="page-link" data-to="page3" data-editor="#editor3" data-run="run-button3"
             data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
             data-error="error-output-text3" data-serial="serial-monitor-text3"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ3:
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ3
           </a>
           <a href="#" class="page-link" data-to="page4" data-editor="#editor4" data-run="run-button4"
             data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
             data-error="error-output-text4" data-serial="serial-monitor-text4"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ4:
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ4
           </a>
         </div>
       </nav>
@@ -94,6 +94,9 @@
           data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
           data-serial="serial-monitor-text2">次のページへ</button>
         <script>
+          const result1_1 = document.getElementById('result1-1');
+          const result1_2 = document.getElementById('result1-2');
+          let que1 = false;
           const questions1 = [
             {
               text: "Q1. マイコンの説明として正しいものはどれですか？",
@@ -171,6 +174,10 @@
               isAnswered = true;
               document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
+            if (result1_1 && result1_2 && result1_1.textContent != "" && result1_2.textContent != "") {
+              console.log("全問正解");
+              que1 = true;
+            }
           }, 10);
         </script>
       </div>
@@ -220,6 +227,10 @@
           data-status="status-label3" data-compiler="compiler-output-text3" data-error="error-output-text3"
           data-serial="serial-monitor-text3">次のページへ</button>
         <script>
+          const result2_1 = document.getElementById('result2-1');
+          const result2_2 = document.getElementById('result2-2');
+          let que2 = false;
+
           const statusLabel = document.getElementById('status-label2');
           const LED7 = document.querySelector('wokwi-led[pin="7"][id="test-led2"]');
           let prevValue = LED7.value;
@@ -329,11 +340,10 @@
             }
 
             prevValue = value;
-
-            // if (que1 && que2) {
-            //   document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-            //   document.getElementById('pageOmake').style.display = 'inline';
-            // }
+            if (result2_1 && result2_2 && result2_1.textContent != "" && result2_2.textContent != "") {
+              console.log("全問正解");
+              que2 = true;
+            }
           }, 10);
 
         </script>
@@ -435,6 +445,9 @@
           data-status="status-label4" data-compiler="compiler-output-text4" data-error="error-output-text4"
           data-serial="serial-monitor-text4">次のページへ</button>
         <script>
+          const result3_1 = document.getElementById('result3-1');
+          const result3_2 = document.getElementById('result3-2');
+          let que3 = false;
           const questions3 = [
             {
               text: "Q13. Arduino のプログラムで命令文の最後に必ずつける記号はどれですか？",
@@ -504,13 +517,14 @@
           seg = document.querySelector('wokwi-7segment[id="segment"]');
           const segAns1 = [1, 1, 0, 1, 1, 0, 1, 0];
           setInterval(() => {
+            if(que3) return;
             if (JSON.stringify(seg.values) === JSON.stringify(segAns1)) {
               document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
-            // if (que1 && que2) {
-            //   // document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-            //   // document.getElementById('pageOmake').style.display = 'inline';
-            // }
+            if (result3_1 && result3_2 && result3_1.textContent != "" && result3_2.textContent != "") {
+              console.log("全問正解");
+              que3 = true;
+            }
           }, 100);
 
         </script>
@@ -520,7 +534,7 @@
         <div id="question-area4"></div>
         <div id="result4-1" style="margin-bottom:24px;"></div>
         <button type="button" onclick="window.checkAnswers(correct4,'result4-1')">回答チェック</button>
-        <p><b>Q18. シリアルモニタに1,2,3と順番に表示するプログラムを作成してください。</b></p>
+        <p><b>Q18. シリアルモニタに、0.1秒ごとに「1、2、3」を順番に表示するプログラムを作成してください。</b></p>
         <div class="app-container">
           <div class="editor-container" style="width: 900px; height: 350px; display: flex;">
             <div class="code-editor-container" style="width: 500px; height: 300px;">
@@ -551,7 +565,17 @@
           </div>
           <div id="result4-2" style="margin-bottom:24px;"></div>
         </div>
+        <button class="page-nav" data-to="page3" data-editor="#editor3" data-run="run-button3" data-stop="stop-button3"
+          data-status="status-label3" data-compiler="compiler-output-text3" data-error="error-output-text3"
+          data-serial="serial-monitor-text3">前のページへ</button>
+
+        <button class="page-nav" data-to="page4" data-editor="#editor4" data-run="run-button4" data-stop="stop-button4"
+          data-status="status-label4" data-compiler="compiler-output-text4" data-error="error-output-text4"
+          data-serial="serial-monitor-text4">次のページへ</button>
         <script>
+          const result4_1 = document.getElementById('result4-1');
+          const result4_2 = document.getElementById('result4-2');
+          let que4 = false;
           const questions4 = [
             {
               text: "Q19. analogWriteでLEDを制御するとき、255を指定するとどうなりますか？",
@@ -622,11 +646,16 @@
           const correctSerial2 = ("1\r\n2\r\n3\r\n1\r\n2\r\n3\r\n");
 
           setInterval(() => {
+            if(que4) return;
             const serialText = document.getElementById('serial-monitor-text4')?.textContent;
             if (serialText && (serialText.includes(correctSerial1) || serialText.includes(correctSerial2))) {
               console.log('Helloが表示されています');
               document.getElementById('result4-2').textContent = "正解です！";
               document.getElementById('result4-2').style.color = "green";
+            }
+            if (result4_1 && result4_2 && result4_1.textContent != "" && result4_2.textContent != "") {
+              console.log("全問正解");
+              que4 = true;
             }
           }, 100);
         </script>

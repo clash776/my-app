@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>delay関数</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-D3IAKssS.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-Cty1drqg.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
 </head>
 
 <body>
@@ -39,21 +39,6 @@
             data-error="error-output-text2"
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-3:
             確認問題</a>
-          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
-            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-            data-error="error-output-text3"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-4:
-            おまけ</a>
-          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
-            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
-            data-error="error-output-text2"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-5:
-            おまけ</a>
-          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
-            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-            data-error="error-output-text3"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-6:
-            おまけ</a>
         </div>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">5章へ</a>
@@ -270,9 +255,7 @@
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button class="page-nav" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
-          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3" style="display:none;" id="pageOmake">次のページへ</button>
+        <button id="tochap5-btn" onclick="window.location.href='que5.html'" style="display:none;">次の章へ</button>
         <script>
           const statusLabel = document.getElementById('status-label2');
           const LED7 = document.querySelector('wokwi-led[pin="7"]');
@@ -350,7 +333,6 @@
             if (que2code && que2led) {
               document.getElementById('result2').textContent = "正解です！";
               document.getElementById('result2').style.color = "green";
-              document.getElementById('pageOmake').style.display = 'inline';
               que2 = true;
             }
 
@@ -358,14 +340,10 @@
 
             if (que1 && que2) {
               document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-              document.getElementById('pageOmake').style.display = 'inline';
+              document.getElementById('tochap5-btn').style.display = 'inline';
             }
           }, 10);
         </script>
-      </div>
-      <div id="page3" style="display:none;">
-
-        <button id="toPage2from3">前のページへ</button>
       </div>
     </div>
     <div class="sidebar"></div>
@@ -420,7 +398,6 @@ void loop() {
     delay(200);
     digitalWrite(7,LOW);
     delay(200);
-    
 }
 `.trim(),
 
@@ -433,11 +410,7 @@ void loop() {
     delay(100);
     digitalWrite(7,LOW);
     delay(100);
-    
 }
-`.trim(),
-    pageOmake: `
-
 `.trim(),
   };
 

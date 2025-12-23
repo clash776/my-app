@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-D3IAKssS.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-Cty1drqg.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
 </head>
 
 <body>
@@ -351,10 +351,8 @@
         <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
           data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
           data-serial="serial-monitor-text2">前のページへ</button>
-        <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
-          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
-          data-error="error-output-text4" data-serial="serial-monitor-text4" style="display:none;"
-          id="toPageOmake">次のページへ</button>
+        <button id="tochaptest-btn" onclick="window.location.href='test1.html'" style="display:none;">次の章へ</button>
+
         <script>
           const statusLabel = document.getElementById('status-label3');
           const LED7 = document.querySelector('wokwi-led[pin="3"]');
@@ -449,12 +447,10 @@
             }
             if (que1 && que2) {
               document.getElementById('result4').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-              document.getElementById('toPageOmake').style.display = "inline-block";
+              document.getElementById('tochaptest-btn').style.display = "inline-block";
             }
             prevValue = value;
           }, 10);
-
-
         </script>
       </div>
     </div>
