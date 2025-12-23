@@ -14,7 +14,7 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='howtouse.html'"
+        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">1章へ</a>
@@ -89,7 +89,7 @@
         </div>
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+          data-error="error-output-text1" onclick="markPageReached(1);">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -134,7 +134,7 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+          data-error="error-output-text1" onclick="markPageReached(2);">次のページへ</button>
       </div>
       <div id="page3" style="display:none;">
         <div class="blue-point-box">
@@ -173,7 +173,7 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+          data-error="error-output-text1" onclick="markPageReached(3);">次のページへ</button>
       </div>
 
       <div id="page4" style="display:none;">
@@ -240,7 +240,7 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
           data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
-          data-error="error-output-text2">次のページへ</button>
+          data-error="error-output-text2" onclick="markPageReached(4);">次のページへ</button>
       </div>
       <div id="pageTest" style="display:none;">
         <h2>確認問題</h2>
@@ -411,7 +411,7 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3" style="display:none;" id="pageOmake">次のページへ</button>
+          data-error="error-output-text3" style="display:none;" id="pageOmake" onclick="markPageReached(5);">次のページへ</button>
 
         <script>
           const testLed = document.querySelector('#pageTest wokwi-led[pin="3"]');
@@ -563,6 +563,26 @@
   <script>
     const readOnly = false;
     let selected_editor = '#editor1';
+        // ページ到達状況を管理（例：最初のページだけ到達済み）
+    let reachedPages2 = JSON.parse(localStorage.getItem('reachedPages2')) || [true, false, false, false, false, false, false];
+    // ページリンクを取得
+    const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+    function updateSidebarLinks() {
+      console.log('Updating sidebar links with reachedPages2:', reachedPages2);
+      pageLinks.forEach((link, idx) => {
+        link.style.display = reachedPages2[idx] ? 'block' : 'none';
+      });
+    }
+    // ページ到達時に呼び出す
+    function markPageReached(pageIdx) {
+      reachedPages2[pageIdx] = true;
+      localStorage.setItem('reachedPages2', JSON.stringify(reachedPages2));
+      updateSidebarLinks();
+    }
+
+    // 初期化
+    updateSidebarLinks();
+
     // 共通ページ切り替え関数
     function showPage(toPage, btn) {
       // すべてのページを非表示

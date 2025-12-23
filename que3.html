@@ -14,7 +14,7 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='howtouse.html'"
+        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">1章へ</a>
@@ -828,6 +828,26 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
+  let reachedPages3 = JSON.parse(localStorage.getItem('reachedPages3')) || [true, false, false, false, false, false, false];
+  // ページリンクを取得
+  const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+  function updateSidebarLinks() {
+    console.log('Updating sidebar links with reachedPages3:', reachedPages3);
+    pageLinks.forEach((link, idx) => {
+      link.style.display = reachedPages3[idx] ? 'block' : 'none';
+    });
+  }
+  // ページ到達時に呼び出す
+  function markPageReached(pageIdx) {
+    reachedPages3[pageIdx] = true;
+    localStorage.setItem('reachedPages3', JSON.stringify(reachedPages3));
+    updateSidebarLinks();
+  }
+
+  // 初期化
+  updateSidebarLinks();
+
   // 共通ページ切り替え関数
   function showPage(toPage, btn) {
     // すべてのページを非表示
