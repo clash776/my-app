@@ -17,23 +17,23 @@
         <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ<br>複雑なLED機器の制御</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ</a>
-        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">5章</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ<br>delay関数</a>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">5章<br>PWM制御</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width:240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
             data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
             data-error="error-output-text1"
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-1:
             PWM制御</a>
-          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
-            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
-            data-error="error-output-text1"
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2"
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-2:
             PWM制御の概要</a>
           <a href="#" class="page-link" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
@@ -41,9 +41,14 @@
             data-error="error-output-text3"
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-3:
             確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+            data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+            data-error="error-output-text4"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-4:
+            おまけ</a>
         </div>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ<br>シリアルモニタ</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
       </nav>
@@ -87,8 +92,8 @@
         </div>
         <p>今回のプログラムでは、11番ピンをPWM出力用として設定し、LEDの明るさを段階的に変化させています。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
-          data-status="status-label2" data-compiler="compiler-output-text2"
-          data-error="error-output-text2">次のページへ</button>
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          onclick="markPageReached(1);">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -159,7 +164,7 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3">次のページへ</button>
+          data-error="error-output-text3" onclick="markPageReached(2);">次のページへ</button>
       </div>
       <div id="pageTest" style="display:none;">
         <h3>第5章　PWM制御　確認問題</h3>
@@ -280,7 +285,10 @@
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button id="tochap6-btn" onclick="window.location.href='que6.html'" style="display:none;">次の章へ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+          data-error="error-output-text4" id="topageOmake" style="display:none;"
+          onclick="markPageReached(3);">次のページへ</button>
         <script>
           let que1 = false;
           let que2 = false;
@@ -378,11 +386,131 @@
             }
             if (que1 && que2) {
               document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-              document.getElementById('tochap6-btn').style.display = 'inline';
+              document.getElementById('topageOmake').style.display = 'inline';
             }
           }, 10);
 
         </script>
+      </div>
+      <div id="pageOmake" style="display:none;">
+        <h2>5章おまけ：条件分岐</h2>
+        <p>5章の内容からは外れてしまいますが、おまけとしてボタンを押したらLEDが点灯するプログラムを紹介します。</p>
+        <p>下のプログラムを実行してボタンを押してみましょう。</p>
+        <div class="app-container" id="simulator">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="3"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
+            <svg width="500" height="550" style="position: absolute; left: 0; top: 0;">
+              <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
+              <line x1="278" y1="208" x2="338" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="270" stroke="black" stroke-width="3" />
+              <line x1="212" y1="268" x2="227" y2="310" stroke="black" stroke-width="3" />
+              <line x1="353" y1="224" x2="347" y2="310" stroke="green" stroke-width="3" />
+              <line x1="367" y1="115" x2="400" y2="115" stroke="black" stroke-width="3" />
+              <line x1="398" y1="115" x2="393" y2="270" stroke="black" stroke-width="3" />
+            </svg>
+            <wokwi-pushbutton id="circuit-button" pin="2"
+              style="position: absolute; left: 325px; top: 130px; transform: rotate(90deg) scale(0.8);"></wokwi-pushbutton>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button4">Run</button>
+            <button id="stop-button4" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label4"></div>
+          </div>
+          <div class="code-editor" id="editor4"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text4"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text4"></pre>
+          </div>
+        </div>
+        <div class="blue-point-box">
+          <h3><b>ボタン(タクトスイッチ)について</b></h3>
+          <p>ボタンには4本のピンが付いていますが、実際には<b>2組のピンが内部でつながっている構造</b>になっています。</p>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 200px; margin: 0 auto;">
+            <wokwi-pushbutton values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="transform: scale(1.5); margin: 0 auto;"></wokwi-pushbutton>
+            <svg width="500" height="200" style="position: absolute; left: 0; top: 0;">
+              <line x1="200" y1="55" x2="300" y2="55" stroke="black" stroke-width="4" />
+              <line x1="200" y1="140" x2="300" y2="140" stroke="black" stroke-width="4" />
+              <line x1="190" y1="70" x2="190" y2="125" stroke="red" stroke-width="4" />
+              <line x1="310" y1="70" x2="310" y2="125" stroke="red" stroke-width="4" />
+              <text x="192" y="45" font-size="15" font-weight="bold" fill="black">つながっていない</text>
+              <text x="192" y="160" font-size="15" font-weight="bold" fill="black">つながっていない</text>
+              <text x="80" y="105" font-size="15" font-weight="bold" fill="red">つながっている</text>
+              <text x="320" y="105" font-size="15" font-weight="bold" fill="red">つながっている</text>
+            </svg>
+          </div>
+          <p>上の図のように<b>隣同士のピンはつながっていますが、向かい側のピンはつながっていません。</b></p>
+          <p>ボタンを押すと、<b>向かい側のピンどうしもつながる</b>仕組みになっています。</p>
+          <p>そのため、<b><span style="color:#d84315;">ボタンが押されたときに処理を変える</span></b>ことが可能になります。</p>
+        </div>
+        <div class="orange-point-box">
+          <h3>ボタンを押したらLEDが点灯する</h3>
+          <p><b
+              style="background: #ffe0b2;padding: 2px 6px; border-radius: 4px;">条件分岐</b>を使うと、状況に応じてプログラムの動作を変えることができます。
+          </p>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <b>条件分岐を行うときには <span style="color:#d84315;">if文</span> を使います。</b><br>
+            if文を使うときは、次のように記述します。
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>if (条件) {処理1;} else {処理2;}</code></pre>
+            <p style="margin-top:8px;">if文は<b>条件を満たしている場合、処理1を実行し、条件を満たしていない場合、処理2を実行</b>します。</p>
+            <p>※else以降は省略可能なので、記述しなくても問題ありません。</p>
+            <ul>
+              <li>if (btn == HIGH) { ... } で「ボタンが押されたとき」だけLEDを点灯します。</li>
+              <li>else を使うと「押されていないとき」の動作も指定できます。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="green-point-box">
+          <h3>ボタンを押したときの処理</h3>
+          <p>ボタンを押したときに処理を変えるには<b>ピンの入力を読み取る必要があります。</b></p>
+          <p>ピンの入力を読み取るには、<b>pinMode関数(INPUT)</b>と<b>digitalRead関数</b>を使います。</p>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <p><b>pinMode関数(INPUT)</b></p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>pinMode(ピン番号, INPUT);</code></pre>
+            <p style="margin-top:8px;">ピン番号に対応するピンを入力ピンとして設定します。</p>
+            <p><b>digitalRead関数</b></p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>digitalRead(ピン番号);</code></pre>
+            <p>ピン番号に対応するピンの入力を読み取って、その値(HIGHまたはLOW)を返します。</p>
+            <p>例：入力ピンにGNDが接続されている場合LOW、5Vが接続されている場合HIGHを返します。</p>
+          </div>
+        </div>
+        <p>プログラムの説明が多くなってしまいましたが、上のプログラムは以下のようになっています。</p>
+        <ol style="background: #e3f2fd;">
+          <li><b>ボタンが押される</b></li>
+          <li><b>つながっていなかったピンどうしがつながる</b></li>
+          <li><b>入力ピン(2番ピン)とGNDがつながる</b></li>
+          <li><b>digitalRead(2)=LOWとなり、if文の条件を満たす</b></li>
+          <li><b>if文の処理1が実行され、3番ピンがHIGHになり、LEDが点灯する。</b></li>
+        </ol>
+        <div class="blue-point-box">
+          <h3>条件分岐の応用例</h3>
+          <ul>
+            <li>センサー値が一定以上ならLEDを点灯</li>
+            <li>ボタンが押されたらモーターを動かす</li>
+            <li>温度が高いときだけファンを回す</li>
+          </ul>
+          <p>if文を使うことで、より賢い電子工作が作れます！</p>
+        </div>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3">前のページへ</button>
+        <button id="tochap6-btn" onclick="window.location.href='que6.html'">次の章へ</button>
       </div>
     </div>
     <div class="sidebar"></div>
@@ -391,6 +519,25 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
+  let reachedPages5 = JSON.parse(localStorage.getItem('reachedPages5')) || [true, false, false, false, false, false, false];
+  // ページリンクを取得
+  const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+  function updateSidebarLinks() {
+    console.log('Updating sidebar links with reachedPages5:', reachedPages5);
+    pageLinks.forEach((link, idx) => {
+      link.style.display = reachedPages5[idx] ? 'block' : 'none';
+    });
+  }
+  // ページ到達時に呼び出す
+  function markPageReached(pageIdx) {
+    reachedPages5[pageIdx] = true;
+    localStorage.setItem('reachedPages5', JSON.stringify(reachedPages5));
+    updateSidebarLinks();
+  }
+
+  // 初期化
+  updateSidebarLinks();
   function showPage(toPage, btn) {
     // すべてのページを非表示
     document.querySelectorAll('[id^="page"]').forEach(div => {
@@ -464,7 +611,18 @@ void loop() {
 }
 `.trim(),
     pageOmake: `
-
+void setup() {
+  pinMode(2, INPUT);   // ボタン用ピン
+  pinMode(3, OUTPUT); // LED用ピン
+}
+void loop() {
+ // ボタンの状態を読む
+  if (digitalRead(2) == LOW) {
+    digitalWrite(3, HIGH); // ボタンが押されたらLED点灯
+  } else {
+    digitalWrite(3, LOW);  // 押されていなければ消灯
+  }
+}
 `.trim(),
   };
 

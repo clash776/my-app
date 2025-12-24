@@ -17,12 +17,12 @@
         <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ</a>
-        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">4章</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ<br>複雑なLED機器の制御</a>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">4章<br>delay関数</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
             data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
@@ -39,17 +39,22 @@
             data-error="error-output-text2"
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-3:
             確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-4:
+            おまけ</a>
         </div>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ<br>PWM制御</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ</a>
+          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ<br>シリアルモニタ</a>
         <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
           style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
       </nav>
     </div>
     <div class="main-content">
-      <div id="page1" style="display:block;">
+      <div id="page1" style="display: block;">
         <h2>第4章　delay関数</h2>
         <p>この章では<b>delay関数</b>の使い方について学びます。</p>
         <p>まずは、プログラムを動作させてみましょう。</p>
@@ -89,8 +94,8 @@
         <p>delay関数の中の数字を変更することで、LEDの点灯・消灯の長さを変えることが出来ます。</p>
         <p>補足：※delay() の時間はミリ秒（ms）で指定します。<br>1000 ms = 1 秒、100 ms = 0.1 秒です。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">次のページへ</button>
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(1);">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -148,7 +153,7 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
           data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
-          data-error="error-output-text2">次のページへ</button>
+          data-error="error-output-text2" onclick="markPageReached(2);">次のページへ</button>
       </div>
       <div id="pageTest" style="display:none;">
         <h3>第4章　delay関数　確認問題</h3>
@@ -255,7 +260,10 @@
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
-        <button id="tochap5-btn" onclick="window.location.href='que5.html'" style="display:none;">次の章へ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" id="topageOmake" style="display:none;"
+          onclick="markPageReached(3);">次のページへ</button>
         <script>
           const statusLabel = document.getElementById('status-label2');
           const LED7 = document.querySelector('wokwi-led[pin="7"]');
@@ -340,10 +348,103 @@
 
             if (que1 && que2) {
               document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
-              document.getElementById('tochap5-btn').style.display = 'inline';
+              document.getElementById('topageOmake').style.display = 'inline';
             }
           }, 10);
         </script>
+      </div>
+      <div id="pageOmake" style="display: none;">
+        <h2>4章おまけ：7セグメントとの組み合わせ</h2>
+        <p>4章ではdelay関数の使い方について学びました。</p>
+        <p>おまけとして、7セグメントとの組み合わせたプログラムを実行してみましょう。</p>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-7segment id="segment" color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+            <wokwi-resistor value="200"
+              style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
+
+
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 2番ピンへ -->
+              <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+              <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+              <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+              <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+              <!-- 3番ピンへ -->
+              <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+              <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+              <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+              <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+              <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+              <!-- 4番ピンへ -->
+              <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+              <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+              <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+              <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+              <!-- 5番ピンへ -->
+              <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+              <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+              <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+              <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+              <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+              <!-- 6番ピンへ -->
+              <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+              <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+              <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+              <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+              <!-- 7番ピンへ -->
+              <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+              <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+              <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+              <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <!-- 8番ピンへ -->
+              <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+              <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+              <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+              <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
+              <!-- GNDへ -->
+              <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+              <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+              <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+              <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+              <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button3">Run</button>
+            <button id="stop-button3" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label3"></div>
+          </div>
+          <div class="code-editor" id="editor3"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
+          <div id="result"></div>
+        </div>
+        <p>プログラムを実行すると、7セグメントLEDに0~9までの数字が表示されます。</p>
+        <p>delay関数はLEDの点灯・消灯だけでなく、様々な場面で応用することが出来ます。</p>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2">前のページへ</button>
+        <button id="tochap4-btn" onclick="window.location.href='que5.html'">次の章へ</button>
       </div>
     </div>
     <div class="sidebar"></div>
@@ -352,6 +453,25 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
+  let reachedPages4 = JSON.parse(localStorage.getItem('reachedPages4')) || [true, false, false, false, false, false, false];
+  // ページリンクを取得
+  const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+  function updateSidebarLinks() {
+    console.log('Updating sidebar links with reachedPages4:', reachedPages4);
+    pageLinks.forEach((link, idx) => {
+      link.style.display = reachedPages4[idx] ? 'block' : 'none';
+    });
+  }
+  // ページ到達時に呼び出す
+  function markPageReached(pageIdx) {
+    reachedPages4[pageIdx] = true;
+    localStorage.setItem('reachedPages4', JSON.stringify(reachedPages4));
+    updateSidebarLinks();
+  }
+
+  // 初期化
+  updateSidebarLinks();
   // 共通ページ切り替え関数
   function showPage(toPage, btn) {
     // すべてのページを非表示
@@ -412,7 +532,41 @@ void loop() {
     delay(100);
 }
 `.trim(),
+    pageOmake: `
+// 0～9の表示パターン（a～g）
+const byte numbers[10][7] = {
+  // a b c d e f g
+  {1,1,1,1,1,1,0}, // 0
+  {0,1,1,0,0,0,0}, // 1
+  {1,1,0,1,1,0,1}, // 2
+  {1,1,1,1,0,0,1}, // 3
+  {0,1,1,0,0,1,1}, // 4
+  {1,0,1,1,0,1,1}, // 5
+  {1,0,1,1,1,1,1}, // 6
+  {1,1,1,0,0,0,0}, // 7
+  {1,1,1,1,1,1,1}, // 8
+  {1,1,1,1,0,1,1}  // 9
+};
+
+void setup() {
+  for (int i = 2; i <= 8; i++) {
+    pinMode(i, OUTPUT);
+  }
+}
+
+void loop() {
+  // 繰り返し処理
+  for (int num = 0; num <= 9; num++) {
+    // 繰り返し処理(二重ループ)
+    for (int seg = 0; seg < 7; seg++) {
+      digitalWrite(seg + 2, numbers[num][seg]);
+    }
+    delay(200); // 0.2秒
+  }
+}
+`.trim(),
   };
+
 
 </script>
 </body>
