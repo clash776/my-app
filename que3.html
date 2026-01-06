@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ボタンを使ってみよう</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
 <body>
@@ -14,12 +14,9 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
         <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">3章<br>複雑なLED機器の制御</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
@@ -53,20 +50,17 @@
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">3-6:
             おまけ2</a>
         </div>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ<br>delay関数</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ<br>PWM制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ<br>シリアルモニタ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
       </nav>
     </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
         <h2>第3章　複雑なLED機器の制御</h2>
-        <p>この章では<b>7セグメントLED</b>の使い方について学びます。</p>
+        <p>この章では<b style="color:#1976d2;">7セグメントLED</b>の使い方について学びます。</p>
         <div class="blue-point-box">
           <p>7セグメントLEDは複数のLEDを組み合わせて数字や文字を表示できる部品です。</p>
           <h3><b>7セグメントLED</b></h3>
@@ -160,19 +154,21 @@
           </div>
         </div>
         <p>プログラムを実行すると、7セグメントLEDがすべて点灯し、右下の点と数字の8が表示されているように見えると思います。</p>
-        <p>7セグメントLEDは点灯のさせ方によって、数字やアルファベットを表示させることが出来ます。</p>
+        <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
+            <b style="color:#1976d2;">7セグメントLEDは点灯のさせ方によって、数字やアルファベットを表示させることが出来ます。</b></span></p>
         <p>次のページでは、7セグメントLEDの仕組みについて学びます。</p>
 
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1" onclick="markPageReached(1);">次のページへ</button>
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(1);">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <p></p>
         <div class="blue-point-box">
           <h3 style="margin-bottom:8px;">7セグメントLEDの概要</h3>
           <ul style="margin-bottom:16px;">
-            <li>7セグメントLEDは、7つの棒状LED（セグメント）と1つの小さな点（ドット）の計8個のLEDで構成されています。</li>
+            <li>7セグメントLEDは、<span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
+                <b style="color:#1976d2;">7つの棒状LED（セグメント）と1つの小さな点（ドット）の計8個のLED</b></span>で構成されています。</li>
             <li>各LEDは対応するピンに電流を流すことで点灯します。</li>
             <li>LEDとピンの対応は下の画像の通りとなっています。</li>
           </ul>
@@ -203,15 +199,16 @@
               <text x="370" y="220" font-size="20" font-weight="bold" fill="red">8</text>
             </svg>
           </div>
-          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
               <b>ポイント：</b>左の画像の数字の位置のLEDが右の画像のピンに対応しています。</span></p>
         </div>
         <p></p>
         <div class="green-point-box">
           <h3 style="margin-bottom:8px;">7セグメントLEDの内部回路</h3>
           <ul style="margin-bottom:16px;">
-            <li>中心のピンは<b>共通端子</b>と呼ばれ、LEDのアノード側またはカソード側がまとめられています。</li>
-            <li>カソード側が集められているものを<b>カソードコモン型</b>、アノード側が集められているものを<b>アノードコモン型</b>と呼びます。</li>
+            <li>中心のピンは<b style="color:#388e3c;">共通端子</b>と呼ばれ、LEDのアノード側またはカソード側がまとめられています。</li>
+            <li>カソード側が集められているものを<b style="color:#388e3c;">カソードコモン型</b>、アノード側が集められているものを<b
+                style="color:#388e3c;">アノードコモン型</b>と呼びます。</li>
             <li>本教材ではカソードコモン型を使用します。</li>
           </ul>
           <div
@@ -223,7 +220,7 @@
               <text x="230" y="220" font-size="20" font-weight="bold" fill="red">com</text>
             </svg>
           </div>
-          <p><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
+          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
               <b>補足:</b>Arduinoで制御する場合、アノード側のピン（1～8）を出力ピンに接続し、共通ピンはGNDに接続します。</span></p>
         </div>
         <p></p>
@@ -231,8 +228,8 @@
           data-status="status-label1" data-compiler="compiler-output-text1"
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="page3" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
-          data-status="status-label2" data-compiler="compiler-output-text2"
-          data-error="error-output-text2" onclick="markPageReached(2);">次のページへ</button>
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          onclick="markPageReached(2);">次のページへ</button>
       </div>
       <div id="page3" style="display:none;">
         <h2>練習問題</h2>
@@ -363,7 +360,8 @@
           data-error="error-output-text1">前のページへ</button>
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3" id="toTestfrom3" style="display:none;" onclick="markPageReached(3);">次のページへ</button>
+          data-error="error-output-text3" id="toTestfrom3" style="display:none;"
+          onclick="markPageReached(3);">次のページへ</button>
         <script>
           let seg = document.querySelector('wokwi-7segment[id="segment"]');
           const segAns = [1, 0, 1, 1, 0, 1, 1, 0];
@@ -538,7 +536,8 @@
           data-error="error-output-text2">前のページへ</button>
         <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
           data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
-          data-error="error-output-text4" style="display:none;" id="pageOmake" onclick="markPageReached(4);">次のページへ</button>
+          data-error="error-output-text4" style="display:none;" id="pageOmake"
+          onclick="markPageReached(4);">次のページへ</button>
         <script>
           seg = document.querySelector('wokwi-7segment[id="segment"]');
           const segAns1 = [1, 1, 1, 1, 0, 0, 1, 0];
@@ -599,8 +598,9 @@
               style="background:#ffe0b2; padding:2px 6px; border-radius:4px;"><b>繰り返し処理</b></span>を使うことで、同じような処理をまとめて書くことができ、コードを短くすることができます。
           </p>
           <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>繰り返し処理</h3>
             <b>繰り返し処理を行うときには <span style="color:#d84315;">for文</span> を使います。</b><br>
-            for文を使うときは、次のように記述します。
+            for文を使うときは、以下のように記述します。
             <pre
               style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>for (初期化; 条件式; 更新処理) {繰り返し中に行う処理;}</code></pre>
             <p style="margin-top:8px;">for文は「<b>初期化 → 条件判定 → 処理 → 更新</b>」を自動で繰り返してくれる構文です。</p>
@@ -883,6 +883,7 @@
         showPage(toPage, this);
       });
     });
+    window.markChapterUnlocked(3);
   });
   const PAGE_CODES = {
     page1: `

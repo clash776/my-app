@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
 <body>
@@ -14,8 +14,7 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
+        <to-chapter-howtouse></to-chapter-howtouse>
         <a href="#" style="color: #fff;text-decoration: none; font-weight: bold; font-size: 25px;">1章<br>マイコンとは何か</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
@@ -54,28 +53,22 @@
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-7:
             おまけ</a>
         </div>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ<br>複雑なLED機器の制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ<br>delay関数</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ<br>PWM制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ<br>シリアルモニタ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
       </nav>
     </div>
     <div class="main-content">
-      <div id="page1" style="display:block;">
+      <div id="page1" style="display: block;">
         <h2>第１章　マイコンとは何か</h2>
         <div class="blue-point-box">
-          <h3>1. マイコンとは</h3>
-          <p><span
-              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;"><b>マイコンは、センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータです。</b></span>
-          </p>
+          <h3>マイコンとは</h3>
+          <p style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;"><b>マイコンは、
+              <span style="color:#1976d2;">センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータ</span>です。</b></p>
           <ul style="margin-bottom:16px;">
             <li>パソコンとは違い、特定の仕事を効率よくこなすために作られている</li>
             <li>小型・低価格で、様々な種類がある</li>
@@ -91,7 +84,7 @@
               <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Nano</div>
             </div>
           </div>
-          <p style="margin-bottom:0;">本教材では、上で紹介したような <b>Arduino</b> を使い、実際の動作を確認しながらプログラミングを学んでいきます。</p>
+          <p>本教材では、上で紹介したような <b>Arduino</b> を使い、実際の動作を確認しながらプログラミングを学んでいきます。</p>
         </div>
         <h3>早速プログラムを実行してみましょう！</h3>
         <div class="app-container">
@@ -111,7 +104,6 @@
               <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
             </svg>
           </div>
-          <!-- <p>Runボタンを押してプログラムを実行してみましょう！</p> -->
           <p></p>
           <div class="toolbar">
             <button id="run-button1">Run</button>
@@ -151,12 +143,11 @@
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
-          <h3>2. マイコンを動かすには</h3>
+          <h3>マイコンを動かすには</h3>
           <p>Arduinoを動かすためには、プログラムをArduinoに書き込む必要があります。</p>
-          <p>Arduinoのプログラムは、複数の<b>関数</b>を組み合わせて作られています。</p>
-          <p><span
-              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">関数とは、<b>特定の処理をまとめた命令のまとまり</b>です。</span>
-          </p>
+          <p>Arduinoのプログラムは、複数の<b style="color:#1976d2;">関数</b>を組み合わせて作られています。</p>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">関数とは、
+              <b style="color:#1976d2;">特定の処理をまとめた命令のまとまり</b>です。</span></p>
           <p>例として、以下のようなものが挙げられます。</p>
           <ul>
             <li><b>LEDを点灯・消灯させる</b></li>
@@ -182,7 +173,7 @@
             </svg>
           </div>
           <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の2つの関数を必ず作成する必要があります。</p>
-          <ul style="background: #bcecbf;">
+          <ul style="background: #e3f2fd;">
             <li><b>setup関数</b>：初期化の処理をする関数　最初に1度だけ実行される</li>
             <li><b>loop関数</b>：メインの処理にあたる関数　繰り返し実行される</li>
           </ul>
@@ -198,9 +189,10 @@
 
       <div id="page3" style="display:none;">
         <div class="blue-point-box">
-          <h3>3. マイコンの機能</h3>
-          <p>Arduinoには<b>GPIO</b>と呼ばれるピンが複数あります。</p>
-          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">GPIOは、<b>General
+          <h3>マイコンの機能</h3>
+          <p>Arduinoには<b style="color:#1976d2;">GPIO</b>と呼ばれるピンが複数あります。</p>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">GPIOは、<b
+                style="color:#1976d2;">General
                 Purpose Input/Output</b>の略で、汎用的な入出力ピンのことを指します。</span></p>
           <div style="position: relative; width: 500px; margin: 0 auto;">
             <img src="/my-app/assets/GPIO-C1LKZOer.jpg" alt="GPIO" style="display: block; width: 100%;">
@@ -218,27 +210,27 @@
           <p>Arduinoのピンには「デジタル」や「アナログ」などいくつか種類がありますが、<br>
             ここではまず「部品とつながって情報をやり取りする場所」として覚えておけば大丈夫です。</p>
           <p>どのピンを使うか、そしてそのピンを電圧の「入力用」や「出力用」にするかは、
-            このあと説明する <b>pinMode関数</b> で設定します。</p>
+            このあと説明する <b style="color:#1976d2;">pinMode関数</b> で設定します。</p>
           </p>
         </div>
         <p></p>
         <div class="green-point-box">
           <h3>pinMode関数</h3>
-          <p>先ほどのプログラムでは、7番ピンを電圧の出力用として使用しました。</p>
-          <p><span
-              style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">ピンの設定をするにはsetup関数の中にある<b>pinMode</b>という関数を用いて行います。</span>
-          </p>
-          <p>pinMode関数は、指定したピンを電気の信号(5V/0V)を出すためのピンに設定する命令です</p>
-          <p>pinMode関数は、以下のように使用します。</p>
-          <p><code>pinMode(ピン番号, モード);</code></p>
-          <p>モードには、以下の2つを指定できます。</p>
-          <ul style="background: #bcecbf;">
-            <li><b>INPUT</b>：入力用のピンとして設定する</li>
-            <li><b>OUTPUT</b>：出力用のピンとして設定する</li>
-          </ul>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <b>ピンの設定をするにはsetup関数の中にある <span style="color:#388e3c;">pinMode関数</span> という関数を用います。</span> </b><br>
+            pinMode関数を使うときは、次のように記述します。
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>pinMode(ピン番号, モード);</code></pre>
+            <p>pinMode関数は、<b>指定したピンを電気の信号(5V/0V)を出すためのピンに設定する命令</b>です</p>
+            <p>モードには、以下の2つを指定できます。</p>
+            <ul style="background: #bcecbf;">
+              <li><b>INPUT</b>：入力用のピンとして設定する</li>
+              <li><b>OUTPUT</b>：出力用のピンとして設定する</li>
+            </ul>
+          </div>
           <p>例えば、7番ピンを出力用として設定する場合は、以下のように記述します。</p>
           <p><code>pinMode(7, OUTPUT);</code></p>
-          <p>関数のかっこの中に入れる値のことを<b>引数（ひきすう）</b>といいます。</p>
+          <p>関数のかっこの中に入れる値のことを<b style="color:#388e3c;">引数（ひきすう）</b>といいます。</p>
           <p>pinMode関数の場合、引数には<b>ピン番号</b>と<b>モード</b>を指定します。</p>
           <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
         </div>
@@ -251,7 +243,7 @@
       </div>
       <div id="page4" style="display:none;">
         <div class="blue-point-box">
-          <h3>4. 基本的なプログラムの書き方</h3>
+          <h3>基本的なプログラムの書き方</h3>
           <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
           <p>下のプログラムを見てみましょう。</p>
           <img src="/my-app/assets/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF-DkQtaL8H.jpg" style="max-width: 100%; margin: 0 auto;">
@@ -262,7 +254,7 @@
         <div class="green-point-box">
           <h3>プログラムを書く上で重要なこと</h3>
 
-          <h4> <span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
+          <h4> <span style="color:#388e3c; font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
               セミコロン ( ; )は必ず必要</span></h4>
 
           <p>命令文の最後には必ず <strong>セミコロン (;)</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
@@ -270,14 +262,14 @@
           <pre><code>pinMode(3, OUTPUT);
 digitalWrite(3, HIGH);</code></pre>
 
-          <h4> <span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
+          <h4> <span style="color:#388e3c; font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
               波かっこ <code>{ }</code> の役割</span></h4>
 
           <p>setup関数とloop関数の中身は、必ず<b>波かっこ{ }</b>で囲む必要があります。もし波かっこを消してしまうと、どこまでが
             関数の中身なのかを Arduino が理解できず、エラーになります。
           </p>
 
-          <h4> <span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
+          <h4> <span style="color:#388e3c; font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
               コメント ( <code>//</code> )</span></h4>
           <p>//の後に記述されたものは<b>コメント</b>として扱われます。</p>
           <p>コメントはプログラムの動作には影響しないため、プログラムの中に説明を書いておくことができます。</p>
@@ -296,10 +288,10 @@ digitalWrite(3, HIGH);</code></pre>
       </div>
       <div id="page5" style="display:none;">
         <div class="blue-point-box">
-          <h3>5. まとめ</h3>
+          <h3>まとめ</h3>
           <h3>マイコンとは何か</h3>
-          <p><span
-              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;"><b>マイコンは、センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータ</b></span>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;"><b>マイコンは、
+                <span style="color:#1976d2;">センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータ</span></b></span>
           </p>
           <p>特定の仕事を効率よくこなすために作られ、小型・低価格・多機能</p>
           <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
@@ -317,9 +309,9 @@ digitalWrite(3, HIGH);</code></pre>
         <div class="green-point-box">
           <h3>マイコンを動かすには</h3>
           <p>Arduinoを動かすためには、プログラムを書いてArduinoに書き込む必要がある。</p>
-          <p>Arduinoのプログラムは、複数の<b>関数</b>を組み合わせて作られている。</p>
-          <p><span
-              style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;"><b>関数とは、<b>特定の処理をまとめた命令のまとまり</b></b></span>
+          <p>Arduinoのプログラムは、複数の<b style="color:#388e3c;">関数</b>を組み合わせて作られている。</p>
+          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">関数とは、
+              <b style="color:#388e3c;">特定の処理をまとめた命令のまとまり</b></span>
           </p>
           <div style="position: relative; width: 500px; margin: 0 auto;">
             <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-DR1XWA7J.jpg" alt="GPIO" style="display: block; width: 100%;">
@@ -330,14 +322,14 @@ digitalWrite(3, HIGH);</code></pre>
               <text x="280" y="130" fill="blue" font-size="24" font-weight="bold">loop関数</text>
             </svg>
           </div>
-          <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の2つの関数を必ず作成する必要がある</p>
+          <p>Arduinoのプログラムを作成する場合、<b style="color:#388e3c;">setup関数</b>と<b
+              style="color:#388e3c;">loop関数</b>の2つの関数を必ず作成する必要がある</p>
         </div>
         <p></p>
         <div class="blue-point-box">
           <h3>マイコンの機能</h3>
-          <p><span
-              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">Arduinoには<b>GPIO(GeneralPurpose
-                Input/Output)</b>と呼ばれる汎用的な入出力ピンが複数ある</span>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">Arduinoには
+              <b style="color:#1976d2;">GPIO</b>と呼ばれる汎用的な入出力ピンが複数ある</span>
           </p>
           <div style="position: relative; width: 500px; margin: 0 auto;">
             <img src="/my-app/assets/GPIO-C1LKZOer.jpg" alt="GPIO" style="display: block; width: 100%;">
@@ -353,11 +345,12 @@ digitalWrite(3, HIGH);</code></pre>
             </svg>
           </div>
           <p><span
-              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">ピンの設定をするにはsetup関数の中にある<b>pinMode</b>という関数を用いて行う</span>
+              style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">ピンの設定をするにはsetup関数の中にある
+              <b style="color:#1976d2;">pinMode</b>という関数を用いて行う</span>
           </p>
           <p>例：7番ピンを出力用として設定する場合</p>
           <p><code>pinMode(7, OUTPUT);</code></p>
-          <p>関数のかっこの中に入れる値のことを<b>引数（ひきすう）</b>という</u></p>
+          <p>関数のかっこの中に入れる値のことを<b style="color:#1976d2;">引数（ひきすう）</b>という</u></p>
         </div>
         <p></p>
         <div class="green-point-box">
@@ -365,7 +358,7 @@ digitalWrite(3, HIGH);</code></pre>
           <img src="/my-app/assets/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF-DkQtaL8H.jpg" style="max-width: 100%; margin: 0 auto;">
           <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラム</p>
           <h3>プログラムを書く上で重要なこと</h3>
-          <ul style="background: #bcecbf;">
+          <ul style="background: #e3f2fd;">
             <li><b>セミコロン（;）</b>：命令文の最後に必ずつける</li>
             <li><b>波かっこ（{}）</b>：setup、loop関数を囲む必要がある</li>
             <li><b>コメント（//）</b>：プログラムの動作には影響しない説明文</li>
@@ -566,9 +559,10 @@ digitalWrite(3, HIGH);</code></pre>
               <my-breadboard style="display:block; margin: 0 auto;"></my-breadboard>
             </div>
           </div>
-          <p>これは <b>ブレッドボード</b> と呼ばれる、多数の穴が開いた基板です。</p>
+          <p>これは<b style="color:#1976d2">ブレッドボード</b>と呼ばれる、多数の穴が開いた基板です。</p>
           <p><span
-              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">ブレッドボードには規則的に配置された穴があり、<br>部品やワイヤーを差し込むことで簡単に電子回路を作成することができます。</span>
+              style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;"><b>ブレッドボードには規則的に配置された穴があり、<br>
+                部品やワイヤーを差し込むことで簡単に電子回路を作成することができます。</b></span>
           </p>
 
         </div>
@@ -582,12 +576,12 @@ digitalWrite(3, HIGH);</code></pre>
             </div>
           </div>
           <h3>電源ライン</h3>
-          <p>ブレッドボードの両端にある赤と青でつながっている部分は<b>電源ライン</b>と呼ばれ、横方向に内部でつながっています。</p>
+          <p>ブレッドボードの両端にある赤と青でつながっている部分は<b><span style="color:#388e3c;">電源ライン</span></b>と呼ばれ、横方向に内部でつながっています。</p>
           <p>電源ラインには、電源およびGND（グランド）を接続します。</p>
           <p>多くのブレッドボードでは、＋が電源、−が GND を表していますが、<br>
             <span
-              style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">実際の電圧が自動的に供給されるわけではありません。
-              必ずマイコンや電源装置から配線する必要があります。
+              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;"><b>実際の電圧が自動的に供給されるわけではありません。
+                必ずマイコンや電源装置から配線する必要があります。</b></span>
           </p>
           <h3>部品エリア</h3>
           <p>ブレッドボードの中央にある水色でつながっている部分は部品エリアと呼ばれ、縦方向に内部でつながっています。</p>
@@ -662,6 +656,7 @@ digitalWrite(3, HIGH);</code></pre>
           showPage(toPage, this);
         });
       });
+      window.markChapterUnlocked(1);
     });
     const PAGE_CODES = {
       page1: `
@@ -674,24 +669,24 @@ void loop() {
 `.trim(),
     };
 
-const pagePrefix = 'q1_'; // 1章なら"q1_"、2章なら"q2_"など
+    const pagePrefix = 'q1_'; // 1章なら"q1_"、2章なら"q2_"など
 
-document.addEventListener('change', function (e) {
-  if (e.target.type === 'radio') {
-    const { name, value } = e.target;
-    localStorage.setItem(pagePrefix + 'radio_' + name, value);
-  }
-});
+    document.addEventListener('change', function (e) {
+      if (e.target.type === 'radio') {
+        const { name, value } = e.target;
+        localStorage.setItem(pagePrefix + 'radio_' + name, value);
+      }
+    });
 
-// ページ読み込み時に保存値を復元
-window.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    const saved = localStorage.getItem(pagePrefix + 'radio_' + radio.name);
-    if (saved && radio.value === saved) {
-      radio.checked = true;
-    }
-  });
-});
+    // ページ読み込み時に保存値を復元
+    window.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        const saved = localStorage.getItem(pagePrefix + 'radio_' + radio.name);
+        if (saved && radio.value === saved) {
+          radio.checked = true;
+        }
+      });
+    });
   </script>
 </body>
 </div>

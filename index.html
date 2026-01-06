@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
 <body>
@@ -14,24 +15,20 @@
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
         <a href="#" style="color: #fff;text-decoration: none; font-weight: bold; font-size: 25px;">使い方</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章<br>LEDの点灯</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章<br>複雑なLED機器の制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">4章<br>delay関数</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">5章<br>PWM制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章<br>シリアルモニタ</a>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
       </nav>
     </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
         <h2>この教材の使い方</h2>
-        <p>この教材は、コードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
+        <p>この教材は、<b>マイコンとそのプログラミング</b>についてコードエディタとマイコンシミュレータを使用しながら学習を進めていきます。</p>
         <div
           style="position: relative; width: 800px; height: 820px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
           <img src="/my-app/assets/%E6%95%99%E6%9D%90%E8%AA%AC%E6%98%8E-DVSez33b.jpg" alt="GPIO" style="display: block;">
@@ -53,16 +50,26 @@
         <p>この教材の流れは、以下のようになります。</p>
         <ul>
           <li><b>第1章：マイコンとは何か</b></li>
-          <li><b>第2章：この教材の使い方</b>←現在の章</li>
-          <li><b>第3章：LED点灯</b></li>
-          <li><b>第4章：さらに応用的な内容を学ぶ</b></li>
+          <li><b>第2章：LEDの点灯</b></li>
+          <li><b>第3章：複雑なLED機器の制御</b></li>
+          <li><b>第4章：delay関数</b></li>
+          <li><b>第5章：PWM制御</b></li>
+          <li><b>第6章：シリアルモニタ</b></li>
+          <li><b>まとめテスト</b></li>
         </ul>
-
+        <p>※各章におまけとして少し発展的な内容の紹介がありますが、それらは確認問題やテストには出ません。</p>
         <p><b>「次の章へ」ボタンを押して次の章へ進みましょう！</b></p>
         <button id="nextpage-btn" onclick="window.location.href='que1.html'">次の章へ</button>
       </div>
     </div>
     <div class="sidebar"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        window.markChapterUnlocked(0); // 使い方をアンロック
+        window.updateChapterLinks();
+      });
+    </script>
   </div>
 </body>
+
 </html>

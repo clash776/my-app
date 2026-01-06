@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
 <body>
@@ -14,18 +14,12 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ<br>複雑なLED機器の制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ<br>delay関数</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ<br>PWM制御</a>
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
         <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">6章<br>シリアルモニタ</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
@@ -48,27 +42,19 @@
             data-error="error-output-text4" data-serial="serial-monitor-text4"
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-4:
             おまけ</a>
-          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
-            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
-            data-error="error-output-text2"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-5:
-            おまけ</a>
-          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
-            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-            data-error="error-output-text3"
-            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-6:
-            おまけ</a>
         </div>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
       </nav>
     </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
         <h2>第6章　シリアルモニタ</h2>
-        <p>この章では<b>シリアルモニタ</b>の使い方について学びます。</p>
+        <p>この章では<b style="color:#1976d2;">シリアルモニタ</b>の使い方について学びます。</p>
         <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
-            <b>シリアルモニタ</b>とは、マイコンとパソコン(マイコン同士も可能)との通信を利用したデータの送受信や<br>デバッグ(プログラムの不具合を修正する作業)などに利用されるものです。</span></p>
+            <b
+              style="color:#1976d2;">シリアルモニタ</b>とは、マイコンとパソコン(マイコン同士も可能)との通信を利用したデータの送受信や<br>デバッグ(プログラムの不具合を修正する作業)などに利用されるものです。</span>
+        </p>
 
         <p>まずは、プログラムを動作させてみましょう。</p>
 
@@ -121,8 +107,8 @@
         <p>プログラムを実行すると、変数brightnessの値(0~255)が順番にシリアルモニタに表示されます。</p>
         <p>このように、シリアルモニタを使うことで、変数の値などプログラムの動作状況をリアルタイムで確認することができます。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
-          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2" data-serial="serial-monitor-text2"
-          onclick="markPageReached(1);">次のページへ</button>
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          data-serial="serial-monitor-text2" onclick="markPageReached(1);">次のページへ</button>
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
@@ -132,38 +118,42 @@
               マイコンとパソコン間でデータをやりとりする「シリアル通信」を使います。
             </li>
             <li><b>プログラムで通信開始</b><br>
-              プログラムの中で<b>Serial.begin関数</b>を書き、通信を開始します。
+              プログラムの中で<b style="color:#1976d2;">Serial.begin関数</b>を書き、通信を開始します。
             </li>
             <li><b>シリアルモニタに表示する</b><br>
-              <b>Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
+              <b style="color:#1976d2;">Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
             </li>
           </ol>
         </div>
         <div class="green-point-box">
-          <h3>Serial.begin関数</h3>
-          <p>シリアル通信を使うためには、<b>Serial.begin関数</b>で通信速度(ボーレート)を指定して、通信を開始する必要があります。</p>
-          <p>Serial.begin関数は以下のように記述します。</p>
-          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
-                Serial.begin(通信速度);</span></code>
-          <p>例えば、通信速度を9600bpsに設定する場合、setup関数の中に以下のように記述します。</p>
-          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
-                void setup() { Serial.begin(9600); // 通信速度を9600bpsに設定 }</span></code>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>Serial.begin関数</h3>
+            <b>シリアル通信を使うためには、<span
+                style="color:#388e3c;">Serial.begin関数</span>で<b>通信速度(ボーレート)</b>を指定して、通信を開始する必要があります。</b><br>
+            <p>Serial.begin関数は以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>Serial.begin(通信速度);</code></pre>
+            <p>例えば、通信速度を9600bpsに設定する場合、setup関数の中に以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>void setup() { Serial.begin(9600); // 通信速度を9600bpsに設定 }</code></pre>
+          </div>
           <p><b>注意：</b>実際のエディタ(Arduino IDEなど)でシリアルモニタを使う場合、<br>
             シリアルモニタ側の通信速度設定を、プログラムの値（例：9600）に合わせる必要があります。</p>
-          <p></p>
         </div>
         <div class="green-point-box">
-          <h3>Serial.print関数 / Serial.println関数</h3>
-          <p>シリアルモニタにデータを表示するには、<b>Serial.print関数</b>または<b>Serial.println関数</b>を使います。</p>
-          <p>これらの関数は以下のように記述します。</p>
-          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
-                Serial.print(表示したいデータ);</span></code>
-          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
-                Serial.println(表示したいデータ);</span></code>
-          <p>例えば、シリアルモニタに「Hello」と表示する場合、loop関数の中に以下のように記述します。</p>
-          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
-                void loop() { Serial.println("Hello"); // シリアルモニタにHelloと表示}</span></code>
-          <p>Serial.print関数は<b>改行せず</b>にデータを表示し、Serial.println関数は<b>改行して</b>データを表示します。</p>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>Serial.print関数 / Serial.println関数</h3>
+            <b>シリアルモニタにデータを表示するには、<span style="color:#388e3c;">Serial.print関数</span>または<span
+                style="color:#388e3c;">Serial.println関数</span>を使います。</b><br>
+            <p>これらの関数は以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>Serial.print(表示したいデータ);<br>または<br>Serial.println(表示したいデータ);</code></pre>
+            <p>例えば、シリアルモニタに「Hello」と表示する場合、loop関数の中に以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>void loop() { Serial.print("Hello");}<br>または<br>void loop() { Serial.printIn("Hello");}</code></pre>
+            <p>Serial.print関数は<b style="color:#388e3c;">改行せず</b>にデータを表示し、Serial.println関数は<b
+                style="color:#388e3c;">改行して</b>データを表示します。</p>
+          </div>
         </div>
         <p>それではシリアルモニタを使ってみましょう。</p>
         <p>下のプログラムを編集してシリアルモニタに「Hello」と表示させてみましょう。</p>
@@ -198,11 +188,12 @@
         </div>
         <div id="result1" style="margin-top: 20px;"></div>
         <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1" 
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
           data-serial="serial-monitor-text1">前のページへ</button>
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3" data-serial="serial-monitor-text3" onclick="markPageReached(2);">次のページへ</button>
+          data-error="error-output-text3" data-serial="serial-monitor-text3"
+          onclick="markPageReached(2);">次のページへ</button>
         <script>
           setInterval(() => {
             const serialText2 = document.getElementById('serial-monitor-text2')?.textContent;
@@ -456,11 +447,71 @@
         </script>
       </div>
       <div id="pageOmake" style="display:none;">
-        <h3>6章おまけ：マイコンが使われている場所</h3>
-        <p>おまけのページです。</p>
+        <h2>6章おまけ：学んだ機器が使われている場所</h2>
+        <p>6章のおまけとして、これまで学んできた機器がどんなところで使われているかを紹介します。</p>
+        <div class="blue-point-box">
+          <h2>マイコン</h2>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 230px; margin: 0 auto;">
+            <wokwi-arduino-uno style="position: absolute; left: 100px; top: 0px;"></wokwi-arduino-uno>
+          </div>
+          <p>本教材ではArduinoを使ってマイコンの学習を行ってきましたが、<br>
+            実際の製品に組み込まれているマイコンは、Arduino本体のような形ではなく、<br>
+            <b style="color:#1976d2;">もっと小さな部品として基板の上に直接取り付けられています。</b>
+          </p>
+          <p>小型のマイコンは、スマートフォン、家電製品、自動車、産業機器など、<br>
+            さまざまな製品に組み込まれており、<b style="color:#1976d2;">製品の制御、データ処理、通信などを担当しています。</b><br>
+          </p>
+        </div>
+        <div class="green-point-box">
+          <h2>LED</h2>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 80px; margin: 0 auto;">
+            <wokwi-led id="circuit-led" color="red"
+              style="position: absolute; left: 230px; top: 0px; transform: scale(1.9);"></wokwi-led>
+          </div>
+          <p>
+            本教材ではLEDを使って、マイコンの出力制御を学習してきましたが、<br>
+            実際の製品に使われているLEDは、実験用の部品としてではなく、<br>
+            <b style="color:#388e3c;">製品の一部として内部に組み込まれています。</b>
+          </p>
+          <p>
+            LEDは電気を流すことで光る小さな部品で、<br>
+            <b style="color:#388e3c;">動作状態の表示、情報の通知、照明</b>など、<br>
+            さまざまな目的で利用されています。
+          </p>
+          <p>
+            スマートフォンや家電製品、自動車、機械設備などでは、<br>
+            LEDがマイコンによって制御され、<b style="color:#388e3c;">点灯・消灯や点滅</b>を行うことで、<br>
+            ユーザーに状態を分かりやすく伝えています。
+          </p>
+        </div>
+        <div class="blue-point-box">
+          <h2>7セグメントLED</h2>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 170px; margin: 0 auto;">
+            <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="transform: scale(2.2, 1.88); margin: 0 auto;"></wokwi-7segment>
+          </div>
+          <p>
+            本教材では7セグメントLEDを使って、複雑なLED機器の制御方法を学習してきましたが、<br>
+            実際の製品では、7セグメントLEDは単体の実験用部品ではなく、<br>
+            <b style="color:#1976d2;">表示装置の一部として機器の内部に組み込まれています。</b>
+          </p>
+          <p>
+            7セグメントLEDは、複数のLEDを組み合わせることで、<br>
+            <b style="color:#1976d2;">数字や簡単な情報を分かりやすく表示できる表示部品</b>です。
+          </p>
+          <p>
+            電子レンジやデジタル時計、電卓、測定器などの機器では、<br>
+            マイコンがどのセグメントを点灯させるかを制御することで、<br>
+            時間や数値、動作状態などを表示しています。
+          </p>
+        </div>
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
           data-error="error-output-text3">前のページへ</button>
+        <button id="tochap6-btn" onclick="window.location.href='test1.html'">次の章へ</button>
       </div>
     </div>
     <div class="sidebar"></div>
@@ -469,7 +520,7 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
-    // ページ到達状況を管理（例：最初のページだけ到達済み）
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
   let reachedPages6 = JSON.parse(localStorage.getItem('reachedPages6')) || [true, false, false, false, false, false, false];
   // ページリンクを取得
   const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
@@ -524,6 +575,7 @@
         showPage(toPage, this);
       });
     });
+    window.markChapterUnlocked(6);
   });
   const PAGE_CODES = {
     page1: `

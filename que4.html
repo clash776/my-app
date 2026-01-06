@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>delay関数</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
 <body>
@@ -14,14 +14,10 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ<br>複雑なLED機器の制御</a>
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
         <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">4章<br>delay関数</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
@@ -45,18 +41,16 @@
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-4:
             おまけ</a>
         </div>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que5.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">5章へ<br>PWM制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ<br>シリアルモニタ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
       </nav>
     </div>
     <div class="main-content">
       <div id="page1" style="display: block;">
         <h2>第4章　delay関数</h2>
-        <p>この章では<b>delay関数</b>の使い方について学びます。</p>
+        <p>この章では<b style="color:#1976d2;">delay関数</b>の使い方について学びます。</p>
         <p>まずは、プログラムを動作させてみましょう。</p>
         <div class="app-container">
           <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
@@ -91,7 +85,8 @@
           </div>
         </div>
         <p>上のプログラムでは0.2秒間隔でLEDが点灯と消灯を繰り返しています。</p>
-        <p>delay関数の中の数字を変更することで、LEDの点灯・消灯の長さを変えることが出来ます。</p>
+        <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
+            <b style="color:#1976d2;">delay関数の中の数字を変更することで、LEDの点灯・消灯の長さを変えることが出来ます。</b></span></p>
         <p>補足：※delay() の時間はミリ秒（ms）で指定します。<br>1000 ms = 1 秒、100 ms = 0.1 秒です。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
@@ -99,11 +94,14 @@
       </div>
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
-          <h3>delay関数</h3>
-          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
-              <b>delay関数</b>はプログラムの実行を指定した時間だけ停止させる関数です。</span></p>
-          <p>delay関数は以下のように記述します。</p>
-          <pre><code>delay(時間（ミリ秒）);</code></pre>
+          <h3>delay関数の概要</h3>
+          <div style="background:#d9fdd9; border-left:4px solid #388e3c; padding:4px 8px; margin:12px 0;">
+            <h3>delay関数</h3>
+            <p><b><span style="color:#1976d2;">delay関数</span>はプログラムの実行を指定した時間だけ停止させる関数です。</b></p>
+            <p>delay関数は以下のように記述します。</p>
+            <pre
+              style="font-size:1.1em; background:#f6fff6; border-radius:4px; padding:8px; margin-top:8px;"><code>delay(時間（ミリ秒）);</code></pre>
+          </div>
           <p>例えば、delay(1000);と記述すると、プログラムの実行が1000ミリ秒（1秒）停止します。</p>
           <p>先ほどのプログラムでは、digitalWrite(7, HIGH);とdigitalWrite(7,LOW);の後に</p>
           <p>delay関数を使うことで、LEDが0.2秒間隔で点灯と消灯を繰り返すようにしています。</p>
@@ -131,16 +129,18 @@
         </div>
         <div class="green-point-box">
           <h3>delay関数を使うときの注意点</h3>
-          <h3>1. delayのあいだは、プログラムの実行が完全に止まる</h3>
+          <h3><span style="color:#388e3c; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              delayのあいだは、プログラムの実行が完全に止まる</span></h3>
           <p>delayが実行されている間、Arduinoは他の命令を実行できません。</p>
-          <ul style="background: #bcecbf;">
+          <ul style="background: #e3f2fd;">
             <li><b>センサーを読まない</b></li>
             <li><b>ボタンを押しても反応しない</b></li>
             <li><b>LEDの状態も変わらない</b></li>
           </ul>
           <p>例えば、センサーの値を頻繁に読み取ったり、ボタンの押下をすぐに反応させたい場合は使い方に気を付ける必要があります。</p>
-          <h3>2. ちょうどいいdelay時間の設定が必要</h3>
-          <ul style="background: #bcecbf;">
+          <h3><span style="color:#388e3c; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              ちょうどいいdelay時間の設定が必要</span></h3>
+          <ul style="background: #e3f2fd;">
             <li><code>delay(10000);</code>　（10秒）</li>
             <li><code>delay(1);</code> （0.001秒）</li>
           </ul>
@@ -356,7 +356,7 @@
       <div id="pageOmake" style="display: none;">
         <h2>4章おまけ：7セグメントとの組み合わせ</h2>
         <p>4章ではdelay関数の使い方について学びました。</p>
-        <p>おまけとして、7セグメントとの組み合わせたプログラムを実行してみましょう。</p>
+        <p>おまけとして、7セグメントLEDと組み合わせたプログラムを実行してみましょう。</p>
         <div class="app-container">
           <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
             <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
@@ -507,6 +507,7 @@
         showPage(toPage, this);
       });
     });
+    window.markChapterUnlocked(4);
   });
   const PAGE_CODES = {
     page1: `

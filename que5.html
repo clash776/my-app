@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-CEUQmWTK.js"></script>
-  <link rel="stylesheet" crossorigin href="/my-app/assets/index-0W-k8foW.css">
+  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
 <body>
@@ -14,16 +14,11 @@
     <div class="sidebar">
       <nav
         style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="#" id="nextpage-btn" onclick="window.location.href='index.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">使い方へ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">1章<br>マイコンとは何か</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que2.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">2章へ<br>LEDの点灯</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que3.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">3章へ<br>複雑なLED機器の制御</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que4.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">4章へ<br>delay関数</a>
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
         <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">5章<br>PWM制御</a>
         <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width:240px;">
           <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
@@ -47,16 +42,15 @@
             style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-4:
             おまけ</a>
         </div>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='que6.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">6章へ<br>シリアルモニタ</a>
-        <a href="#" id="nextpage-btn" onclick="window.location.href='test1.html'"
-          style="color: #fff;text-decoration: none; font-weight: bold;">まとめテストへ</a>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
       </nav>
     </div>
     <div class="main-content">
       <div id="page1" style="display:block;">
         <h2>第5章　PWM制御</h2>
-        <p>この章では<b>PWM制御</b>について学びます。</p>
+        <p>この章では<b style="color:#1976d2;">PWM制御</b>について学びます。</p>
         <p>まずは、プログラムを動作させてみましょう。</p>
 
         <div class="app-container">
@@ -90,7 +84,7 @@
             <pre id="error-output-text1"></pre>
           </div>
         </div>
-        <p>今回のプログラムでは、11番ピンをPWM出力用として設定し、LEDの明るさを段階的に変化させています。</p>
+        <p>今回のプログラムでは、11番ピンを<b style="color:#1976d2;">PWM出力用</b>として設定し、LEDの明るさを段階的に変化させています。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
           data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
           onclick="markPageReached(1);">次のページへ</button>
@@ -98,17 +92,21 @@
       <div id="page2" style="display:none;">
         <div class="blue-point-box">
           <h3>PWM制御とは</h3>
-          <p><b>PWM（Pulse Width Modulation:
-              パルス幅変調）制御</b>は、デジタル信号のONとOFFを高速で切り替えることで、<br>アナログ的な出力を実現する技術です。PWMを使うことで、LEDの明るさやモーターの速度などを細かく制御することができます。
+          <p><b>PWM（Pulse Width Modulation:パルス幅変調）制御</b>は、
+            <br><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;"><b
+                style="color:#1976d2;">デジタル信号のONとOFFを高速で切り替えることで、アナログ的な出力を実現する技術です。</b></span>
+            <br>PWMを使うことで、LEDの明るさやモーターの速度などを細かく制御することができます。
           </p>
         </div>
         <div class="green-point-box">
-          <h3>analogWrite関数</h3>
-          <p>Arduinoでは、<b>analogWrite関数</b>を使うことで簡単にPWM出力を行うことができます。</p>
-          <p>analogWrite関数は、以下のように記述します。</p>
-          <code><span style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;">
-                analogWrite(ピン番号, 値);</span></code>
-          <p>２つ目の引数には0～255の値を指定することが出来ます。LEDの場合、値が大きいほど明るく、小さいほど暗くなります。</p>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>analogWrite関数</h3>
+            <b>Arduinoでは、<span style="color:#388e3c;">analogWrite関数</span>を使うことで簡単にPWM出力を行うことができます。</b><br>
+            <p>analogWrite関数は、以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>analogWrite(ピン番号, 値);</code></pre>
+          </div>
+          <p>2つ目の引数「値」には<b>0～255の値</b>を指定することが出来ます。LEDの場合、<b style="color:#1976d2;">値が大きいほど明るく、小さいほど暗くなります。</b></p>
           <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
         </div>
         <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
@@ -147,11 +145,11 @@
         <div class="blue-point-box">
           <h3>digitalWrite関数との違い</h3>
           <p>LEDを点灯させる制御として、digitalWrite関数がありました。</p>
-          <code><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+          <code><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
                 digitalWrite(ピン番号, モード);</span></code>
           <p>digitalWrite関数では、HIGH（5V）かLOW（0V）のどちらかしか指定できませんが、<br>analogWrite関数では0～255の範囲で細かく出力を調整できる点が異なります。</p>
           </p>
-          <ul style="background: #e3f2fd;">
+          <ul style="background: #d9fdd9;">
             <li><b>digitalWrite関数</b>：HIGHかLOWしか出力の設定ができない<br>
               イメージ：0か100かしか設定できない　デジタル：飛び飛びの値</li>
             <p></p>
@@ -477,7 +475,8 @@
         <div class="green-point-box">
           <h3>ボタンを押したときの処理</h3>
           <p>ボタンを押したときに処理を変えるには<b>ピンの入力を読み取る必要があります。</b></p>
-          <p>ピンの入力を読み取るには、<b>pinMode関数(INPUT)</b>と<b>digitalRead関数</b>を使います。</p>
+          <p>ピンの入力を読み取るには、<b><span style="color:#388e3c;">pinMode関数(INPUT)</span></b>と<b><span
+                style="color:#388e3c;">digitalRead関数</span></b>を使います。</p>
           <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
             <p><b>pinMode関数(INPUT)</b></p>
             <pre
@@ -498,15 +497,7 @@
           <li><b>digitalRead(2)=LOWとなり、if文の条件を満たす</b></li>
           <li><b>if文の処理1が実行され、3番ピンがHIGHになり、LEDが点灯する。</b></li>
         </ol>
-        <div class="blue-point-box">
-          <h3>条件分岐の応用例</h3>
-          <ul>
-            <li>センサー値が一定以上ならLEDを点灯</li>
-            <li>ボタンが押されたらモーターを動かす</li>
-            <li>温度が高いときだけファンを回す</li>
-          </ul>
-          <p>if文を使うことで、より賢い電子工作が作れます！</p>
-        </div>
+        <p></p>
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
           data-error="error-output-text3">前のページへ</button>
@@ -573,6 +564,7 @@
         showPage(toPage, this);
       });
     });
+    window.markChapterUnlocked(5);
   });
   const PAGE_CODES = {
     page1: `
