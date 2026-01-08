@@ -51,7 +51,10 @@
       <div id="page1" style="display:block;">
         <h2>第5章　PWM制御</h2>
         <p>この章では<b style="color:#1976d2;">PWM制御</b>について学びます。</p>
+        <p>今回のプログラムでは、11番ピンを<b style="color:#1976d2;">PWM出力用</b>として設定し、LEDの明るさを段階的に変化させています。</p>
         <p>まずは、プログラムを動作させてみましょう。</p>
+        <p><b>(本ページではLEDの明るさを制御するために0~255の値を扱えるbyte型の変数[2章おまけ]を使用しています。
+          以降のページでは使用しません。)</b></p>
 
         <div class="app-container">
           <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
@@ -84,7 +87,6 @@
             <pre id="error-output-text1"></pre>
           </div>
         </div>
-        <p>今回のプログラムでは、11番ピンを<b style="color:#1976d2;">PWM出力用</b>として設定し、LEDの明るさを段階的に変化させています。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
           data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
           onclick="markPageReached(1);">次のページへ</button>
@@ -108,6 +110,7 @@
           </div>
           <p>2つ目の引数「値」には<b>0～255の値</b>を指定することが出来ます。LEDの場合、<b style="color:#1976d2;">値が大きいほど明るく、小さいほど暗くなります。</b></p>
           <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
+          <p><b>補足：analogwrite関数を使用する際は、pinMode関数でピンを出力用にする必要はありません。</b></p>
         </div>
         <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
 
@@ -280,9 +283,9 @@
         <div id="result2"></div>
         <div id="result3"></div>
 
-        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
-          data-status="status-label1" data-compiler="compiler-output-text1"
-          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2">前のページへ</button>
         <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
           data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
           data-error="error-output-text4" id="topageOmake" style="display:none;"
@@ -565,11 +568,21 @@
       });
     });
     window.markChapterUnlocked(5);
+
+    if (!localStorage.getItem('chapter5_start') && !localStorage.getItem('chapter5_time')) {
+      localStorage.setItem('chapter5_start', Date.now());
+    }
+    const chapter4_start = parseInt(localStorage.getItem('chapter4_start'));
+    const end = Date.now();
+    const diffMs = end - chapter4_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter4_time', diffSec);
+    localStorage.removeItem('chapter4_start');
   });
   const PAGE_CODES = {
     page1: `
 void setup() {
-  pinMode(11, OUTPUT);
+
 }
 
 byte brightness = 0;
@@ -581,7 +594,7 @@ void loop() {
 `.trim(),
     page2: `
 void setup() {
-  pinMode(11, OUTPUT);
+
 }
 
 void loop() {
@@ -590,15 +603,15 @@ void loop() {
 `.trim(),
     pageTest: `
 void setup() {
-  pinMode(11, OUTPUT);
+
 }
 
 void loop() {
-  analogWrite(11, 50);
+  analogWrite(11, 0);
   delay(100);
-  analogWrite(11, 150);
+  analogWrite(11, 0);
   delay(100);
-  analogWrite(11, 250);
+  analogWrite(11, 0);
   delay(100);
 }
 `.trim(),

@@ -757,6 +757,16 @@ void loop() {
       });
     });
     window.markChapterUnlocked(7);
+    
+    if (!localStorage.getItem('chaptertest_start') && !localStorage.getItem('chaptertest_time')) {
+      localStorage.setItem('chaptertest_start', Date.now());
+    }
+    const chapter6_start = parseInt(localStorage.getItem('chapter6_start'));
+    const end = Date.now();
+    const diffMs = end - chapter6_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter6_time', diffSec);
+    localStorage.removeItem('chapter6_start');
   });
 
   document.addEventListener('change', function (e) {

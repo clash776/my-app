@@ -508,6 +508,16 @@
       });
     });
     window.markChapterUnlocked(4);
+
+    if (!localStorage.getItem('chapter4_start') && !localStorage.getItem('chapter4_time')) {
+      localStorage.setItem('chapter4_start', Date.now());
+    }
+    const chapter3_start = parseInt(localStorage.getItem('chapter3_start'));
+    const end = Date.now();
+    const diffMs = end - chapter3_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter3_time', diffSec);
+    localStorage.removeItem('chapter3_start');
   });
   const PAGE_CODES = {
     page1: `
@@ -524,13 +534,10 @@ void loop() {
 
     pageTest: `
 void setup() {
-    pinMode(7, OUTPUT);             
+          
 }
 void loop() {
-    digitalWrite(7,HIGH); 
-    delay(100);
-    digitalWrite(7,LOW);
-    delay(100);
+
 }
 `.trim(),
     pageOmake: `

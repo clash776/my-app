@@ -143,6 +143,13 @@
         });
       });
       window.markChapterUnlocked(8); 
+      
+    const chaptertest_start = parseInt(localStorage.getItem('chaptertest_start'));
+    const end = Date.now();
+    const diffMs = end - chaptertest_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chaptertest_time', diffSec);
+    localStorage.removeItem('chaptertest_start');
     });
     const PAGE_CODES = {
       page1: `

@@ -86,7 +86,7 @@
           </div>
           <p>本教材では、上で紹介したような <b>Arduino</b> を使い、実際の動作を確認しながらプログラミングを学んでいきます。</p>
         </div>
-        <h3>早速プログラムを実行してみましょう！</h3>
+        <h3>早速Runボタンを押してプログラムを実行してみましょう！</h3>
         <div class="app-container">
           <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
             <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
@@ -120,7 +120,7 @@
           </div>
           <div id='test-output'>
             <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
-              <p>LEDが点灯しました！次のページへ進みましょう。</p>
+              <p><b style="color:#1976d2;">プログラムを実行して、LEDが点灯したことを確認したら次のページへ進みましょう。</b></p>
               <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1"
                 data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
                 data-error="error-output-text1" onclick="markPageReached(1);">次のページへ</button>
@@ -277,7 +277,6 @@ digitalWrite(3, HIGH);</code></pre>
           <pre>// 3番ピンを出力用にする
 // 3番ピンをHIGHにする
       </pre>
-          <p>このほかにもプログラムを書く上で重要なことがあるので、後の章でも説明します。</p>
         </div>
         <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
           data-status="status-label1" data-compiler="compiler-output-text1"
@@ -657,6 +656,9 @@ digitalWrite(3, HIGH);</code></pre>
         });
       });
       window.markChapterUnlocked(1);
+      if (!localStorage.getItem('chapter1_start') && !localStorage.getItem('chapter1_time')) {
+        localStorage.setItem('chapter1_start', Date.now());
+      }
     });
     const PAGE_CODES = {
       page1: `
@@ -669,24 +671,6 @@ void loop() {
 `.trim(),
     };
 
-    const pagePrefix = 'q1_'; // 1章なら"q1_"、2章なら"q2_"など
-
-    document.addEventListener('change', function (e) {
-      if (e.target.type === 'radio') {
-        const { name, value } = e.target;
-        localStorage.setItem(pagePrefix + 'radio_' + name, value);
-      }
-    });
-
-    // ページ読み込み時に保存値を復元
-    window.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        const saved = localStorage.getItem(pagePrefix + 'radio_' + radio.name);
-        if (saved && radio.value === saved) {
-          radio.checked = true;
-        }
-      });
-    });
   </script>
 </body>
 </div>

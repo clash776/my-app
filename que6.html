@@ -104,8 +104,8 @@
           </div>
         </div>
         <p>上のプログラムは5章の最初のプログラムです。</p>
-        <p>プログラムを実行すると、変数brightnessの値(0~255)が順番にシリアルモニタに表示されます。</p>
-        <p>このように、シリアルモニタを使うことで、変数の値などプログラムの動作状況をリアルタイムで確認することができます。</p>
+        <p>プログラムを実行すると、<b style="color:#1976d2;">変数brightnessの値(0~255)</b>が順番にシリアルモニタに表示されます。</p>
+        <p>このように、シリアルモニタを使うことで、<b>変数の値などプログラムの動作状況をリアルタイムで確認する</b>ことができます。</p>
         <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
           data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
           data-serial="serial-monitor-text2" onclick="markPageReached(1);">次のページへ</button>
@@ -121,7 +121,7 @@
               プログラムの中で<b style="color:#1976d2;">Serial.begin関数</b>を書き、通信を開始します。
             </li>
             <li><b>シリアルモニタに表示する</b><br>
-              <b style="color:#1976d2;">Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
+              <b style="color:#1976d2;">Serial.print関数</b>または<b style="color:#1976d2;">Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
             </li>
           </ol>
         </div>
@@ -193,7 +193,7 @@
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
           data-error="error-output-text3" data-serial="serial-monitor-text3"
-          onclick="markPageReached(2);">次のページへ</button>
+          onclick="markPageReached(2);" id="topageTest" style="display:none;">次のページへ</button>
         <script>
           setInterval(() => {
             const serialText2 = document.getElementById('serial-monitor-text2')?.textContent;
@@ -201,6 +201,7 @@
               console.log('Helloが表示されています');
               document.getElementById('result1').textContent = "正解です！";
               document.getElementById('result1').style.color = "green";
+              document.getElementById('topageTest').style.display = "inline-block";
             }
           }, 100);
         </script>
@@ -576,6 +577,16 @@
       });
     });
     window.markChapterUnlocked(6);
+
+    if (!localStorage.getItem('chapter6_start') && !localStorage.getItem('chapter6_time')) {
+      localStorage.setItem('chapter6_start', Date.now());
+    }
+    const chapter5_start = parseInt(localStorage.getItem('chapter5_start'));
+    const end = Date.now();
+    const diffMs = end - chapter5_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter5_time', diffSec);
+    localStorage.removeItem('chapter5_start');
   });
   const PAGE_CODES = {
     page1: `
@@ -598,7 +609,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Hello"); 
+  Serial.println(""); 
   delay(100);
 }
 `.trim(),
@@ -610,11 +621,11 @@ void setup() {
 
 byte brightness = 0;
 void loop() {
-  digitalWrite(3, HIGH);
-  Serial.println("LED ON"); 
+  digitalWrite(3, LOW);
+  Serial.println(""); 
   delay(100);
   digitalWrite(3, LOW);
-  Serial.println("LED OFF"); 
+  Serial.println(""); 
   delay(100);
 }
 `.trim(),

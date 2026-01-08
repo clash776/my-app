@@ -153,7 +153,7 @@
             <pre id="error-output-text1"></pre>
           </div>
         </div>
-        <p>プログラムを実行すると、7セグメントLEDがすべて点灯し、右下の点と数字の8が表示されているように見えると思います。</p>
+        <p>プログラムを実行すると、7セグメントLEDが点灯し、数字の8が表示されているように見えると思います。</p>
         <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
             <b style="color:#1976d2;">7セグメントLEDは点灯のさせ方によって、数字やアルファベットを表示させることが出来ます。</b></span></p>
         <p>次のページでは、7セグメントLEDの仕組みについて学びます。</p>
@@ -168,8 +168,10 @@
           <h3 style="margin-bottom:8px;">7セグメントLEDの概要</h3>
           <ul style="margin-bottom:16px;">
             <li>7セグメントLEDは、<span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
-                <b style="color:#1976d2;">7つの棒状LED（セグメント）と1つの小さな点（ドット）の計8個のLED</b></span>で構成されています。</li>
-            <li>各LEDは対応するピンに電流を流すことで点灯します。</li>
+                <b
+                  style="color:#1976d2;">7つの棒状LED（セグメント）と1つの小さな点（ドット）の計8個のLED</b></span>で構成されています。<br><b>(本教材の問題ではドット部分は使用しません)</b>
+            </li>
+            <li>各LEDは<b style="color:#1976d2;">対応するピンに電流を流す</b>ことで点灯します。</li>
             <li>LEDとピンの対応は下の画像の通りとなっています。</li>
           </ul>
           <div
@@ -369,7 +371,8 @@
           setInterval(() => {
             if (JSON.stringify(seg.values) === JSON.stringify(segAns)) {
               console.log("全問正解です！次のページへ行きましょう！", seg.values);
-              document.getElementById('result').textContent = "正解です！確認問題へ行きましょう！";
+              document.getElementById('result').innerHTML = "<b>正解です！確認問題へ行きましょう！</b>";
+              document.getElementById('result').style.color = "green";
               document.getElementById('toTestfrom3').style.display = 'inline';
             }
           }, 100);
@@ -884,6 +887,15 @@
       });
     });
     window.markChapterUnlocked(3);
+    if (!localStorage.getItem('chapter3_start')&&!localStorage.getItem('chapter3_time')) {
+      localStorage.setItem('chapter3_start', Date.now());
+    }
+    const chapter2_start = parseInt(localStorage.getItem('chapter2_start'));
+    const end = Date.now();
+    const diffMs = end - chapter2_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter2_time', diffSec);
+    localStorage.removeItem('chapter2_start');
   });
   const PAGE_CODES = {
     page1: `
@@ -895,7 +907,6 @@ void setup() {
     pinMode(6, OUTPUT);      
     pinMode(7, OUTPUT);   
     pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
 }
 void loop() {
     digitalWrite(2, HIGH);
@@ -905,7 +916,6 @@ void loop() {
     digitalWrite(6, HIGH);
     digitalWrite(7, HIGH);
     digitalWrite(8, HIGH);
-    digitalWrite(9, HIGH);
 }
 `.trim(),
 
@@ -918,39 +928,23 @@ void setup() {
     pinMode(6, OUTPUT);      
     pinMode(7, OUTPUT);   
     pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
 }
 void loop() {
-    digitalWrite(2, HIGH); //1
+    digitalWrite(2, LOW); //1
     digitalWrite(3, LOW); //2
-    digitalWrite(4, HIGH); //3
-    digitalWrite(5, HIGH); //4
+    digitalWrite(4, LOW); //3
+    digitalWrite(5, LOW); //4
     digitalWrite(6, LOW); //5
-    digitalWrite(7, HIGH); //6
-    digitalWrite(8, HIGH); //7
-    digitalWrite(9, LOW); //8
+    digitalWrite(7, LOW); //6
+    digitalWrite(8, LOW); //7
 }
 `.trim(),
     pageTest: `
 void setup() {
-    pinMode(2, OUTPUT);      
-    pinMode(3, OUTPUT);   
-    pinMode(4, OUTPUT);      
-    pinMode(5, OUTPUT);    
-    pinMode(6, OUTPUT);      
-    pinMode(7, OUTPUT);   
-    pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
+
 }
 void loop() {
-    digitalWrite(2, HIGH); //1
-    digitalWrite(3, HIGH); //2
-    digitalWrite(4, HIGH); //3
-    digitalWrite(5, HIGH); //4
-    digitalWrite(6, LOW); //5
-    digitalWrite(7, LOW); //6
-    digitalWrite(8, HIGH); //7
-    digitalWrite(9, LOW); //8
+
 }
 `.trim(),
     pageOmake: `
