@@ -311,7 +311,7 @@
               // 点灯→消灯の瞬間だけ一度だけ表示
               time2 = parseSimTime(statusLabel);
               console.log('LED消灯時の時刻:', time2);
-              if (time2 - time1 > 0.290) {
+              if (0.310 > (time2 - time1) > 0.290) {
                 counter++;
                 console.log(counter);
                 if ((!que2led && (counter >= 2))) {
@@ -691,57 +691,34 @@
   const PAGE_CODES = {
     page1: `
 void setup() {
-    pinMode(7, OUTPUT);             
+
 }
 void loop() {
-    digitalWrite(7, HIGH); 
+
 }
 `.trim(),
     page2: `
 void setup() {
-    pinMode(7, OUTPUT);             
+
 }
 void loop() {
-    digitalWrite(7,HIGH); 
-    delay(300);
-    digitalWrite(7,LOW);
-    delay(300);
-    
+
 }
 `.trim(),
     page3: `
     void setup() {
-    pinMode(2, OUTPUT);      
-    pinMode(3, OUTPUT);   
-    pinMode(4, OUTPUT);      
-    pinMode(5, OUTPUT);    
-    pinMode(6, OUTPUT);      
-    pinMode(7, OUTPUT);   
-    pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
+
 }
 void loop() {
-    digitalWrite(2, HIGH); //1
-    digitalWrite(3, HIGH); //2
-    digitalWrite(4, LOW); //3
-    digitalWrite(5, HIGH); //4
-    digitalWrite(6, HIGH); //5
-    digitalWrite(7, LOW); //6
-    digitalWrite(8, HIGH); //7
-    digitalWrite(9, LOW); //8
+
 }
 `.trim(),
     page4: `
 void setup() {
-    Serial.begin(9600);
+
 }
 void loop() {
-    Serial.println("1"); 
-    delay(100);
-    Serial.println("2"); 
-    delay(100);
-    Serial.println("3"); 
-    delay(100);
+
 }
 `.trim(),
   };

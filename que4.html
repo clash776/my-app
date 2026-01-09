@@ -321,7 +321,7 @@
               // 点灯→消灯の瞬間だけ一度だけ表示
               time2 = parseSimTime(statusLabel);
               console.log('LED消灯時の時刻:', time2);
-              if (time2 - time1 > 0.090) {
+              if (time2 - time1 > 0.090 && 0.11 > time2 - time1) {
                 counter++;
                 console.log(counter);
                 if ((!que2led && (counter >= 3))) {
@@ -534,7 +534,7 @@ void loop() {
 
     pageTest: `
 void setup() {
-          
+
 }
 void loop() {
 

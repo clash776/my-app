@@ -33,6 +33,9 @@
           難しく考えず、教材で行った操作や説明を思い出しながら回答してください。
         </p>
         <p>事後テストの前に確認したいことがある場合は、各章へ戻って確認したり、下のシミュレータを利用して確認しましょう。</p>
+        <p><b>事後テスト終了後、教材に関するアンケートにご協力をお願いします。</b></p>
+        <button onclick="openGoogleForm()">アンケートページへ</button>
+        <p></p>
         <div class="app-container">
           <!-- wokwiオブジェクト部分はそのまま -->
           <div class="leds-circuit" style="position: relative; width: 500px; height: 550px; margin: 0 auto;">
@@ -142,14 +145,14 @@
           showPage(toPage, this);
         });
       });
-      window.markChapterUnlocked(8); 
-      
-    const chaptertest_start = parseInt(localStorage.getItem('chaptertest_start'));
-    const end = Date.now();
-    const diffMs = end - chaptertest_start; // 経過ミリ秒
-    const diffSec = Math.floor(diffMs / 1000); // 経過秒
-    localStorage.setItem('chaptertest_time', diffSec);
-    localStorage.removeItem('chaptertest_start');
+      window.markChapterUnlocked(8);
+
+      const chaptertest_start = parseInt(localStorage.getItem('chaptertest_start'));
+      const end = Date.now();
+      const diffMs = end - chaptertest_start; // 経過ミリ秒
+      const diffSec = Math.floor(diffMs / 1000); // 経過秒
+      localStorage.setItem('chaptertest_time', diffSec);
+      localStorage.removeItem('chaptertest_start');
     });
     const PAGE_CODES = {
       page1: `
@@ -161,6 +164,31 @@ void loop() {
 }
 `.trim(),
     };
+
+    function openGoogleForm() {
+      // ここで送信したい値を変数で用意
+      const val1 = ''; // entry.864638212
+      const val2 = ''; // entry.1368732382
+      // チャプター1～6とテストのタイムを空白区切りでval3に格納
+      const val3 = [
+        localStorage.getItem('chapter1_time') || '',
+        localStorage.getItem('chapter2_time') || '',
+        localStorage.getItem('chapter3_time') || '',
+        localStorage.getItem('chapter4_time') || '',
+        localStorage.getItem('chapter5_time') || '',
+        localStorage.getItem('chapter6_time') || '',
+        localStorage.getItem('chaptertest_time') || ''
+      ].join(' ');
+      const val4 = ''; // entry.2085820087
+      // Googleフォームの事前入力リンクを組み立て
+      const url = 'https://docs.google.com/forms/d/e/1FAIpQLSdFGnpoKfmbs_KbBtaxJzevw9Ar465Ge1J7WwANI6vVMsnupA/viewform?usp=pp_url'
+        + '&entry.864638212=' + encodeURIComponent(val1)
+        + '&entry.1368732382=' + encodeURIComponent(val2)
+        + '&entry.802561133=' + encodeURIComponent(val3)
+        + '&entry.2085820087=' + encodeURIComponent(val4)
+        + '&pageHistory=0,1';
+      window.open(url, '_blank'); // 新しいタブで開く
+    }
   </script>
 </body>
 </div>
