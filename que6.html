@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
@@ -88,7 +88,7 @@
             <div class="serial-monitor-container" style="width: 400px; height: 300px;">
               <div class="bar"
                 style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
-                Serial Monitor
+                Serial Monitor　(9600bps)　
               </div>
               <div class="serial-monitor"
                 style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
@@ -121,7 +121,8 @@
               プログラムの中で<b style="color:#1976d2;">Serial.begin関数</b>を書き、通信を開始します。
             </li>
             <li><b>シリアルモニタに表示する</b><br>
-              <b style="color:#1976d2;">Serial.print関数</b>または<b style="color:#1976d2;">Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
+              <b style="color:#1976d2;">Serial.print関数</b>または<b
+                style="color:#1976d2;">Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
             </li>
           </ol>
         </div>
@@ -171,7 +172,7 @@
             <div class="serial-monitor-container" style="width: 400px; height: 300px;">
               <div class="bar"
                 style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
-                Serial Monitor
+                Serial Monitor　(9600bps)
               </div>
               <div class="serial-monitor"
                 style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
@@ -192,8 +193,8 @@
           data-serial="serial-monitor-text1">前のページへ</button>
         <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
           data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
-          data-error="error-output-text3" data-serial="serial-monitor-text3"
-          onclick="markPageReached(2);" id="topageTest" style="display:none;">次のページへ</button>
+          data-error="error-output-text3" data-serial="serial-monitor-text3" onclick="markPageReached(2);"
+          id="topageTest" style="display:none;">次のページへ</button>
         <script>
           setInterval(() => {
             const serialText2 = document.getElementById('serial-monitor-text2')?.textContent;
@@ -319,7 +320,7 @@
             <div class="serial-monitor-container" style="width: 400px; height: 300px;">
               <div class="bar"
                 style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
-                Serial Monitor
+                Serial Monitor　(9600bps)　
               </div>
               <div class="serial-monitor"
                 style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
@@ -521,6 +522,37 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('page6_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+
+    // 各Runボタンにイベント登録
+    const pageKeys = ['page1', 'page2', 'pageTest', 'pageOmake'];
+    ['run-button1', 'run-button2', 'run-button3', 'run-button4'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES[pageKeys[idx]] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('page6_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
   // ページ到達状況を管理（例：最初のページだけ到達済み）
   let reachedPages6 = JSON.parse(localStorage.getItem('reachedPages6')) || [true, false, false, false, false, false, false];
   // ページリンクを取得
@@ -628,10 +660,30 @@ void loop() {
   delay(200);
 }
 `.trim(),
-    pageOmake: `
-
-`.trim(),
   };
+
+  // ラジオボタンの保存・復元
+  document.addEventListener('DOMContentLoaded', function () {
+    // 復元
+    for (let i = 1; i <= 5; i++) {
+      const saved = localStorage.getItem('que6_q' + i);
+      if (saved) {
+        const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+        const radio = document.querySelector(selector);
+        if (radio) radio.checked = true;
+      }
+    }
+    // 変更時に保存
+    for (let i = 1; i <= 5; i++) {
+      document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+        radio.addEventListener('change', function () {
+          if (this.checked) {
+            localStorage.setItem('que6_q' + i, this.value);
+          }
+        });
+      });
+    }
+  });
 </script>
 
 </html>

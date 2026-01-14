@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>test</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
@@ -164,11 +164,30 @@
             if (que1) return;
             const isLedOn = led && led.value === true;
             if (isLedOn) {
-              document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              // プログラム問題の正解状況を保存
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[0]) {
+                window.testCorrectStatus[0][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
             }
-            if (result1_1 && result1_2 && result1_1.textContent != "" && result1_2.textContent != "") {
-              console.log("全問正解");
-              que1 = true;
+
+            if (window.testCorrectStatus && window.testCorrectStatus[0]) {
+              const arr = window.testCorrectStatus[0];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result1-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解１");
+                que1 = true;
+              } else if (arr[0]) {
+                document.getElementById('result1-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                document.getElementById('result1-2').innerHTML = "";
+              } else if (arr[1]) {
+                document.getElementById('result1-1').innerHTML = "";
+                document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result1-1').innerHTML = "";
+                document.getElementById('result1-2').innerHTML = "";
+              }
             }
           }, 10);
         </script>
@@ -329,13 +348,32 @@
             }
 
             if (que2code && que2led) {
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[1]) {
+                window.testCorrectStatus[1][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
               document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
 
             prevValue = value;
-            if (result2_1 && result2_2 && result2_1.textContent != "" && result2_2.textContent != "") {
-              console.log("全問正解");
-              que2 = true;
+
+            if (window.testCorrectStatus && window.testCorrectStatus[1]) {
+              const arr = window.testCorrectStatus[1];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result2-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解２");
+                que2 = true;
+              } else if (arr[0]) {
+                document.getElementById('result2-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result2-2').innerHTML = "";
+              } else if (arr[1]) {
+                document.getElementById('result2-1').innerHTML = "";
+                document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result2-1').innerHTML = "";
+                document.getElementById('result2-2').innerHTML = "";
+              }
             }
           }, 10);
 
@@ -441,6 +479,7 @@
           const result3_1 = document.getElementById('result3-1');
           const result3_2 = document.getElementById('result3-2');
           let que3 = false;
+          let que3_1 = false;
           const questions3 = [
             {
               text: "Q13. Arduino のプログラムで命令文の最後に必ずつける記号はどれですか？",
@@ -512,11 +551,32 @@
           setInterval(() => {
             if (que3) return;
             if (JSON.stringify(seg.values) === JSON.stringify(segAns1)) {
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[2]) {
+                window.testCorrectStatus[2][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
               document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
-            if (result3_1 && result3_2 && result3_1.textContent != "" && result3_2.textContent != "") {
-              console.log("全問正解");
-              que3 = true;
+
+            if (window.testCorrectStatus && window.testCorrectStatus[2]) {
+              const arr = window.testCorrectStatus[2];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result3-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解３");
+                que3 = true;
+              } else if (arr[0]) {
+                if (que3_1) return;
+                document.getElementById('result3-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result3-2').innerHTML = "";
+                que3_1 = true;
+              } else if (arr[1]) {
+                document.getElementById('result3-1').innerHTML = "";
+                document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result3-1').innerHTML = "";
+                document.getElementById('result3-2').innerHTML = "";
+              }
             }
           }, 100);
 
@@ -542,7 +602,7 @@
             <div class="serial-monitor-container" style="width: 400px; height: 300px;">
               <div class="bar"
                 style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
-                Serial Monitor
+                Serial Monitor　(9600bps)　
               </div>
               <div class="serial-monitor"
                 style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
@@ -565,6 +625,7 @@
           const result4_1 = document.getElementById('result4-1');
           const result4_2 = document.getElementById('result4-2');
           let que4 = false;
+          let que4_1 = false;
           const questions4 = [
             {
               text: "Q19. analogWriteでLEDを制御するとき、255を指定するとどうなりますか？",
@@ -638,12 +699,32 @@
             if (que4) return;
             const serialText = document.getElementById('serial-monitor-text4')?.textContent;
             if (serialText && (serialText.includes(correctSerial1) || serialText.includes(correctSerial2))) {
-              document.getElementById('result4-2').textContent = "正解です！";
-              document.getElementById('result4-2').style.color = "green";
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[3]) {
+                window.testCorrectStatus[3][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
+              document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
             }
-            if (result4_1 && result4_2 && result4_1.textContent != "" && result4_2.textContent != "") {
-              console.log("全問正解");
-              que4 = true;
+
+            if (window.testCorrectStatus && window.testCorrectStatus[3]) {
+              const arr = window.testCorrectStatus[3];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result4-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解４");
+                que4 = true;
+              } else if (arr[0]) {
+                if (que4_1) return;
+                document.getElementById('result4-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result4-2').innerHTML = "";
+                que4_1 = true;
+              } else if (arr[1]) {
+                document.getElementById('result4-1').innerHTML = "";
+                document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result4-1').innerHTML = "";
+                document.getElementById('result4-2').innerHTML = "";
+              }
             }
           }, 100);
         </script>
@@ -688,6 +769,38 @@
       }
     }
   }
+
+  // --- Runボタンでコード保存 ---
+
+  // Runボタンイベント登録
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('pagetest_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+    // 各Runボタンにイベント登録
+    ['run-button1', 'run-button2', 'run-button3', 'run-button4'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES['page' + (idx + 1)] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('pagetest_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
   const PAGE_CODES = {
     page1: `
 void setup() {
@@ -715,10 +828,11 @@ void loop() {
 `.trim(),
     page4: `
 void setup() {
-
+    Serial.begin(9600);
 }
 void loop() {
 
+    delay(100);
 }
 `.trim(),
   };
@@ -734,7 +848,7 @@ void loop() {
       });
     });
     window.markChapterUnlocked(7);
-    
+
     if (!localStorage.getItem('chaptertest_start') && !localStorage.getItem('chaptertest_time')) {
       localStorage.setItem('chaptertest_start', Date.now());
     }
@@ -744,8 +858,36 @@ void loop() {
     const diffSec = Math.floor(diffMs / 1000); // 経過秒
     localStorage.setItem('chapter6_time', diffSec);
     localStorage.removeItem('chapter6_start');
-  });
 
+    // --- 正解状況のローカルストレージ初期化 ---
+    // 二次元配列: [ [選択問題, プログラム問題], ... ]
+    const correctStatusKey = 'test_correct_status';
+    let correctStatus = localStorage.getItem(correctStatusKey);
+    const defaultStatus = [
+      [false, false], // 大問1: [選択, プログラム]
+      [false, false], // 大問2
+      [false, false], // 大問3
+      [false, false], // 大問4
+    ];
+    if (correctStatus) {
+      try {
+        window.testCorrectStatus = JSON.parse(correctStatus);
+        // 配列の形が違う場合は初期化
+        if (!Array.isArray(window.testCorrectStatus) || window.testCorrectStatus.length !== 4) {
+          window.testCorrectStatus = defaultStatus;
+          localStorage.setItem(correctStatusKey, JSON.stringify(window.testCorrectStatus));
+        }
+      } catch (e) {
+        window.testCorrectStatus = defaultStatus;
+        localStorage.setItem(correctStatusKey, JSON.stringify(window.testCorrectStatus));
+      }
+    } else {
+      window.testCorrectStatus = defaultStatus;
+      localStorage.setItem(correctStatusKey, JSON.stringify(window.testCorrectStatus));
+    }
+    // window.testCorrectStatus を使って各ページの正解状況を管理できます
+  });
+  // ラジオボタンの選択状態をローカルストレージに保存
   document.addEventListener('change', function (e) {
     if (e.target.type === 'radio') {
       const { name, value } = e.target;
@@ -764,9 +906,13 @@ void loop() {
   });
 
   setInterval(() => {
-    // console.log('チェック中:', que1, que2, que3, que4);
-    if (que1 && que2 && que3 && que4) {
-      // すべて正解したらid=clearのページを表示
+    // 全ての大問の[選択, プログラム]がtrueか判定
+    if (
+      window.testCorrectStatus &&
+      Array.isArray(window.testCorrectStatus) &&
+      window.testCorrectStatus.length === 4 &&
+      window.testCorrectStatus.every(arr => Array.isArray(arr) && arr[0] === true && arr[1] === true)
+    ) {
       const clearDiv = document.getElementById('clear');
       if (clearDiv) clearDiv.style.display = 'block';
     }

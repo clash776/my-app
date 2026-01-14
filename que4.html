@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>delay関数</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
@@ -453,6 +453,38 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('page4_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+
+    // 各Runボタンにイベント登録
+    const pageKeys = ['page1','pageTest', 'pageOmake'];
+    ['run-button1', 'run-button2', 'run-button3'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES[pageKeys[idx]] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('page4_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
+
   // ページ到達状況を管理（例：最初のページだけ到達済み）
   let reachedPages4 = JSON.parse(localStorage.getItem('reachedPages4')) || [true, false, false, false, false, false, false];
   // ページリンクを取得
@@ -575,6 +607,28 @@ void loop() {
 `.trim(),
   };
 
+  // ラジオボタンの保存・復元
+  document.addEventListener('DOMContentLoaded', function () {
+    // 復元
+    for (let i = 1; i <= 4; i++) {
+      const saved = localStorage.getItem('que4_q' + i);
+      if (saved) {
+        const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+        const radio = document.querySelector(selector);
+        if (radio) radio.checked = true;
+      }
+    }
+    // 変更時に保存
+    for (let i = 1; i <= 4; i++) {
+      document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+        radio.addEventListener('change', function () {
+          if (this.checked) {
+            localStorage.setItem('que4_q' + i, this.value);
+          }
+        });
+      });
+    }
+  });
 
 </script>
 </body>

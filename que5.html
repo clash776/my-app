@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PWM制御</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
@@ -54,7 +54,7 @@
         <p>今回のプログラムでは、11番ピンを<b style="color:#1976d2;">PWM出力用</b>として設定し、LEDの明るさを段階的に変化させています。</p>
         <p>まずは、プログラムを動作させてみましょう。</p>
         <p><b>(本ページではLEDの明るさを制御するために0~255の値を扱えるbyte型の変数[2章おまけ]を使用しています。
-          以降のページでは使用しません。)</b></p>
+            以降のページでは使用しません。)</b></p>
 
         <div class="app-container">
           <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
@@ -513,6 +513,37 @@
 <script>
   let selected_editor = '#editor1';
   const readOnly = false;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('page5_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+
+    // 各Runボタンにイベント登録
+    const pageKeys = ['page1', 'page2', 'pageTest', 'pageOmake'];
+    ['run-button1', 'run-button2', 'run-button3', 'run-button4'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES[pageKeys[idx]] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('page5_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
   // ページ到達状況を管理（例：最初のページだけ到達済み）
   let reachedPages5 = JSON.parse(localStorage.getItem('reachedPages5')) || [true, false, false, false, false, false, false];
   // ページリンクを取得
@@ -630,6 +661,29 @@ void loop() {
 }
 `.trim(),
   };
+
+  // ラジオボタンの保存・復元
+  document.addEventListener('DOMContentLoaded', function () {
+    // 復元
+    for (let i = 1; i <= 5; i++) {
+      const saved = localStorage.getItem('que5_q' + i);
+      if (saved) {
+        const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+        const radio = document.querySelector(selector);
+        if (radio) radio.checked = true;
+      }
+    }
+    // 変更時に保存
+    for (let i = 1; i <= 5; i++) {
+      document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+        radio.addEventListener('change', function () {
+          if (this.checked) {
+            localStorage.setItem('que5_q' + i, this.value);
+          }
+        });
+      });
+    }
+  });
 
 </script>
 </body>

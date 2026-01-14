@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第１章　マイコンとは何か</title>
-  <script type="module" crossorigin src="/my-app/assets/main1-DNZuyHBV.js"></script>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
   <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
 </head>
 
@@ -670,6 +670,28 @@ void loop() {
 }
 `.trim(),
     };
+    // ラジオボタンの保存・復元
+    document.addEventListener('DOMContentLoaded', function () {
+      // 復元
+      for (let i = 1; i <= 8; i++) {
+        const saved = localStorage.getItem('que1_q' + i);
+        if (saved) {
+          const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+          const radio = document.querySelector(selector);
+          if (radio) radio.checked = true;
+        }
+      }
+      // 変更時に保存
+      for (let i = 1; i <= 8; i++) {
+        document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+          radio.addEventListener('change', function () {
+            if (this.checked) {
+              localStorage.setItem('que1_q' + i, this.value);
+            }
+          });
+        });
+      }
+    });
 
   </script>
 </body>
