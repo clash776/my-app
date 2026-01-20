@@ -174,18 +174,14 @@
             if (window.testCorrectStatus && window.testCorrectStatus[0]) {
               const arr = window.testCorrectStatus[0];
               if (arr[0] && arr[1]) {
-                document.getElementById('result1-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
                 console.log("全問正解１");
                 que1 = true;
               } else if (arr[0]) {
-                document.getElementById('result1-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
                 document.getElementById('result1-2').innerHTML = "";
               } else if (arr[1]) {
-                document.getElementById('result1-1').innerHTML = "";
                 document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
               } else {
-                document.getElementById('result1-1').innerHTML = "";
                 document.getElementById('result1-2').innerHTML = "";
               }
             }
