@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">まとめテスト</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1" data-serial="serial-monitor-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ1
+          </a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2" data-serial="serial-monitor-text2"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ2
+          </a>
+          <a href="#" class="page-link" data-to="page3" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3" data-serial="serial-monitor-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ3
+          </a>
+          <a href="#" class="page-link" data-to="page4" data-editor="#editor4" data-run="run-button4"
+            data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+            data-error="error-output-text4" data-serial="serial-monitor-text4"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">ページ4
+          </a>
+        </div>
+        <to-final></to-final>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="page1" style="display:block;">
+        <h2>まとめテスト</h2>
+        <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
+        <div id="question-area1"></div>
+        <div id="result1-1" style="margin-bottom:24px;"></div>
+        <button type="button" onclick="window.checkAnswers(correct1,'result1-1')">回答チェック</button>
+        <p><b>Q6. LEDを点灯させるプログラムを完成させて下さい。</b></p>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+        </div>
+        <div id="result1-2" style="margin-bottom:24px;"></div>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          data-serial="serial-monitor-text2">次のページへ</button>
+        <script>
+          const result1_1 = document.getElementById('result1-1');
+          const result1_2 = document.getElementById('result1-2');
+          let que1 = false;
+          const questions1 = [
+            {
+              text: "Q1. マイコンの説明として正しいものはどれですか？",
+              name: "q1",
+              choices: [
+                "大型のゲーム専用コンピュータである",
+                "センサーの情報を受け取り、LEDやモーターなどを制御できる小型コンピュータ",
+                "インターネット接続だけを行う装置"
+              ]
+            },
+            {
+              text: "Q2. 7セグメントLEDの構成として正しいものはどれですか？",
+              name: "q2",
+              choices: [
+                "7つのLEDだけで構成される",
+                "7つの棒状LEDと1つの点の計8個で構成される",
+                "8つの棒状LEDと1つの点の計9個で構成される"
+              ]
+            },
+            {
+              text: "Q3. delay(1000); と書いたとき、プログラムはどうなりますか？",
+              name: "q3",
+              choices: [
+                "1ミリ秒だけ停止する",
+                "0.1秒だけ停止する",
+                "1000ミリ秒だけ停止する"
+              ]
+            },
+            {
+              text: "Q4. ArduinoでPWM制御を行いたいときに使う関数はどれですか？",
+              name: "q4",
+              choices: [
+                "digitalWrite",
+                "pinMode",
+                "analogWrite"
+              ]
+            },
+            {
+              text: "Q5. シリアル通信を開始するために、最初に書く必要がある関数はどれですか？",
+              name: "q5",
+              choices: [
+                "Serial.print",
+                "Serial.begin",
+                "Serial.start"
+              ]
+            }
+          ];
+          let html1 = "";
+          questions1.forEach(q => {
+            html1 += `<p><b>${q.text}</b></p><form name="${q.name}">`;
+            q.choices.forEach((choice, i) => {
+              html1 += `\n  <div class=\"form-row\">`;
+              html1 += `\n    <input type=\"radio\" name=\"${q.name}\" value=\"${i + 1}\">`;
+              html1 += `\n    <label>${choice}</label>`;
+              html1 += `\n  </div>`;
+            });
+            html1 += `</form>`;
+          });
+          document.getElementById("question-area1").innerHTML = html1;
+
+          const correct1 = {
+            q1: [1], // Q1は2番目（index:1）が正解
+            q2: [1], // Q2は2番目（index:1）が正解
+            q3: [2], // Q3は1番目（index:0）が正解
+            q4: [2], // Q4は3番目（index:2）が正解
+            q5: [1], // Q5は2番目（index:1）が正解
+          };
+
+          const led = document.querySelector('wokwi-led[pin="7"]');
+          setInterval(() => {
+            if (que1) return;
+            const isLedOn = led && led.value === true;
+            if (isLedOn) {
+              // プログラム問題の正解状況を保存
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[0]) {
+                window.testCorrectStatus[0][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
+            }
+
+            if (window.testCorrectStatus && window.testCorrectStatus[0]) {
+              const arr = window.testCorrectStatus[0];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result1-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解１");
+                que1 = true;
+              } else if (arr[0]) {
+                document.getElementById('result1-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                document.getElementById('result1-2').innerHTML = "";
+              } else if (arr[1]) {
+                document.getElementById('result1-1').innerHTML = "";
+                document.getElementById('result1-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result1-1').innerHTML = "";
+                document.getElementById('result1-2').innerHTML = "";
+              }
+            }
+          }, 10);
+        </script>
+      </div>
+      <div id="page2" style="display:none;">
+        <h2>まとめテスト</h2>
+        <div id="question-area2"></div>
+        <div id="result2-1" style="margin-bottom:24px;"></div>
+        <button type="button" onclick="window.checkAnswers(correct2,'result2-1')">回答チェック</button>
+        <p><b>Q12. 0.3秒ごとにLEDが点灯するプログラムを作成してください。</b></p>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="test-led2" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button2">Run</button>
+            <button id="stop-button2" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label2"></div>
+          </div>
+          <div class="code-editor" id="editor2"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <div id="result2-2" style="margin-bottom:24px;"></div>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          data-serial="serial-monitor-text1">前のページへ</button>
+        <button class="page-nav" data-to="page3" data-editor="#editor3" data-run="run-button3" data-stop="stop-button3"
+          data-status="status-label3" data-compiler="compiler-output-text3" data-error="error-output-text3"
+          data-serial="serial-monitor-text3">次のページへ</button>
+        <script>
+          const result2_1 = document.getElementById('result2-1');
+          const result2_2 = document.getElementById('result2-2');
+          let que2 = false;
+
+          const statusLabel = document.getElementById('status-label2');
+          const LED7 = document.querySelector('wokwi-led[pin="7"][id="test-led2"]');
+          let prevValue = LED7.value;
+          let time1;
+          let time2;
+          let counter = 0;
+          const questions2 = [
+            {
+              text: "Q7. delay関数の値が小さすぎる場合（例：delay(1);）の問題として正しいものはどれですか？",
+              name: "q7",
+              choices: [
+                "プログラム(LEDなど)の変化が速すぎて見えなくなる",
+                "プログラムが強制終了する",
+                "Arduinoが自動的に最適なdelayに調整してくれる"
+              ]
+            },
+            {
+              text: "Q8. カソードコモン型7セグメントLEDをArduinoで制御するときの接続として正しいものはどれですか？",
+              name: "q8",
+              choices: [
+                "アノード側ピン（1～8）をGNDに接続し、共通端子を出力ピンに接続する",
+                "アノード側ピン（1～8）を入力ピンに接続し、共通端子をGNDに接続する",
+                "アノード側ピン（1～8）を出力ピンに接続し、共通端子をGNDに接続する"
+              ]
+            },
+            {
+              text: "Q9. analogWrite(ピン番号, 値) の「値」に指定できる範囲はどれですか？",
+              name: "q9",
+              choices: [
+                "0〜1",
+                "0〜100",
+                "0〜255"
+              ]
+            },
+            {
+              text: "Q10. Serial.begin(9600); の「9600」は何を表していますか？",
+              name: "q10",
+              choices: [
+                "LEDの明るさ",
+                "通信速度（ボーレート）",
+                "デジタルピン番号"
+              ]
+            },
+            {
+              text: "Q11. digitalWrite(3, HIGH); の説明として正しいものはどれですか？",
+              name: "q11",
+              choices: [
+                "3番ピンを電圧あり（ON）に設定する",
+                "3番ピンを入力用に設定する",
+                "3番ピンの電圧を読み取る"
+              ]
+            }
+          ];
+          let html2 = "";
+          questions2.forEach(q => {
+            html2 += `<p><b>${q.text}</b></p><form name="${q.name}">`;
+            q.choices.forEach((choice, i) => {
+              html2 += `\n  <div class=\"form-row\">`;
+              html2 += `\n    <input type=\"radio\" name=\"${q.name}\" value=\"${i + 1}\">`;
+              html2 += `\n    <label>${choice}</label>`;
+              html2 += `\n  </div>`;
+            });
+            html2 += `</form>`;
+          });
+          document.getElementById("question-area2").innerHTML = html2;
+          const correct2 = {
+            q7: [0], // Q1は2番目（index:1）が正解
+            q8: [2], // Q2は2番目（index:1）が正解
+            q9: [2], // Q3は1番目（index:0）が正解
+            q10: [1], // Q4は3番目（index:2）が正解
+            q11: [0], // Q5は2番目（index:1）が正解
+          };
+
+          let que2code = false;
+          let que2led = false;
+
+          setInterval(() => {
+            if (que2) return;
+            const value = LED7.value;
+            if (!prevValue && value) {
+              // 消灯→点灯の瞬間だけ一度だけ表示
+              time1 = parseSimTime(statusLabel);
+              console.log('LED点灯時の時刻:', time1);
+            }
+            if (prevValue && !value) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED消灯時の時刻:', time2);
+              if (0.310 > (time2 - time1) > 0.290) {
+                counter++;
+                console.log(counter);
+                if ((!que2led && (counter >= 2))) {
+                  que2led = true;
+                }
+              } else {
+                counter = 0;
+              }
+            }
+            // window.codeがundefined/nullでない場合のみ判定
+            if (typeof window.code === 'string') {
+              if (window.code.includes("delay(300);")) {
+                que2code = true;
+              }
+            }
+
+            if (que2code && que2led) {
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[1]) {
+                window.testCorrectStatus[1][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
+              document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+            }
+
+            prevValue = value;
+
+            if (window.testCorrectStatus && window.testCorrectStatus[1]) {
+              const arr = window.testCorrectStatus[1];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result2-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解２");
+                que2 = true;
+              } else if (arr[0]) {
+                document.getElementById('result2-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result2-2').innerHTML = "";
+              } else if (arr[1]) {
+                document.getElementById('result2-1').innerHTML = "";
+                document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result2-1').innerHTML = "";
+                document.getElementById('result2-2').innerHTML = "";
+              }
+            }
+          }, 10);
+
+        </script>
+      </div>
+      <div id="page3" style="display:none;">
+        <h2>まとめテスト</h2>
+        <div id="question-area3"></div>
+        <div id="result3-1" style="margin-bottom:24px;"></div>
+        <button type="button" onclick="window.checkAnswers(correct3,'result3-1')">回答チェック</button>
+        <p><b>Q18. 7セグメントに2を表示するプログラムを作成してください。</b></p>
+        <div class="app-container">
+          <!-- wokwiオブジェクト部分はそのまま -->
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-7segment id="segment" color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+            <wokwi-resistor value="200"
+              style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
+
+
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 2番ピンへ -->
+              <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+              <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+              <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+              <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+              <!-- 3番ピンへ -->
+              <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+              <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+              <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+              <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+              <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+              <!-- 4番ピンへ -->
+              <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+              <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+              <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+              <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+              <!-- 5番ピンへ -->
+              <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+              <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+              <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+              <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+              <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+              <!-- 6番ピンへ -->
+              <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+              <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+              <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+              <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+              <!-- 7番ピンへ -->
+              <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+              <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+              <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+              <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <!-- 8番ピンへ -->
+              <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+              <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+              <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+              <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
+              <!-- GNDへ -->
+              <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+              <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+              <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+              <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+              <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button3">Run</button>
+            <button id="stop-button3" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label3"></div>
+          </div>
+          <div class="code-editor" id="editor3"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
+        </div>
+        <div id="result3-2" style="margin-bottom:24px;"></div>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          data-serial="serial-monitor-text2">前のページへ</button>
+
+        <button class="page-nav" data-to="page4" data-editor="#editor4" data-run="run-button4" data-stop="stop-button4"
+          data-status="status-label4" data-compiler="compiler-output-text4" data-error="error-output-text4"
+          data-serial="serial-monitor-text4">次のページへ</button>
+        <script>
+          const result3_1 = document.getElementById('result3-1');
+          const result3_2 = document.getElementById('result3-2');
+          let que3 = false;
+          let que3_1 = false;
+          const questions3 = [
+            {
+              text: "Q13. Arduino のプログラムで命令文の最後に必ずつける記号はどれですか？",
+              name: "q13",
+              choices: [
+                "セミコロン（;）",
+                "カンマ（,）",
+                "ピリオド（.）"
+              ]
+            },
+            {
+              text: "Q14. digitalWriteとanalogWriteの違いとして正しいものはどれですか？",
+              name: "q14",
+              choices: [
+                "analogWriteはHIGHかLOWしか出力できない",
+                "digitalWriteは0〜255まで細かく出力できる",
+                "digitalWriteは2つの値しか指定できないが、analogWriteは256段階で出力を調整できる"
+              ]
+            },
+            {
+              text: "Q15. 7セグメントLEDが点灯する仕組みとして正しいものはどれですか？(カソードコモン型)",
+              name: "q15",
+              choices: [
+                "各LEDに対応するピンへ電流を流すことで点灯する",
+                "ピンに電圧がかかると7セグメントLED全体が一度に点灯する",
+                "各セグメントは共通のピンで制御される"
+              ]
+            },
+            {
+              text: "Q16. LEDを接続する正しい順番はどれですか？",
+              name: "q16",
+              choices: [
+                "GND → 抵抗 → LED → 出力ピン",
+                "出力ピン → LEDアノード → LEDカソード → 抵抗 → GND",
+                "LEDのアノード → 出力ピン → 抵抗 → GND"
+              ]
+            },
+            {
+              text: "Q17. シリアルモニタとは何に使う機能ですか？",
+              name: "q17",
+              choices: [
+                "LEDの明るさを調整するための機能",
+                "Arduinoのプログラムを保存するための機能",
+                "マイコンとパソコン間でデータを送受信したり、プログラムの動作を確認するための機能"
+              ]
+            }
+          ];
+          let html3 = "";
+          questions3.forEach(q => {
+            html3 += `<p><b>${q.text}</b></p><form name="${q.name}">`;
+            q.choices.forEach((choice, i) => {
+              html3 += `\n  <div class=\"form-row\">`;
+              html3 += `\n    <input type=\"radio\" name=\"${q.name}\" value=\"${i + 1}\">`;
+              html3 += `\n    <label>${choice}</label>`;
+              html3 += `\n  </div>`;
+            });
+            html3 += `</form>`;
+          });
+          document.getElementById("question-area3").innerHTML = html3;
+          const correct3 = {
+            q13: [0], // Q1は2番目（index:1）が正解
+            q14: [2], // Q2は2番目（index:1）が正解
+            q15: [0], // Q3は1番目（index:0）が正解
+            q16: [1], // Q4は3番目（index:2）が正解
+            q17: [2], // Q5は2番目（index:1）が正解
+          };
+          seg = document.querySelector('wokwi-7segment[id="segment"]');
+          const segAns1 = [1, 1, 0, 1, 1, 0, 1, 0];
+          setInterval(() => {
+            if (que3) return;
+            if (JSON.stringify(seg.values) === JSON.stringify(segAns1)) {
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[2]) {
+                window.testCorrectStatus[2][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
+              document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+            }
+
+            if (window.testCorrectStatus && window.testCorrectStatus[2]) {
+              const arr = window.testCorrectStatus[2];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result3-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解３");
+                que3 = true;
+              } else if (arr[0]) {
+                if (que3_1) return;
+                document.getElementById('result3-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result3-2').innerHTML = "";
+                que3_1 = true;
+              } else if (arr[1]) {
+                document.getElementById('result3-1').innerHTML = "";
+                document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result3-1').innerHTML = "";
+                document.getElementById('result3-2').innerHTML = "";
+              }
+            }
+          }, 100);
+
+        </script>
+      </div>
+      <div id="page4" style="display:none;">
+        <h2>まとめテスト</h2>
+        <div id="question-area4"></div>
+        <div id="result4-1" style="margin-bottom:24px;"></div>
+        <button type="button" onclick="window.checkAnswers(correct4,'result4-1')">回答チェック</button>
+        <p><b>Q18. シリアルモニタに、0.1秒ごとに「1、2、3」を順番に表示するプログラムを作成してください。</b></p>
+        <div class="app-container">
+          <div class="editor-container" style="width: 900px; height: 350px; display: flex;">
+            <div class="code-editor-container" style="width: 500px; height: 300px;">
+              <div class="toolbar">
+                <button id="run-button4">Run</button>
+                <button id="stop-button4" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label4"></div>
+              </div>
+              <div class="code-editor" id="editor4"></div>
+            </div>
+            <div class="serial-monitor-container" style="width: 400px; height: 300px;">
+              <div class="bar"
+                style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
+                Serial Monitor　(9600bps)　
+              </div>
+              <div class="serial-monitor"
+                style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
+                <pre id="serial-monitor-text4"></pre>
+              </div>
+            </div>
+          </div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text4"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text4"></pre>
+          </div>
+          <div id="result4-2" style="margin-bottom:24px;"></div>
+        </div>
+        <button class="page-nav" data-to="page3" data-editor="#editor3" data-run="run-button3" data-stop="stop-button3"
+          data-status="status-label3" data-compiler="compiler-output-text3" data-error="error-output-text3"
+          data-serial="serial-monitor-text3">前のページへ</button>
+        <script>
+          const result4_1 = document.getElementById('result4-1');
+          const result4_2 = document.getElementById('result4-2');
+          let que4 = false;
+          let que4_1 = false;
+          const questions4 = [
+            {
+              text: "Q19. analogWriteでLEDを制御するとき、255を指定するとどうなりますか？",
+              name: "q19",
+              choices: [
+                "中くらいの明るさになる",
+                "完全に消灯する",
+                "最も明るく点灯する"
+              ]
+            },
+            {
+              text: "Q20. 出力ピンからLEDに電流を流すために使う関数はどれですか？",
+              name: "q20",
+              choices: [
+                "digitalWrite関数",
+                "pinMode関数",
+                "analogWrite関数"
+              ]
+            },
+            {
+              text: "Q21. Serial.print と Serial.println の違いとして正しいものはどれですか？",
+              name: "q21",
+              choices: [
+                "どちらも改行する",
+                "Serial.printは改行し、Serial.printlnは改行しない",
+                "Serial.printlnは改行し、Serial.printは改行しない"
+              ]
+            },
+            {
+              text: "Q22. ピンの設定を行うために使用する関数はどれですか？",
+              name: "q22",
+              choices: [
+                "pinMode関数",
+                "digitalWrite関数",
+                "analogRead関数"
+              ]
+            },
+            {
+              text: "Q23. アノードコモン型・カソードコモン型の説明として正しいものはどれですか？",
+              name: "q23",
+              choices: [
+                "アノード側がまとめられているものがカソードコモン型",
+                "どちらもすべてのピンが独立している",
+                "カソード側がまとめられているものがカソードコモン型"
+              ]
+            }
+          ];
+          let html4 = "";
+          questions4.forEach(q => {
+            html4 += `<p><b>${q.text}</b></p><form name="${q.name}">`;
+            q.choices.forEach((choice, i) => {
+              html4 += `\n  <div class=\"form-row\">`;
+              html4 += `\n    <input type=\"radio\" name=\"${q.name}\" value=\"${i + 1}\">`;
+              html4 += `\n    <label>${choice}</label>`;
+              html4 += `\n  </div>`;
+            });
+            html4 += `</form>`;
+          });
+          document.getElementById("question-area4").innerHTML = html4;
+          const correct4 = {
+            q19: [2], // Q1は2番目（index:1）が正解
+            q20: [0], // Q2は2番目（index:1）が正解
+            q21: [2], // Q3は1番目（index:0）が正解
+            q22: [0], // Q4は3番目（index:2）が正解
+            q23: [2], // Q5は2番目（index:1）が正解
+          };
+          const correctSerial1 = ("123123");
+          const correctSerial2 = ("1\r\n2\r\n3\r\n1\r\n2\r\n3\r\n");
+
+          setInterval(() => {
+            if (que4) return;
+            const serialText = document.getElementById('serial-monitor-text4')?.textContent;
+            if (serialText && (serialText.includes(correctSerial1) || serialText.includes(correctSerial2))) {
+              if (window.testCorrectStatus && Array.isArray(window.testCorrectStatus) && window.testCorrectStatus[3]) {
+                window.testCorrectStatus[3][1] = true;
+                localStorage.setItem('test_correct_status', JSON.stringify(window.testCorrectStatus));
+              }
+              document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+            }
+
+            if (window.testCorrectStatus && window.testCorrectStatus[3]) {
+              const arr = window.testCorrectStatus[3];
+              if (arr[0] && arr[1]) {
+                document.getElementById('result4-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+                console.log("全問正解４");
+                que4 = true;
+              } else if (arr[0]) {
+                if (que4_1) return;
+                document.getElementById('result4-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
+                document.getElementById('result4-2').innerHTML = "";
+                que4_1 = true;
+              } else if (arr[1]) {
+                document.getElementById('result4-1').innerHTML = "";
+                document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
+              } else {
+                document.getElementById('result4-1').innerHTML = "";
+                document.getElementById('result4-2').innerHTML = "";
+              }
+            }
+          }, 100);
+        </script>
+
+      </div>
+      <div id="clear" style="display:none;">
+        <h2>全問正解です！おめでとうございます！</h2>
+        <button id="tofinal" onclick="window.location.href='final.html'">次の章へ</button>
+      </div>
+    </div>
+    <div class=" sidebar">
+    </div>
+  </div>
+
+</body>
+<script>
+  let selected_editor = '#editor1';
+  const readOnly = false;
+
+  function showPage(toPage, btn) {
+    // すべてのページを非表示
+    document.querySelectorAll('[id^="page"]').forEach(div => {
+      div.style.display = (div.id === toPage) ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+    // エディタやボタンの切り替え
+    if (btn) {
+      const editor = btn.dataset.editor;
+      const run = btn.dataset.run;
+      const stop = btn.dataset.stop;
+      const status = btn.dataset.status;
+      const compiler = btn.dataset.compiler;
+      const error = btn.dataset.error;
+      const serial = btn.dataset.serial;
+      if (editor && run && stop && status && compiler && error && serial) {
+        selected_editor = editor;
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons(run, stop, status, compiler, error, serial);
+        window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+        window.initMonacoEditor();
+        window.updatepwmLed();
+      }
+    }
+  }
+
+  // --- Runボタンでコード保存 ---
+
+  // Runボタンイベント登録
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('pagetest_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+    // 各Runボタンにイベント登録
+    ['run-button1', 'run-button2', 'run-button3', 'run-button4'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES['page' + (idx + 1)] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('pagetest_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
+  const PAGE_CODES = {
+    page1: `
+void setup() {
+
+}
+void loop() {
+
+}
+`.trim(),
+    page2: `
+void setup() {
+
+}
+void loop() {
+
+}
+`.trim(),
+    page3: `
+    void setup() {
+
+}
+void loop() {
+
+}
+`.trim(),
+    page4: `
+void setup() {
+    Serial.begin(9600);
+}
+void loop() {
+
+    delay(100);
+}
+`.trim(),
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+    window.INITIAL_CODE = PAGE_CODES['page1'];
+    document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const toPage = this.dataset.to || this.dataset.page;
+        showPage(toPage, this);
+      });
+    });
+    window.markChapterUnlocked(7);
+
+    if (!localStorage.getItem('chaptertest_start') && !localStorage.getItem('chaptertest_time')) {
+      localStorage.setItem('chaptertest_start', Date.now());
+    }
+    const chapter6_start = parseInt(localStorage.getItem('chapter6_start'));
+    const end = Date.now();
+    const diffMs = end - chapter6_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter6_time', diffSec);
+    localStorage.removeItem('chapter6_start');
+
+    // --- 正解状況のローカルストレージ初期化 ---
+    // 二次元配列: [ [選択問題, プログラム問題], ... ]
+    const correctStatusKey = 'test_correct_status';
+    let correctStatus = localStorage.getItem(correctStatusKey);
+    const defaultStatus = [
+      [false, false], // 大問1: [選択, プログラム]
+      [false, false], // 大問2
+      [false, false], // 大問3
+      [false, false], // 大問4
+    ];
+    if (correctStatus) {
+      try {
+        window.testCorrectStatus = JSON.parse(correctStatus);
+        // 配列の形が違う場合は初期化
+        if (!Array.isArray(window.testCorrectStatus) || window.testCorrectStatus.length !== 4) {
+          window.testCorrectStatus = defaultStatus;
+          localStorage.setItem(correctStatusKey, JSON.stringify(window.testCorrectStatus));
+        }
+      } catch (e) {
+        window.testCorrectStatus = defaultStatus;
+        localStorage.setItem(correctStatusKey, JSON.stringify(window.testCorrectStatus));
+      }
+    } else {
+      window.testCorrectStatus = defaultStatus;
+      localStorage.setItem(correctStatusKey, JSON.stringify(window.testCorrectStatus));
+    }
+    // window.testCorrectStatus を使って各ページの正解状況を管理できます
+  });
+  // ラジオボタンの選択状態をローカルストレージに保存
+  document.addEventListener('change', function (e) {
+    if (e.target.type === 'radio') {
+      const { name, value } = e.target;
+      localStorage.setItem('radio_' + name, value);
+    }
+  });
+
+  // ページ読み込み時に保存値を復元
+  window.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      const saved = localStorage.getItem('radio_' + radio.name);
+      if (saved && radio.value === saved) {
+        radio.checked = true;
+      }
+    });
+  });
+
+  setInterval(() => {
+    // 全ての大問の[選択, プログラム]がtrueか判定
+    if (
+      window.testCorrectStatus &&
+      Array.isArray(window.testCorrectStatus) &&
+      window.testCorrectStatus.length === 4 &&
+      window.testCorrectStatus.every(arr => Array.isArray(arr) && arr[0] === true && arr[1] === true)
+    ) {
+      const clearDiv = document.getElementById('clear');
+      if (clearDiv) clearDiv.style.display = 'block';
+    }
+  }, 100);
+</script>
+
+</html>

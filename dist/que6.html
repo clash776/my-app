@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWM制御</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">6章<br>シリアルモニタ</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1" data-serial="serial-monitor-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-1:
+            シリアルモニタ</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2" data-serial="serial-monitor-text2"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-2:
+            シリアルモニタの概要</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3" data-serial="serial-monitor-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-3:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+            data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+            data-error="error-output-text4" data-serial="serial-monitor-text4"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">6-4:
+            おまけ</a>
+        </div>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="page1" style="display:block;">
+        <h2>第6章　シリアルモニタ</h2>
+        <p>この章では<b style="color:#1976d2;">シリアルモニタ</b>の使い方について学びます。</p>
+        <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+            <b
+              style="color:#1976d2;">シリアルモニタ</b>とは、マイコンとパソコン(マイコン同士も可能)との通信を利用したデータの送受信や<br>デバッグ(プログラムの不具合を修正する作業)などに利用されるものです。</span>
+        </p>
+
+        <p>まずは、プログラムを動作させてみましょう。</p>
+
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="editor-container" style="width: 900px; height: 350px; display: flex;">
+            <div class="code-editor-container" style="width: 500px; height: 300px;">
+              <div class="toolbar">
+                <button id="run-button1">Run</button>
+                <button id="stop-button1" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label1"></div>
+              </div>
+              <div class="code-editor" id="editor1"></div>
+            </div>
+            <div class="serial-monitor-container" style="width: 400px; height: 300px;">
+              <div class="bar"
+                style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
+                Serial Monitor　(9600bps)　
+              </div>
+              <div class="serial-monitor"
+                style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
+                <pre id="serial-monitor-text1"></pre>
+              </div>
+            </div>
+          </div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+        </div>
+        <p>上のプログラムは5章の最初のプログラムです。</p>
+        <p>プログラムを実行すると、<b style="color:#1976d2;">変数brightnessの値(0~255)</b>が順番にシリアルモニタに表示されます。</p>
+        <p>このように、シリアルモニタを使うことで、<b>変数の値などプログラムの動作状況をリアルタイムで確認する</b>ことができます。</p>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          data-serial="serial-monitor-text2" onclick="markPageReached(1);">次のページへ</button>
+      </div>
+      <div id="page2" style="display:none;">
+        <div class="blue-point-box">
+          <h3>シリアルモニタの使い方</h3>
+          <ol>
+            <li><b>シリアル通信の準備</b><br>
+              マイコンとパソコン間でデータをやりとりする「シリアル通信」を使います。
+            </li>
+            <li><b>プログラムで通信開始</b><br>
+              プログラムの中で<b style="color:#1976d2;">Serial.begin関数</b>を書き、通信を開始します。
+            </li>
+            <li><b>シリアルモニタに表示する</b><br>
+              <b style="color:#1976d2;">Serial.print関数</b>または<b
+                style="color:#1976d2;">Serial.println関数</b>を使うと、マイコンからパソコンへ文字や数値を送信し、シリアルモニタに表示できます。
+            </li>
+          </ol>
+        </div>
+        <div class="green-point-box">
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>Serial.begin関数</h3>
+            <b>シリアル通信を使うためには、<span
+                style="color:#388e3c;">Serial.begin関数</span>で<b>通信速度(ボーレート)</b>を指定して、通信を開始する必要があります。</b><br>
+            <p>Serial.begin関数は以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>Serial.begin(通信速度);</code></pre>
+            <p>例えば、通信速度を9600bpsに設定する場合、setup関数の中に以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>void setup() { Serial.begin(9600); // 通信速度を9600bpsに設定 }</code></pre>
+          </div>
+          <p><b>注意：</b>実際のエディタ(Arduino IDEなど)でシリアルモニタを使う場合、<br>
+            シリアルモニタ側の通信速度設定を、プログラムの値（例：9600）に合わせる必要があります。</p>
+        </div>
+        <div class="green-point-box">
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>Serial.print関数 / Serial.println関数</h3>
+            <b>シリアルモニタにデータを表示するには、<span style="color:#388e3c;">Serial.print関数</span>または<span
+                style="color:#388e3c;">Serial.println関数</span>を使います。</b><br>
+            <p>これらの関数は以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>Serial.print(表示したいデータ);<br>または<br>Serial.println(表示したいデータ);</code></pre>
+            <p>例えば、シリアルモニタに「Hello」と表示する場合、loop関数の中に以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>void loop() { Serial.print("Hello");}<br>または<br>void loop() { Serial.printIn("Hello");}</code></pre>
+            <p>Serial.print関数は<b style="color:#388e3c;">改行せず</b>にデータを表示し、Serial.println関数は<b
+                style="color:#388e3c;">改行して</b>データを表示します。</p>
+          </div>
+        </div>
+        <p>それではシリアルモニタを使ってみましょう。</p>
+        <p>下のプログラムを編集してシリアルモニタに「Hello」と表示させてみましょう。</p>
+        <div class="app-container">
+          <div class="editor-container" style="width: 900px; height: 350px; display: flex;">
+            <div class="code-editor-container" style="width: 500px; height: 300px;">
+              <div class="toolbar">
+                <button id="run-button2">Run</button>
+                <button id="stop-button2" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label2"></div>
+              </div>
+              <div class="code-editor" id="editor2"></div>
+            </div>
+            <div class="serial-monitor-container" style="width: 400px; height: 300px;">
+              <div class="bar"
+                style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
+                Serial Monitor　(9600bps)
+              </div>
+              <div class="serial-monitor"
+                style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
+                <pre id="serial-monitor-text2"></pre>
+              </div>
+            </div>
+          </div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <div id="result1" style="margin-top: 20px;"></div>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          data-serial="serial-monitor-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" data-serial="serial-monitor-text3" onclick="markPageReached(2);"
+          id="topageTest" style="display:none;">次のページへ</button>
+        <script>
+          setInterval(() => {
+            const serialText2 = document.getElementById('serial-monitor-text2')?.textContent;
+            if (serialText2 && serialText2.includes('Hello')) {
+              console.log('Helloが表示されています');
+              document.getElementById('result1').textContent = "正解です！";
+              document.getElementById('result1').style.color = "green";
+              document.getElementById('topageTest').style.display = "inline-block";
+            }
+          }, 100);
+        </script>
+      </div>
+      <div id="pageTest" style="display:none;">
+        <h3>第6章　シリアルモニタ　確認問題</h3>
+        <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
+        <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
+        <p><b>Q1. シリアルモニタとは何に使う機能ですか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label>LEDの明るさを調整するための機能</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>マイコンとパソコン間でデータを送受信したり、プログラムの動作を確認するための機能</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>Arduinoのプログラムを保存するための機能</label>
+          </div>
+        </form>
+        <p><b>Q2. シリアル通信を開始するために、最初に書く必要がある関数はどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label>Serial.print</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>Serial.begin</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>Serial.start</label>
+          </div>
+        </form>
+        <p><b>Q3. Serial.begin(9600); の「9600」は何を表していますか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>通信速度（ボーレート）</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>LEDの明るさ</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>デジタルピン番号</label>
+          </div>
+        </form>
+        <p><b>Q4. シリアルモニタに「Hello」と表示したい場合、正しい書き方はどれですか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1">
+            <label>Serial.begin("Hello");</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2">
+            <label>Serial.send(Hello);</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3">
+            <label>Serial.println("Hello");</label>
+          </div>
+        </form>
+        <p><b>Q5. Serial.print と Serial.println の違いとして正しいものはどれですか？</b></p>
+        <form name="q5">
+          <div class="form-row">
+            <input type="radio" name="q5" value="1">
+            <label>Serial.printは改行し、Serial.printlnは改行しない</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="2">
+            <label>Serial.printlnは改行し、Serial.printは改行しない</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="3">
+            <label>どちらも改行する</label>
+          </div>
+        </form>
+        <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
+        <div id="result2" style="margin-top: 20px;"></div>
+        <h3>２．LEDを0.1秒間隔で点滅させ、シリアルモニタに点灯時は「LED ON」と、消灯時は「LED OFF」と表示するプログラムを作成してください。</h3>
+        <div class="app-container" id="simulator">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="3"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
+              <line x1="278" y1="208" x2="338" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="editor-container" style="width: 900px; height: 350px; display: flex;">
+            <div class="code-editor-container" style="width: 500px; height: 300px;">
+              <div class="toolbar">
+                <button id="run-button3">Run</button>
+                <button id="stop-button3" disabled>Stop</button>
+                <div class="spacer"></div>
+                <div id="status-label3"></div>
+              </div>
+              <div class="code-editor" id="editor3"></div>
+            </div>
+            <div class="serial-monitor-container" style="width: 400px; height: 300px;">
+              <div class="bar"
+                style="width: 400px; height: 30px; background-color: #888888; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;">
+                Serial Monitor　(9600bps)　
+              </div>
+              <div class="serial-monitor"
+                style="width: 400px; height: 300px; box-sizing: border-box; border: 1px solid grey;">
+                <pre id="serial-monitor-text3"></pre>
+              </div>
+            </div>
+          </div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
+          <!-- <div class="serial-monitor">
+            <pre id="serial-monitor-text3"></pre>
+          </div> -->
+          <div id="result3"></div>
+          <div id="result4"></div>
+        </div>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          data-serial="serial-monitor-text2">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+          data-error="error-output-text4" data-serial="serial-monitor-text4" id="topageOmake" style="display:none;"
+          onclick="markPageReached(3);">次のページへ</button>
+
+        <script>
+          const statusLabel = document.getElementById('status-label3');
+          const LED7 = document.querySelector('wokwi-led[pin="3"]');
+          const serialmonitor = document.getElementById('serial-monitor-text3');
+
+          let que1 = false;
+          let que2 = false;
+          function checkAnswer() {
+            // 各問題の正解インデックス（0始まり）
+            const correct = {
+              q1: [1], // Q1は2番目（index:1）が正解
+              q2: [1], // Q2は2番目（index:1）が正解
+              q3: [0], // Q3は1番目（index:0）が正解
+              q4: [2], // Q4は3番目（index:2）が正解
+              q5: [1], // Q5は2番目（index:1）が正解
+            };
+
+            let results = [];
+            Object.keys(correct).forEach(q => {
+              const form = document.forms[q];
+              const checks = Array.from(form.querySelectorAll('input[type="radio"]'));
+              const checkedIdx = checks.findIndex(c => c.checked); // 選択されたインデックス（1つだけ）
+              const isCorrect = JSON.stringify([checkedIdx]) === JSON.stringify(correct[q]);
+              results.push(isCorrect ? "○" : "×");
+            });
+
+            // 全問分の結果をresult1に表示
+            // 横並びで表示
+            let html = '';
+            Object.keys(correct).forEach((q, i) => {
+              html += `Q${i + 1}:${results[i]} `;
+            });
+            html = html.trim();
+            if (results.every(r => r === "○")) {
+              html += '<br><span style="color:green;font-weight:bold;">全問正解です！</span>';
+              que1 = true;
+            } else {
+              html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
+            }
+            document.getElementById('result2').innerHTML = html;
+          }
+
+          let que2code = false;
+          let que2serial1 = false;
+          let que2serial2 = false;
+          let time1;
+          let time2;
+          let counter = 0;
+          let prevValue = LED7.value;
+
+
+
+          setInterval(() => {
+            const value = LED7.value;
+            let lines = serialmonitor.textContent.split('\n').map(line => line.trim()).filter(line => line !== '');
+            let lastLine = lines[lines.length - 1];
+            if (!que2serial1 && !que2serial2 && value && (lastLine === "LED ON")) {
+              time1 = parseSimTime(statusLabel);
+              console.log('LED点灯時の時刻:', time1);
+              que2serial1 = true;
+            }
+            if (que2serial1 && !que2serial2 && !value && (lastLine === "LED OFF")) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED消灯時の時刻:', time2);
+              if (0.110 > (time2 - time1) > 0.090) {
+                counter++;
+                console.log(counter);
+                que2serial1 = false;
+                if ((!que2serial2 && (counter >= 3))) {
+                  que2serial2 = true;
+                }
+              } else {
+                counter = 0;
+              }
+            }
+            // window.codeがundefined/nullでない場合のみ判定
+            if (typeof window.code === 'string') {
+              if (window.code.includes('Serial.println("LED ON");') &&
+                window.code.includes('Serial.println("LED OFF");') &&
+                window.code.includes('Serial.begin(9600);') &&
+                window.code.includes('delay(100);')
+              ) {
+                que2code = true;
+              }
+            }
+
+            if (que2code && que2serial2) {
+              document.getElementById('result3').textContent = "正解です！";
+              document.getElementById('result3').style.color = "green";
+              que2 = true;
+            }
+            if (que1 && que2) {
+              document.getElementById('result4').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
+              document.getElementById('topageOmake').style.display = "inline-block";
+            }
+            prevValue = value;
+          }, 10);
+        </script>
+      </div>
+      <div id="pageOmake" style="display:none;">
+        <h2>6章おまけ：学んだ機器が使われている場所</h2>
+        <p>6章のおまけとして、これまで学んできた機器がどんなところで使われているかを紹介します。</p>
+        <div class="blue-point-box">
+          <h2>マイコン</h2>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 230px; margin: 0 auto;">
+            <wokwi-arduino-uno style="position: absolute; left: 100px; top: 0px;"></wokwi-arduino-uno>
+          </div>
+          <p>本教材ではArduinoを使ってマイコンの学習を行ってきましたが、<br>
+            実際の製品に組み込まれているマイコンは、Arduino本体のような形ではなく、<br>
+            <b style="color:#1976d2;">もっと小さな部品として基板の上に直接取り付けられています。</b>
+          </p>
+          <p>小型のマイコンは、スマートフォン、家電製品、自動車、産業機器など、<br>
+            さまざまな製品に組み込まれており、<b style="color:#1976d2;">製品の制御、データ処理、通信などを担当しています。</b><br>
+          </p>
+        </div>
+        <div class="green-point-box">
+          <h2>LED</h2>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 80px; margin: 0 auto;">
+            <wokwi-led id="circuit-led" color="red"
+              style="position: absolute; left: 230px; top: 0px; transform: scale(1.9);"></wokwi-led>
+          </div>
+          <p>
+            本教材ではLEDを使って、マイコンの出力制御を学習してきましたが、<br>
+            実際の製品に使われているLEDは、実験用の部品としてではなく、<br>
+            <b style="color:#388e3c;">製品の一部として内部に組み込まれています。</b>
+          </p>
+          <p>
+            LEDは電気を流すことで光る小さな部品で、<br>
+            <b style="color:#388e3c;">動作状態の表示、情報の通知、照明</b>など、<br>
+            さまざまな目的で利用されています。
+          </p>
+          <p>
+            スマートフォンや家電製品、自動車、機械設備などでは、<br>
+            LEDがマイコンによって制御され、<b style="color:#388e3c;">点灯・消灯や点滅</b>を行うことで、<br>
+            ユーザーに状態を分かりやすく伝えています。
+          </p>
+        </div>
+        <div class="blue-point-box">
+          <h2>7セグメントLED</h2>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 170px; margin: 0 auto;">
+            <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="transform: scale(2.2, 1.88); margin: 0 auto;"></wokwi-7segment>
+          </div>
+          <p>
+            本教材では7セグメントLEDを使って、複雑なLED機器の制御方法を学習してきましたが、<br>
+            実際の製品では、7セグメントLEDは単体の実験用部品ではなく、<br>
+            <b style="color:#1976d2;">表示装置の一部として機器の内部に組み込まれています。</b>
+          </p>
+          <p>
+            7セグメントLEDは、複数のLEDを組み合わせることで、<br>
+            <b style="color:#1976d2;">数字や簡単な情報を分かりやすく表示できる表示部品</b>です。
+          </p>
+          <p>
+            電子レンジやデジタル時計、電卓、測定器などの機器では、<br>
+            マイコンがどのセグメントを点灯させるかを制御することで、<br>
+            時間や数値、動作状態などを表示しています。
+          </p>
+        </div>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3">前のページへ</button>
+        <button id="tochap6-btn" onclick="window.location.href='test1.html'">次の章へ</button>
+      </div>
+    </div>
+    <div class="sidebar"></div>
+  </div>
+</body>
+<script>
+  let selected_editor = '#editor1';
+  const readOnly = false;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('page6_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+
+    // 各Runボタンにイベント登録
+    const pageKeys = ['page1', 'page2', 'pageTest', 'pageOmake'];
+    ['run-button1', 'run-button2', 'run-button3', 'run-button4'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES[pageKeys[idx]] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('page6_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
+  let reachedPages6 = JSON.parse(localStorage.getItem('reachedPages6')) || [true, false, false, false, false, false, false];
+  // ページリンクを取得
+  const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+  function updateSidebarLinks() {
+    console.log('Updating sidebar links with reachedPages6:', reachedPages6);
+    pageLinks.forEach((link, idx) => {
+      link.style.display = reachedPages6[idx] ? 'block' : 'none';
+    });
+  }
+  // ページ到達時に呼び出す
+  function markPageReached(pageIdx) {
+    reachedPages6[pageIdx] = true;
+    localStorage.setItem('reachedPages6', JSON.stringify(reachedPages6));
+    updateSidebarLinks();
+  }
+
+  // 初期化
+  updateSidebarLinks();
+  function showPage(toPage, btn) {
+    // すべてのページを非表示
+    document.querySelectorAll('[id^="page"]').forEach(div => {
+      div.style.display = (div.id === toPage) ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+    // エディタやボタンの切り替え
+    if (btn) {
+      const editor = btn.dataset.editor;
+      const run = btn.dataset.run;
+      const stop = btn.dataset.stop;
+      const status = btn.dataset.status;
+      const compiler = btn.dataset.compiler;
+      const error = btn.dataset.error;
+      const serial = btn.dataset.serial;
+      if (editor && run && stop && status && compiler && error && serial) {
+        selected_editor = editor;
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons(run, stop, status, compiler, error, serial);
+        window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+        window.initMonacoEditor();
+        window.updatepwmLed();
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1', 'serial-monitor-text1');
+    window.INITIAL_CODE = PAGE_CODES['page1'];
+    document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const toPage = this.dataset.to || this.dataset.page;
+        showPage(toPage, this);
+      });
+    });
+    window.markChapterUnlocked(6);
+
+    if (!localStorage.getItem('chapter6_start') && !localStorage.getItem('chapter6_time')) {
+      localStorage.setItem('chapter6_start', Date.now());
+    }
+    const chapter5_start = parseInt(localStorage.getItem('chapter5_start'));
+    const end = Date.now();
+    const diffMs = end - chapter5_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter5_time', diffSec);
+    localStorage.removeItem('chapter5_start');
+  });
+  const PAGE_CODES = {
+    page1: `
+void setup() {
+  Serial.begin(9600);
+  pinMode(11, OUTPUT);
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  Serial.println(brightness); 
+  delay(10);
+  brightness++;
+}
+`.trim(),
+    page2: `
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.println(""); 
+  delay(100);
+}
+`.trim(),
+    pageTest: `
+void setup() {
+  Serial.begin(9600);
+  pinMode(3, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(3, LOW);
+  Serial.println(""); 
+  delay(200);
+  digitalWrite(3, LOW);
+  Serial.println(""); 
+  delay(200);
+}
+`.trim(),
+  };
+
+  // ラジオボタンの保存・復元
+  document.addEventListener('DOMContentLoaded', function () {
+    // 復元
+    for (let i = 1; i <= 5; i++) {
+      const saved = localStorage.getItem('que6_q' + i);
+      if (saved) {
+        const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+        const radio = document.querySelector(selector);
+        if (radio) radio.checked = true;
+      }
+    }
+    // 変更時に保存
+    for (let i = 1; i <= 5; i++) {
+      document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+        radio.addEventListener('change', function () {
+          if (this.checked) {
+            localStorage.setItem('que6_q' + i, this.value);
+          }
+        });
+      });
+    }
+  });
+</script>
+
+</html>

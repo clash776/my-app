@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEDを光らせてみよう</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">2章<br>LEDの点灯</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-1:
+            LEDの概要</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-2:
+            マイコンとLEDを接続する</a>
+          <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-3:
+            LEDを点灯させるプログラム</a>
+          <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-4:
+            まとめ</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-5:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">2-6:
+            おまけ</a>
+        </div>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="page1" style="display:block;">
+        <h2>第２章　LEDの点灯</h2>
+        <p>この章では<b style="color:#1976d2;">LED(発光ダイオード)の点灯</b>について学びます。</p>
+        <div class="blue-point-box">
+          <h3>LEDの概要</h3>
+          <p>マイコンでLEDを光らせるためには、LEDを正しくつなぐ必要があります。</p>
+          <p>LEDには向き（極性）があり、<b style="color:#1976d2;">アノード（長い足）</b>と<b style="color:#1976d2;">カソード（短い足）</b>があります。</p>
+          <img src="/my-app/assets/LED%E6%A6%82%E8%A6%81-wjU2wXeM.jpg" alt="LEDの極性" style="display: block; margin: 0 auto; width: 200px; height: auto;">
+          <ul style="background:#d9fdd9;">
+            <li><b style="color:#1976d2;">アノード（長い足）</b>：プラス側（電流の入り口）</li>
+            <li><b style="color:#1976d2;">カソード（短い足）</b>：マイナス側（電流の出口）</li>
+          </ul>
+
+          <p>このため、LEDを接続するときは、以下のような順番でつなぎます：</p>
+          <ol style="background:#d9fdd9;">
+            <li><b>マイコンの出力ピン（電流を出す）</b></li>
+            <li><b>LEDのアノード（長い足）</b></li>
+            <li><b>LEDのカソード（短い足）</b></li>
+            <li><b>抵抗（電流を調整）</b></li>
+            <li><b>GND（グランド）</b></li>
+          </ol>
+          <p>補足：抵抗はアノード側、カソード側どちらに接続しても問題ありません。</p>
+        </div>
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(1);">次のページへ</button>
+      </div>
+      <div id="page2" style="display:none;">
+        <div class="blue-point-box">
+          <h3>マイコンとLEDを接続する</h3>
+          <p>マイコンとLEDを接続して点灯させるには第1章で学んだ<b style="color:#1976d2;">出力ピン</b>を使います。</p>
+          <p>今回は、3番ピンを出力用として使います。</p>
+          <div
+            style="position: relative; width: 800px; height: 440px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+            <img src="/my-app/assets/LED%E5%9B%9E%E8%B7%AF-CICbhA89.jpg" alt="GPIO" style="display: block;">
+            <svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none;">
+              <text x="560" y="260" fill="red" font-size="24" font-weight="bold">3番ピン</text>
+              <text x="200" y="260" fill="black" font-size="24" font-weight="bold">GND</text>
+              <line x1="390" y1="215" x2="230" y2="230" stroke="blue" stroke-width="3" />
+              <line x1="495" y1="215" x2="600" y2="230" stroke="blue" stroke-width="3" />
+            </svg>
+          </div>
+          <p>この回路は以下のような順番で接続されています。</p>
+          <ol style="background:#d9fdd9;">
+            <li><b>マイコンの出力ピン（３番ピン）</b></li>
+            <li><b>LEDのアノード（長い足）</b></li>
+            <li><b>LEDのカソード（短い足）</b></li>
+            <li><b>抵抗（電流を調整）</b></li>
+            <li><b>GND（グランド）</b></li>
+          </ol>
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>電気の通り道</h3>
+          <p>このように正しく接続することで、出力ピンから流れた電流がLEDを通り、抵抗で電流を抑えながら<b style="color:#388e3c;">GNDに戻るルート</b>ができます。</p>
+          <p><b>GND（グランド）</b>とは、電気の「出口」や「戻り道」となる場所のことです。<br>
+            電気は必ず「出発点（プラス）」から「戻る場所（マイナス）」へ流れようとするので、</p>
+          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              <b style="color:#388e3c;">GNDがつながっていないと、電流が流れず、LEDも光りません。 </b></span></p>
+
+
+          <p>LEDは「電気の一方通行の道」のようなものなので、<b>正しい向きと順番</b>でつなぐことが大切です。</p>
+
+          <p>次のページでは、初期設定とLEDを点灯させるプログラムを書きます。</p>
+        </div>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(2);">次のページへ</button>
+      </div>
+      <div id="page3" style="display:none;">
+        <div class="blue-point-box">
+          <h3>LEDを点灯させるプログラム</h3>
+          <p>LEDを点灯させるためには、出力ピンから電圧を流す必要があります。</p>
+          <p>そのために、setup関数とloop関数を編集する必要があります。</p>
+          <div style="background:#d9fdd9; border-left:4px solid #388e3c; padding:4px 8px; margin:12px 0;">
+            <h3>setup関数の編集</h3>
+            <p>今回は、3番ピンを出力用として使用するため、1章で学んだ<b style="color:#1976d2;">pinMode関数</b>を使用して以下のように記述します。</p>
+            <pre
+              style="font-size:1.1em; background:#f6fff6; border-radius:4px; padding:8px; margin-top:8px;"><code>pinMode(3, OUTPUT);</code></pre>
+          </div>
+          <div style="background:#d9fdd9; border-left:4px solid #388e3c; padding:4px 8px; margin:12px 0;">
+            <h3>loop関数の編集</h3>
+            <p><b>setup関数で設定した出力ピンから電流を流すには、<span style="color:#1976d2;">digitalWrite関数</span>を使用します。</b></p>
+            <p>digitalWrite関数は以下のように記述します。</p>
+            <pre
+              style="font-size:1.1em; background:#f6fff6; border-radius:4px; padding:8px; margin-top:8px;"><code>digitalWrite(ピン番号, モード);</code></pre>
+            <p>モードには、<b style="color:#1976d2;">HIGH</b>と<b style="color:#1976d2;">LOW</b>の2つを指定できます。</p>
+          </div>
+
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>HIGHとLOWの意味</h3>
+          <p><b>digitalWrite関数</b>の2つ目の引数には、<b>HIGH</b>または<b>LOW</b>を指定します。</p>
+          <ul style="background: #e3f2fd;">
+            <li><b style="color:#388e3c;">HIGH</b>：出力ピンを「電圧あり（ON）」にします。例：5V<br>
+              → 電流が流れるので、LEDが光ります。</li>
+            <li><b style="color:#388e3c;">LOW</b>：出力ピンを「電圧なし（OFF）」にします。例：0V<br>
+              → 電流が流れないので、LEDは消えます。</li>
+          </ul>
+
+          <p>つまり、<b style="color:#388e3c; background:#e3f2fd;">HIGH = スイッチを入れる、LOW = スイッチを切る</b>というイメージです。</p>
+          <p>最後に、LEDを点灯させるプログラムは以下の通りになります。</p>
+          <img src="/my-app/assets/LED%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-Q1-2Y01Q.jpg" alt="LEDプログラム"
+            style="display: block; margin: 0 auto; width: 500px; height: auto;">
+          <p>これでLEDを点灯させる準備が整いました！次のページではこの章のまとめです。</p>
+        </div>
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(3);">次のページへ</button>
+      </div>
+
+      <div id="page4" style="display:none;">
+        <div class="blue-point-box">
+          <h3>まとめ</h3>
+          <p>LEDを点灯させるためには、正しく回路を作成する必要があります。</p>
+          <p><b>・LEDの向き(極性)</b></p>
+          <P>LEDには向き（極性）があり、<b>アノード（長い足）</b>と<b>カソード（短い足）</b>があります。</P>
+          <img src="/my-app/assets/LED%E6%A6%82%E8%A6%81-wjU2wXeM.jpg" alt="LEDの極性" style="display: block; margin: 0 auto; width: 200px; height: auto;">
+          <ul style="background: #d9fdd9; color:#1976d2;">
+            <li><b>アノード（長い足）</b>：プラス側（電流の入り口）</li>
+            <li><b>カソード（短い足）</b>：マイナス側（電流の出口）</li>
+          </ul>
+          <p>そのため、アノードからカソードに電流が流れるように回路を作成する必要がありました。</p>
+          <ol style="background: #d9fdd9; color:#1976d2;">
+            <li><b>マイコンの出力ピン（３番ピン）</b></li>
+            <li><b>LEDのアノード（長い足）</b></li>
+            <li><b>LEDのカソード（短い足）</b></li>
+            <li><b>抵抗（電流を調整）</b></li>
+            <li><b>GND（グランド）</b></li>
+          </ol>
+          <p>そして、出力ピンから電流を流すためには、setup関数とloop関数を編集する必要がありました。</p>
+          <ul style="background: #d9fdd9; color:#1976d2;">
+            <li><b>pinMode(ピン番号, モード);</b></li>
+            <li><b>digitalWrite(ピン番号, モード);</b></li>
+          </ul>
+        </div>
+        <p>これまで学んできたことをまとめると、LEDを点灯させる回路とプログラムは以下のようになります。Runボタンを押してプログラムを実行してみましょう！</p>
+        <div class="app-container" id="simulator">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="3"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
+              <line x1="278" y1="208" x2="338" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+        </div>
+
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" onclick="markPageReached(4);">次のページへ</button>
+      </div>
+      <div id="pageTest" style="display:none;">
+        <h2>確認問題</h2>
+        <h2>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h2>
+
+        <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
+        <p><b>Q1. LEDには極性があります。アノード（長い足）はどちら側につなぐ必要がありますか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label></label>マイコンのGND側</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>電流を出すマイコンの出力ピン側</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>抵抗の後ろ側</label>
+          </div>
+        </form>
+        <p><b>Q2. LEDを接続する正しい順番はどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label></label>GND → 抵抗 → LED → 出力ピン</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>LEDのアノード → 出力ピン → 抵抗 → GND</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>出力ピン → LEDアノード → LEDカソード → 抵抗 → GND</label>
+          </div>
+        </form>
+        <p><b>Q3. 抵抗をつなぐ位置として正しい説明はどれですか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>LEDのアノード側にしかつけてはいけない</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>LEDのカソード側にしかつけてはいけない</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>LEDのアノード側でもカソード側でも問題ない</label>
+          </div>
+        </form>
+        <p><b>Q4. GNDの正しい説明はどれですか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1">
+            <label>電気を増幅する場所</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2">
+            <label>電気の「戻る場所・出口」</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3">
+            <label>電気を止めるための装置</label>
+          </div>
+        </form>
+        <p><b>Q5. 出力ピンからLEDに電流を流すために使う関数はどれですか？</b></p>
+        <form name="q5">
+          <div class="form-row">
+            <input type="radio" name="q5" value="1">
+            <label>digitalWrite関数</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="2">
+            <label>analogWrite関数</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="3">
+            <label>pinMode関数</label>
+          </div>
+        </form>
+        <p><b>Q6. digitalWrite(3, HIGH); の説明として正しいものはどれですか？</b></p>
+        <form name="q6">
+          <div class="form-row">
+            <input type="radio" name="q6" value="1">
+            <label>3番ピンを入力用に設定する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q6" value="2">
+            <label>3番ピンを電圧あり（ON）に設定する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q6" value="3">
+            <label>3番ピンの電圧を読み取る</label>
+          </div>
+        </form>
+        <p><b>Q7. pinMode(3, OUTPUT); の目的として正しいものはどれですか？</b></p>
+        <form name="q7">
+          <div class="form-row">
+            <input type="radio" name="q7" value="1">
+            <label>3番ピンを出力用として使う設定</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q7" value="2">
+            <label>3番ピンをアナログ入力用として使う設定</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q7" value="3">
+            <label>3番ピンの電圧を初期化する設定</label>
+          </div>
+        </form>
+        <p><b>Q8. HIGHとLOWの説明として正しいものはどれですか？</b></p>
+        <form name="q8">
+          <div class="form-row">
+            <input type="radio" name="q8" value="1">
+            <label>HIGH=OFF、LOW=ON</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q8" value="2">
+            <label>HIGH=5V付近、LOW=0V付近</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q8" value="3">
+            <label>HIGHもLOWも同じ意味</label>
+          </div>
+        </form>
+        <div id="result1" style="margin-top: 20px;"></div>
+        <button onclick="window.checkAnswer()">回答チェック</button>
+
+        <h3>2.LEDを点灯させるプログラムを完成させて下さい。</h3>
+        <div class="app-container" id="simulator">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="test-led" color="red" pin="5"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの5番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 5番ピン（右足）: LEDの右足からArduinoの5番ピン付近へ -->
+              <line x1="278" y1="208" x2="318" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button2">Run</button>
+            <button id="stop-button2" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label2"></div>
+          </div>
+          <div class="code-editor" id="editor2"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <div id="result2" style="margin-top: 20px;"></div>
+        <div id="result3" style="margin-top: 20px;"></div>
+
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" style="display:none;" id="pageOmake"
+          onclick="markPageReached(5);">次のページへ</button>
+
+        <script>
+          const testLed = document.getElementById('test-led');
+          let isTestAnswered = false;
+          let que1 = false;
+          let que2 = false;
+
+          function checkAnswer() {
+            // 各問題の正解インデックス（0始まり）
+            const correct = {
+              q1: [1], // Q1は2番目（index:1）が正解
+              q2: [2], // Q2は3番目（index:2）が正解
+              q3: [2], // Q3は3番目（index:2）が正解
+              q4: [1], // Q4は3番目（index:2）が正解
+              q5: [0], // Q5は1番目（index:0）が正解
+              q6: [1], // Q6は2番目（index:1）が正解
+              q7: [0], // Q7は1番目（index:0）が正解
+              q8: [1], // Q8は2番目（index:1）が正解
+            };
+
+            let results = [];
+            Object.keys(correct).forEach(q => {
+              const form = document.forms[q];
+              const checks = Array.from(form.querySelectorAll('input[type="radio"]'));
+              const checkedIdx = checks.findIndex(c => c.checked); // 選択されたインデックス（1つだけ）
+              const isCorrect = JSON.stringify([checkedIdx]) === JSON.stringify(correct[q]);
+              results.push(isCorrect ? "○" : "×");
+            });
+
+            // 全問分の結果をresult1に表示
+            // 横並びで表示
+            let html = '';
+            Object.keys(correct).forEach((q, i) => {
+              html += `Q${i + 1}:${results[i]} `;
+            });
+            html = html.trim();
+            if (results.every(r => r === "○")) {
+              html += '<br><span style="color:green;font-weight:bold;">全問正解です！</span>';
+              que1 = true;
+            } else {
+              html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
+            }
+            document.getElementById('result1').innerHTML = html;
+          }
+
+          setInterval(() => {
+            if (isTestAnswered) return;
+            // wokwi-ledのvalueがtrueなら正誤判定
+            if (testLed && testLed.value === true) {
+              document.getElementById('result2').innerHTML = "<b>LEDが点灯しました！正解です！</b>";
+              document.getElementById('result2').style.color = "green";
+              isTestAnswered = true;
+              que2 = true;
+            }
+          }, 100);
+
+          setInterval(() => {
+            if (que1 && que2) {
+              document.getElementById('result3').innerHTML = "<b style=\"color:green;\">全問正解です！次のページへ進みましょう！</b>";
+              document.getElementById('pageOmake').style.display = 'inline';
+            } else {
+              document.getElementById('pageOmake').style.display = 'none';
+            }
+          }, 100);
+
+        </script>
+      </div>
+      <div id="pageOmake" style="display:none;">
+        <h3>２章おまけ：変数</h3>
+        <div class="green-point-box">
+          <p style="font-size:1.1em;"><b>Arduinoのプログラム（C言語）には、<span style="color:#1976d2;">変数</span>という便利なしくみがあります。</b>
+          </p>
+          <p><span
+              style="background:#e3f2fd; padding:2px 6px; border-radius:4px;">変数とは「データに名前をつけて保存しておくための入れ物」です。</span>
+          </p>
+          <p>例えば、LEDをつないでいるピン番号を変数に入れておけば、プログラムの中でその名前を使ってLEDを操作できるようになります。</p>
+          <ul style="margin-top:10px;">
+            <li><b>どのピンを使っているかが分かりやすくなる</b></li>
+            <li><b>後でピン番号を変更したいときに、1か所変えるだけで済む</b></li>
+            <li><b>数字だけよりも読みやすく、ミスも減る</b></li>
+          </ul>
+          <div style="background:#fffde7; border-left:4px solid #ffeb3b; padding:8px 12px; margin:12px 0;">
+            <b>変数をつくるときには「型」という種類を指定します。</b><br>
+            型は「どんな種類のデータを入れる箱か」を表すものです。<br>
+            <span style="color:#388e3c;">ピン番号などの整数には <b>int型</b> を使います。</span>（ほかにも様々な型があります）
+          </div>
+        </div>
+        <div class="blue-point-box">
+          <h3>変数の使い方</h3>
+          <p>変数を使うには、まず<strong>変数を宣言（せんげん）</strong>します。<br>
+            宣言とは、「この名前の変数を使いますよ」とプログラムに伝えることです。</p>
+          <p>変数の宣言は、以下のように行います。</p>
+          <pre style="background:#e3f2fd; border-radius:4px; padding:8px;"><code>int ledPin = 7;</code></pre>
+          <p>上の例では、<b>int型</b>の変数<b>ledPin</b>を宣言し、<span style="color:#1976d2;">7</span>という値を入れています。<br>
+            これで、<span
+              style="background:#fffde7; padding:2px 6px; border-radius:4px;">ledPin</span>という名前を使って7番ピンを操作できるようになります。
+          </p>
+        </div>
+        <div style="margin-bottom:20px;"><b>変数を使ってLEDを点灯させるプログラムの例を見てみましょう。</b></div>
+
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button3">Run</button>
+            <button id="stop-button3" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label3"></div>
+          </div>
+          <div class="code-editor" id="editor3"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
+        </div>
+        <p>上のプログラムでは１つのLEDしか制御していないため、変数を使ってもコードの見た目はあまり変わりません。<br>
+          しかし、複数のピンや複数のLEDを扱う場合には、変数を使うことでコードをより簡潔に書けるようになります。</p>
+        <button id="toTestfromOmake">前のページへ</button>
+        <button id="nextpage-btn" onclick="window.location.href='que3.html'"> 次の章へ</button>
+      </div>
+    </div>
+    <div class="sidebar"></div>
+  </div>
+
+  <!-- <div id="omake1" style="display: none;">
+    <h3>おまけ：プルアップ抵抗</h3>
+    <p>２章では</p>
+
+  </div> -->
+
+
+  <script>
+    const readOnly = false;
+    let selected_editor = '#editor1';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // ページコード全体をローカルストレージから復元
+      const codesAll = localStorage.getItem('page2_codes_all');
+      if (codesAll) {
+        try {
+          const parsed = JSON.parse(codesAll);
+          if (parsed && typeof parsed === 'object') {
+            Object.keys(PAGE_CODES).forEach(key => {
+              if (parsed[key]) PAGE_CODES[key] = parsed[key];
+            });
+          }
+        } catch (e) { }
+      }
+
+      // 各Runボタンにイベント登録
+      const pageKeys = ['page4', 'pageTest', 'pageOmake'];
+      ['run-button1', 'run-button2', 'run-button3'].forEach((btnId, idx) => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+          btn.addEventListener('click', function () {
+            // 現在のエディタのコードを取得して保存
+            let code = editor.getModel().getValue();
+            PAGE_CODES[pageKeys[idx]] = code;
+            // ローカルストレージに保存
+            localStorage.setItem('page2_codes_all', JSON.stringify(PAGE_CODES));
+            console.log(code);
+          });
+        }
+      });
+    });
+    // ページ到達状況を管理（例：最初のページだけ到達済み）
+    let reachedPages2 = JSON.parse(localStorage.getItem('reachedPages2')) || [true, false, false, false, false, false, false];
+    // ページリンクを取得
+    const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+    function updateSidebarLinks() {
+      console.log('Updating sidebar links with reachedPages2:', reachedPages2);
+      pageLinks.forEach((link, idx) => {
+        link.style.display = reachedPages2[idx] ? 'block' : 'none';
+      });
+    }
+    // ページ到達時に呼び出す
+    function markPageReached(pageIdx) {
+      reachedPages2[pageIdx] = true;
+      localStorage.setItem('reachedPages2', JSON.stringify(reachedPages2));
+      updateSidebarLinks();
+    }
+
+    // 初期化
+    updateSidebarLinks();
+
+    // 共通ページ切り替え関数
+    function showPage(toPage, btn) {
+      // すべてのページを非表示
+      document.querySelectorAll('[id^="page"]').forEach(div => {
+        div.style.display = (div.id === toPage) ? 'block' : 'none';
+      });
+      window.scrollTo(0, 0);
+      // エディタやボタンの切り替え
+      if (btn) {
+        const editor = btn.dataset.editor;
+        const run = btn.dataset.run;
+        const stop = btn.dataset.stop;
+        const status = btn.dataset.status;
+        const compiler = btn.dataset.compiler;
+        const error = btn.dataset.error;
+        if (editor && run && stop && status && compiler && error) {
+          selected_editor = editor;
+          window.errorOutputText.textContent = '';
+          window.setActiveButtons(run, stop, status, compiler, error);
+          window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+          window.initMonacoEditor();
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+      window.INITIAL_CODE = PAGE_CODES['page1'];
+      document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const toPage = this.dataset.to || this.dataset.page;
+          showPage(toPage, this);
+        });
+      });
+      window.markChapterUnlocked(2);
+      if (!localStorage.getItem('chapter2_start') && !localStorage.getItem('chapter2_time')) {
+        localStorage.setItem('chapter2_start', Date.now());
+      }
+      if (!localStorage.getItem('chapter1_time')) {
+        const chapter1_start = parseInt(localStorage.getItem('chapter1_start'));
+        const end = Date.now();
+        const diffMs = end - chapter1_start; // 経過ミリ秒
+        const diffSec = Math.floor(diffMs / 1000); // 経過秒
+        localStorage.setItem('chapter1_time', diffSec);
+        localStorage.removeItem('chapter1_start');
+      }
+    });
+    const PAGE_CODES = {
+      page4: `
+void setup() {
+    pinMode(3, OUTPUT);             
+}
+void loop() {
+    digitalWrite(3, HIGH); 
+}
+`.trim(),
+
+      pageTest: `
+void setup() {
+
+}
+void loop() {
+
+}
+`.trim(),
+      pageOmake: `
+int ledPin = 7;
+void setup() {
+    pinMode(ledPin, OUTPUT);             
+}
+void loop() {
+    digitalWrite(ledPin, HIGH); 
+}
+`.trim(),
+    };
+    
+    // ラジオボタンの保存・復元
+    document.addEventListener('DOMContentLoaded', function () {
+      // 復元
+      for (let i = 1; i <= 8; i++) {
+        const saved = localStorage.getItem('que2_q' + i);
+        if (saved) {
+          const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+          const radio = document.querySelector(selector);
+          if (radio) radio.checked = true;
+        }
+      }
+      // 変更時に保存
+      for (let i = 1; i <= 8; i++) {
+        document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+          radio.addEventListener('change', function () {
+            if (this.checked) {
+              localStorage.setItem('que2_q' + i, this.value);
+            }
+          });
+        });
+      }
+    });
+
+  </script>
+</body>
+
+</html>

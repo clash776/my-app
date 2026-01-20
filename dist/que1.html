@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第１章　マイコンとは何か</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold; font-size: 25px;">1章<br>マイコンとは何か</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-1:
+            マイコンとは</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-2:
+            マイコンを動かすには</a>
+          <a href="#" class="page-link" data-to="page3" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-3:
+            マイコンの機能</a>
+          <a href="#" class="page-link" data-to="page4" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-4:
+            プログラムの書き方</a>
+          <a href="#" class="page-link" data-to="page5" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-5:
+            まとめ</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-6:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">1-7:
+            おまけ</a>
+        </div>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="page1" style="display: block;">
+        <h2>第１章　マイコンとは何か</h2>
+        <div class="blue-point-box">
+          <h3>マイコンとは</h3>
+          <p style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;"><b>マイコンは、
+              <span style="color:#1976d2;">センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータ</span>です。</b></p>
+          <ul style="margin-bottom:16px;">
+            <li>パソコンとは違い、特定の仕事を効率よくこなすために作られている</li>
+            <li>小型・低価格で、様々な種類がある</li>
+            <li>用途に応じて異なる機能を持つ</li>
+          </ul>
+          <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
+            <div style="text-align: center;">
+              <wokwi-arduino-uno></wokwi-arduino-uno>
+              <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Uno</div>
+            </div>
+            <div style="text-align: center;">
+              <wokwi-arduino-nano></wokwi-arduino-nano>
+              <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Nano</div>
+            </div>
+          </div>
+          <p>本教材では、上で紹介したような <b>Arduino</b> を使い、実際の動作を確認しながらプログラミングを学んでいきます。</p>
+        </div>
+        <h3>早速Runボタンを押してプログラムを実行してみましょう！</h3>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+          <div id='test-output'>
+            <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
+              <p><b style="color:#1976d2;">プログラムを実行して、LEDが点灯したことを確認したら次のページへ進みましょう。</b></p>
+              <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1"
+                data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+                data-error="error-output-text1" onclick="markPageReached(1);">次のページへ</button>
+            </div>
+          </div>
+        </div>
+        <script>
+          const nextpageGuide = document.getElementById('nextpage-guide');
+          const led = document.querySelector('wokwi-led[pin="7"]');
+          let isAnswered = false; // 正解フラグ
+          setInterval(() => {
+            if (isAnswered) return;
+            const isLedOn = led && led.value === true;
+            if (isLedOn) {
+              nextpageGuide.style.display = "inline";
+              isAnswered = true;
+            }
+          }, 10);
+        </script>
+      </div>
+      <div id="page2" style="display:none;">
+        <div class="blue-point-box">
+          <h3>マイコンを動かすには</h3>
+          <p>Arduinoを動かすためには、プログラムをArduinoに書き込む必要があります。</p>
+          <p>Arduinoのプログラムは、複数の<b style="color:#1976d2;">関数</b>を組み合わせて作られています。</p>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">関数とは、
+              <b style="color:#1976d2;">特定の処理をまとめた命令のまとまり</b>です。</span></p>
+          <p>例として、以下のようなものが挙げられます。</p>
+          <ul>
+            <li><b>LEDを点灯・消灯させる</b></li>
+            <wokwi-led color="red" pin="7" value="true"></wokwi-led>
+            <li><b>ボタンを押したときの動作</b></li>
+            <wokwi-pushbutton color="red" pin="3"></wokwi-pushbutton>
+            <li><b>モーターを動かす</b></li>
+            <wokwi-servo angle="90"></wokwi-servo>
+          </ul>
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>setup関数とloop関数</h3>
+          <p>関数を使うことで、同じ処理を何度も簡単に実行することが出来るため、プログラムが作りやすくなります。</p>
+          <p>先ほどのプログラムでもいくつか関数が使用されています。</p>
+          <div style="position: relative; width: 500px; margin: 0 auto;">
+            <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-DR1XWA7J.jpg" alt="GPIO" style="display: block; width: 100%;">
+            <svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none;">
+              <rect x="68" y="38" width="177" height="53" fill="none" stroke="red" stroke-width="3" />
+              <rect x="68" y="94" width="200" height="53" fill="none" stroke="blue" stroke-width="3" />
+              <text x="250" y="70" fill="red" font-size="24" font-weight="bold">setup関数</text>
+              <text x="280" y="130" fill="blue" font-size="24" font-weight="bold">loop関数</text>
+            </svg>
+          </div>
+          <p>Arduinoのプログラムを作成する場合、<b>setup関数</b>と<b>loop関数</b>の<b style="color:#1976d2;">2つの関数を必ず作成する必要があります</b>。</p>
+          <ul style="background: #e3f2fd;">
+            <li><b>setup関数</b>：初期化の処理をする関数　最初に1度だけ実行される</li>
+            <li><b>loop関数</b>：メインの処理にあたる関数　繰り返し実行される</li>
+          </ul>
+          <p>これらの関数の中にプログラムを書き込むことで、LEDやモーターなどを制御できます。</p>
+        </div>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(2);">次のページへ</button>
+      </div>
+
+      <div id="page3" style="display:none;">
+        <div class="blue-point-box">
+          <h3>マイコンの機能</h3>
+          <p>Arduinoには<b style="color:#1976d2;">GPIO</b>と呼ばれるピンが複数あります。</p>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">GPIOは、<b
+                style="color:#1976d2;">General
+                Purpose Input/Output</b>の略で、汎用的な入出力ピンのことを指します。</span></p>
+          <div style="position: relative; width: 500px; margin: 0 auto;">
+            <img src="/my-app/assets/GPIO-C1LKZOer.jpg" alt="GPIO" style="display: block; width: 100%;">
+            <svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none;">
+              <rect x="190" y="2" width="177" height="45" fill="none" stroke="red" stroke-width="3" />
+              <rect x="225" y="155" width="142" height="45" fill="none" stroke="red" stroke-width="3" />
+              <line x1="367" y1="30" x2="405" y2="30" stroke="red" stroke-width="3"></line>
+              <line x1="367" y1="175" x2="405" y2="175" stroke="red" stroke-width="3"></line>
+              <line x1="403" y1="30" x2="403" y2="175" stroke="red" stroke-width="3"></line>
+              <text x="380" y="25" fill="red" font-size="24" font-weight="bold">入出力ピン</text>
+              <line x1="100" y1="300" x2="240" y2="300" stroke="blue" stroke-width="3"></line>
+              <text x="260" y="300" fill="blue" font-size="24" font-weight="bold">ピンの設定</text>
+            </svg>
+          </div>
+          <p>Arduinoのピンには「デジタル」や「アナログ」などいくつか種類がありますが、<br>
+            ここではまず「部品とつながって情報をやり取りする場所」として覚えておけば大丈夫です。</p>
+          <p>どのピンを使うか、そしてそのピンを電圧の「入力用」や「出力用」にするかは、
+            このあと説明する <b style="color:#1976d2;">pinMode関数</b> で設定します。</p>
+          </p>
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>pinMode関数</h3>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <b>ピンの設定をするにはsetup関数の中にある <span style="color:#388e3c;">pinMode関数</span> という関数を用います。</span> </b><br>
+            pinMode関数を使うときは、次のように記述します。
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>pinMode(ピン番号, モード);</code></pre>
+            <p>pinMode関数は、<b>指定したピンを電気の信号(5V/0V)を出すためのピンに設定する命令</b>です</p>
+            <p>モードには、以下の2つを指定できます。</p>
+            <ul style="background: #bcecbf;">
+              <li><b>INPUT</b>：入力用のピンとして設定する</li>
+              <li><b>OUTPUT</b>：出力用のピンとして設定する</li>
+            </ul>
+          </div>
+          <p>例えば、7番ピンを出力用として設定する場合は、以下のように記述します。</p>
+          <p><code>pinMode(7, OUTPUT);</code></p>
+          <p>関数のかっこの中に入れる値のことを<b style="color:#388e3c;">引数（ひきすう）</b>といいます。</p>
+          <p>pinMode関数の場合、引数には<b>ピン番号</b>と<b>モード</b>を指定します。</p>
+          <p>このように、pinMode関数を使うことで、マイコンのピンを入力用や出力用として設定することができます。</p>
+        </div>
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(3);">次のページへ</button>
+      </div>
+      <div id="page4" style="display:none;">
+        <div class="blue-point-box">
+          <h3>基本的なプログラムの書き方</h3>
+          <p>この章では、先ほど学んだ関数をもとに、基本的なプログラムの書き方を学んでいきます。</p>
+          <p>下のプログラムを見てみましょう。</p>
+          <img src="/my-app/assets/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF-DkQtaL8H.jpg" style="max-width: 100%; margin: 0 auto;">
+          <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラムです。</p>
+          <p>HIGH は約5Vを出力するという意味で、LEDを光らせるときなどに使います。</p>
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>プログラムを書く上で重要なこと</h3>
+
+          <h4> <span style="color:#388e3c; font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              セミコロン ( ; )は必ず必要</span></h4>
+
+          <p>命令文の最後には必ず <strong>セミコロン (;)</strong> をつけます。これを忘れると「エラー」になって、プログラムが動きません。</p>
+
+          <pre><code>pinMode(3, OUTPUT);
+digitalWrite(3, HIGH);</code></pre>
+
+          <h4> <span style="color:#388e3c; font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              波かっこ <code>{ }</code> の役割</span></h4>
+
+          <p>setup関数とloop関数の中身は、必ず<b>波かっこ{ }</b>で囲む必要があります。もし波かっこを消してしまうと、どこまでが
+            関数の中身なのかを Arduino が理解できず、エラーになります。
+          </p>
+
+          <h4> <span style="color:#388e3c; font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              コメント ( <code>//</code> )</span></h4>
+          <p>//の後に記述されたものは<b>コメント</b>として扱われます。</p>
+          <p>コメントはプログラムの動作には影響しないため、プログラムの中に説明を書いておくことができます。</p>
+
+          <pre>// 3番ピンを出力用にする
+// 3番ピンをHIGHにする
+      </pre>
+        </div>
+        <button class="page-nav" data-to="page3" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="page5" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(4);">次のページへ</button>
+      </div>
+      <div id="page5" style="display:none;">
+        <div class="blue-point-box">
+          <h3>まとめ</h3>
+          <h3>マイコンとは何か</h3>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;"><b>マイコンは、
+                <span style="color:#1976d2;">センサーからの情報を受け取り、LEDやモーターなどの出力装置を制御できる小型コンピュータ</span></b></span>
+          </p>
+          <p>特定の仕事を効率よくこなすために作られ、小型・低価格・多機能</p>
+          <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px; justify-content: center;">
+            <div style="text-align: center;">
+              <wokwi-arduino-uno></wokwi-arduino-uno>
+              <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Uno</div>
+            </div>
+            <div style="text-align: center;">
+              <wokwi-arduino-nano></wokwi-arduino-nano>
+              <div style="margin-top: 8px; font-weight: bold; color:#1976d2;">Arduino Nano</div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>マイコンを動かすには</h3>
+          <p>Arduinoを動かすためには、プログラムを書いてArduinoに書き込む必要がある。</p>
+          <p>Arduinoのプログラムは、複数の<b style="color:#388e3c;">関数</b>を組み合わせて作られている。</p>
+          <p><span style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;">関数とは、
+              <b style="color:#388e3c;">特定の処理をまとめた命令のまとまり</b></span>
+          </p>
+          <div style="position: relative; width: 500px; margin: 0 auto;">
+            <img src="/my-app/assets/%E9%96%A2%E6%95%B0%E8%AA%AC%E6%98%8E-DR1XWA7J.jpg" alt="GPIO" style="display: block; width: 100%;">
+            <svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none;">
+              <rect x="68" y="38" width="177" height="53" fill="none" stroke="red" stroke-width="3" />
+              <rect x="68" y="94" width="200" height="53" fill="none" stroke="blue" stroke-width="3" />
+              <text x="250" y="70" fill="red" font-size="24" font-weight="bold">setup関数</text>
+              <text x="280" y="130" fill="blue" font-size="24" font-weight="bold">loop関数</text>
+            </svg>
+          </div>
+          <p>Arduinoのプログラムを作成する場合、<b style="color:#388e3c;">setup関数</b>と<b
+              style="color:#388e3c;">loop関数</b>の2つの関数を必ず作成する必要がある</p>
+        </div>
+        <p></p>
+        <div class="blue-point-box">
+          <h3>マイコンの機能</h3>
+          <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">Arduinoには
+              <b style="color:#1976d2;">GPIO</b>と呼ばれる汎用的な入出力ピンが複数ある</span>
+          </p>
+          <div style="position: relative; width: 500px; margin: 0 auto;">
+            <img src="/my-app/assets/GPIO-C1LKZOer.jpg" alt="GPIO" style="display: block; width: 100%;">
+            <svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none;">
+              <rect x="190" y="2" width="177" height="45" fill="none" stroke="red" stroke-width="3" />
+              <rect x="225" y="155" width="142" height="45" fill="none" stroke="red" stroke-width="3" />
+              <line x1="367" y1="30" x2="405" y2="30" stroke="red" stroke-width="3"></line>
+              <line x1="367" y1="175" x2="405" y2="175" stroke="red" stroke-width="3"></line>
+              <line x1="403" y1="30" x2="403" y2="175" stroke="red" stroke-width="3"></line>
+              <text x="380" y="25" fill="red" font-size="24" font-weight="bold">入出力ピン</text>
+              <line x1="100" y1="300" x2="240" y2="300" stroke="blue" stroke-width="3"></line>
+              <text x="260" y="300" fill="blue" font-size="24" font-weight="bold">ピンの設定</text>
+            </svg>
+          </div>
+          <p><span
+              style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">ピンの設定をするにはsetup関数の中にある
+              <b style="color:#1976d2;">pinMode</b>という関数を用いて行う</span>
+          </p>
+          <p>例：7番ピンを出力用として設定する場合</p>
+          <p><code>pinMode(7, OUTPUT);</code></p>
+          <p>関数のかっこの中に入れる値のことを<b style="color:#1976d2;">引数（ひきすう）</b>という</u></p>
+        </div>
+        <p></p>
+        <div class="green-point-box">
+          <h3>基本的なプログラムの書き方</h3>
+          <img src="/my-app/assets/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF-DkQtaL8H.jpg" style="max-width: 100%; margin: 0 auto;">
+          <p>上のプログラムは、3番ピンを出力用として設定し、3番ピンをHIGHにするプログラム</p>
+          <h3>プログラムを書く上で重要なこと</h3>
+          <ul style="background: #e3f2fd;">
+            <li><b>セミコロン（;）</b>：命令文の最後に必ずつける</li>
+            <li><b>波かっこ（{}）</b>：setup、loop関数を囲む必要がある</li>
+            <li><b>コメント（//）</b>：プログラムの動作には影響しない説明文</li>
+          </ul>
+        </div>
+        <p>この章の内容をしっかり復習し、確認問題へ進みましょう！</p>
+        <button class="page-nav" data-to="page4" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" onclick="markPageReached(5);">次のページへ</button>
+      </div>
+      <div id="pageTest" style="display:none;">
+        <h2>確認問題</h2>
+        <h2>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。</h2>
+
+        <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
+        <p><b>Q1. マイコンの説明として正しいものはどれですか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label>大型のゲーム専用コンピュータである</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>センサーの情報を受け取り、LEDやモーターなどを制御できる小型コンピュータ</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>インターネット接続だけを行う装置</label>
+          </div>
+        </form>
+
+        <p><b>Q2. Arduino のプログラムに必ず必要な関数はどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label>start関数とend関数</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>main関数とreset関数</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>setup関数とloop関数</label>
+          </div>
+        </form>
+
+        <p><b>Q3. 関数の説明として正しいものはどれですか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>プログラムの最後に必ず書くコメント</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>特定の処理をまとめた命令のまとまり</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>マイコンの種類を選ぶための設定</label>
+          </div>
+        </form>
+
+        <p><b>Q4. GPIOの説明として正しいものはどれですか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1">
+            <label>マイコンを冷やすための部品</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2">
+            <label>電源端子のこと</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3">
+            <label>汎用的な入出力ピンのこと</label>
+          </div>
+        </form>
+        <p><b>Q5. ピンの設定を行うために使用する関数はどれですか？</b></p>
+        <form name="q5">
+          <div class="form-row">
+            <input type="radio" name="q5" value="1">
+            <label>digitalWrite関数</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="2">
+            <label>pinMode関数</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="3">
+            <label>analogRead関数</label>
+          </div>
+        </form>
+        <p><b>Q6. pinMode(7, OUTPUT); の説明として正しいものはどれですか？</b></p>
+        <form name="q6">
+          <div class="form-row">
+            <input type="radio" name="q6" value="1">
+            <label>7番ピンを出力用として使う設定</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q6" value="2">
+            <label>7番ピンからアナログ入力をする設定</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q6" value="3">
+            <label>7番ピンを削除する設定</label>
+          </div>
+        </form>
+        <p><b>Q7. Arduino のプログラムで命令文の最後に必ずつける記号はどれですか？</b></p>
+        <form name="q7">
+          <div class="form-row">
+            <input type="radio" name="q7" value="1">
+            <label>カンマ（,）</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q7" value="2">
+            <label>ピリオド（.）</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q7" value="3">
+            <label>セミコロン（;）</label>
+          </div>
+        </form>
+        <p><b>Q8. コメント（//）の正しい説明はどれですか？</b></p>
+        <form name="q8">
+          <div class="form-row">
+            <input type="radio" name="q8" value="1">
+            <label>プログラムの動作に影響しない説明文</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q8" value="2">
+            <label>コンピュータに音声を出す命令</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q8" value="3">
+            <label>エラーを自動修正する命令</label>
+          </div>
+        </form>
+        <div id="result1" style="margin-top: 20px;"></div>
+        <button onclick="checkAnswer()">回答チェック</button>
+        <p></p>
+        <button class="page-nav" data-to="page5" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1" style="display:none;" id="topageOmake"
+          onclick="markPageReached(6);">次のページへ</button>
+        <script>
+          function checkAnswer() {
+            // 各問題の正解インデックス（0始まり）
+            const correct = {
+              q1: [1], // Q1は2番目（index:1）が正解
+              q2: [2], // Q2は3番目（index:2）が正解
+              q3: [1], // Q3は2番目（index:1）が正解
+              q4: [2], // Q4は3番目（index:2）が正解
+              q5: [1], // Q5は2番目（index:1）が正解
+              q6: [0], // Q6は1番目（index:0）が正解
+              q7: [2], // Q7は3番目（index:2）が正解
+              q8: [0], // Q8は1番目（index:0）が正解
+            };
+
+            let results = [];
+            Object.keys(correct).forEach(q => {
+              const form = document.forms[q];
+              const checks = Array.from(form.querySelectorAll('input[type="radio"]'));
+              const checkedIdx = checks.findIndex(c => c.checked); // 選択されたインデックス（1つだけ）
+              const isCorrect = JSON.stringify([checkedIdx]) === JSON.stringify(correct[q]);
+              results.push(isCorrect ? "○" : "×");
+            });
+
+            // 全問分の結果をresult1に表示
+            // 横並びで表示
+            let html = '';
+            Object.keys(correct).forEach((q, i) => {
+              html += `Q${i + 1}:${results[i]} `;
+            });
+            html = html.trim();
+            if (results.every(r => r === "○")) {
+              html += '<br><span style="color:green;font-weight:bold;">全問正解です！次の章に進みましょう！</span>';
+              document.getElementById('topageOmake').style.display = 'inline';
+            } else {
+              html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
+            }
+            document.getElementById('result1').innerHTML = html;
+          }
+        </script>
+      </div>
+      <div id="pageOmake" style="display:none;">
+        <h2>1章おまけ：ブレッドボード</h2>
+        <div class="blue-point-box">
+          <p>1章の最初のページで、Arduinoの近くに下のようなものがあったと思います。</p>
+          <div class="app-container">
+            <div class="leds-circuit" style="position: relative; width: 100%; height: 300px; margin: 0 auto;">
+              <my-breadboard style="display:block; margin: 0 auto;"></my-breadboard>
+            </div>
+          </div>
+          <p>これは<b style="color:#1976d2">ブレッドボード</b>と呼ばれる、多数の穴が開いた基板です。</p>
+          <p><span
+              style="font-size:1.1em; background:#bcecbf; padding:2px 6px; border-radius:4px;"><b>ブレッドボードには規則的に配置された穴があり、<br>
+                部品やワイヤーを差し込むことで簡単に電子回路を作成することができます。</b></span>
+          </p>
+
+        </div>
+        <div class="green-point-box">
+          <h3>ブレッドボードの内部構造</h3>
+          <p>ブレッドボードの穴はすべてが独立しているわけではなく、内部では次のようにつながっています。</p>
+          <div class="app-container">
+            <!-- wokwiオブジェクト部分はそのまま -->
+            <div class="leds-circuit" style="position: relative; width: 500px; height: 300px; margin: 0 auto;">
+              <my-breadboard2 style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard2>
+            </div>
+          </div>
+          <h3>電源ライン</h3>
+          <p>ブレッドボードの両端にある赤と青でつながっている部分は<b><span style="color:#388e3c;">電源ライン</span></b>と呼ばれ、横方向に内部でつながっています。</p>
+          <p>電源ラインには、電源およびGND（グランド）を接続します。</p>
+          <p>多くのブレッドボードでは、＋が電源、−が GND を表していますが、<br>
+            <span
+              style="font-size:1.1em; background:#e3f2fd; padding:2px 6px; border-radius:4px;"><b>実際の電圧が自動的に供給されるわけではありません。
+                必ずマイコンや電源装置から配線する必要があります。</b></span>
+          </p>
+          <h3>部品エリア</h3>
+          <p>ブレッドボードの中央にある水色でつながっている部分は部品エリアと呼ばれ、縦方向に内部でつながっています。</p>
+          <p>電源ラインとは違い、中央に溝があります。この溝を越えた穴どうしはつながっていません。</p>
+          <P>部品エリアには、LED、抵抗、センサなどの部品を接続します。</P>
+        </div>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor1" data-run="run-button1"
+          data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+
+        <button id="nextpage-btn" onclick="window.location.href='que2.html'">次の章へ</button>
+      </div>
+    </div>
+    <div class="sidebar"></div>
+  </div>
+  <script>
+    const readOnly = false;
+    let selected_editor = '#editor1';
+
+    // ページ到達状況を管理（例：最初のページだけ到達済み）
+    let reachedPages1 = JSON.parse(localStorage.getItem('reachedPages1')) || [true, false, false, false, false, false, false];
+    // ページリンクを取得
+    const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+    function updateSidebarLinks() {
+      console.log('Updating sidebar links with reachedPages1:', reachedPages1);
+      pageLinks.forEach((link, idx) => {
+        link.style.display = reachedPages1[idx] ? 'block' : 'none';
+      });
+    }
+    // ページ到達時に呼び出す
+    function markPageReached(pageIdx) {
+      reachedPages1[pageIdx] = true;
+      localStorage.setItem('reachedPages1', JSON.stringify(reachedPages1));
+      updateSidebarLinks();
+    }
+
+    // 初期化
+    updateSidebarLinks();
+
+    // 共通ページ切り替え関数
+    function showPage(toPage, btn) {
+      // すべてのページを非表示
+      document.querySelectorAll('[id^="page"]').forEach(div => {
+        div.style.display = (div.id === toPage) ? 'block' : 'none';
+      });
+      window.scrollTo(0, 0);
+      // エディタやボタンの切り替え
+      if (btn) {
+        const editor = btn.dataset.editor;
+        const run = btn.dataset.run;
+        const stop = btn.dataset.stop;
+        const status = btn.dataset.status;
+        const compiler = btn.dataset.compiler;
+        const error = btn.dataset.error;
+        if (editor && run && stop && status && compiler && error) {
+          selected_editor = editor;
+          window.errorOutputText.textContent = '';
+          window.setActiveButtons(run, stop, status, compiler, error);
+          window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+          window.initMonacoEditor();
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+      window.INITIAL_CODE = PAGE_CODES['page1'];
+      document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const toPage = this.dataset.to || this.dataset.page;
+          showPage(toPage, this);
+        });
+      });
+      window.markChapterUnlocked(1);
+      if (!localStorage.getItem('chapter1_start') && !localStorage.getItem('chapter1_time')) {
+        localStorage.setItem('chapter1_start', Date.now());
+      }
+    });
+    const PAGE_CODES = {
+      page1: `
+void setup() {
+    pinMode(7, OUTPUT);             
+}
+void loop() {
+    digitalWrite(7, HIGH); 
+}
+`.trim(),
+    };
+    // ラジオボタンの保存・復元
+    document.addEventListener('DOMContentLoaded', function () {
+      // 復元
+      for (let i = 1; i <= 8; i++) {
+        const saved = localStorage.getItem('que1_q' + i);
+        if (saved) {
+          const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+          const radio = document.querySelector(selector);
+          if (radio) radio.checked = true;
+        }
+      }
+      // 変更時に保存
+      for (let i = 1; i <= 8; i++) {
+        document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+          radio.addEventListener('change', function () {
+            if (this.checked) {
+              localStorage.setItem('que1_q' + i, this.value);
+            }
+          });
+        });
+      }
+    });
+
+  </script>
+</body>
+</div>
+
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>delay関数</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">4章<br>delay関数</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width: 240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-1:
+            delay関数</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-2:
+            delay関数の概要</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-3:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">4-4:
+            おまけ</a>
+        </div>
+        <to-chapter-5></to-chapter-5>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="page1" style="display: block;">
+        <h2>第4章　delay関数</h2>
+        <p>この章では<b style="color:#1976d2;">delay関数</b>の使い方について学びます。</p>
+        <p>まずは、プログラムを動作させてみましょう。</p>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+        </div>
+        <p>上のプログラムでは0.2秒間隔でLEDが点灯と消灯を繰り返しています。</p>
+        <p><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
+            <b style="color:#1976d2;">delay関数の中の数字を変更することで、LEDの点灯・消灯の長さを変えることが出来ます。</b></span></p>
+        <p>補足：※delay() の時間はミリ秒（ms）で指定します。<br>1000 ms = 1 秒、100 ms = 0.1 秒です。</p>
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1" data-error="error-output-text1"
+          onclick="markPageReached(1);">次のページへ</button>
+      </div>
+      <div id="page2" style="display:none;">
+        <div class="blue-point-box">
+          <h3>delay関数の概要</h3>
+          <div style="background:#d9fdd9; border-left:4px solid #388e3c; padding:4px 8px; margin:12px 0;">
+            <h3>delay関数</h3>
+            <p><b><span style="color:#1976d2;">delay関数</span>はプログラムの実行を指定した時間だけ停止させる関数です。</b></p>
+            <p>delay関数は以下のように記述します。</p>
+            <pre
+              style="font-size:1.1em; background:#f6fff6; border-radius:4px; padding:8px; margin-top:8px;"><code>delay(時間（ミリ秒）);</code></pre>
+          </div>
+          <p>例えば、delay(1000);と記述すると、プログラムの実行が1000ミリ秒（1秒）停止します。</p>
+          <p>先ほどのプログラムでは、digitalWrite(7, HIGH);とdigitalWrite(7,LOW);の後に</p>
+          <p>delay関数を使うことで、LEDが0.2秒間隔で点灯と消灯を繰り返すようにしています。</p>
+          <div style="display: flex; flex-direction: column; align-items: center; margin: 16px 0;">
+            <div
+              style="border: 2px solid #1976d2; border-radius: 8px; padding: 8px 24px; margin: 0 0 8px 0; background: #e3f2fd; font-weight: bold;">
+              7番ピン HIGH</div>
+            <div style="font-size: 2em; color: #1976d2; margin: -8px 0;">↓</div>
+            <div
+              style="border: 2px solid #1976d2; border-radius: 8px; padding: 8px 24px; margin: 0 0 8px 0; background: #fff;">
+              0.2秒待ち</div>
+            <div style="font-size: 2em; color: #1976d2; margin: -8px 0;">↓</div>
+            <div
+              style="border: 2px solid #d32f2f; border-radius: 8px; padding: 8px 24px; margin: 0 0 8px 0; background: #ffebee; font-weight: bold;">
+              7番ピン LOW</div>
+            <div style="font-size: 2em; color: #1976d2; margin: -8px 0;">↓</div>
+            <div
+              style="border: 2px solid #1976d2; border-radius: 8px; padding: 8px 24px; margin: 0 0 8px 0; background: #fff;">
+              0.2秒待ち</div>
+            <div style="font-size: 2em; color: #1976d2; margin: -8px 0;">↓</div>
+            <div
+              style="border: 2px dashed #888; border-radius: 8px; padding: 8px 24px; margin: 0 0 8px 0; background: #f5f5f5; color: #888;">
+              繰り返し</div>
+          </div>
+        </div>
+        <div class="green-point-box">
+          <h3>delay関数を使うときの注意点</h3>
+          <h3><span style="color:#388e3c; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              delayのあいだは、プログラムの実行が完全に止まる</span></h3>
+          <p>delayが実行されている間、Arduinoは他の命令を実行できません。</p>
+          <ul style="background: #e3f2fd;">
+            <li><b>センサーを読まない</b></li>
+            <li><b>ボタンを押しても反応しない</b></li>
+            <li><b>LEDの状態も変わらない</b></li>
+          </ul>
+          <p>例えば、センサーの値を頻繁に読み取ったり、ボタンの押下をすぐに反応させたい場合は使い方に気を付ける必要があります。</p>
+          <h3><span style="color:#388e3c; background:#e3f2fd; padding:2px 6px; border-radius:4px;">
+              ちょうどいいdelay時間の設定が必要</span></h3>
+          <ul style="background: #e3f2fd;">
+            <li><code>delay(10000);</code>　（10秒）</li>
+            <li><code>delay(1);</code> （0.001秒）</li>
+          </ul>
+          <p>delay時間が長すぎると、プログラムの動作が止まっているように見えます。</p>
+          <p>逆に、delay時間が短すぎると、プログラム実行時の変化が見えなくなってしまいます。</p>
+          <p>そのため、delay時間を適切に設定することが重要です。</p>
+        </div>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2" onclick="markPageReached(2);">次のページへ</button>
+      </div>
+      <div id="pageTest" style="display:none;">
+        <h3>第4章　delay関数　確認問題</h3>
+        <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
+        <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
+        <p><b>Q1. delay(1000); と書いたとき、プログラムはどうなりますか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label></label>1ミリ秒だけ停止する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>0.1秒だけ停止する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>1000ミリ秒だけ停止する</label>
+          </div>
+        </form>
+        <p><b>Q2. delay関数を使うとどうなるか、正しいものはどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label>プログラムは止まらず、他の命令を同時に実行できる</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>プログラムは指定した時間だけ完全に止まる</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>LEDの点灯だけは続けて動く</label>
+          </div>
+        </form>
+        <p><b>Q3. delay関数の値が大きすぎる場合（例：delay(10000);） に起こりやすいことはどれですか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>プログラムが止まっているように見える</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>センサーの値が100倍になる</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>LEDの点灯・消灯が速くなりすぎる</label>
+          </div>
+        </form>
+        <p><b>Q4. delay関数の値が小さすぎる場合（例：delay(1);）の問題として正しいものはどれですか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1">
+            <label>プログラムが強制終了する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2">
+            <label>プログラム(LEDなど)の変化が速すぎて見えなくなる</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3">
+            <label>Arduinoが自動的に最適なdelayに調整してくれる</label>
+          </div>
+        </form>
+        <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
+        <div id="result1" style="margin-top: 20px;"></div>
+        <h3>２．0.1秒ごとにLEDが点灯するプログラムを作成してください。</h3>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="7"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button2">Run</button>
+            <button id="stop-button2" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label2"></div>
+          </div>
+          <div class="code-editor" id="editor2"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <div id="result2"></div>
+        <div id="result3"></div>
+
+        <button class="page-nav" data-to="page2" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" id="topageOmake" style="display:none;"
+          onclick="markPageReached(3);">次のページへ</button>
+        <script>
+          const statusLabel = document.getElementById('status-label2');
+          const LED7 = document.querySelector('wokwi-led[pin="7"]');
+          let que1 = false;
+          let que2 = false;
+          let time1;
+          let time2;
+          let counter = 0;
+          let prevValue = LED7.value;
+          function checkAnswer() {
+            // 各問題の正解インデックス（0始まり）
+            const correct = {
+              q1: [2], // Q1は2番目（index:1）が正解
+              q2: [1], // Q2は3番目（index:2）が正解
+              q3: [0], // Q3は3番目（index:2）が正解
+              q4: [1], // Q4は3番目（index:2）が正解
+            };
+
+            let results = [];
+            Object.keys(correct).forEach(q => {
+              const form = document.forms[q];
+              const checks = Array.from(form.querySelectorAll('input[type="radio"]'));
+              const checkedIdx = checks.findIndex(c => c.checked); // 選択されたインデックス（1つだけ）
+              const isCorrect = JSON.stringify([checkedIdx]) === JSON.stringify(correct[q]);
+              results.push(isCorrect ? "○" : "×");
+            });
+
+            // 全問分の結果をresult1に表示
+            // 横並びで表示
+            let html = '';
+            Object.keys(correct).forEach((q, i) => {
+              html += `Q${i + 1}:${results[i]} `;
+            });
+            html = html.trim();
+            if (results.every(r => r === "○")) {
+              html += '<br><span style="color:green;font-weight:bold;">全問正解です！</span>';
+              que1 = true;
+            } else {
+              html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
+            }
+            document.getElementById('result1').innerHTML = html;
+          }
+
+          let que2code = false;
+          let que2led = false;
+
+          setInterval(() => {
+            const value = LED7.value;
+            if (!prevValue && value) {
+              // 消灯→点灯の瞬間だけ一度だけ表示
+              time1 = parseSimTime(statusLabel);
+              console.log('LED点灯時の時刻:', time1);
+            }
+            if (prevValue && !value) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED消灯時の時刻:', time2);
+              if (time2 - time1 > 0.090 && 0.11 > time2 - time1) {
+                counter++;
+                console.log(counter);
+                if ((!que2led && (counter >= 3))) {
+                  que2led = true;
+                }
+              } else {
+                counter = 0;
+              }
+            }
+            // window.codeがundefined/nullでない場合のみ判定
+            if (typeof window.code === 'string') {
+              if (window.code.includes("delay(100);")) {
+                que2code = true;
+              }
+            }
+
+            if (que2code && que2led) {
+              document.getElementById('result2').textContent = "正解です！";
+              document.getElementById('result2').style.color = "green";
+              que2 = true;
+            }
+
+            prevValue = value;
+
+            if (que1 && que2) {
+              document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
+              document.getElementById('topageOmake').style.display = 'inline';
+            }
+          }, 10);
+        </script>
+      </div>
+      <div id="pageOmake" style="display: none;">
+        <h2>4章おまけ：7セグメントとの組み合わせ</h2>
+        <p>4章ではdelay関数の使い方について学びました。</p>
+        <p>おまけとして、7セグメントLEDと組み合わせたプログラムを実行してみましょう。</p>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-7segment id="segment" color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+            <wokwi-resistor value="200"
+              style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
+
+
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 2番ピンへ -->
+              <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+              <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+              <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+              <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+              <!-- 3番ピンへ -->
+              <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+              <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+              <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+              <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+              <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+              <!-- 4番ピンへ -->
+              <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+              <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+              <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+              <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+              <!-- 5番ピンへ -->
+              <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+              <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+              <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+              <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+              <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+              <!-- 6番ピンへ -->
+              <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+              <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+              <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+              <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+              <!-- 7番ピンへ -->
+              <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+              <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+              <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+              <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+              <!-- 8番ピンへ -->
+              <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+              <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+              <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+              <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
+              <!-- GNDへ -->
+              <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+              <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+              <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+              <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+              <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button3">Run</button>
+            <button id="stop-button3" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label3"></div>
+          </div>
+          <div class="code-editor" id="editor3"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
+          <div id="result"></div>
+        </div>
+        <p>プログラムを実行すると、7セグメントLEDに0~9までの数字が表示されます。</p>
+        <p>delay関数はLEDの点灯・消灯だけでなく、様々な場面で応用することが出来ます。</p>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor2" data-run="run-button2"
+          data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2">前のページへ</button>
+        <button id="tochap4-btn" onclick="window.location.href='que5.html'">次の章へ</button>
+      </div>
+    </div>
+    <div class="sidebar"></div>
+  </div>
+</body>
+<script>
+  let selected_editor = '#editor1';
+  const readOnly = false;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('page4_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+
+    // 各Runボタンにイベント登録
+    const pageKeys = ['page1','pageTest', 'pageOmake'];
+    ['run-button1', 'run-button2', 'run-button3'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES[pageKeys[idx]] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('page4_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
+
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
+  let reachedPages4 = JSON.parse(localStorage.getItem('reachedPages4')) || [true, false, false, false, false, false, false];
+  // ページリンクを取得
+  const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+  function updateSidebarLinks() {
+    console.log('Updating sidebar links with reachedPages4:', reachedPages4);
+    pageLinks.forEach((link, idx) => {
+      link.style.display = reachedPages4[idx] ? 'block' : 'none';
+    });
+  }
+  // ページ到達時に呼び出す
+  function markPageReached(pageIdx) {
+    reachedPages4[pageIdx] = true;
+    localStorage.setItem('reachedPages4', JSON.stringify(reachedPages4));
+    updateSidebarLinks();
+  }
+
+  // 初期化
+  updateSidebarLinks();
+  // 共通ページ切り替え関数
+  function showPage(toPage, btn) {
+    // すべてのページを非表示
+    document.querySelectorAll('[id^="page"]').forEach(div => {
+      div.style.display = (div.id === toPage) ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+    // エディタやボタンの切り替え
+    if (btn) {
+      const editor = btn.dataset.editor;
+      const run = btn.dataset.run;
+      const stop = btn.dataset.stop;
+      const status = btn.dataset.status;
+      const compiler = btn.dataset.compiler;
+      const error = btn.dataset.error;
+      if (editor && run && stop && status && compiler && error) {
+        selected_editor = editor;
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons(run, stop, status, compiler, error);
+        window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+        window.initMonacoEditor();
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    window.INITIAL_CODE = PAGE_CODES['page1'];
+    document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const toPage = this.dataset.to || this.dataset.page;
+        showPage(toPage, this);
+      });
+    });
+    window.markChapterUnlocked(4);
+
+    if (!localStorage.getItem('chapter4_start') && !localStorage.getItem('chapter4_time')) {
+      localStorage.setItem('chapter4_start', Date.now());
+    }
+    const chapter3_start = parseInt(localStorage.getItem('chapter3_start'));
+    const end = Date.now();
+    const diffMs = end - chapter3_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter3_time', diffSec);
+    localStorage.removeItem('chapter3_start');
+  });
+  const PAGE_CODES = {
+    page1: `
+void setup() {
+    pinMode(7, OUTPUT);             
+}
+void loop() {
+    digitalWrite(7, HIGH); 
+    delay(200);
+    digitalWrite(7,LOW);
+    delay(200);
+}
+`.trim(),
+
+    pageTest: `
+void setup() {
+
+}
+void loop() {
+
+}
+`.trim(),
+    pageOmake: `
+// 0～9の表示パターン（a～g）
+const byte numbers[10][7] = {
+  // a b c d e f g
+  {1,1,1,1,1,1,0}, // 0
+  {0,1,1,0,0,0,0}, // 1
+  {1,1,0,1,1,0,1}, // 2
+  {1,1,1,1,0,0,1}, // 3
+  {0,1,1,0,0,1,1}, // 4
+  {1,0,1,1,0,1,1}, // 5
+  {1,0,1,1,1,1,1}, // 6
+  {1,1,1,0,0,0,0}, // 7
+  {1,1,1,1,1,1,1}, // 8
+  {1,1,1,1,0,1,1}  // 9
+};
+
+void setup() {
+  for (int i = 2; i <= 8; i++) {
+    pinMode(i, OUTPUT);
+  }
+}
+
+void loop() {
+  // 繰り返し処理
+  for (int num = 0; num <= 9; num++) {
+    // 繰り返し処理(二重ループ)
+    for (int seg = 0; seg < 7; seg++) {
+      digitalWrite(seg + 2, numbers[num][seg]);
+    }
+    delay(200); // 0.2秒
+  }
+}
+`.trim(),
+  };
+
+  // ラジオボタンの保存・復元
+  document.addEventListener('DOMContentLoaded', function () {
+    // 復元
+    for (let i = 1; i <= 4; i++) {
+      const saved = localStorage.getItem('que4_q' + i);
+      if (saved) {
+        const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+        const radio = document.querySelector(selector);
+        if (radio) radio.checked = true;
+      }
+    }
+    // 変更時に保存
+    for (let i = 1; i <= 4; i++) {
+      document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+        radio.addEventListener('change', function () {
+          if (this.checked) {
+            localStorage.setItem('que4_q' + i, this.value);
+          }
+        });
+      });
+    }
+  });
+
+</script>
+</body>
+
+</html>

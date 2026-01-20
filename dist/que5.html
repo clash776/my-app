@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWM制御</title>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="sidebar">
+      <nav
+        style="display: flex; position:absolute; top: 200px; flex-direction: column; align-items: center; gap: 16px;">
+        <to-chapter-howtouse></to-chapter-howtouse>
+        <to-chapter-1></to-chapter-1>
+        <to-chapter-2></to-chapter-2>
+        <to-chapter-3></to-chapter-3>
+        <to-chapter-4></to-chapter-4>
+        <a href="#" style="color: #fff;text-decoration: none; font-weight: bold;font-size: 25px;">5章<br>PWM制御</a>
+        <div class="sidebar-links" style="background: #1976d2; border-radius: 10px; padding: 8px 0; width:240px;">
+          <a href="#" class="page-link" data-to="page1" data-editor="#editor1" data-run="run-button1"
+            data-stop="stop-button1" data-status="status-label1" data-compiler="compiler-output-text1"
+            data-error="error-output-text1"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-1:
+            PWM制御</a>
+          <a href="#" class="page-link" data-to="page2" data-editor="#editor2" data-run="run-button2"
+            data-stop="stop-button2" data-status="status-label2" data-compiler="compiler-output-text2"
+            data-error="error-output-text2"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-2:
+            PWM制御の概要</a>
+          <a href="#" class="page-link" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+            data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+            data-error="error-output-text3"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-3:
+            確認問題</a>
+          <a href="#" class="page-link" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+            data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+            data-error="error-output-text4"
+            style="color: #fff; text-decoration: none; font-weight: bold; display: block; padding: 6px 16px; border-radius: 6px;">5-4:
+            おまけ</a>
+        </div>
+        <to-chapter-6></to-chapter-6>
+        <to-test-1></to-test-1>
+        <to-final></to-final>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="page1" style="display:block;">
+        <h2>第5章　PWM制御</h2>
+        <p>この章では<b style="color:#1976d2;">PWM制御</b>について学びます。</p>
+        <p>今回のプログラムでは、11番ピンを<b style="color:#1976d2;">PWM出力用</b>として設定し、LEDの明るさを段階的に変化させています。</p>
+        <p>まずは、プログラムを動作させてみましょう。</p>
+        <p><b>(本ページではLEDの明るさを制御するために0~255の値を扱えるbyte型の変数[2章おまけ]を使用しています。
+            以降のページでは使用しません。)</b></p>
+
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="toolbar">
+            <button id="run-button1">Run</button>
+            <button id="stop-button1" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label1"></div>
+          </div>
+          <div class="code-editor" id="editor1"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text1"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text1"></pre>
+          </div>
+        </div>
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2" data-error="error-output-text2"
+          onclick="markPageReached(1);">次のページへ</button>
+      </div>
+      <div id="page2" style="display:none;">
+        <div class="blue-point-box">
+          <h3>PWM制御とは</h3>
+          <p><b>PWM（Pulse Width Modulation:パルス幅変調）制御</b>は、
+            <br><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;"><b
+                style="color:#1976d2;">デジタル信号のONとOFFを高速で切り替えることで、アナログ的な出力を実現する技術です。</b></span>
+            <br>PWMを使うことで、LEDの明るさやモーターの速度などを細かく制御することができます。
+          </p>
+        </div>
+        <div class="green-point-box">
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <h3>analogWrite関数</h3>
+            <b>Arduinoでは、<span style="color:#388e3c;">analogWrite関数</span>を使うことで簡単にPWM出力を行うことができます。</b><br>
+            <p>analogWrite関数は、以下のように記述します。</p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>analogWrite(ピン番号, 値);</code></pre>
+          </div>
+          <p>2つ目の引数「値」には<b>0～255の値</b>を指定することが出来ます。LEDの場合、<b style="color:#1976d2;">値が大きいほど明るく、小さいほど暗くなります。</b></p>
+          <p>そのため、0を指定すれば消灯、255を指定すれば点灯になります。</p>
+          <p><b>補足：analogWrite関数を使用する際は、pinMode関数でピンを出力用にする必要はありません。</b></p>
+        </div>
+        <p>下のプログラムのanalogWrite関数の引数を自由に変更して点灯の様子を確認してみましょう。</p>
+
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="toolbar">
+            <button id="run-button2">Run</button>
+            <button id="stop-button2" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label2"></div>
+          </div>
+          <div class="code-editor" id="editor2"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text2"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text2"></pre>
+          </div>
+        </div>
+        <div class="blue-point-box">
+          <h3>digitalWrite関数との違い</h3>
+          <p>LEDを点灯させる制御として、digitalWrite関数がありました。</p>
+          <code><span style="font-size:1.1em; background:#d9fdd9; padding:2px 6px; border-radius:4px;">
+                digitalWrite(ピン番号, モード);</span></code>
+          <p>digitalWrite関数では、HIGH（5V）かLOW（0V）のどちらかしか指定できませんが、<br>analogWrite関数では0～255の範囲で細かく出力を調整できる点が異なります。</p>
+          </p>
+          <ul style="background: #d9fdd9;">
+            <li><b>digitalWrite関数</b>：HIGHかLOWしか出力の設定ができない<br>
+              イメージ：0か100かしか設定できない　デジタル：飛び飛びの値</li>
+            <p></p>
+            <li><b>analogWrite関数</b>：0～255の範囲で細かく出力を調整できる<br>
+              イメージ：0から100までの間で細かく設定できる　アナログ：連続的</li>
+          </ul>
+        </div>
+        <button class="page-nav" data-to="page1" data-editor="#editor1" data-run="run-button1" data-stop="stop-button1"
+          data-status="status-label1" data-compiler="compiler-output-text1"
+          data-error="error-output-text1">前のページへ</button>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3" onclick="markPageReached(2);">次のページへ</button>
+      </div>
+      <div id="pageTest" style="display:none;">
+        <h3>第5章　PWM制御　確認問題</h3>
+        <h3>問題を回答し、「回答チェック」ボタンを押して正解かどうか確認しましょう。<br>プログラムを作成する問題はプログラムを実行することで正解かどうか確認できます。</h3>
+        <h3>1. それぞれについて、正しい説明を1つ選んでください。</h3>
+        <p><b>Q1. PWM制御とは何ですか？</b></p>
+        <form name="q1">
+          <div class="form-row">
+            <input type="radio" name="q1" value="1">
+            <label></label>電圧を常に一定に保つ制御方式</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="2">
+            <label>デジタル信号を高速でON/OFFしてアナログ的な出力を実現する方式</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q1" value="3">
+            <label>電流を直接アナログ出力する方式</label>
+          </div>
+        </form>
+        <p><b>Q2. ArduinoでPWM制御を行いたいときに使う関数はどれですか？</b></p>
+        <form name="q2">
+          <div class="form-row">
+            <input type="radio" name="q2" value="1">
+            <label></label>digitalWrite</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="2">
+            <label>pinMode</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q2" value="3">
+            <label>analogWrite</label>
+          </div>
+        </form>
+        <p><b>Q3. analogWrite(ピン番号, 値) の「値」に指定できる範囲はどれですか？</b></p>
+        <form name="q3">
+          <div class="form-row">
+            <input type="radio" name="q3" value="1">
+            <label>0〜1</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="2">
+            <label>0〜100</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q3" value="3">
+            <label>0〜255</label>
+          </div>
+        </form>
+        <p><b>Q4. analogWriteでLEDを制御するとき、255を指定するとどうなりますか？</b></p>
+        <form name="q4">
+          <div class="form-row">
+            <input type="radio" name="q4" value="1" id="q4a">
+            <label>最も明るく点灯する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="2" id="q4b">
+            <label>完全に消灯する</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q4" value="3" id="q4c">
+            <label>中くらいの明るさになる</label>
+          </div>
+        </form>
+        <p><b>Q5. digitalWriteとanalogWriteの違いとして正しいものはどれですか？</b></p>
+        <form name="q5">
+          <div class="form-row">
+            <input type="radio" name="q5" value="1" id="q5a">
+            <label>digitalWriteは0〜255まで細かく出力できる</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="2" id="q5b">
+            <label>analogWriteはHIGHかLOWしか出力できない</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="q5" value="3" id="q5c">
+            <label>digitalWriteは2つの値しか指定できないが、analogWriteは256段階で出力を調整できる</label>
+          </div>
+        </form>
+        <button id="check-answer-btn" onclick="checkAnswer()">回答チェック</button>
+        <div id="result1" style="margin-top: 20px;"></div>
+        <h3>２．0.1 秒ごとに analogWrite の第2引数に与える値を50、150、250 と順番に変化させ、<br>LED の明るさが段階的に変化するプログラムを作成してください。</h3>
+        <div class="app-container">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 530px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="quiz-led" color="red" pin="11"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+            <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+              <!-- 7番ピン（右足）: LEDの右足からArduinoの7番ピン付近へ -->
+              <line x1="278" y1="208" x2="254" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="310" stroke="black" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="toolbar">
+            <button id="run-button3">Run</button>
+            <button id="stop-button3" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label3"></div>
+          </div>
+          <div class="code-editor" id="editor3"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text3"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text3"></pre>
+          </div>
+        </div>
+        <div id="result2"></div>
+        <div id="result3"></div>
+
+        <button class="page-nav" data-to="page2" data-editor="#editor2" data-run="run-button2" data-stop="stop-button2"
+          data-status="status-label2" data-compiler="compiler-output-text2"
+          data-error="error-output-text2">前のページへ</button>
+        <button class="page-nav" data-to="pageOmake" data-editor="#editor4" data-run="run-button4"
+          data-stop="stop-button4" data-status="status-label4" data-compiler="compiler-output-text4"
+          data-error="error-output-text4" id="topageOmake" style="display:none;"
+          onclick="markPageReached(3);">次のページへ</button>
+        <script>
+          let que1 = false;
+          let que2 = false;
+          function checkAnswer() {
+            // 各問題の正解インデックス（0始まり）
+            const correct = {
+              q1: [1], // Q1は2番目（index:1）が正解
+              q2: [2], // Q2は3番目（index:2）が正解
+              q3: [2], // Q3は3番目（index:2）が正解
+              q4: [0], // Q4は1番目（index:0）が正解
+              q5: [2], // Q5は2番目（index:2）が正解
+            };
+
+            let results = [];
+            Object.keys(correct).forEach(q => {
+              const form = document.forms[q];
+              const checks = Array.from(form.querySelectorAll('input[type="radio"]'));
+              const checkedIdx = checks.findIndex(c => c.checked); // 選択されたインデックス（1つだけ）
+              const isCorrect = JSON.stringify([checkedIdx]) === JSON.stringify(correct[q]);
+              results.push(isCorrect ? "○" : "×");
+            });
+
+            // 全問分の結果をresult1に表示
+            // 横並びで表示
+            let html = '';
+            Object.keys(correct).forEach((q, i) => {
+              html += `Q${i + 1}:${results[i]} `;
+            });
+            html = html.trim();
+            if (results.every(r => r === "○")) {
+              html += '<br><span style="color:green;font-weight:bold;">全問正解です！</span>';
+              que1 = true;
+            } else {
+              html += '<br><span style="color:red;font-weight:bold;">不正解の問題があります。もう一度確認してみましょう。</span>';
+            }
+            document.getElementById('result1').innerHTML = html;
+          }
+
+          let que2code = false;
+          let que2led = false;
+          let expectedValues = [50, 150, 250];
+          const LED11 = document.querySelector('#quiz-led');
+          let prevbrightness = LED11.brightness;
+          const statusLabel = document.getElementById('status-label3');
+          let time1;
+          let time2;
+          let counter = 0;
+
+          setInterval(() => {
+            if (!prevbrightness && LED11.value) {
+              // 消灯→点灯の瞬間だけ一度だけ表示
+              console.log(LED11, LED11.value, LED11.brightness, counter);
+              if (counter == 0 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+                time1 = parseSimTime(statusLabel);
+                if (time1 == null) return;
+                console.log('LED点灯時の時刻:', time1);
+                counter++;
+              }
+            }
+            if (counter == 1 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED消灯時の時刻:', time2, time2 - time1);
+              if (time2 - time1 > 0.090) {
+                time1 = parseSimTime(statusLabel);
+                counter++;
+              } else {
+                counter = 0;
+              }
+            }
+            if (counter == 2 && Math.abs(LED11.brightness - (expectedValues[counter] / 255)) < 0.05) {
+              // 点灯→消灯の瞬間だけ一度だけ表示
+              time2 = parseSimTime(statusLabel);
+              console.log('LED点灯時の時刻:', time2);
+              if (time2 - time1 > 0.090) {
+                que2led = true;
+                counter = 3;
+              } else {
+                counter = 0;
+              }
+            }
+            if (typeof window.code === 'string') {
+              if (window.code.includes("analogWrite(11, 50);") &&
+                window.code.includes("analogWrite(11, 150);") &&
+                window.code.includes("analogWrite(11, 250);") &&
+                window.code.includes("delay(100);")
+              ) {
+                que2code = true;
+              }
+            }
+            if (que2code && que2led) {
+              document.getElementById('result2').textContent = "正解です！";
+              document.getElementById('result2').style.color = "green";
+              que2 = true;
+            }
+            if (que1 && que2) {
+              document.getElementById('result3').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！次のページへ行きましょう！</span>";
+              document.getElementById('topageOmake').style.display = 'inline';
+            }
+          }, 10);
+
+        </script>
+      </div>
+      <div id="pageOmake" style="display:none;">
+        <h2>5章おまけ：条件分岐</h2>
+        <p>5章の内容からは外れてしまいますが、おまけとしてボタンを押したらLEDが点灯するプログラムを紹介します。</p>
+        <p>下のプログラムを実行してボタンを押してみましょう。</p>
+        <div class="app-container" id="simulator">
+          <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+            <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+            <!-- LEDを中央上に配置 -->
+            <wokwi-led id="circuit-led" color="red" pin="3"
+              style="position: absolute; left: 250px; top: 145px; transform: scale(1.5);"></wokwi-led>
+            <!-- Arduino Unoを中央下に配置 -->
+            <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 204px;"></wokwi-resistor>
+            <wokwi-arduino-uno id="circuit-arduino"
+              style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+            <!-- 回路の線をSVGで描画（LEDの足からArduinoの3番ピン/GNDへ） -->
+            <svg width="500" height="550" style="position: absolute; left: 0; top: 0;">
+              <!-- 3番ピン（右足）: LEDの右足からArduinoの3番ピン付近へ -->
+              <line x1="278" y1="208" x2="338" y2="310" stroke="red" stroke-width="3" />
+              <line x1="202" y1="225" x2="227" y2="270" stroke="black" stroke-width="3" />
+              <line x1="212" y1="268" x2="227" y2="310" stroke="black" stroke-width="3" />
+              <line x1="353" y1="224" x2="347" y2="310" stroke="green" stroke-width="3" />
+              <line x1="367" y1="115" x2="400" y2="115" stroke="black" stroke-width="3" />
+              <line x1="398" y1="115" x2="393" y2="270" stroke="black" stroke-width="3" />
+            </svg>
+            <wokwi-pushbutton id="circuit-button" pin="2"
+              style="position: absolute; left: 325px; top: 130px; transform: rotate(90deg) scale(0.8);"></wokwi-pushbutton>
+          </div>
+          <p></p>
+          <div class="toolbar">
+            <button id="run-button4">Run</button>
+            <button id="stop-button4" disabled>Stop</button>
+            <div class="spacer"></div>
+            <div id="status-label4"></div>
+          </div>
+          <div class="code-editor" id="editor4"></div>
+          <div class="compiler-output">
+            <pre id="compiler-output-text4"></pre>
+          </div>
+          <div class="error-output">
+            <pre id="error-output-text4"></pre>
+          </div>
+        </div>
+        <div class="blue-point-box">
+          <h3><b>ボタン(タクトスイッチ)について</b></h3>
+          <p>ボタンには4本のピンが付いていますが、実際には<b>2組のピンが内部でつながっている構造</b>になっています。</p>
+          <div
+            style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 200px; margin: 0 auto;">
+            <wokwi-pushbutton values="[0,0,0,0,0,0,0,0]" pins="extend"
+              style="transform: scale(1.5); margin: 0 auto;"></wokwi-pushbutton>
+            <svg width="500" height="200" style="position: absolute; left: 0; top: 0;">
+              <line x1="200" y1="55" x2="300" y2="55" stroke="black" stroke-width="4" />
+              <line x1="200" y1="140" x2="300" y2="140" stroke="black" stroke-width="4" />
+              <line x1="190" y1="70" x2="190" y2="125" stroke="red" stroke-width="4" />
+              <line x1="310" y1="70" x2="310" y2="125" stroke="red" stroke-width="4" />
+              <text x="192" y="45" font-size="15" font-weight="bold" fill="black">つながっていない</text>
+              <text x="192" y="160" font-size="15" font-weight="bold" fill="black">つながっていない</text>
+              <text x="80" y="105" font-size="15" font-weight="bold" fill="red">つながっている</text>
+              <text x="320" y="105" font-size="15" font-weight="bold" fill="red">つながっている</text>
+            </svg>
+          </div>
+          <p>上の図のように<b>隣同士のピンはつながっていますが、向かい側のピンはつながっていません。</b></p>
+          <p>ボタンを押すと、<b>向かい側のピンどうしもつながる</b>仕組みになっています。</p>
+          <p>そのため、<b><span style="color:#d84315;">ボタンが押されたときに処理を変える</span></b>ことが可能になります。</p>
+        </div>
+        <div class="orange-point-box">
+          <h3>ボタンを押したらLEDが点灯する</h3>
+          <p><b
+              style="background: #ffe0b2;padding: 2px 6px; border-radius: 4px;">条件分岐</b>を使うと、状況に応じてプログラムの動作を変えることができます。
+          </p>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <b>条件分岐を行うときには <span style="color:#d84315;">if文</span> を使います。</b><br>
+            if文を使うときは、次のように記述します。
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>if (条件) {処理1;} else {処理2;}</code></pre>
+            <p style="margin-top:8px;">if文は<b>条件を満たしている場合、処理1を実行し、条件を満たしていない場合、処理2を実行</b>します。</p>
+            <p>※else以降は省略可能なので、記述しなくても問題ありません。</p>
+            <ul>
+              <li>if (btn == HIGH) { ... } で「ボタンが押されたとき」だけLEDを点灯します。</li>
+              <li>else を使うと「押されていないとき」の動作も指定できます。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="green-point-box">
+          <h3>ボタンを押したときの処理</h3>
+          <p>ボタンを押したときに処理を変えるには<b>ピンの入力を読み取る必要があります。</b></p>
+          <p>ピンの入力を読み取るには、<b><span style="color:#388e3c;">pinMode関数(INPUT)</span></b>と<b><span
+                style="color:#388e3c;">digitalRead関数</span></b>を使います。</p>
+          <div style="background:#e3f2fd; border-left:4px solid #1976d2; padding:8px 12px; margin:12px 0;">
+            <p><b>pinMode関数(INPUT)</b></p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>pinMode(ピン番号, INPUT);</code></pre>
+            <p style="margin-top:8px;">ピン番号に対応するピンを入力ピンとして設定します。</p>
+            <p><b>digitalRead関数</b></p>
+            <pre
+              style="background:#f0f7ff; border-radius:4px; padding:8px; margin-top:8px;"><code>digitalRead(ピン番号);</code></pre>
+            <p>ピン番号に対応するピンの入力を読み取って、その値(HIGHまたはLOW)を返します。</p>
+            <p>例：入力ピンにGNDが接続されている場合LOW、5Vが接続されている場合HIGHを返します。</p>
+          </div>
+        </div>
+        <p>プログラムの説明が多くなってしまいましたが、上のプログラムは以下のようになっています。</p>
+        <ol style="background: #e3f2fd;">
+          <li><b>ボタンが押される</b></li>
+          <li><b>つながっていなかったピンどうしがつながる</b></li>
+          <li><b>入力ピン(2番ピン)とGNDがつながる</b></li>
+          <li><b>digitalRead(2)=LOWとなり、if文の条件を満たす</b></li>
+          <li><b>if文の処理1が実行され、3番ピンがHIGHになり、LEDが点灯する。</b></li>
+        </ol>
+        <p></p>
+        <button class="page-nav" data-to="pageTest" data-editor="#editor3" data-run="run-button3"
+          data-stop="stop-button3" data-status="status-label3" data-compiler="compiler-output-text3"
+          data-error="error-output-text3">前のページへ</button>
+        <button id="tochap6-btn" onclick="window.location.href='que6.html'">次の章へ</button>
+      </div>
+    </div>
+    <div class="sidebar"></div>
+  </div>
+</body>
+<script>
+  let selected_editor = '#editor1';
+  const readOnly = false;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ページコード全体をローカルストレージから復元
+    const codesAll = localStorage.getItem('page5_codes_all');
+    if (codesAll) {
+      try {
+        const parsed = JSON.parse(codesAll);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(PAGE_CODES).forEach(key => {
+            if (parsed[key]) PAGE_CODES[key] = parsed[key];
+          });
+        }
+      } catch (e) { }
+    }
+
+    // 各Runボタンにイベント登録
+    const pageKeys = ['page1', 'page2', 'pageTest', 'pageOmake'];
+    ['run-button1', 'run-button2', 'run-button3', 'run-button4'].forEach((btnId, idx) => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          // 現在のエディタのコードを取得して保存
+          let code = editor.getModel().getValue();
+          PAGE_CODES[pageKeys[idx]] = code;
+          // ローカルストレージに保存
+          localStorage.setItem('page5_codes_all', JSON.stringify(PAGE_CODES));
+          console.log(code);
+        });
+      }
+    });
+  });
+  // ページ到達状況を管理（例：最初のページだけ到達済み）
+  let reachedPages5 = JSON.parse(localStorage.getItem('reachedPages5')) || [true, false, false, false, false, false, false];
+  // ページリンクを取得
+  const pageLinks = document.querySelectorAll('.sidebar-links .page-link');
+  function updateSidebarLinks() {
+    console.log('Updating sidebar links with reachedPages5:', reachedPages5);
+    pageLinks.forEach((link, idx) => {
+      link.style.display = reachedPages5[idx] ? 'block' : 'none';
+    });
+  }
+  // ページ到達時に呼び出す
+  function markPageReached(pageIdx) {
+    reachedPages5[pageIdx] = true;
+    localStorage.setItem('reachedPages5', JSON.stringify(reachedPages5));
+    updateSidebarLinks();
+  }
+
+  // 初期化
+  updateSidebarLinks();
+  function showPage(toPage, btn) {
+    // すべてのページを非表示
+    document.querySelectorAll('[id^="page"]').forEach(div => {
+      div.style.display = (div.id === toPage) ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+    // エディタやボタンの切り替え
+    if (btn) {
+      const editor = btn.dataset.editor;
+      const run = btn.dataset.run;
+      const stop = btn.dataset.stop;
+      const status = btn.dataset.status;
+      const compiler = btn.dataset.compiler;
+      const error = btn.dataset.error;
+      if (editor && run && stop && status && compiler && error) {
+        selected_editor = editor;
+        window.errorOutputText.textContent = '';
+        window.setActiveButtons(run, stop, status, compiler, error);
+        window.INITIAL_CODE = PAGE_CODES[toPage] || '';
+        window.initMonacoEditor();
+        window.updatepwmLed();
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.setActiveButtons('run-button1', 'stop-button1', 'status-label1', 'compiler-output-text1', 'error-output-text1');
+    window.INITIAL_CODE = PAGE_CODES['page1'];
+    document.querySelectorAll('.page-link, .page-nav').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const toPage = this.dataset.to || this.dataset.page;
+        showPage(toPage, this);
+      });
+    });
+    window.markChapterUnlocked(5);
+
+    if (!localStorage.getItem('chapter5_start') && !localStorage.getItem('chapter5_time')) {
+      localStorage.setItem('chapter5_start', Date.now());
+    }
+    const chapter4_start = parseInt(localStorage.getItem('chapter4_start'));
+    const end = Date.now();
+    const diffMs = end - chapter4_start; // 経過ミリ秒
+    const diffSec = Math.floor(diffMs / 1000); // 経過秒
+    localStorage.setItem('chapter4_time', diffSec);
+    localStorage.removeItem('chapter4_start');
+  });
+  const PAGE_CODES = {
+    page1: `
+void setup() {
+
+}
+
+byte brightness = 0;
+void loop() {
+  analogWrite(11, brightness);
+  delay(10);
+  brightness++;
+}
+`.trim(),
+    page2: `
+void setup() {
+
+}
+
+void loop() {
+  analogWrite(11, 0);
+}
+`.trim(),
+    pageTest: `
+void setup() {
+
+}
+
+void loop() {
+  analogWrite(11, 0);
+  delay(100);
+  analogWrite(11, 0);
+  delay(100);
+  analogWrite(11, 0);
+  delay(100);
+}
+`.trim(),
+    pageOmake: `
+void setup() {
+  pinMode(2, INPUT);   // ボタン用ピン
+  pinMode(3, OUTPUT); // LED用ピン
+}
+void loop() {
+ // ボタンの状態を読む
+  if (digitalRead(2) == LOW) {
+    digitalWrite(3, HIGH); // ボタンが押されたらLED点灯
+  } else {
+    digitalWrite(3, LOW);  // 押されていなければ消灯
+  }
+}
+`.trim(),
+  };
+
+  // ラジオボタンの保存・復元
+  document.addEventListener('DOMContentLoaded', function () {
+    // 復元
+    for (let i = 1; i <= 5; i++) {
+      const saved = localStorage.getItem('que5_q' + i);
+      if (saved) {
+        const selector = `input[type="radio"][name="q${i}"][value="${saved}"]`;
+        const radio = document.querySelector(selector);
+        if (radio) radio.checked = true;
+      }
+    }
+    // 変更時に保存
+    for (let i = 1; i <= 5; i++) {
+      document.querySelectorAll(`input[type="radio"][name="q${i}"]`).forEach(radio => {
+        radio.addEventListener('change', function () {
+          if (this.checked) {
+            localStorage.setItem('que5_q' + i, this.value);
+          }
+        });
+      });
+    }
+  });
+
+</script>
+</body>
+
+</html>

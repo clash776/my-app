@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEDを光らせてみよう</title>
+  <style>
+    #draggable-led {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      cursor: grab;
+      user-select: none;
+      /* wokwi-ledはdisplay:inlineなので、block化 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <script type="module" crossorigin src="/my-app/assets/main1-DKnhThjR.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-app/assets/main1-C9ua35nR.css">
+</head>
+
+<body>
+  <div
+    style="position: relative; display: flex; justify-content: center; align-items: center; width: 500px; height: 500px; margin: 0 auto;">
+    <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+      style="position: absolute; left: 0; top: 30; transform: scale(2.2, 1.88);"></wokwi-7segment>
+    <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 110px; top: 20px;"></wokwi-arduino-uno>
+    <wokwi-led color="red" pin="7"
+      style="position: absolute; left: 250px; top: 235px; transform: scale(1.5);"></wokwi-led>
+    <wokwi-resistor value="200" style="position: absolute; left: 160px; top: 250px; transform: scale(1.5);"></wokwi-resistor>
+    <wokwi-arduino-nano id="circuit-arduino" style="position: absolute; left: 110px; top: 350px;"></wokwi-arduino-nano>
+    <my-breadboard style="display:block; position:absolute; top:20px; left:400px;"></my-breadboard>
+  </div>
+  <h2>LEDを光らせてみよう</h2>
+  <button onclick="openGoogleForm()">Googleフォームに送信</button>
+  <script>
+    function openGoogleForm() {
+      // ここで送信したい値を変数で用意
+      const val1 = '111'; // entry.864638212
+      const val2 = '222'; // entry.1368732382
+      const val3 = '333'; // entry.802561133
+      const val4 = '444'; // entry.2085820087
+      // Googleフォームの事前入力リンクを組み立て
+      const url = 'https://docs.google.com/forms/d/e/1FAIpQLSdFGnpoKfmbs_KbBtaxJzevw9Ar465Ge1J7WwANI6vVMsnupA/viewform?usp=pp_url'
+        + '&entry.864638212=' + encodeURIComponent(val1)
+        + '&entry.1368732382=' + encodeURIComponent(val2)
+        + '&entry.802561133=' + encodeURIComponent(val3)
+        + '&entry.2085820087=' + encodeURIComponent(val4)
+        + '&pageHistory=0,1';
+      window.open(url, '_blank'); // 新しいタブで開く
+    }
+  </script>
+  <div class="app-container">
+    <div class="leds-circuit" style="position: relative; width: 500px; height: 500px; margin: 0 auto;">
+      <my-breadboard style="display:block; position:absolute; top:0px; left:0px;"></my-breadboard>
+      <!-- LEDを中央上に配置 -->
+      <wokwi-7segment color="red" values="[0,0,0,0,0,0,0,0]" pins="extend"
+        style="position: absolute; left: 269px; top: 111px; transform: scale(1.56, 1.28);"></wokwi-7segment>
+      <!-- Arduino Unoを中央下に配置 -->
+      <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 219px;"></wokwi-resistor>
+      <wokwi-resistor value="200"
+        style="position: absolute; left: 225px; top: 203px; transform: rotate(212deg);"></wokwi-resistor>
+      <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 219px;"></wokwi-resistor>
+      <wokwi-resistor value="200" style="position: absolute; left: 308px; top: 79px;"></wokwi-resistor>
+      <wokwi-resistor value="200" style="position: absolute; left: 323px; top: 64px;"></wokwi-resistor>
+      <wokwi-resistor value="200" style="position: absolute; left: 218px; top: 79px;"></wokwi-resistor>
+      <wokwi-resistor value="200" style="position: absolute; left: 203px; top: 64px;"></wokwi-resistor>
+
+
+      <wokwi-arduino-uno id="circuit-arduino" style="position: absolute; left: 110px; top: 300px;"></wokwi-arduino-uno>
+      <!-- 回路の線をSVGで描画（LEDの足からArduinoの7番ピン/GNDへ） -->
+      <svg width="500" height="340" style="position: absolute; left: 0; top: 0;">
+        <!-- 2番ピンへ -->
+        <line x1="367" y1="99" x2="405" y2="99" stroke="red" stroke-width="3" />
+        <line x1="403" y1="99" x2="403" y2="300" stroke="red" stroke-width="3" />
+        <line x1="403" y1="299" x2="360" y2="299" stroke="red" stroke-width="3" />
+        <line x1="360" y1="299" x2="345" y2="310" stroke="red" stroke-width="3" />
+        <!-- 3番ピンへ -->
+        <line x1="381" y1="84" x2="420" y2="84" stroke="red" stroke-width="3" />
+        <line x1="418" y1="84" x2="418" y2="295" stroke="red" stroke-width="3" />
+        <line x1="418" y1="293" x2="406" y2="293" stroke="red" stroke-width="3" />
+        <line x1="400" y1="293" x2="360" y2="293" stroke="red" stroke-width="3" />
+        <line x1="360" y1="293" x2="335" y2="310" stroke="red" stroke-width="3" />
+        <!-- 4番ピンへ -->
+        <line x1="368" y1="209" x2="392" y2="209" stroke="red" stroke-width="3" />
+        <line x1="390" y1="209" x2="390" y2="286" stroke="red" stroke-width="3" />
+        <line x1="392" y1="286" x2="360" y2="286" stroke="red" stroke-width="3" />
+        <line x1="360" y1="286" x2="325" y2="310" stroke="red" stroke-width="3" />
+        <!-- 5番ピンへ -->
+        <line x1="233" y1="179" x2="225" y2="179" stroke="red" stroke-width="3" />
+        <line x1="227" y1="179" x2="227" y2="218" stroke="red" stroke-width="3" />
+        <line x1="227" y1="231" x2="227" y2="240" stroke="red" stroke-width="3" />
+        <line x1="225" y1="240" x2="320" y2="240" stroke="red" stroke-width="3" />
+        <line x1="318" y1="240" x2="318" y2="310" stroke="red" stroke-width="3" />
+        <!-- 6番ピンへ -->
+        <line x1="203" y1="209" x2="193" y2="209" stroke="red" stroke-width="3" />
+        <line x1="195" y1="209" x2="195" y2="260" stroke="red" stroke-width="3" />
+        <line x1="193" y1="260" x2="310" y2="260" stroke="red" stroke-width="3" />
+        <line x1="308" y1="260" x2="308" y2="310" stroke="red" stroke-width="3" />
+        <!-- 7番ピンへ -->
+        <line x1="218" y1="99" x2="180" y2="99" stroke="red" stroke-width="3" />
+        <line x1="182" y1="99" x2="182" y2="270" stroke="red" stroke-width="3" />
+        <line x1="180" y1="270" x2="300" y2="270" stroke="red" stroke-width="3" />
+        <line x1="298" y1="270" x2="298" y2="310" stroke="red" stroke-width="3" />
+        <!-- 8番ピンへ -->
+        <line x1="203" y1="84" x2="165" y2="84" stroke="red" stroke-width="3" />
+        <line x1="167" y1="84" x2="167" y2="280" stroke="red" stroke-width="3" />
+        <line x1="165" y1="280" x2="286" y2="280" stroke="red" stroke-width="3" />
+        <line x1="284" y1="280" x2="284" y2="310" stroke="red" stroke-width="3" />
+        <!-- GNDへ -->
+        <line x1="292" y1="84" x2="292" y2="40" stroke="black" stroke-width="3" />
+        <line x1="292" y1="40" x2="150" y2="40" stroke="black" stroke-width="3" />
+        <line x1="152" y1="40" x2="152" y2="295" stroke="black" stroke-width="3" />
+        <line x1="150" y1="295" x2="228" y2="295" stroke="black" stroke-width="3" />
+        <line x1="226" y1="295" x2="225" y2="310" stroke="black" stroke-width="3" />
+      </svg>
+    </div>
+    <p>Runボタンを押してプログラムを実行してみましょう！</p>
+    <div class="toolbar">
+      <button id="run-button1">Run</button>
+      <button id="stop-button1" disabled>Stop</button>
+      <div class="spacer"></div>
+      <div id="status-label1"></div>
+    </div>
+    <div class="code-editor" id="editor1"></div>
+    <div class="compiler-output">
+      <pre id="compiler-output-text1"></pre>
+    </div>
+    <div class="error-output">
+      <pre id="error-output-text1"></pre>
+    </div>
+    <div id='test-output'>
+      <div id="nextpage-guide" style="display:block; margin-top:24px; text-align:center;">
+        <p>LEDが点灯しました！次のページへ進みましょう。</p>
+        <button id="toPage2from1">次のページへ</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <div class="items_space">
+      <div class="menu-bar"
+        style="width:100%; height:40px; background:#eee; border-bottom:1px solid #ccc; display:flex; align-items:center; padding:0 16px; box-sizing:border-box;">
+        <div style="position:relative;">
+          <button id="add-item-button">追加 ▼</button>
+          <button id="delete-item-button" style="margin-left:8px;">削除</button>
+          <div id="parts-dropdown"
+            style="display:none; position:absolute; top:40px; left:0; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.1); z-index:1000; min-width:120px;">
+            <button class="dropdown-item" data-type="led" style="width:100%;">LED</button>
+            <button class="dropdown-item" data-type="button" style="width:100%;">ボタン</button>
+            <!-- 今後モーターなど追加可能 -->
+          </div>
+        </div>
+        <span style="margin-left:auto;">メニュー</span>
+      </div>
+      <wokwi-7segment color="red" values="[0,1,1,0,0,1,1,1]" pins="[0,1,2,3,4,5,6,7]"></wokwi-7segment>
+
+      <!-- SVGブレッドボード（シンプルな例） -->
+
+    </div>
+    <div class="toolbar">
+      <button id="run-button">Run</button>
+      <button id="stop-button" disabled>Stop</button>
+      <div class="spacer"></div>
+      <div id="status-label"></div>
+    </div>
+    <div class="code-editor" id="editor1"></div>
+    <div class="compiler-output">
+      <pre id="compiler-output-text"></pre>
+    </div>
+    <div id='test-output'>
+      <h3 id="test-output-label">Test Output1</h3>
+      <pre id="test-output-text"></pre>
+      <button id="check-button">正誤チェック</button>
+    </div>
+    <div class="error-output">
+      <pre id="error-output-text"></pre>
+    </div>
+    <div id="pin-status-view" style="margin:16px 0;">
+      <div id="pin-status-view" style="margin:16px 0;">
+        <h4>ピン状態</h4>
+        <div id="pin-status-row" style="display: flex; gap: 16px;"></div>
+      </div>
+    </div>
+
+    <script>
+      window.INITIAL_CODE = `
+void setup() {
+    pinMode(2, OUTPUT);      
+    pinMode(3, OUTPUT);   
+    pinMode(4, OUTPUT);      
+    pinMode(5, OUTPUT);    
+    pinMode(6, OUTPUT);      
+    pinMode(7, OUTPUT);   
+    pinMode(8, OUTPUT);      
+    pinMode(9, OUTPUT);    
+}
+void loop() {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
+}
+`.trim();
+      let selected_editor = '#editor1';
+      window.addEventListener('DOMContentLoaded', function () {
+        window.setActiveButtons('run-button', 'stop-button', 'status-label', 'compiler-output-text', 'error-output-text');
+      });
+    </script>
+    <script>
+      document.getElementById('check-button').addEventListener('click', () => {
+        console.log(lastPortDState);
+        console.log(lastPortBState);
+        const userCode = editor.getModel().getValue()
+        console.log(userCode);
+
+        const testoutputlabel = document.getElementById('test-output-label');
+        const nextpageBtn = document.getElementById('nextpage-btn');
+        const led = document.querySelector('wokwi-led[pin="7"]');
+        console.log(led, led.value);
+        if (led && led.value === true) {
+          testoutputlabel.textContent = "正解です！（7番LEDが点灯しています）";
+          nextpageBtn.style.display = "inline";
+        } else {
+          testoutputlabel.textContent = "7番LEDが点灯していません。もう一度やってみよう";
+        }
+      });
+    </script>
+</body>
+
+</html>
+
+
+<script>
+  // ドラッグ＆ドロップ処理
+  const led = document.getElementById('draggable-led');
+  let offsetX, offsetY, isDragging = false;
+
+  led.addEventListener('mousedown', function (e) {
+    isDragging = true;
+    offsetX = e.clientX - led.offsetLeft;
+    offsetY = e.clientY - led.offsetTop;
+    led.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (isDragging) {
+      led.style.left = (e.clientX - offsetX) + 'px';
+      led.style.top = (e.clientY - offsetY) + 'px';
+    }
+  });
+
+  document.addEventListener('mouseup', function () {
+    isDragging = false;
+    led.style.cursor = 'grab';
+  });
+
+</script>
+
+<script>
+  // ドロップダウン表示・非表示
+  const addItemBtn = document.getElementById('add-item-button');
+  const deleteItemBtn = document.getElementById('delete-item-button');
+  const partsDropdown = document.getElementById('parts-dropdown');
+  let deleteMode = false;
+  const readOnly = false;
+
+
+  addItemBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    partsDropdown.style.display = (partsDropdown.style.display === 'none' || partsDropdown.style.display === '') ? 'block' : 'none';
+  });
+
+  // ドロップダウン外をクリックしたら閉じる
+  document.addEventListener('click', (e) => {
+    if (!addItemBtn.contains(e.target) && !partsDropdown.contains(e.target)) {
+      partsDropdown.style.display = 'none';
+    }
+    // 削除モード解除（LED以外をクリックしたら解除）
+    if (deleteMode && !e.target.matches('wokwi-led')) {
+      deleteMode = false;
+      deleteItemBtn.style.background = '';
+    }
+  });
+
+  // 部品追加
+  partsDropdown.querySelector('.dropdown-item[data-type="led"]').addEventListener('click', () => {
+    const itemsSpace = document.querySelector('.items_space');
+    const newLed = document.createElement('wokwi-led');
+    newLed.setAttribute('color', 'red');
+    newLed.setAttribute('pin', '99');
+    itemsSpace.appendChild(newLed);
+    partsDropdown.style.display = 'none';
+  });
+
+  // 削除ボタンの処理
+  deleteItemBtn.addEventListener('click', () => {
+    deleteMode = true;
+    deleteItemBtn.style.background = '#fcc'; // 削除モード中は色を変える
+  });
+
+  // LEDクリックで削除
+  document.querySelector('.items_space').addEventListener('click', (e) => {
+    if (deleteMode && e.target.tagName === 'WOKWI-LED') {
+      e.target.remove();
+      deleteMode = false;
+      deleteItemBtn.style.background = '';
+    }
+  });
+
+  function updatePinStatusView() {
+    const row = document.getElementById('pin-status-row');
+    row.innerHTML = ''; // クリア
+
+    // Dピン（0～7）
+    for (let i = 0; i < 8; i++) {
+      const pinDiv = document.createElement('div');
+      pinDiv.style.textAlign = 'center';
+      const state = window.lastPortDState ? window.lastPortDState[i] : 'LOW';
+      pinDiv.innerHTML = `<strong>D${i}</strong><br>${state}`;
+      if (state === 'HIGH') {
+        pinDiv.style.color = 'red'; // HIGHのとき赤色
+        pinDiv.style.fontWeight = 'bold';
+      } else {
+        pinDiv.style.color = 'black';
+        pinDiv.style.fontWeight = 'normal';
+      }
+      row.appendChild(pinDiv);
+    }
+    // Bピン（0～7）
+    for (let i = 0; i < 8; i++) {
+      const pinDiv = document.createElement('div');
+      pinDiv.style.textAlign = 'center';
+      const state = window.lastPortBState ? window.lastPortBState[i] : 'LOW';
+      pinDiv.innerHTML = `<strong>B${i}</strong><br>${state}`;
+      if (state === 'HIGH') {
+        pinDiv.style.color = 'red';
+        pinDiv.style.fontWeight = 'bold';
+      } else {
+        pinDiv.style.color = 'black';
+        pinDiv.style.fontWeight = 'normal';
+      }
+      row.appendChild(pinDiv);
+    }
+  }
+  setInterval(updatePinStatusView, 100);
+</script>
