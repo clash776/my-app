@@ -356,18 +356,14 @@
             if (window.testCorrectStatus && window.testCorrectStatus[1]) {
               const arr = window.testCorrectStatus[1];
               if (arr[0] && arr[1]) {
-                document.getElementById('result2-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
                 console.log("全問正解２");
                 que2 = true;
               } else if (arr[0]) {
-                document.getElementById('result2-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result2-2').innerHTML = "";
               } else if (arr[1]) {
-                document.getElementById('result2-1').innerHTML = "";
                 document.getElementById('result2-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
               } else {
-                document.getElementById('result2-1').innerHTML = "";
                 document.getElementById('result2-2').innerHTML = "";
               }
             }
@@ -557,20 +553,16 @@
             if (window.testCorrectStatus && window.testCorrectStatus[2]) {
               const arr = window.testCorrectStatus[2];
               if (arr[0] && arr[1]) {
-                document.getElementById('result3-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
                 console.log("全問正解３");
                 que3 = true;
               } else if (arr[0]) {
                 if (que3_1) return;
-                document.getElementById('result3-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result3-2').innerHTML = "";
                 que3_1 = true;
               } else if (arr[1]) {
-                document.getElementById('result3-1').innerHTML = "";
                 document.getElementById('result3-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
               } else {
-                document.getElementById('result3-1').innerHTML = "";
                 document.getElementById('result3-2').innerHTML = "";
               }
             }
@@ -705,20 +697,16 @@
             if (window.testCorrectStatus && window.testCorrectStatus[3]) {
               const arr = window.testCorrectStatus[3];
               if (arr[0] && arr[1]) {
-                document.getElementById('result4-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
                 console.log("全問正解４");
                 que4 = true;
               } else if (arr[0]) {
                 if (que4_1) return;
-                document.getElementById('result4-1').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">全問正解です！</span>";
                 document.getElementById('result4-2').innerHTML = "";
                 que4_1 = true;
               } else if (arr[1]) {
-                document.getElementById('result4-1').innerHTML = "";
                 document.getElementById('result4-2').innerHTML = "<br><span style=\"color:green;font-weight:bold;\">正解です！</span>";
               } else {
-                document.getElementById('result4-1').innerHTML = "";
                 document.getElementById('result4-2').innerHTML = "";
               }
             }
